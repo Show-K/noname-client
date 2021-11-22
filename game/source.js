@@ -13,6 +13,9 @@ window.noname_source_list=[
 	'card/yunchou.js',
 	'card/zhenfa.js',
 	'card/zhulu.js',
+	'card/sst.js',
+	'card/sst_sp.js',
+	/*
 	'character/diy.js',
 	'character/extra.js',
 	'character/gujian.js',
@@ -36,6 +39,10 @@ window.noname_source_list=[
 	'character/yijiang.js',
 	'character/yingbian.js',
 	'character/yxs.js',
+	*/
+	'character/sst.js',
+	'character/sst_sp.js',
+	'character/sst_old.js',
 	'game/asset.js',
 	'game/codemirror.js',
 	'game/config.js',

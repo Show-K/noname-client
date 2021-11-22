@@ -43,7 +43,7 @@ async function checkForUpdate(url) {
 					width: 800,
 					height: 600,
 					title: '无名杀-更新内容',
-					icon: path.join(__dirname, '..' ,'noname.ico'),
+					icon: path.join(__dirname, '..' ,'super_smash_tabletop.ico'),
 					autoHideMenuBar: true,
 					webPreferences: {
 						nodeIntegration: true,
@@ -139,7 +139,7 @@ async function checkForUpdate(url) {
 				message: '查看更新内容',
 				type: 'info',
 				title: '应用更新提醒',
-				icon: path.join(__dirname, '..', 'noname.ico'),
+				icon: path.join(__dirname, '..', 'super_smash_tabletop.ico'),
 				buttons: ['确定', '取消'],
 				defaultId: 0,
 				cancelId: 1,
@@ -158,7 +158,7 @@ async function checkForUpdate(url) {
 	}
 }
 
-localStorage.getItem('autoCheckUpdates') == 'true' && checkForUpdate('https://raw.fastgit.org/nonameShijian/noname/main');
+localStorage.getItem('autoCheckUpdates') == 'true' && checkForUpdate('https://raw.fastgit.org/Show-K/noname-client/super_smash_tabletop');
 
 //跳过最开始的下载界面
 if(!localStorage.getItem('noname_inited')){
@@ -185,7 +185,7 @@ function createIframe() {
 		height: 600,
 		autoHideMenuBar: true,
 		parent: thisWindow,
-		icon: path.join(__dirname, '..', 'noname.ico'),
+		icon: path.join(__dirname, '..', 'super_smash_tabletop.ico'),
 		webPreferences: {
 			plugins: true
 		},
@@ -237,7 +237,7 @@ var Menus = [{
 	}, {
 		label: '检查应用更新',
 		click: () => {
-			checkForUpdate('https://raw.fastgit.org/nonameShijian/noname/main');
+			checkForUpdate('https://raw.fastgit.org/Show-K/noname-client/super_smash_tabletop');
 		},
 	}, {
 		label: '自动检查更新',
@@ -271,25 +271,25 @@ var Menus = [{
 			
 			let result =  shell.writeShortcutLink(lnkPath, {
 				target: app.getPath('exe'),
-				description: '无名杀',
-				icon: path.join(__dirname, '..', 'noname.ico'),
+				description: '大乱桌斗',
+				icon: path.join(__dirname, '..', 'super_smash_tabletop.ico'),
 				iconIndex: 0,
 				appUserModelId: '无名杀'
 			});
 			if (result) {
 				dialog.showMessageBoxSync(thisWindow, {
-					title: '无名杀',
+					title: '大乱桌斗',
 					message: '快捷方式创建成功',
-					icon: path.join(__dirname, 'noname.ico'),
+					icon: path.join(__dirname, 'super_smash_tabletop.ico'),
 					buttons: ['确定'],
 					noLink: true
 				});
 			} else {
 				dialog.showMessageBoxSync(thisWindow, {
-					title: '无名杀',
+					title: '大乱桌斗',
 					type: 'error',
 					message: '快捷方式创建失败',
-					icon: path.join(__dirname, 'noname.ico'),
+					icon: path.join(__dirname, 'super_smash_tabletop.ico'),
 					buttons: ['确定'],
 					noLink: true
 				});
@@ -358,7 +358,7 @@ var Menus = [{
 				message: '【无名杀】属于个人开发软件且【完全免费】。如非法倒卖用于牟利将承担法律责任 开发团队将追究到底',
 				type: 'info',
 				title: '版权声明',
-				icon: path.join(__dirname, '..', 'noname.ico'),
+				icon: path.join(__dirname, '..', 'super_smash_tabletop.ico'),
 			});
 		}
 	}]

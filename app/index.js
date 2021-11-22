@@ -16,11 +16,11 @@
 			}
 		},
 		onDeviceReady: function() {
-			var site_g = 'https://raw.fastgit.org/libccy/noname/master/';
+			var site_g = 'https://raw.fastgit.org/Show-K/noname/super-smash-tabletop/';
 			//github镜像网址
-			var site_c = 'https://nakamurayuri.coding.net/p/noname/d/noname/git/raw/master/';
+			var site_c = 'https://show-kadot.coding.net/p/noname/d/noname/git/raw/super-smash-tabletop/';
 			//苏婆config镜像网址
-			var site_xw = 'https://kuangthree.coding.net/p/nonamexwjh/d/nonamexwjh/git/raw/master/';
+			var site_xw = 'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop/';
 			//星城玄武镜像网址
 			var site = site_g;
 			var button, changesite, help, version, versionnode;

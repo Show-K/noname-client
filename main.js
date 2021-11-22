@@ -21,10 +21,10 @@ if (!gotTheLock) {
 	app.quit();
 }
 
-app.setAppUserModelId('无名杀');
+app.setAppUserModelId('大乱桌斗');
 
 //防止32位无名杀的乱码
-app.setName('无名杀');
+app.setName('大乱桌斗');
 
 if (!app.isDefaultProtocolClient(PROTOCOL)) {
 	const args = [];
@@ -103,10 +103,10 @@ function createWindow() {
 
 function createMainWindow() {
 	let win = new BrowserWindow({
-		width: 1000,
-		height: 800,
-		title: '无名杀',
-		icon: path.join(__dirname, 'noname.ico'),
+		width: 1280,
+		height: 720,
+		title: '大乱桌斗',
+		icon: path.join(__dirname, 'super_smash_tabletop.ico'),
 		webPreferences: {
 			preload: path.join(__dirname, 'app', 'menu.js'), //页面运行其他脚本之前预先加载指定的脚本
 			nodeIntegration: true, //主页面用node
@@ -126,10 +126,10 @@ function createMainWindow() {
 
 function createExtensionWindow() {
 	let win = new BrowserWindow({
-		width: 800,
-		height: 600,
-		title: '无名杀-下载扩展',
-		icon: path.join(__dirname, 'noname.ico'),
+		width: 1280,
+		height: 720,
+		title: '大乱桌斗-下载扩展',
+		icon: path.join(__dirname, 'super_smash_tabletop.ico'),
 		autoHideMenuBar: true,
 		webPreferences: {
 			nodeIntegration: true, //主页面用node
@@ -145,10 +145,10 @@ function createExtensionWindow() {
 
 function createUpdateWindow() {
 	let win = new BrowserWindow({
-		width: 800,
-		height: 600,
-		title: '无名杀-更新文件',
-		icon: path.join(__dirname, 'noname.ico'),
+		width: 1280,
+		height: 720,
+		title: '大乱桌斗-更新文件',
+		icon: path.join(__dirname, 'super_smash_tabletop.ico'),
 		autoHideMenuBar: true,
 		webPreferences: {
 			nodeIntegration: true, //主页面用node
