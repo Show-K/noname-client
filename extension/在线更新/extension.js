@@ -18,7 +18,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 		lib.config.brokenFile.add(url);
 		
 		if(url.indexOf('http') != 0){
-			url = lib.updateURL + '/master/' + url;
+			url = lib.updateURL + '/' + url;
 		}
 		
 		function success(status) {
@@ -52,7 +52,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 						if(e) {
 							error(e, 'writeFile');
 						} else {
-							success(200);
+							success(200, 'writeFile');
 						}
 					});
 				} else {
@@ -61,7 +61,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 						entry.getFile(name, {create:true}, fileEntry => {
 							fileEntry.createWriter(fileWriter => {
 								fileWriter.onwriteend = () => {
-									success(200);
+									success(200, 'writeFile');
 								};
 								fileWriter.write(arrayBuffer);
 							}, e => {
@@ -174,8 +174,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 		editable: false,
 		content: function(config, pack) {},
 		precontent: function() {
-			lib.updateURLS.github = 'https://raw.fastgit.org/libccy/noname';
-			if(lib.updateURL == 'https://raw.githubusercontent.com/libccy/noname') {
+			lib.updateURLS.github = 'https://raw.fastgit.org/Show-K/noname/super-smash-tabletop';
+			if(lib.updateURL == 'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop') {
 				lib.updateURL = lib.updateURLS.github;
 			}
 			
@@ -210,7 +210,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				onclick: function() {
 					if (game.Updating) return;
 					game.Updating = true;
-					let updateURL = lib.updateURL + '/master/';
+					let updateURL = lib.updateURL + '/';
 					let reduction = () => {
 						game.Updating = false;
 						this.childNodes[0].innerHTML = '<button type="button">检查游戏更新</button>';
@@ -438,7 +438,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				onclick: function() {
 					if (game.UpdatingForAsset) return;
 					game.UpdatingForAsset = true;
-					let updateURL = lib.updateURL + '/master/';
+					let updateURL = lib.updateURL + '/';
 					let reduction = () => {
 						game.UpdatingForAsset = false;
 						this.childNodes[0].innerHTML = '<button type="button">检查素材更新</button>';
@@ -534,7 +534,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 									//如果更新素材
 									for (let i in skins) {
 										for (let j = 1; j <= skins[i]; j++) {
-											updates.push('image/skin/' + i + '/' + j + '.jpg');
+											updates.push('image/skin/' + i + '/' + j + '.png');
 										}
 									}
 								}
@@ -713,11 +713,11 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				skill: {},
 				translate: {},
 			},
-			intro: "点击按钮即可在线更新，文件下载失败会自动重新下载。</br><span style='color:red'>请不要在更新时关闭游戏，否则后果自负</span></br>最新完整包下载地址：<a target='_self' href='https://hub.fastgit.org/libccy/noname/archive/refs/heads/master.zip'><span style='text-decoration: underline;'>点击下载</span></a>",
+			intro: "点击按钮即可在线更新，文件下载失败会自动重新下载。</br><span style='color:red'>请不要在更新时关闭游戏，否则后果自负</span></br>最新完整包下载地址：<a target='_self' href='https://hub.fastgit.org/Show-K/noname/archive/refs/heads/super_smash_tabletop.zip'><span style='text-decoration: underline;'>点击下载</span></a>",
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.2",
+			version: "1.2.1",
 		},
 		files: {
 			"character": [],

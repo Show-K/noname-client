@@ -46,7 +46,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 					dialog.showMessageBoxSync(remote.getCurrentWindow(), {
 						title: '无名杀',
 						message: message !== undefined ? (message + '') : '',
-						icon: path.join(__dirname, 'noname.ico'),
+						icon: path.join(__dirname, 'super_smash_tabletop.ico'),
 						buttons: ['确定'],
 						noLink: true
 					});
@@ -59,7 +59,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 					const result = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
 						title: '无名杀',
 						message: message !== undefined ? (message + '') : '',
-						icon: path.join(__dirname, 'noname.ico'),
+						icon: path.join(__dirname, 'super_smash_tabletop.ico'),
 						buttons: ['确定', '取消'],
 						noLink: true,
 						cancelId: 1,

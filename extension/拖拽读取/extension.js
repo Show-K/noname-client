@@ -1,25 +1,25 @@
 game.import("extension", function(lib, game, ui, get, ai, _status) {
 	/*
 	可以通过下面的网址访问项目网址
-	https://hub.fastgit.org/nonameShijian/extinsion-DragRead
+	https://hub.fastgit.org/Show-K/extinsion-DragRead
 	*/
 	if (typeof require != 'function') {
 		game.removeExtension("拖拽读取", false);
 		throw '没有nodejs环境，无法导入此扩展';
 	}
 
-	const fs = require("fs");
-	const { versions } = process;
-	const electronVersion = parseFloat(versions.electron);
+	var fs = require("fs");
+	var { versions } = process;
+	var electronVersion = parseFloat(versions.electron);
 	let remote;
 	if (electronVersion >= 14) {
-		remote = require('@electron/remote');
+		remote =  require('@electron/remote');
 	} else {
 		remote = require('electron').remote;
 	}
-	const { dialog, BrowserWindow } = remote;
-	const path = require('path');
-	const body = document.body;
+	var { dialog, BrowserWindow } = remote;
+	var path = require('path');
+	var body = document.body;
 	let loadCSS = false;
 
 	function createIframe(src) {
@@ -172,7 +172,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 		editable: false,
 		onremove: function() {
 			/*game.saveConfig('update_link', 'coding');
-			lib.updateURLS.github = 'https://raw.githubusercontent.com/libccy/noname';
+			lib.updateURLS.github = 'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop';
 			lib.updateURL = lib.updateURLS['coding'];*/
 			delete window.JSZip3;
 		},
@@ -372,11 +372,11 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 			/*let bool = game.getExtensionConfig('拖拽读取', 'changeURL');
 			if (bool) {
 				game.saveConfig('update_link', 'github');
-				lib.updateURLS.github = 'https://raw.fastgit.org/libccy/noname';
-				lib.updateURL = 'https://raw.fastgit.org/libccy/noname';
+				lib.updateURLS.github = 'https://raw.fastgit.org/Show-K/noname/super-smash-tabletop';
+				lib.updateURL = 'https://raw.fastgit.org/Show-K/noname/super-smash-tabletop';
 			} else {
-				lib.updateURLS.github = 'https://raw.githubusercontent.com/libccy/noname';
-				lib.updateURL = 'https://raw.githubusercontent.com/libccy/noname';
+				lib.updateURLS.github = 'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop';
+				lib.updateURL = 'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop';
 			}*/
 		},
 		config: {
@@ -388,7 +388,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 					if (typeof fetch != 'function') throw '不支持fetch函数，无法使用此功能';
 					if (_status.DragReadUpdate) return alert('请不要重复检查更新');
 					_status.DragReadUpdate = true;
-					fetch('https://raw.fastgit.org/nonameShijian/extinsion-DragRead/main/version')
+					fetch('https://raw.fastgit.org/Show-K/extinsion-DragRead/main/version')
 						.then(response => response.text()).then(version => {
 							let newVersion = parseFloat(version);
 							let nowVersion = NaN;
@@ -401,7 +401,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 									lib.init.css(lib.assetURL + "extension/拖拽读取", "extension");
 									loadCSS = true;
 								}
-								fetch('https://raw.fastgit.org/nonameShijian/extinsion-DragRead/main/updateContent')
+								fetch('https://raw.fastgit.org/Show-K/extinsion-DragRead/main/updateContent')
 									.then(response => response.text()).then(txt => {
 										let end = false;
 										let updateContent = txt.split("\n").filter((str) => {
@@ -429,7 +429,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 											if (download) return false;
 											download = true;
 											button.value = '正在下载';
-											fetch('https://hub.fastgit.org/nonameShijian/extinsion-DragRead/archive/refs/heads/main.zip')
+											fetch('https://hub.fastgit.org/Show-K/extinsion-DragRead/archive/refs/heads/main.zip')
 												.then(response => response.arrayBuffer()).then(arrayBuffer => {
 													layer.remove();
 													let {
@@ -546,8 +546,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 						lib.updateURL = 'https://raw.fastgit.org/libccy/noname';
 					} else {
 						game.saveConfig('update_link', 'coding');
-						lib.updateURLS.github = 'https://raw.githubusercontent.com/libccy/noname';
-						lib.updateURL = 'https://raw.githubusercontent.com/libccy/noname';
+						lib.updateURLS.github = 'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop';
+						lib.updateURL = 'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop';
 					}
 				},
 			},*/
@@ -672,10 +672,10 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				translate: {},
 			},
 			intro: `windows电脑版专属扩展，把zip文件（离线包，扩展或素材压缩包）拖入到游戏内即可导入`,
-			author: "诗笺",
+			author: "诗笺、Show-K（修改）",
 			diskURL: "",
 			forumURL: "",
-			version: "1.75",
+			version: "1.75.1",
 		},
 		files: {
 			"character": [],
