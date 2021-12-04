@@ -1,5 +1,5 @@
 const PROTOCOL = 'nonameSkill';
-const { app, BrowserWindow, Menu, ipcMain, session, globalShortcut } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain, session, globalShortcut, crashReporter } = require('electron');
 const fs = require('fs');
 const path = require('path');
 const isWindows = process.platform === 'win32';
@@ -21,10 +21,41 @@ if (!gotTheLock) {
 	app.quit();
 }
 
-app.setAppUserModelId('大乱桌斗');
+app.setAppUserModelId('com.shijian.noname');
 
 //防止32位无名杀的乱码
-app.setName('大乱桌斗');
+app.setName('无名杀');
+
+
+function createDir(dirPath) {
+	if (!fs.existsSync(dirPath)) {
+		fs.mkdirSync(dirPath);
+	}
+}
+
+function setPath(path1, path2) {
+	app.getPath(path1);
+	createDir(path2);
+	app.setPath(path1, path2);
+}
+
+setPath('home', path.join(__dirname, 'Home'));
+setPath('appData', path.join(__dirname, 'Home', 'AppData'));
+setPath('userData', path.join(__dirname, 'Home', 'UserData'));
+setPath('temp', path.join(__dirname, 'Home', 'Temp'));
+setPath('cache', path.join(__dirname, 'Home', 'Cache'));
+//崩溃转储文件存储的目录
+setPath('crashDumps', path.join(__dirname, 'Home', 'crashDumps'));
+//日志目录
+setPath('logs', path.join(__dirname, 'Home', 'logs'));
+
+//崩溃处理
+crashReporter.start({
+	productName: '无名杀',
+	//崩溃报告将被收集并存储在崩溃目录中，不会上传
+	uploadToServer: false,
+	compress: false
+});
 
 if (!app.isDefaultProtocolClient(PROTOCOL)) {
 	const args = [];
@@ -103,10 +134,10 @@ function createWindow() {
 
 function createMainWindow() {
 	let win = new BrowserWindow({
-		width: 1280,
-		height: 720,
-		title: '大乱桌斗',
-		icon: path.join(__dirname, 'super_smash_tabletop.ico'),
+		width: 1000,
+		height: 800,
+		title: '无名杀',
+		icon: path.join(__dirname, 'noname.ico'),
 		webPreferences: {
 			preload: path.join(__dirname, 'app', 'menu.js'), //页面运行其他脚本之前预先加载指定的脚本
 			nodeIntegration: true, //主页面用node
@@ -126,10 +157,10 @@ function createMainWindow() {
 
 function createExtensionWindow() {
 	let win = new BrowserWindow({
-		width: 1280,
-		height: 720,
-		title: '大乱桌斗-下载扩展',
-		icon: path.join(__dirname, 'super_smash_tabletop.ico'),
+		width: 800,
+		height: 600,
+		title: '无名杀-下载扩展',
+		icon: path.join(__dirname, 'noname.ico'),
 		autoHideMenuBar: true,
 		webPreferences: {
 			nodeIntegration: true, //主页面用node
@@ -140,15 +171,18 @@ function createExtensionWindow() {
 	win.loadURL(`file://${__dirname}/downloadExtension.html`);
 	//win.webContents.openDevTools();
 	win.webContents.executeJavaScript(`window.extensionName = '${extensionName}'`);
+	if (electronVersion >= 14) {
+		remote.enable(win.webContents);
+	}
 	return win;
 }
 
 function createUpdateWindow() {
 	let win = new BrowserWindow({
-		width: 1280,
-		height: 720,
-		title: '大乱桌斗-更新文件',
-		icon: path.join(__dirname, 'super_smash_tabletop.ico'),
+		width: 800,
+		height: 600,
+		title: '无名杀-更新文件',
+		icon: path.join(__dirname, 'noname.ico'),
 		autoHideMenuBar: true,
 		webPreferences: {
 			nodeIntegration: true, //主页面用node
@@ -159,29 +193,11 @@ function createUpdateWindow() {
 	win.loadURL(`file://${__dirname}/update.html`);
 	//win.webContents.openDevTools();
 	win.webContents.executeJavaScript(`window.updateURL = '${updateURL}'`);
+	if (electronVersion >= 14) {
+		remote.enable(win.webContents);
+	}
 	return win;
 }
-
-function createDir(dirPath) {
-	if (!fs.existsSync(dirPath)) {
-		fs.mkdirSync(dirPath);
-	}
-}
-
-function setPath(path1, path2) {
-	createDir(path2);
-	app.setPath(path1, path2);
-}
-
-setPath('home', path.join(__dirname, 'Home'));
-setPath('appData', path.join(__dirname, 'Home', 'AppData'));
-setPath('userData', path.join(__dirname, 'Home', 'UserData'));
-setPath('temp', path.join(__dirname, 'Home', 'Temp'));
-setPath('cache', path.join(__dirname, 'Home', 'Cache'));
-//崩溃转储文件存储的目录
-setPath('crashDumps', path.join(__dirname, 'Home', 'crashDumps'));
-//日志目录
-setPath('logs', path.join(__dirname, 'Home', 'logs'));
 
 app.whenReady().then(() => {
 	

@@ -1,21 +1,72 @@
 {
-  "name": "super_smash_tabletop",
+  "name": "noname",
   "version": "1.9.0",
-  "productName": "大乱桌斗",
-  "description": "游戏内容来源于项目无名杀（https://github.com/libccy/noname），本Electron应用及功能由诗笺制作，由Show-K修改",
+  "productName": "无名杀",
+  "description": "游戏内容来源于项目无名杀（https://github.com/libccy/noname），本Electron应用及功能由我制作",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "packageWin64": "electron-packager . 大乱桌斗 --platform=win32 --arch=x64 --out=./ --app-version=1.9.0 --icon=super_smash_tabletop.ico --overwrite --ignore=node_modules --electron-version 16.0.0",
-    "packageWin32": "electron-packager . 大乱桌斗 --platform=win32 --arch=ia32 --out=./ --app-version=1.9.0 --icon=super_smash_tabletop.ico --overwrite --ignore=node_modules --electron-version 16.0.0",
-    "packageLinux": "electron-packager . 大乱桌斗 --platform=linux --arch=x64 --out=./ --app-version=1.9.0 --icon=super_smash_tabletop.ico --overwrite --ignore=node_modules --electron-version 16.0.0"
+    "packageWin64": "electron-packager . 无名杀 --platform=win32 --arch=x64 --out=./ --app-version=1.9.0 --icon=noname.ico --overwrite --ignore=node_modules --electron-version 16.0.2",
+    "packageWin32": "electron-packager . 无名杀 --platform=win32 --arch=ia32 --out=./ --app-version=1.9.0 --icon=noname.ico --overwrite --ignore=node_modules --electron-version 16.0.2",
+    "packageLinux": "electron-packager . 无名杀 --platform=linux --arch=x64 --out=./ --app-version=1.9.0 --icon=noname.ico --overwrite --ignore=node_modules --electron-version 16.0.2",
+	"postinstall": "electron-builder install-app-deps",
+	"dist": "electron-builder"
+  },
+  "build": {
+    "productName":"无名杀",
+    "appId": "com.shijian.noname", 
+    "directories": {
+      "output": "build"
+    },
+	"asar": false,
+    "win": {  
+      "icon": "./resources/app/noname.ico",
+	  "target": [{
+	    "target": "nsis",
+		"arch": ["x64"]
+	  }]
+    }
+  },
+  "nsis": {
+    "oneClick": false,
+	"perMachine": false,
+    "allowElevation": true,
+    "allowToChangeInstallationDirectory": true,
+    "installerIcon": "./resources/app/noname.ico",
+    "uninstallerIcon": "./resources/app/noname.ico",
+    "installerHeaderIcon": "./resources/app/noname.ico",
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": false,
+    "shortcutName": "无名杀",
+	"uninstallDisplayName": "无名杀 v1.9",
+	"include": "build/installer.nsh",
+	"artifactName": "无名杀安装程序v1.38.exe",
+	"deleteAppDataOnUninstall": false,
+	"language": "zh-CN"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Show-K/noname-client.git"
+    "url": "git+https://github.com/nonameShijian/noname.git"
   },
-  "installerVersion": "1.37",
+  "installerVersion": "1.381",
   "installerUpdateContent": [
+    {
+      "version": "1.381",
+      "updateContent": [
+        "撤销上个版本的更新",
+        "若你使用的是v1.37的安装包，请更换至v1.381的安装包",
+        "注意：v1.381的安装包不兼容windows 7，window 7 用户请尝试v1.36的安装包",
+		"内置无名杀全教程V9.9完整版"
+      ]
+    },
+	{
+      "version": "1.38",
+      "updateContent": [
+        "main.js中对部分代码的顺序进行调整，修复某些代码执行太晚而失效的问题",
+        "通过【应用配置】扩展修复【制作扩展-选择武将图片】时闪退的问题",
+        "修复通过协议更新或下载扩展时remote模块找不到的问题"
+      ]
+    },
     {
       "version": "1.37",
       "updateContent": [
@@ -92,11 +143,11 @@
   "author": "诗笺",
   "license": "ISC",
   "devDependencies": {
-    "electron-packager": "^15.3.0",
-    "electron-winstaller": "^5.0.0"
+    "electron": "^16.0.2",
+    "electron-builder": "^22.14.5",
+    "electron-packager": "^15.3.0"
   },
   "dependencies": {
-    "@electron/remote": "^2.0.1",
-    "electron": "^16.0.0"
+    "@electron/remote": "^2.0.1"
   }
 }

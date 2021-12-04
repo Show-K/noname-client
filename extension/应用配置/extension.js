@@ -101,6 +101,20 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 					}
 				}
 			}
+			
+			/*
+			//导入api.js
+			lib.cheat.i();
+			lib.init.js('extension/应用配置', 'api', () => {
+				if (!lib.config.dev) {
+					delete window.ui;
+					delete window.get;
+					delete window.ai;
+					delete window.lib;
+					delete window._status;
+				}
+			});
+			*/
 		},
 		config: {
 			//修改原生alert弹窗
@@ -150,7 +164,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.1",
+			version: "1.11",
 		},
 		files: {
 			"character": [],
