@@ -19,12 +19,8 @@ window.noname_character_rank={
 	],
 	rarity:{
 		legend:[
-			"ymk_claude",
 			"ymk_isabelle",
-			"sst_sans",
-			"ymk_yumiko",
-			"sst_steve",
-			"sst_fox"
+			"sst_sans"
 		],
 		epic:[
 			"sst_dr_mario",
@@ -37,11 +33,11 @@ window.noname_character_rank={
 			"sst_byleth_male",
 			"sst_massy",
 			"sst_dark_samus",
-			"sst_mnm",
+			"sst_mario_not_mary",
 			"sst_haine",
 			"sst_incineroar",
 			"sst_greninja",
-			"sst_k_rool",
+			"sst_king_k_rool",
 			"sst_richter",
 			"sst_meta_knight",
 			"ska_olivia",
@@ -57,7 +53,7 @@ window.noname_character_rank={
 			"sst_joker",
 			"sst_captain_falcon",
 			"sst_lucario",
-			"sst_dedede",
+			"sst_king_dedede",
 			"sst_corrin",
 			"sst_corrin_male",
 			"sst_corrin_female",
@@ -67,7 +63,13 @@ window.noname_character_rank={
 			"sst_pikachu",
 			"sst_enderman",
 			"sst_sephiroth",
-			"sst_pokemon_trainer_blue"
+			"sst_pokemon_trainer_blue",
+			"sst_steve",
+			"sst_fox",
+			"ymk_yumikohimi",
+			"sst_donkey_kong",
+			"mnm_edelgard",
+			"sst_kyo_kusanagi"
 		],
 		rare:[
 			"sst_mario",
@@ -80,7 +82,7 @@ window.noname_character_rank={
 			"sst_samus",
 			"sst_ridley",
 			"sst_mr_game_watch",
-			"sst_yumiko",
+			"sst_yumikohimi",
 			"sst_terry",
 			"sst_simon",
 			"sst_kirby",
@@ -120,10 +122,11 @@ window.noname_character_rank={
 			"ska_professor_toad",
 			"sst_geno",
 			"sst_ken",
-			"sst_pyra_mythra"
+			"sst_pyra_mythra",
+			"sst_claude",
+			"alz_kyo_kusanagi"
 		],
 		junk:[
-			"sst_donkey_kong",
 			"sst_yoshi",
 			"sst_villager",
 			"sst_krystal"

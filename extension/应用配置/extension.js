@@ -44,7 +44,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 			if(lib.config.extension_应用配置_replaceAlert) {
 				window.alert = (message) => {
 					dialog.showMessageBoxSync(remote.getCurrentWindow(), {
-						title: '无名杀',
+						title: '大乱桌斗',
 						message: message !== undefined ? (message + '') : '',
 						icon: path.join(__dirname, 'super_smash_tabletop.ico'),
 						buttons: ['确定'],
@@ -57,7 +57,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 			if(lib.config.extension_应用配置_replaceConfirm) {
 				window.confirm = (message) => {
 					const result = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
-						title: '无名杀',
+						title: '大乱桌斗',
 						message: message !== undefined ? (message + '') : '',
 						icon: path.join(__dirname, 'super_smash_tabletop.ico'),
 						buttons: ['确定', '取消'],

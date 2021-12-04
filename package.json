@@ -1,26 +1,26 @@
 {
-  "name": "noname",
+  "name": "super_smash_tabletop",
   "version": "1.9.0",
-  "productName": "无名杀",
-  "description": "游戏内容来源于项目无名杀（https://github.com/libccy/noname），本Electron应用及功能由我制作",
+  "productName": "大乱桌斗",
+  "description": "诗笺：游戏内容来源于项目无名杀（https://github.com/libccy/noname），本Electron应用及功能由我制作",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "packageWin64": "electron-packager . 无名杀 --platform=win32 --arch=x64 --out=./ --app-version=1.9.0 --icon=noname.ico --overwrite --ignore=node_modules --electron-version 16.0.2",
-    "packageWin32": "electron-packager . 无名杀 --platform=win32 --arch=ia32 --out=./ --app-version=1.9.0 --icon=noname.ico --overwrite --ignore=node_modules --electron-version 16.0.2",
-    "packageLinux": "electron-packager . 无名杀 --platform=linux --arch=x64 --out=./ --app-version=1.9.0 --icon=noname.ico --overwrite --ignore=node_modules --electron-version 16.0.2",
+    "packageWin64": "electron-packager . 大乱桌斗 --platform=win32 --arch=x64 --out=./ --app-version=1.9.0 --icon=super_smash_tabletop.ico --overwrite --ignore=node_modules --electron-version 16.0.2",
+    "packageWin32": "electron-packager . 大乱桌斗 --platform=win32 --arch=ia32 --out=./ --app-version=1.9.0 --icon=super_smash_tabletop.ico --overwrite --ignore=node_modules --electron-version 16.0.2",
+    "packageLinux": "electron-packager . 大乱桌斗 --platform=linux --arch=x64 --out=./ --app-version=1.9.0 --icon=super_smash_tabletop.ico --overwrite --ignore=node_modules --electron-version 16.0.2",
 	"postinstall": "electron-builder install-app-deps",
 	"dist": "electron-builder"
   },
   "build": {
-    "productName":"无名杀",
-    "appId": "com.shijian.noname", 
+    "productName":"大乱桌斗",
+    "appId": "win.show-k.super_smash_tabletop", 
     "directories": {
       "output": "build"
     },
 	"asar": false,
     "win": {  
-      "icon": "./resources/app/noname.ico",
+      "icon": "super_smash_tabletop.ico",
 	  "target": [{
 	    "target": "nsis",
 		"arch": ["x64"]
@@ -32,21 +32,21 @@
 	"perMachine": false,
     "allowElevation": true,
     "allowToChangeInstallationDirectory": true,
-    "installerIcon": "./resources/app/noname.ico",
-    "uninstallerIcon": "./resources/app/noname.ico",
-    "installerHeaderIcon": "./resources/app/noname.ico",
+    "installerIcon": "super_smash_tabletop.ico",
+    "uninstallerIcon": "super_smash_tabletop.ico",
+    "installerHeaderIcon": "super_smash_tabletop.ico",
     "createDesktopShortcut": true,
     "createStartMenuShortcut": false,
-    "shortcutName": "无名杀",
-	"uninstallDisplayName": "无名杀 v1.9",
+    "shortcutName": "大乱桌斗",
+	"uninstallDisplayName": "大乱桌斗 v1.9",
 	"include": "build/installer.nsh",
-	"artifactName": "无名杀安装程序v1.38.exe",
+	"artifactName": "大乱桌斗安装程序v1.38.exe",
 	"deleteAppDataOnUninstall": false,
 	"language": "zh-CN"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nonameShijian/noname.git"
+    "url": "git+https://github.com/Show-K/noname-client.git"
   },
   "installerVersion": "1.381",
   "installerUpdateContent": [
@@ -140,7 +140,7 @@
       ]
     }
   ],
-  "author": "诗笺",
+  "author": "Show-K",
   "license": "ISC",
   "devDependencies": {
     "electron": "^16.0.2",

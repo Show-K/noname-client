@@ -42,7 +42,7 @@ async function checkForUpdate(url) {
 				let updateContent = new BrowserWindow({
 					width: 800,
 					height: 600,
-					title: '无名杀-更新内容',
+					title: '大乱桌斗-更新内容',
 					icon: path.join(__dirname, '..' ,'super_smash_tabletop.ico'),
 					autoHideMenuBar: true,
 					webPreferences: {
@@ -83,7 +83,7 @@ async function checkForUpdate(url) {
 		<html>
 			<head>
 				<meta charset="utf-8">
-				<title>无名杀-更新内容</title>
+				<title>大乱桌斗-更新内容</title>
 			</head>
 			<style>
 			span {
@@ -115,7 +115,7 @@ async function checkForUpdate(url) {
 			`;
 		}
 		updateStr += `
-			<button onclick="location.href='nonameSkill:?updateURL=${url}'; setTimeout(remote.getCurrentWindow().close, 1000);">更新无名杀</button>
+			<button onclick="location.href='nonameSkill:?updateURL=${url}'; setTimeout(remote.getCurrentWindow().close, 1000);">更新大乱桌斗</button>
 			</body>
 		</html>
 		`;
@@ -270,7 +270,7 @@ var Menus = [{
 		click: () => {
 			let lnkPath = dialog.showSaveDialogSync(thisWindow, {
 				title: '选择目录保存快捷方式',
-				defaultPath: path.join(app.getPath('desktop'), '无名杀.lnk'),
+				defaultPath: path.join(app.getPath('desktop'), '大乱桌斗.lnk'),
 				properties: ['dontAddToRecent'],
 			});
 			
@@ -281,7 +281,7 @@ var Menus = [{
 				description: '大乱桌斗',
 				icon: path.join(__dirname, '..', 'super_smash_tabletop.ico'),
 				iconIndex: 0,
-				appUserModelId: '无名杀'
+				appUserModelId: '大乱桌斗'
 			});
 			if (result) {
 				dialog.showMessageBoxSync(thisWindow, {
@@ -305,7 +305,7 @@ var Menus = [{
 	}, {
 		type: 'separator'
 	}, {
-		label: '打开无名杀目录',
+		label: '打开大乱桌斗目录',
 		click: () => {
 			shell.showItemInFolder(__dirname);
 		},

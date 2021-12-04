@@ -53,7 +53,7 @@
 				versionnode.innerHTML = '';
 				req(site + 'game/update.js', function() {
 					button.classList.remove('disabled');
-					button.innerHTML = '下载无名杀';
+					button.innerHTML = '下载大乱桌斗';
 					version = window.noname_update.version;
 					versionnode.innerHTML = 'v' + version;
 				}, function() {
