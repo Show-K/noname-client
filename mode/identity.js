@@ -4,6 +4,15 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 		name:'identity',
 		start:function(){
 			"step 0"
+			if(get.config('no_group')){
+				for(var i in lib.character){
+					lib.character[i][1]='sst_smash';
+				}
+			}
+			if(parseInt(get.config('player_number'))>=13){
+				ui.arenalog.style.display='';
+				ui.arenalog.dataset.position='center';
+			}
 			if(!lib.config.new_tutorial){
 				ui.arena.classList.add('only_dialog');
 			}

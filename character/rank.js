@@ -69,7 +69,8 @@ window.noname_character_rank={
 			"ymk_yumikohimi",
 			"sst_donkey_kong",
 			"mnm_edelgard",
-			"sst_kyo_kusanagi"
+			"sst_kyo_kusanagi",
+			"ska_king_olly"
 		],
 		rare:[
 			"sst_mario",
@@ -124,12 +125,13 @@ window.noname_character_rank={
 			"sst_ken",
 			"sst_pyra_mythra",
 			"sst_claude",
-			"alz_kyo_kusanagi"
+			"alz_kyo_kusanagi",
+			"ska_koopa_troopa",
+			"sst_krystal"
 		],
 		junk:[
 			"sst_yoshi",
-			"sst_villager",
-			"sst_krystal"
-		],
+			"sst_villager"
+		]
 	}
 };
