@@ -6,30 +6,34 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "packageWin64": "electron-packager . 大乱桌斗 --platform=win32 --arch=x64 --out=./ --app-version=1.9.0 --icon=super_smash_tabletop.ico --overwrite --ignore=node_modules --electron-version 16.0.2",
-    "packageWin32": "electron-packager . 大乱桌斗 --platform=win32 --arch=ia32 --out=./ --app-version=1.9.0 --icon=super_smash_tabletop.ico --overwrite --ignore=node_modules --electron-version 16.0.2",
-    "packageLinux": "electron-packager . 大乱桌斗 --platform=linux --arch=x64 --out=./ --app-version=1.9.0 --icon=super_smash_tabletop.ico --overwrite --ignore=node_modules --electron-version 16.0.2",
-	"postinstall": "electron-builder install-app-deps",
-	"dist": "electron-builder"
+    "packageWin64": "electron-packager . 大乱桌斗 --platform=win32 --arch=x64 --out=./ --app-version=1.9.0 --icon=noname.ico --overwrite --ignore=node_modules --electron-version 16.0.4",
+    "packageWin32": "electron-packager . 大乱桌斗 --platform=win32 --arch=ia32 --out=./ --app-version=1.9.0 --icon=noname.ico --overwrite --ignore=node_modules --electron-version 16.0.4",
+    "packageLinux": "electron-packager . 大乱桌斗 --platform=linux --arch=x64 --out=./ --app-version=1.9.0 --icon=noname.ico --overwrite --ignore=node_modules --electron-version 16.0.4",
+    "postinstall": "electron-builder install-app-deps",
+    "dist": "electron-builder"
   },
   "build": {
-    "productName":"大乱桌斗",
-    "appId": "win.show-k.super_smash_tabletop", 
+    "productName": "大乱桌斗",
+    "appId": "win.show_k.super_smash_tabletop",
     "directories": {
       "output": "build"
     },
-	"asar": false,
-    "win": {  
+    "asar": false,
+    "win": {
       "icon": "super_smash_tabletop.ico",
-	  "target": [{
-	    "target": "nsis",
-		"arch": ["x64"]
-	  }]
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
     }
   },
   "nsis": {
     "oneClick": false,
-	"perMachine": false,
+    "perMachine": false,
     "allowElevation": true,
     "allowToChangeInstallationDirectory": true,
     "installerIcon": "super_smash_tabletop.ico",
@@ -38,28 +42,47 @@
     "createDesktopShortcut": true,
     "createStartMenuShortcut": false,
     "shortcutName": "大乱桌斗",
-	"uninstallDisplayName": "大乱桌斗 v1.9",
-	"include": "build/installer.nsh",
-	"artifactName": "大乱桌斗安装程序v1.38.exe",
-	"deleteAppDataOnUninstall": false,
-	"language": "zh-CN"
+    "uninstallDisplayName": "大乱桌斗 v1.9",
+    "include": "build/installer.nsh",
+    "artifactName": "大乱桌斗安装程序v1.38.exe",
+    "deleteAppDataOnUninstall": false,
+    "language": "zh-CN"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Show-K/noname-client.git"
   },
-  "installerVersion": "1.381",
+  "installerVersion": "1.40",
   "installerUpdateContent": [
+    {
+      "version": "1.40",
+      "updateContent": [
+        "【在线更新】扩展v1.25更新",
+        "【应用配置】扩展v1.12更新，优化游戏内的报错弹窗",
+        "内置无名杀全教程V10.0完整版"
+      ]
+    },
+    {
+      "version": "1.39",
+      "updateContent": [
+        "暂时屏蔽通过链接下载扩展的功能（nonameSKill:?extensionName=扩展名）",
+        "从此版本开始，将不兼容扩展【概念武将】和【假装无敌】",
+        "【拖拽读取】扩展v1.77更新，支持导入.7z格式的压缩包",
+        "【在线更新】扩展v1.22更新，还原github更新地址，添加github镜像和玄武镜像更新地址，覆盖游戏内原更新方式",
+        "若你使用的是v1.37的安装包，请更换至v1.381及以上的安装包",
+        "注意：v1.381及以上的安装包可能不兼容windows 7，windows 7 用户请尝试v1.36的安装包"
+      ]
+    },
     {
       "version": "1.381",
       "updateContent": [
         "撤销上个版本的更新",
         "若你使用的是v1.37的安装包，请更换至v1.381的安装包",
-        "注意：v1.381的安装包不兼容windows 7，window 7 用户请尝试v1.36的安装包",
-		"内置无名杀全教程V9.9完整版"
+        "注意：v1.381的安装包不兼容windows 7，windows 7 用户请尝试v1.36的安装包",
+        "内置无名杀全教程V9.9完整版"
       ]
     },
-	{
+    {
       "version": "1.38",
       "updateContent": [
         "main.js中对部分代码的顺序进行调整，修复某些代码执行太晚而失效的问题",
@@ -143,7 +166,7 @@
   "author": "Show-K",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^16.0.2",
+    "electron": "^16.0.4",
     "electron-builder": "^22.14.5",
     "electron-packager": "^15.3.0"
   },
