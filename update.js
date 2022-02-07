@@ -11,7 +11,7 @@ window.updateList = [
 	'update.html',
 	
 	//教程
-	'(必看)无名杀全教程9.9.pdf',
+	'(必看)无名杀全教程10.0.pdf',
 	
 	//应用配置
 	'extension/应用配置/extension.js',

@@ -1,11 +1,12 @@
 "use strict";
 game.import("character",function(lib,game,ui,get,ai,_status){
+	if(!lib.translateEnglish) lib.translateEnglish={};
 	var sst_yingbian={
 		name:"sst_yingbian",//武将包命名（必填）
 		connect:true,//该武将包是否可以联机（必填）
 		characterSort:{
 			sst_yingbian:{
-				sst_spirits:["sst_claude"]
+				sst_spirits:["sst_claude","sst_geno","sst_duck_hunt"]
 			}
 		},
 		character:{
@@ -24,10 +25,10 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			"武将作者：Yumikohimi<br>"+
 			"武将作者：mario not mary<br>"+
 			"武将作者：Show-K<br>"+
-			"--------------------------------<br>"+
+			"------------------------------<br>"+
 			"<br>"+
 			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"--------------------------------<br>"+
+			"------------------------------<br>"+
 			"
 
 			"+
@@ -37,10 +38,10 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			"系列：Fire Emblem（火焰纹章）<br>"+
 			"初登场：Fire Emblem: Three Houses（火焰纹章 风花雪月）<br>"+
 			"武将作者：mario not mary、Yumikohimi<br>"+
-			"--------------------------------<br>"+
+			"------------------------------<br>"+
 			"雷斯塔诸侯同盟盟主之孙、爵位继承人。喜欢策略，喜欢琢磨战术，为了达到目标可以不择手段。不论玩家选择的是贝雷特还是贝雷丝，他都会以“兄弟”称呼他的老师。<br>"+
 			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"--------------------------------<br>"+
+			"------------------------------<br>"+
 			"芙朵拉内外都要变革，才能得以见到所愿之景……对吧？"
 		},//武将介绍（选填）
 		characterTitle:{
@@ -56,18 +57,22 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					return get.is.yingbian(event.card);
 				},
 				content:function(){
+					/*
 					if(!_status.cardtag) _status.cardtag={};
 					var list=["yingbian_kongchao","yingbian_canqu","yingbian_fujia","yingbian_zhuzhan"];
 					var cardtag=["yingbian_kongchao","yingbian_canqu","yingbian_fujia","yingbian_zhuzhan"];
 					for(var i=0;i<list.length;i++){
 						if(!_status.cardtag[list[i]]) _status.cardtag[list[i]]=[];
 						if(!_status.cardtag[list[i]].contains(trigger.card.cardid)){
-							_status.cardtag[list[i]].push(trigger.card.cardid);
+							_status.cardtag[list[i]].add(trigger.card.cardid);
 						}
 						else{
 							cardtag.remove(list[i]);
 						}
 					}
+					game.broadcastAll(function(cardtag){
+						_status.cardtag=cardtag;
+					},_status.cardtag);
 					var evt=event.getParent("useCard");
 					if(evt&&evt.name=="useCard"&&!evt.sst_yunchou){
 						evt.sst_yunchou=true;
@@ -79,6 +84,10 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 						next.set("cardtag",cardtag);
 						next.setContent(lib.skill.sst_yunchou.contentx);
 					}
+					*/
+					var list=["yingbian_kongchao","yingbian_canqu","yingbian_fujia","yingbian_zhuzhan"];
+					if(!trigger.card.cardtags) trigger.card.cardtags=[];
+					trigger.card.cardtags.addArray(list);
 				},
 				contentx:function(){
 					if(!_status.cardtag) _status.cardtag={};
@@ -88,6 +97,16 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					}
 					for(var i=0;i<event.cardtag.length;i++){
 						_status.cardtag[event.cardtag[i]].remove(card.cardid);
+					}
+					game.broadcastAll(function(cardtag){
+						_status.cardtag=cardtag;
+					},_status.cardtag);
+				},
+				ai:{
+					effect:{
+						player:function(card){
+							if(get.is.yingbian(card)) return [1,1];
+						}
 					}
 				}
 			},
@@ -104,7 +123,7 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 						list[i]="yingbian_"+list[i]+"_tag";
 					}
 					player.chooseControl(list,"cancel2").set("ai",function(){
-						var choices=["yingbian_damage_tag","yingbian_hit_tag","yingbian_draw_tag","yingbian_gain_tag","yingbian_add_tag","yingbian_all_tag","yingbian_remove_tag"];
+						var choices=["yingbian_all_tag","yingbian_damage_tag","yingbian_hit_tag","yingbian_draw_tag","yingbian_gain_tag","yingbian_add_tag","yingbian_remove_tag"];
 						var list=_status.event.list;
 						var card=_status.event.card;
 						for(var i=0;i<choices.length;i++){
@@ -127,7 +146,10 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 								cardtag.push(list[i]);
 							}
 						}
-						_status.cardtag[result.control.slice(0,-4)].push(trigger.card.cardid);
+						_status.cardtag[result.control.slice(0,-4)].add(trigger.card.cardid);
+						game.broadcastAll(function(cardtag){
+							_status.cardtag=cardtag;
+						},_status.cardtag);
 						player.popup(result.control,"wood");
 						game.log(player,"指定此牌的应变效果为","#y"+result.control);
 						var evt=event.getParent("useCard");
@@ -152,8 +174,11 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					}
 					_status.cardtag[event.cardtag_temp].remove(card.cardid);
 					for(var i=0;i<event.cardtag.length;i++){
-						_status.cardtag[event.cardtag[i]].push(card.cardid);
+						_status.cardtag[event.cardtag[i]].add(card.cardid);
 					}
+					game.broadcastAll(function(cardtag){
+						_status.cardtag=cardtag;
+					},_status.cardtag);
 				}
 			},
 			sst_guimou2:{}
@@ -181,6 +206,9 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			sst_guimou5:"鬼谋",
 			sst_guimou_info:"每回合限一次，若你使用的牌具有应变效果，你可以任意指定此牌的应变效果。"
 			//武将分类
+		},
+		translateEnglish:{
+			sst_claude:"Claude"
 		},
 		perfectPair:{
 			sst_claude:["sst_byleth_male","sst_byleth_female"]

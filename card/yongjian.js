@@ -106,7 +106,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					if(result.bool&&target.isIn()){
 						var num=result.cards.length,hs=player.getCards('h');
 						if(!hs.length) event.finish();
-						else if(hs.length<num) event._result={bool:true,cards:hs.length};
+						else if(hs.length<num) event._result={bool:true,cards:hs};
 						else player.chooseCard('h',true,num,'交给'+get.translation(target)+get.cnNumber(num)+'张牌');
 					}
 					else event.finish();
@@ -395,6 +395,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			},
 			xinge:{
 				audio:true,
+				equipSkill:true,
 				enable:'phaseUse',
 				usable:1,
 				filter:function(event,player){
@@ -409,6 +410,19 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				content:function(){
 					target.gain(cards,player,'giveAuto');
 				},
+				//Temporary AI
+				ai:{
+					order:1,
+					result:{
+						target:function(){
+							if(ui.selected.cards&&ui.selected.cards.length) return get.value(ui.selected.cards[0]);
+						},
+						player:function(player,target){
+							if((get.attitude(player,target)>0&&player.needsToDiscard())||(get.attitude(player,target)<0&&ui.selected.cards&&ui.selected.cards.length&&get.value(ui.selected.cards[0])<0)) return 1;
+							return -1;
+						}
+					}
+				}
 			},
 			qixingbaodao:{
 				trigger:{player:'equipAfter'},

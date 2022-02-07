@@ -1,8 +1,8 @@
 "use strict";
 game.import("card",function(lib,game,ui,get,ai,_status){
 	var sst={
-		name:"sst",//卡包命名
-		connect:true,//卡包是否可以联机
+		name:"sst",
+		connect:true,
 		card:{
 			sst_aegises:{
 				fullskin:true,
@@ -19,9 +19,6 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 		},
 		skill:{
 			sst_aegises_skill:{
-				init:function(player){
-					player.storage.sst_aegises_skill=false;
-				},
 				//mark:true,
 				zhuanhuanji:true,
 				equipSkill:true,
@@ -65,6 +62,7 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 						return -1;
 					}
 				},
+				delay:false,
 				content:function(){
 					"step 0"
 					if(!player.storage.sst_aegises_skill){
@@ -78,7 +76,7 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 						//与牌堆顶的一张牌拼点
 						var next=game.createEvent("chooseToCompare");
 						next.player=player;
-						next.ai=function(card){
+						next.set("ai",function(card){
 							if(typeof card=="string"&&lib.skill[card]){
 								var ais=lib.skill[card].check||function(){return 0};
 								return ais();
@@ -92,7 +90,7 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 							var addi=(get.value(card)>=8&&get.type(card)!="equip")?-10:0;
 							if(card.name=="du") addi+=5;
 							return getn(card)-get.value(card)/2+addi;
-						};
+						});
 						next.setContent(lib.skill.sst_aegises_skill.contentx);
 						//next._args=Array.from(arguments);
 					};
@@ -226,14 +224,16 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 					expose:0.2,
 					damage:true,
 					result:{
-						target:-1,
-						player:1
+						player:function(player,target){
+							if(!player.storage.sst_aegises_skill) return -get.attitude(player,target)/2;
+							return 1;
+						}
 					}
 				}
 			}
 		},
 		translate:{
-			//标签
+			//Tag
 			sst_64_tag:"64",
 			sst_melee_tag:"Melee",
 			sst_brawl_tag:"Brawl",
@@ -242,10 +242,13 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 			sst_spirits_tag:"命魂",
 			sst_players_tag:"玩家",
 			sst_sp_tag:"SP",
-			//武器
+			sst_light_tag:"光",
+			sst_reality_tag:"现",
+			sst_smash_tag:"斗",
+			//Equip
 			sst_aegises:"天之圣杯",
 			sst_aegises_info:"转换技，出牌阶段限一次，你可以与①一名角色②牌堆顶的一张牌拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点①火焰②雷电伤害。",
-			//技能
+			//Skill
 			sst_aegises_skill:"炫奕",
 			sst_aegises_skill_info:"转换技，出牌阶段限一次，你可以与①一名角色②牌堆顶的一张牌拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点①火焰②雷电伤害。"
 		},
