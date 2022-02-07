@@ -188,7 +188,7 @@ function createIframe() {
 			plugins: true
 		},
 	});
-	win.loadURL(`file://${__dirname}/../(必看)无名杀全教程9.9.pdf`);
+	win.loadURL(`file://${__dirname}/../(必看)无名杀全教程10.0.pdf`);
 	win.on('closed', () => {
 		win = null
 	});
@@ -406,7 +406,7 @@ var Menus = [{
 		label: '版权声明',
 		click: () => {
 			dialog.showMessageBoxSync(thisWindow, {
-				message: '【无名杀】属于个人开发软件且【完全免费】。如非法倒卖用于牟利将承担法律责任 开发团队将追究到底',
+				message: '【大乱桌斗】及【无名杀】属于个人开发软件且【完全免费】。如非法倒卖用于牟利将承担法律责任 开发团队将追究到底',
 				type: 'info',
 				title: '版权声明',
 				icon: path.join(__dirname, '..', 'super_smash_tabletop.ico'),
