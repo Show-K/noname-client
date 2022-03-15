@@ -7,10 +7,10 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 		characterSort:{
 			sst_sp:{
 				sst_mnm:["mnm_edelgard"],
-				sst_ymk:["ymk_isabelle","ymk_577","ymk_yumikohimi"],
-				sst_ska:["ska_bobby","ska_olivia","ska_super_xiaojie","ska_show_k","ska_bowser","ska_professor_toad","ska_king_olly","ska_koopa_troopa"],
+				sst_ymk:["ymk_isabelle","ymk_yumikohimi","ymk_tianyi"],
+				sst_ska:["ska_bobby","ska_olivia","ska_super_xiaojie","ska_show_k","ska_professor_toad","ska_king_olly","ska_koopa_troopa"],
 				sst_nnk:["nnk_robin"],
-				sst_alz:["alz_kyo_kusanagi"],
+				sst_alz:["alz_kyo_kusanagi","alz_yuri_kozukata"],
 				sst_entertainment:["mnm_captain_falcon","mnm_9_volt_18_volt"]
 			}
 		},
@@ -18,7 +18,6 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			ymk_isabelle:["female","sst_light",3,["ymk_zhongmi","ymk_mihu"],[]],
 			ska_bobby:["male","sst_spirit",3,["ska_jixing","ska_wangshi","ska_yangxun"],[]],
 			ska_olivia:["female","sst_spirit",3,["ska_shenqi","ska_zhefu"],[]],
-			ymk_577:["male","sst_reality",3,["ymk_jiagou","ymk_jicai"],[]],
 			ska_super_xiaojie:["male","sst_reality",3,["ska_kezhi","ska_jiyan"],[]],
 			ska_show_k:["male","sst_reality",3,["ska_jingli","ska_zhiyi"],[]],
 			ymk_yumikohimi:["female","sst_reality",3,["ymk_qiuyi","ymk_xifang"],[]],
@@ -30,9 +29,11 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			ska_king_olly:["male","sst_spirit",3,["ska_shenqi2","ska_zhesheng"],[]],
 			ska_koopa_troopa:["male","sst_spirit",3,["ska_suixuan","ska_xiangshi"],[]],
 			mnm_9_volt_18_volt:["male","sst_spirit",4,["mnm_huaijiu"],[]],
-			nnk_robin:["none","sst_darkness",4,["nnk_leishu"],[]],
-			nnk_robin_male:["male","sst_darkness",4,["nnk_leishu"],["unseen"]],
-			nnk_robin_female:["female","sst_darkness",4,["nnk_leishu"],["unseen"]]
+			nnk_robin:["none","sst_darkness",4,["nnk_yuanlei"],[]],
+			nnk_robin_male:["male","sst_darkness",4,["nnk_yuanlei"],["unseen"]],
+			nnk_robin_female:["female","sst_darkness",4,["nnk_yuanlei"],["unseen"]],
+			alz_yuri_kozukata:["female","sst_spirit","2/3",["alz_yingjian"]],
+			ymk_tianyi:["male","sst_reality",4,["ymk_kaibai"],[]]
 		},
 		characterFilter:{
 			mnm_edelgard:function(mode){
@@ -41,159 +42,167 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 		},
 		characterIntro:{
 			/*
-			"<br>"+
-			"系列：（）<br>"+
-			"初登场：（）<br>"+
-			"武将作者：Yumikohimi<br>"+
-			"武将作者：mario not mary<br>"+
-			"武将作者：Show-K<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"
+			"<br>\
+			系列：（）<br>\
+			初登场：（）<br>\
+			武将作者：Yumikohimi<br>\
+			武将作者：mario not mary<br>\
+			武将作者：Show-K<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			
 
 			"+
 			"
 			*/
-			ymk_isabelle:"0827. 西施惠/Isabelle/しずえ<br>"+
-			"系列：Animal Crossing（动物森友会）<br>"+
-			"初登场：Animal Crossing: New Leaf（来吧！动物森友会）<br>"+
-			"武将作者：Yumikohimi<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"在3DS版《动物森友会》中，她是村民们的可靠秘书；而在NS版中，她也为每个无人岛居民提供生活服务。她有时可能健忘，但总的来说很靠谱。有个叫西施德的弟弟。她在3DS和WiiU版《任天堂明星大乱斗》中是辅助模型，NS版中则成为了斗士。<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"上次柚子的武将就被老摸吵着要删，这次希望不要太IMBA……老摸的西施慧出来了，柚子的武将至少还是被借鉴了一点的。",
-			ska_bobby:"????. 炸弹彬/Bobby/ボム平<br>"+
-			"系列：Mario（马力欧）<br>"+
-			"初登场：Paper Mario: The Origami King（纸片马力欧 折纸国王）<br>"+
-			"武将作者：Show-K<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"炸弹兵，通常被奥莉维亚称为“炸弹彬”，也曾被错误地称为“Bhomas”和“Bomber”，是纸片马力欧 折纸国王中马力欧的伙伴。作为一个没有保险丝、失忆的炸弹兵，他加入了马力欧和奥莉维亚的探险，努力回忆起他的记忆。在他们的冒险过程中，他将马力欧和奥莉维亚分别称为“大哥”和“女士”。<br>"+
-			"——翻译自《超级马力欧维基》（来源：https://www.mariowiki.com/Bob-omb_(Paper_Mario%3A_The_Origami_King)）<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"“我？哦，我是炸弹兵。”",
-			ska_olivia:"1426. 奥莉维亚/Olivia/オリビア<br>"+
-			"系列：Mario（马力欧）<br>"+
-			"初登场：Paper Mario: The Origami King（纸片马力欧 折纸国王）<br>"+
-			"武将作者：Show-K<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"由掌握赋生折法的匠人制作的折纸，奥利王的妹妹。非常天真烂漫，对世界充满了好奇心。为了阻止哥哥的野心而踏上冒险之途，虽然也有过悲痛和犹豫，但是还是走到了最后。非常擅长唱歌跳舞，喜欢泡温泉和撸狗。<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"一个拥有赋之能力的折纸妹妹，在和马里奥的冒险路途上成长很多啊……",
-			ymk_577:"武将作者：Yumikohimi<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"柚子设计的577，估计又要偏强……意外的还行？",
-			ska_super_xiaojie:"武将作者：Show-K<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"喜欢没事说嬲，但更喜欢不放弃。",
-			ska_show_k:"武将作者：Show-K<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"有人建议我给我自己写一个，于是我就写出来了。",
-			ymk_yumikohimi:"武将作者：Yumikohimi<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"果然刚设计出来就要被削，果然还是三方定律。现在削了，感觉可以。",
-			ska_professor_toad:"????. 考古学家奇诺比奥/Professor Toad/考古学者キノピオ<br>"+
-			"系列：Mario（马力欧）<br>"+
-			"初登场：Paper Mario: The Origami King（纸片马力欧 折纸国王）<br>"+
-			"武将作者：Show-K<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"考古学家奇诺比奥是第一次出现在纸片马里奥 折纸国王中的奇诺比奥。作为古代历史学院教授兼考古学家，他与马力欧和奥莉维亚联手，帮助他们破坏黄色神祇胶带。他的棕色探险家装束和黄色斑点蘑菇头（大部分隐藏在他的髓质头盔中）以及他总是随身携带的铁锹和记事本，很容易将他与其他奇诺比奥区分开来。<br>"+
-			"——翻译自《超级马力欧维基》（来源：https://www.mariowiki.com/Professor_Toad）<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"大概是现代纸片马力欧中最有特色的奇诺比奥了吧……",
-			mnm_edelgard:"1382. 艾黛尔贾特/Edelgard/エーデルガルト<br>"+
-			"系列：Fire Emblem（火焰纹章）<br>"+
-			"初登场：（）<br>"+
-			"武将作者：mario not mary<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"阿德剌斯忒亚帝国的皇女、皇位继承人。气质高雅充满自信，有很强的执行能力，怀有深藏不露的野心。似乎和神秘人“炎帝”有什么关系？<br>"+
-			"——Marioraz、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"请握住我的手，在我随风飘落，散入黎明之前……",
-			alz_kyo_kusanagi:"1362. 草薙京/Kyo Kusanagi/草薙京<br>"+
-			"系列：The King of Fighters（拳皇）<br>"+
-			"初登场：The King of Fighters \x2794（拳皇\x2794）<br>"+
-			"武将作者：Axel_Zhai<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"炎之贵公子草薙京，三神器之一“草薙剑”的传人，因此能够使用神器所带来的火焰之力。三神器家族自1800年前便与大蛇结下了宿命的渊源。大蛇作为地球的意志，想要清除一直以来破坏地球的人类，而三神器一族则世世代代守护着大蛇的封印。他们也背负上了与大蛇一族战斗的宿命。不过听说他现在还拿不到中学毕业证。<br>"+
-			"——Mario_not_mary、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"另外一位新人设计的第一个武将，但是为什么要选择一个已经有了的武将呢……",
-			mnm_captain_falcon:"0591. 飞隼队长/Captain Falcon/キャプテン・ファルコン<br>"+
-			"系列：F-Zero（零式赛车）<br>"+
-			"初登场：F-Zero（零式赛车）<br>"+
-			"武将作者：Show-K、mario not mary<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"在F-Zero赛车大赛中，飞隼队长驾驶着他的“蓝色猎鹰”取得了优秀的成绩。虽然参战了大乱斗，但他的真实身份仍然是个谜。他的速度和力量都很强，还有演出效果爆炸的招牌技能“飞隼拳”，可以在落地的时候尝试使用哦！<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"MNM曾经提过一个“面杀”版本技能，最近无名杀能玩音游了，于是我就借鉴了这种思路（不就是小游戏武将吗）。",
-			ska_king_olly:"1427. 奥利王/King Olly/オリー王<br>"+
-			"系列：Mario（马力欧）<br>"+
-			"初登场：Paper Mario: The Origami King（纸片马力欧 折纸国王）<br>"+
-			"武将作者：Show-K<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"由掌握赋生折法的匠人制作的折纸，奥莉维亚的哥哥。自称折纸国王，将匠人的所有文具变为了自己的手下，有把整个纸片世界都变成折纸的野心。手段残忍，即使是亲妹妹也会毫不犹豫的下手。骄傲的背后其实是极端的玻璃心和无知。<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"马里奥RPG系列中唯二原创最终Boss之一，极具历史意义！",
-			ska_koopa_troopa:"0037. 慢慢龟/Koopa Troopa/ノコノコ<br>"+
-			"系列：Mario（马力欧）<br>"+
-			"初登场：Super Mario Bros.（超级马力欧兄弟）<br>"+
-			"武将作者：Show-K、mario not mary<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"在酷霸王军团里，最常见的不是栗宝宝就是慢慢龟了。它们看起来很温顺，但它们也有奋不顾身地跳崖的勇气。马力欧如果踩到慢慢龟，它们会缩进壳里，这个状态下的它们经常被踢来踢去或者扔来扔去。马力欧游戏的不少地名都是以慢慢龟命名的哦。<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"黑历史重铸武将之一。",
-			mnm_9_volt_18_volt:"0733. 九伏特&十八伏特【九伏&十八伏】/9-Volt & 18-Volt/ナインボルト & エイティーンボルト<br>"+
-			"系列：Wario（瓦力欧）<br>"+
-			"初登场：WarioWare, Inc.: Mega Microgame$!（瓦力欧制造）<br>"+
-			"武将作者：mario not mary<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"九伏特和十八伏特是最要好的朋友，目前正在钻石城市读小学——没错，看起来高大又成熟的十八伏特其实是个小学生。两人都喜欢玩游戏，其中九伏特会在晚上躲着妈妈偷偷玩。九伏特有个黄色的像素宠物蓬蓬，而十八伏特还很擅长rap，作为rapper的标志是老虎。<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"MNM的娱乐武将，超值N合1！",
-			nnk_robin:"0616. 鲁弗莱（男性）/Robin (Male)/ルフレ（男性）<br>"+
-			"0617. 鲁弗莱（女性）/Robin (Female)/ルフレ（女性）<br>"+
-			"系列：Fire Emblem（火焰纹章）<br>"+
-			"初登场：Fire Emblem Awakening（火焰纹章 觉醒）<br>"+
-			"武将作者：mario not mary<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"《火焰纹章：觉醒》中的主角，形象和性别可以自定义。根据选择的性别不同，能够攻略的对象也不一样——比如男鲁弗莱可以攻略露琪娜。在大乱斗中，鲁弗莱除了剑术之外，还会使用魔法。魔法书用完之后需要等待恢复。<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"《火焰纹章：觉醒》中的主角，根据选择的性别不同，能够攻略的对象也不一样——比如女鲁弗莱可以攻略库洛姆。她可以切换青铜剑和雷剑进行攻击，在地面或空中输入快弹就可以切换为雷剑，但雷剑使用时也会像魔法书一样消耗耐久。<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"南柯设计的第二个武将，值得一试。",
-			nnk_robin_male:"0616. 鲁弗莱（男性）/Robin (Male)/ルフレ（男性）<br>"+
-			"系列：Fire Emblem（火焰纹章）<br>"+
-			"初登场：Fire Emblem Awakening（火焰纹章 觉醒）<br>"+
-			"武将作者：mario not mary<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"《火焰纹章：觉醒》中的主角，形象和性别可以自定义。根据选择的性别不同，能够攻略的对象也不一样——比如男鲁弗莱可以攻略露琪娜。在大乱斗中，鲁弗莱除了剑术之外，还会使用魔法。魔法书用完之后需要等待恢复。<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"南柯设计的第二个武将，值得一试。（已选择男性）",
-			nnk_robin_female:"0617. 鲁弗莱（女性）/Robin (Female)/ルフレ（女性）<br>"+
-			"系列：Fire Emblem（火焰纹章）<br>"+
-			"初登场：Fire Emblem Awakening（火焰纹章 觉醒）<br>"+
-			"武将作者：mario not mary<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"《火焰纹章：觉醒》中的主角，根据选择的性别不同，能够攻略的对象也不一样——比如女鲁弗莱可以攻略库洛姆。她可以切换青铜剑和雷剑进行攻击，在地面或空中输入快弹就可以切换为雷剑，但雷剑使用时也会像魔法书一样消耗耐久。<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"━━━━━━━━━━━━━━━━━<br>"+
-			"南柯设计的第二个武将，值得一试。（已选择女性）"
+			ymk_isabelle:"0827. 西施惠/Isabelle/しずえ<br>\
+			系列：Animal Crossing（动物森友会）<br>\
+			初登场：Animal Crossing: New Leaf（来吧！动物森友会）<br>\
+			武将作者：Yumikohimi<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			在3DS版《动物森友会》中，她是村民们的可靠秘书；而在NS版中，她也为每个无人岛居民提供生活服务。她有时可能健忘，但总的来说很靠谱。有个叫西施德的弟弟。她在3DS和WiiU版《任天堂明星大乱斗》中是辅助模型，NS版中则成为了斗士。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			上次柚子的武将就被老摸吵着要删，这次希望不要太IMBA……老摸的西施慧出来了，柚子的武将至少还是被借鉴了一点的。",
+			ska_bobby:"????. 炸弹彬/Bobby/ボム平<br>\
+			系列：Mario（马力欧）<br>\
+			初登场：Paper Mario: The Origami King（纸片马力欧 折纸国王）<br>\
+			武将作者：Show-K<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			炸弹兵，通常被奥莉维亚称为“炸弹彬”，也曾被错误地称为“Bhomas”和“Bomber”，是纸片马力欧 折纸国王中马力欧的伙伴。作为一个没有保险丝、失忆的炸弹兵，他加入了马力欧和奥莉维亚的探险，努力回忆起他的记忆。在他们的冒险过程中，他将马力欧和奥莉维亚分别称为“大哥”和“女士”。<br>\
+			——翻译自《超级马力欧维基》（来源：https://www.mariowiki.com/Bob-omb_(Paper_Mario%3A_The_Origami_King)）<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			“我？哦，我是炸弹兵。”",
+			ska_olivia:"1426. 奥莉维亚/Olivia/オリビア<br>\
+			系列：Mario（马力欧）<br>\
+			初登场：Paper Mario: The Origami King（纸片马力欧 折纸国王）<br>\
+			武将作者：Show-K<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			由掌握赋生折法的匠人制作的折纸，奥利王的妹妹。非常天真烂漫，对世界充满了好奇心。为了阻止哥哥的野心而踏上冒险之途，虽然也有过悲痛和犹豫，但是还是走到了最后。非常擅长唱歌跳舞，喜欢泡温泉和撸狗。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			一个拥有赋之能力的折纸妹妹，在和马里奥的冒险路途上成长很多啊……",
+			ska_super_xiaojie:"武将作者：Show-K<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			喜欢没事说嬲，但更喜欢不放弃。",
+			ska_show_k:"武将作者：Show-K<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			有人建议我给我自己写一个，于是我就写出来了。",
+			ymk_yumikohimi:"武将作者：Yumikohimi<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			果然刚设计出来就要被削，果然还是三方定律。现在削了，感觉可以。",
+			ska_professor_toad:"????. 考古学家奇诺比奥/Professor Toad/考古学者キノピオ<br>\
+			系列：Mario（马力欧）<br>\
+			初登场：Paper Mario: The Origami King（纸片马力欧 折纸国王）<br>\
+			武将作者：Show-K<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			考古学家奇诺比奥是第一次出现在纸片马里奥 折纸国王中的奇诺比奥。作为古代历史学院教授兼考古学家，他与马力欧和奥莉维亚联手，帮助他们破坏黄色神祇胶带。他的棕色探险家装束和黄色斑点蘑菇头（大部分隐藏在他的髓质头盔中）以及他总是随身携带的铁锹和记事本，很容易将他与其他奇诺比奥区分开来。<br>\
+			——翻译自《超级马力欧维基》（来源：https://www.mariowiki.com/Professor_Toad）<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			大概是现代纸片马力欧中最有特色的奇诺比奥了吧……",
+			mnm_edelgard:"1382. 艾黛尔贾特/Edelgard/エーデルガルト<br>\
+			系列：Fire Emblem（火焰纹章）<br>\
+			初登场：Fire Emblem: Three Houses（火焰纹章 风花雪月）<br>\
+			武将作者：mario not mary<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			阿德剌斯忒亚帝国的皇女、皇位继承人。气质高雅充满自信，有很强的执行能力，怀有深藏不露的野心。似乎和神秘人“炎帝”有什么关系？<br>\
+			——Marioraz、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			请握住我的手，在我随风飘落，散入黎明之前……",
+			alz_kyo_kusanagi:"1362. 草薙京/Kyo Kusanagi/草薙京<br>\
+			系列：The King of Fighters（拳皇）<br>\
+			初登场：The King of Fighters \x2794（拳皇\x2794）<br>\
+			武将作者：Axel_Zhai<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			炎之贵公子草薙京，三神器之一“草薙剑”的传人，因此能够使用神器所带来的火焰之力。三神器家族自1800年前便与大蛇结下了宿命的渊源。大蛇作为地球的意志，想要清除一直以来破坏地球的人类，而三神器一族则世世代代守护着大蛇的封印。他们也背负上了与大蛇一族战斗的宿命。不过听说他现在还拿不到中学毕业证。<br>\
+			——Mario_not_mary、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			另外一位新人设计的第一个武将，但是为什么要选择一个已经有了的武将呢……",
+			mnm_captain_falcon:"0591. 飞隼队长/Captain Falcon/キャプテン・ファルコン<br>\
+			系列：F-Zero（零式赛车）<br>\
+			初登场：F-Zero（零式赛车）<br>\
+			武将作者：Show-K、mario not mary<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			在F-Zero赛车大赛中，飞隼队长驾驶着他的“蓝色猎鹰”取得了优秀的成绩。虽然参战了大乱斗，但他的真实身份仍然是个谜。他的速度和力量都很强，还有演出效果爆炸的招牌技能“飞隼拳”，可以在落地的时候尝试使用哦！<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			MNM曾经提过一个“面杀”版本技能，最近无名杀能玩音游了，于是我就借鉴了这种思路（不就是小游戏武将吗）。",
+			ska_king_olly:"1427. 奥利王/King Olly/オリー王<br>\
+			系列：Mario（马力欧）<br>\
+			初登场：Paper Mario: The Origami King（纸片马力欧 折纸国王）<br>\
+			武将作者：Show-K<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			由掌握赋生折法的匠人制作的折纸，奥莉维亚的哥哥。自称折纸国王，将匠人的所有文具变为了自己的手下，有把整个纸片世界都变成折纸的野心。手段残忍，即使是亲妹妹也会毫不犹豫的下手。骄傲的背后其实是极端的玻璃心和无知。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			马里奥RPG系列中唯二原创最终Boss之一，极具历史意义！",
+			ska_koopa_troopa:"0037. 慢慢龟/Koopa Troopa/ノコノコ<br>\
+			系列：Mario（马力欧）<br>\
+			初登场：Super Mario Bros.（超级马力欧兄弟）<br>\
+			武将作者：Show-K、mario not mary<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			在酷霸王军团里，最常见的不是栗宝宝就是慢慢龟了。它们看起来很温顺，但它们也有奋不顾身地跳崖的勇气。马力欧如果踩到慢慢龟，它们会缩进壳里，这个状态下的它们经常被踢来踢去或者扔来扔去。马力欧游戏的不少地名都是以慢慢龟命名的哦。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			黑历史重铸武将之一。",
+			mnm_9_volt_18_volt:"0733. 九伏特&十八伏特【九伏&十八伏】/9-Volt & 18-Volt/ナインボルト & エイティーンボルト<br>\
+			系列：Wario（瓦力欧）<br>\
+			初登场：WarioWare, Inc.: Mega Microgame$!（瓦力欧制造）<br>\
+			武将作者：mario not mary<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			九伏特和十八伏特是最要好的朋友，目前正在钻石城市读小学——没错，看起来高大又成熟的十八伏特其实是个小学生。两人都喜欢玩游戏，其中九伏特会在晚上躲着妈妈偷偷玩。九伏特有个黄色的像素宠物蓬蓬，而十八伏特还很擅长rap，作为rapper的标志是老虎。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			MNM的娱乐武将，超值N合1！",
+			nnk_robin:"0616. 鲁弗莱（男性）/Robin (Male)/ルフレ（男性）<br>\
+			0617. 鲁弗莱（女性）/Robin (Female)/ルフレ（女性）<br>\
+			系列：Fire Emblem（火焰纹章）<br>\
+			初登场：Fire Emblem Awakening（火焰纹章 觉醒）<br>\
+			武将作者：南柯<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			《火焰纹章：觉醒》中的主角，形象和性别可以自定义。根据选择的性别不同，能够攻略的对象也不一样——比如男鲁弗莱可以攻略露琪娜。在大乱斗中，鲁弗莱除了剑术之外，还会使用魔法。魔法书用完之后需要等待恢复。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			《火焰纹章：觉醒》中的主角，根据选择的性别不同，能够攻略的对象也不一样——比如女鲁弗莱可以攻略库洛姆。她可以切换青铜剑和雷剑进行攻击，在地面或空中输入快弹就可以切换为雷剑，但雷剑使用时也会像魔法书一样消耗耐久。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			南柯设计的第二个武将，值得一试。",
+			nnk_robin_male:"0616. 鲁弗莱（男性）/Robin (Male)/ルフレ（男性）<br>\
+			系列：Fire Emblem（火焰纹章）<br>\
+			初登场：Fire Emblem Awakening（火焰纹章 觉醒）<br>\
+			武将作者：南柯<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			《火焰纹章：觉醒》中的主角，形象和性别可以自定义。根据选择的性别不同，能够攻略的对象也不一样——比如男鲁弗莱可以攻略露琪娜。在大乱斗中，鲁弗莱除了剑术之外，还会使用魔法。魔法书用完之后需要等待恢复。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			南柯设计的第二个武将，值得一试。（已选择男性）",
+			nnk_robin_female:"0617. 鲁弗莱（女性）/Robin (Female)/ルフレ（女性）<br>\
+			系列：Fire Emblem（火焰纹章）<br>\
+			初登场：Fire Emblem Awakening（火焰纹章 觉醒）<br>\
+			武将作者：南柯<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			《火焰纹章：觉醒》中的主角，根据选择的性别不同，能够攻略的对象也不一样——比如女鲁弗莱可以攻略库洛姆。她可以切换青铜剑和雷剑进行攻击，在地面或空中输入快弹就可以切换为雷剑，但雷剑使用时也会像魔法书一样消耗耐久。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			南柯设计的第二个武将，值得一试。（已选择女性）",
+			alz_yuri_kozukata:"1241. 不来方夕莉/Yuri Kozukata/不来方夕莉<br>\
+			系列：Fatal Frame（零）<br>\
+			初登场：Fatal Frame: Maiden of Black Water（零～濡鸦之巫女～）<br>\
+			武将作者：Axel_Zhai<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			在经历过交通事故之后，拥有了能看见死者的能力。被这个能力困扰的她本想自杀，最后被人救下，并学会了使用“射影机”对抗怨灵。在一次委托中，她逐渐发现了灵山中的真相。在大乱斗中，作为辅助模型的她可以使用射影机对被拍到的斗士造成伤害。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			咕了好久了……",
+			ymk_tianyi:"武将作者：Yumikohimi<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			啊对对对。"
 		},
 		characterTitle:{
 			ymk_isabelle:"尽忠职守",
 			ska_bobby:"枫海思忆",
 			ska_olivia:"折纸赋情",
-			ymk_577:"生电妙手",
 			ska_super_xiaojie:"永不言弃",
 			ska_show_k:"中流砥柱",
 			ymk_yumikohimi:"新厨明灶",
@@ -207,7 +216,9 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			mnm_9_volt_18_volt:"电子幻界",
 			nnk_robin:"卓越的战术师",
 			nnk_robin_male:"卓越的战术师",
-			nnk_robin_female:"卓越的战术师"
+			nnk_robin_female:"卓越的战术师",
+			alz_yuri_kozukata:"",
+			ymk_tianyi:"虚假的废物"
 		},
 		skill:{
 			//SP Isabelle
@@ -317,6 +328,21 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 				}
 			},
 			//Bobby
+			_sst_judge_count:{
+				charlotte:true,
+				superCharlotte:true,
+				trigger:{player:"judgeBegin"},
+				ruleSkill:true,
+				silent:true,
+				firstDo:true,
+				content:function(){
+					/*
+					if(!_status.sstJudgeCount) _status.sstJudgeCount=0;
+					_status.sstJudgeCount++;
+					*/
+					player.actionHistory[player.actionHistory.length-1].custom.push(trigger);
+				}
+			},
 			ska_jixing:{
 				enable:"phaseUse",
 				usable:1,
@@ -363,7 +389,9 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					achieve:{
 						trigger:{player:"phaseZhunbeiBegin"},
 						filter:function(event,player){
-							return _status.sstJudgeCount>=11;
+							return player.getAllHistory("custom",function(evt){
+								return evt.name=="judge";
+							})>=11;
 						},
 						forced:true,
 						skillAnimation:true,
@@ -478,9 +506,7 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					"step 0"
 					player.judge(function(card){
 						return get.value(card)/2;
-					}).set("judge2",function(){
-						return true;
-					});
+					}).set("judge2",()=>true);
 					"step 1"
 					var card=result.card;
 					if(get.position(card,true)=="d"){
@@ -598,117 +624,6 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					}
 				}
 			},
-			ymk_jiagou:{
-				trigger:{global:"phaseZhunbeiBegin"},
-				filter:function(event,player){
-					return player.countCards("he");
-				},
-				direct:true,
-				content:function(){
-					"step 0"
-					player.chooseCard("he",get.prompt2("ymk_jiagou",trigger.player)).set("ai",function(card){
-						var player=_status.event.player;
-						var target=_status.event.targetx;
-						var judges=target.getCards("j");
-						if(ui.selected.cards&&ui.selected.cards.length){
-							for(var i=0;i<ui.selected.cards.length;i++){
-								if(judges&&judges.length) judges.shift();
-							}
-						}
-						if(judges&&judges.length){
-							var judge=get.judge(judges[0]);
-							return judge(card)*(11-get.value(card));
-						}
-						var att=get.attitude(player,target)*(get.number(card)-target.getHandcardLimit())*Math.max(0,5-get.useful(card));
-						var num=get.number(card)<=5?Math.max(0,player.maxHp-player.countCards("h")):0;
-						return Math.pow(att,1/3)+num;
-					}).set("targetx",trigger.player);
-					"step 1"
-					if(result.cards&&result.cards.length){
-						player.logSkill("ymk_jiagou",trigger.player);
-						var card=result.cards[0];
-						/*
-						event.card=card;
-						player.lose(card,ui.special,"visible");
-						player.$throw(card,1000);
-						game.log(player,"将",card,"置于牌堆顶");
-						*/
-						player.$throw(card,1000);
-						game.log(player,"将",card,"置于牌堆顶");
-						player.lose(card,ui.cardPile,"insert");
-						player.storage.ymk_jiagou=get.number(card);
-						trigger.player.storage.ymk_jiagou=get.number(card);
-						trigger.player.addTempSkill("ymk_jiagou2");
-					}
-				},
-				ai:{
-					expose:0.1
-				},
-				group:["ymk_jiagou3","ymk_jiagou_clear"],
-				subSkill:{
-					clear:{
-						trigger:{global:"phaseAfter"},
-						silent:true,
-						content:function(){
-							delete player.storage.ymk_jiagou;
-						}
-					}
-				}
-			},
-			ymk_jiagou2:{
-				onremove:function(player){
-					delete player.storage.ymk_jiagou;
-				},
-				mod:{
-					maxHandcardBase:function(player,num){
-						return player.storage.ymk_jiagou;
-					}
-				}
-			},
-			ymk_jiagou3:{
-				trigger:{global:"phaseJieshuBegin"},
-				filter:function(event,player){
-					return player.storage.ymk_jiagou&&player.storage.ymk_jiagou<=5;
-				},
-				forced:true,
-				content:function(){
-					player.drawTo(player.maxHp);
-				}
-			},
-			ymk_jicai:{
-				trigger:{player:"phaseJudgeBefore"},
-				forced:true,
-				content:function(){
-					trigger.cancel();
-					player.phaseDiscard();
-				},
-				ai:{
-					effect:{
-						player:function(card,player,target){
-							if(get.type(card)=="delay"){
-								return "zeroplayertarget";
-							}
-						},
-						target:function(card,player,target){
-							if(get.type(card)=="delay"){
-								return "zeroplayertarget";
-							}
-						}
-					}
-				},
-				group:"ymk_jicai2"
-			},
-			ymk_jicai2:{
-				trigger:{player:"phaseDiscardBefore"},
-				filter:function(event,player){
-					return event.getParent().name!="ymk_jicai";
-				},
-				forced:true,
-				content:function(){
-					trigger.cancel();
-					player.phaseDraw();
-				}
-			},
 			//Super Xiaojie
 			ska_kezhi:{
 				init:function(player){
@@ -779,12 +694,12 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			},
 			ska_kezhi_effect:{
 				charlotte:true,
+				usable:1,
 				trigger:{player:"useCardEnd"},
 				filter:function(event,player){
-					//game.log(event.getParent().skill);
-					return !player.hasSkill("ska_kezhi_effect2")&&event.skill=="ska_kezhix"&&player.getHistory("sourceDamage",function(evt){
+					return event.skill=="ska_kezhix"&&player.hasHistory("sourceDamage",function(evt){
 						return evt.card==event.card;
-					}).length;
+					});
 				},
 				forced:true,
 				popup:false,
@@ -792,10 +707,11 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					"step 0"
 					player.chooseDrawRecover(2,"恪志：你可以回复1点体力或摸两张牌");
 					"step 1"
-					if(result.control!="cancel2") player.addTempSkill("ska_kezhi_effect2");
+					if(result.control=="cancel2"){
+						player.storage.counttrigger[event.name]--;
+					}
 				}
 			},
-			ska_kezhi_effect2:{},
 			ska_jiyan:{
 				dutySkill:true,
 				init:function(player){
@@ -1211,10 +1127,11 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			//Yumikohimi
 			ymk_qiuyi:{
 				preHidden:true,
+				usable:1,
 				trigger:{global:"useCardAfter"},
 				direct:true,
 				filter:function(event,player){
-					return !player.hasSkill("ymk_qiuyi2")&&!["shan","wuxie"].contains(get.name(event.card))&&["basic","trick"].contains(get.type(event.card))&&(event.player.hp>=player.hp||event.player.countCards("h")>=player.countCards("h"));
+					return !["shan","wuxie"].contains(get.name(event.card))&&["basic","trick"].contains(get.type(event.card))&&(event.player.hp>=player.hp||event.player.countCards("h")>=player.countCards("h"));
 				},
 				content:function(){
 					"step 0"
@@ -1226,12 +1143,12 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					"step 1"
 					if(result.cards&&result.cards.length){
 						player.logSkill("ymk_qiuyi",trigger.player);
-						player.addTempSkill("ymk_qiuyi2");
 						player.give(result.cards,trigger.player);
 						if(!trigger.player.hasSkill("ymk_qiuyi_effect")) trigger.player.addTempSkill("ymk_qiuyi_effect");
 						trigger.player.addMark("ymk_qiuyi_effect",1,false);
 					}
 					else{
+						player.storage.counttrigger[event.name]--;
 						event.finish();
 					}
 					"step 2"
@@ -1257,7 +1174,6 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					}
 				}
 			},
-			ymk_qiuyi2:{},
 			ymk_xifang:{
 				usable:1,
 				trigger:{source:"gainAfter"},
@@ -2144,11 +2060,19 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 				}
 			},
 			//Robin
-			nnk_leishu:{
+			nnk_yuanlei:{
+				locked:false,
+				mod:{
+					targetInRange:function(card,player,target){
+						if(_status.event.skill=="nnk_yuanlei") return true;
+					}
+				},
 				enable:"phaseUse",
 				usable:1,
 				filterCard:true,
-				selectCard:[1,4],
+				selectCard:function(){
+					return [1,_status.event.player.maxHp];
+				},
 				position:"hs",
 				viewAs:{name:"sha",nature:"thunder"},
 				viewAsFilter:function(player){
@@ -2168,28 +2092,28 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					},
 					respondSha:true
 				},
-				group:"nnk_leishu2"
+				group:"nnk_yuanlei2"
 			},
-			nnk_leishu2:{
+			nnk_yuanlei2:{
 				trigger:{player:"useCardAfter"},
 				forced:true,
 				filter:function(event,player){
-					return event.skill=="nnk_leishu"&&game.cardCausedDamage(event.card)&&event.cards&&event.cards.length;
+					return event.skill=="nnk_yuanlei"&&game.cardCausedDamage(event.card)&&event.cards&&event.cards.length;
 				},
 				content:function(){
-					if(trigger.cards.length>=1) player.addTempSkill("nnk_leishu_effect");
+					if(trigger.cards.length>=1) player.addTempSkill("nnk_yuanlei_effect");
 					if(trigger.cards.length>=2) player.draw();
 					if(trigger.cards.length>=3){
-						player.addTempSkill("nnk_leishu_effect3");
-						player.addMark("nnk_leishu_effect3",1,false);
+						player.addTempSkill("nnk_yuanlei_effect3");
+						player.addMark("nnk_yuanlei_effect3",1,false);
 					}
 					if(trigger.cards.length>=4){
-						player.addTempSkill("nnk_leishu_effect4");
-						player.addMark("nnk_leishu_effect4",2,false);
+						player.addTempSkill("nnk_yuanlei_effect4");
+						player.addMark("nnk_yuanlei_effect4",2,false);
 					}
 				}
 			},
-			nnk_leishu_effect:{
+			nnk_yuanlei_effect:{
 				charlotte:true,
 				forced:true,
 				mark:true,
@@ -2197,53 +2121,225 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					content:"本回合你使用的下一张牌不可被响应"
 				},
 				trigger:{player:"useCard"},
-				filter:function(event,player){
-					return get.name(event.card)=="sha";
-				},
 				content:function(){
 					trigger.directHit.addArray(game.players);
-					player.removeSkill("nnk_leishu_effect");
+					player.removeSkill("nnk_yuanlei_effect");
 				}
 			},
-			nnk_leishu_effect3:{
+			nnk_yuanlei_effect3:{
 				charlotte:true,
 				intro:{
 					content:"本回合你可以额外使用&张【杀】，且使用【杀】可以额外指定&个目标"
 				},
 				onremove:function(player){
-					player.removeMark("nnk_leishu_effect3",player.countMark("nnk_leishu_effect3"),false);
+					player.removeMark("nnk_yuanlei_effect3",player.countMark("nnk_yuanlei_effect3"),false);
 				},
 				mod:{
 					cardUsable:function(card,player,num){
-						if(card.name=="sha") return num+player.countMark("nnk_leishu_effect3");
+						if(card.name=="sha") return num+player.countMark("nnk_yuanlei_effect3");
 					},
 					selectTarget:function(card,player,range){
 						if(card.name!="sha") return;
 						if(range[1]==-1) return;
-						range[1]+=player.countMark("nnk_leishu_effect3");
+						range[1]+=player.countMark("nnk_yuanlei_effect3");
 					}
 				}
 			},
-			nnk_leishu_effect4:{
+			nnk_yuanlei_effect4:{
 				charlotte:true,
 				forced:true,
 				intro:{
 					content:"本回合你使用的下一张【杀】伤害值基数+#"
 				},
 				onremove:function(player){
-					player.removeMark("nnk_leishu_effect4",player.countMark("nnk_leishu_effect4"),false);
+					player.removeMark("nnk_yuanlei_effect4",player.countMark("nnk_yuanlei_effect4"),false);
 				},
 				trigger:{player:"useCard1"},
 				filter:function(event,player){
 					return event.card&&get.name(event.card)=="sha";
 				},
 				content:function(){
-					trigger.baseDamage+=player.countMark("nnk_leishu_effect4");
-					player.removeSkill("nnk_leishu_effect4");
+					trigger.baseDamage+=player.countMark("nnk_yuanlei_effect4");
+					player.removeSkill("nnk_yuanlei_effect4");
 				},
 				ai:{
 					damageBonus:true
 				}
+			},
+			//Yuri Kozukata
+			alz_yingjian:{
+				marktext:"灵",
+				intro:{
+					name:"灵",
+					content:"mark"
+				},
+				zhuanhuanji:true,
+				locked:false,
+				forced:true,
+				trigger:{
+					global:"gameStart",
+					player:"enterGame"
+				},
+				content:function(){
+					player.addMark("alz_yingjian",3);
+				},
+				group:["alz_yingjian2","alz_yingjian3"]
+			},
+			alz_yingjian2:{
+				zhuanhuanji:true,
+				delay:false,
+				enable:"phaseUse",
+				usable:1,
+				filterTarget:function(card,player,target){
+					if(!player.storage.alz_yingjian2) return true;
+					return !target.hasSkill("fengyin");
+				},
+				filterCard:true,
+				selectCard:2,
+				position:"he",
+				prompt:function(){
+					if(_status.event.player.storage.alz_yingjian2) return "转换技，出牌阶段限一次，你可以弃置两张牌，令一名角色本轮非锁定技失效。然后若你的“灵”数量小于体力值，你获得一个“灵”";
+					return "转换技，出牌阶段限一次，你可以弃置两张牌，令一名角色翻面。然后若你的“灵”数量小于体力值，你获得一个“灵”";
+				},
+				check:function(card){
+					return 7-get.value(card);
+				},
+				content:function(){
+					"step 0"
+					if(!player.storage.alz_yingjian2){
+						player.storage.alz_yingjian2=true;
+						target.turnOver();
+					}
+					else{
+						player.storage.alz_yingjian2=false;
+						target.addTempSkill("fengyin","roundStart");
+					}
+					"step 1"
+					if(player.countMark("alz_yingjian")<Math.max(0,player.hp)) player.addMark("alz_yingjian");
+				},
+				ai:{
+					order:5,
+					result:{
+						target:function(player,target){
+							if(!player.storage.alz_yingjian2){
+								if(target.hasSkillTag("noturn")) return -0.5;
+								return target.isTurnedOver()?2:-2;
+							}
+							var skills=target.getSkills();
+							for(var i=0;i<skills.length;i++){
+								if(!get.is.locked(skills[i])){
+									if(target.hasSkillTag("maixie")) return -2;
+									return -get.threaten(target);
+								}
+							}
+							return -0.5;
+						}
+					}
+				}
+			},
+			alz_yingjian3:{
+				enable:"chooseToUse",
+				filter:function(event,player){
+					if(!player.hasMark("alz_yingjian")||player.countMark("alz_yingjian")<=Math.max(0,player.hp)) return false;
+					for(var i of lib.inpile){
+						var type=get.type(i);
+						if(type=="basic"&&lib.filter.filterCard({name:i,isCard:true},player,event)) return true;
+					}
+					return false;
+				},
+				prompt:"若你拥有“灵”且数量大于体力值，你可以弃一个“灵”，视为你使用一张基本牌",
+				chooseButton:{
+					dialog:function(){
+						var list=[];
+						for(var i of lib.inpile){
+							if(get.type(i)=="basic"){
+								list.push(["基本","",i]);
+								if(i=="sha"){
+									for(var j of lib.inpile_nature) list.push(["基本","","sha",j]);
+								}
+							}
+						}
+						return ui.create.dialog("影见",[list,"vcard"],"hidden");
+					},
+					filter:function(button,player){
+						return _status.event.getParent().filterCard({name:button.link[2]},player,_status.event.getParent());
+					},
+					backup:function(links,player){
+						return {
+							filterCard:()=>false,
+							selectCard:-1,
+							popname:true,
+							viewAs:{name:links[0][2],nature:links[0][3],isCard:true},
+							precontent:function(){
+								player.removeMark("alz_yingjian",1);
+							}
+						}
+					},
+					prompt:function(links,player){
+						return "视为使用"+(get.translation(links[0][3])||"")+get.translation(links[0][2]);
+					}
+				},
+				hiddenCard:function(player,name){
+					var type=get.type(name);
+					return type=="basic"&&player.hasMark("alz_yingjian")&&player.countMark("alz_yingjian")>Math.max(0,player.hp);
+				},
+				ai:{
+					respondSha:true,
+					respondShan:true,
+					respondTao:true,
+					save:true,
+					skillTagFilter:function(player,tag,arg){
+						if(arg!="use") return false;
+						if(!player.hasMark("alz_yingjian")||player.countMark("alz_yingjian")<=Math.max(0,player.hp)) return false;
+					},
+					order:1,
+					result:{
+						player:function(player){
+							if(_status.event.dying) return get.attitude(player,_status.event.dying);
+							return 1;
+						}
+					}
+				}
+			},
+			//天翊
+			ymk_kaibai:{
+				usable:1,
+				trigger:{target:"useCardToTarget"},
+				check:function(event,player){
+					var val=0;
+					var cards=player.getCards();
+					for(var i=0;i<cards.length;i++){
+						val+=get.value(cards[i]);
+					}
+					val=val/cards.length;
+					return Math.cbrt(6-val)>0;
+				},
+				content:function(){
+					"step 0"
+					player.discard(player.getCards("h",function(card){
+						return lib.filter.cardDiscardable(card,player);
+					}));
+					"step 1"
+					player.judge(function(card){
+						return Math.ceil(get.number(card)/2);
+					}).set("judge2",function(result){
+						return result.number;
+					});
+					"step 2"
+					if(Math.ceil(result.number/2)) player.draw(Math.ceil(result.number/2));
+					var evt=trigger.getParent();
+					var next=game.createEvent("ymk_kaibai_clear");
+					event.next.remove(next);
+					evt.after.push(next);
+					next.set("player",player);
+					next.set("card",trigger.card);
+					next.setContent(function(){
+						if(game.cardCausedDamage(card,null,player)&&Math.floor(player.countCards()/2)) player.chooseToDiscard("开摆：弃置"+get.cnNumber(Math.floor(player.countCards()/2))+"张手牌",Math.floor(player.countCards()/2),"h",true);
+					});
+				}
+			},
+			ai:{
+				threaten:2
 			}
 		},
 		dynamicTranslate:{
@@ -2256,6 +2352,10 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 				str+=player.storage.ska_jiyan.contains("jiu")?"<span class=\"bluetext\">4. 【酒】。</span>":"<span style=\"opacity:0.5\">4. 【酒】。</span>";
 				str+="②使命：你使用牌结算后，若你已没有可选选项，你增加1点体力上限并回复1点体力。";
 				return str;
+			},
+			alz_yingjian:function(player){
+				if(player.storage.alz_yingjian2) return "游戏开始时，你获得三个“灵”；转换技，出牌阶段限一次，你可以弃置两张牌，令一名角色①翻面<span class=\"bluetext\">②本轮非锁定技失效</span>。然后若你的“灵”数量小于体力值，你获得一个“灵”；若你拥有“灵”且数量大于体力值，你可以弃一个“灵”，视为你使用一张基本牌。";
+				return "游戏开始时，你获得三个“灵”；转换技，出牌阶段限一次，你可以弃置两张牌，令一名角色<span class=\"bluetext\">①翻面</span>②本轮非锁定技失效。然后若你的“灵”数量小于体力值，你获得一个“灵”；若你拥有“灵”且数量大于体力值，你可以弃一个“灵”，视为你使用一张基本牌。";
 			}
 		},
 		/*
@@ -2271,7 +2371,6 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			ymk_isabelle:"SP西施惠",
 			ska_bobby:"炸弹彬",
 			ska_olivia:"奥莉维亚",
-			ymk_577:"方块君",
 			ska_super_xiaojie:"超级小桀",
 			ska_show_k:"小溪",
 			ymk_yumikohimi:"SP柚子",
@@ -2286,13 +2385,17 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			nnk_robin:"SP鲁弗莱",
 			nnk_robin_male:"SP鲁弗莱",
 			nnk_robin_female:"SP鲁弗莱",
+			alz_yuri_kozukata:"不来方夕莉",
+			ymk_tianyi:"天翊",
+			//Character ab.
+			ska_professor_toad_ab:"奇诺比奥",
+			ska_king_olly_ab:"奥利",
+			mnm_9_volt_18_volt_ab:"九伏十八伏",
 			//Identity mode skill
 			ymk_zhongmi:"忠秘",
 			ymk_zhongmi_info:"你的回合外，当你获得或不因使用或打出而失去牌时，你可以选择一项：1. 令一名其他角色摸X+1张牌；2. 弃置一名其他角色的X+1张牌。（X为你损失的体力值）",
 			ymk_mihu:"迷糊",
-			ymk_mihu_info:"锁定技，当你使用基本牌或普通锦囊牌指定目标后，你判定。若判定结果为（X为你损失的体力值）：<br>"+
-			"红色：此牌增加X+1个目标（不足则全选）；<br>"+
-			"黑色：此牌减少X+1个目标（不足则全选）。<br>",
+			ymk_mihu_info:"锁定技，当你使用基本牌或普通锦囊牌指定目标后，你判定。若判定结果为：红色：此牌增加X+1个目标（不足则全选）；黑色：此牌减少X+1个目标（不足则全选）。（X为你损失的体力值）",
 			ska_jixing:"激行",
 			ska_jixing_info:"出牌阶段限一次，你可以指定攻击范围内一名角色，然后你判定，若结果不为♦，你对其造成1点伤害，否则你弃置一张牌。",
 			ska_wangshi:"惘事",
@@ -2305,13 +2408,6 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			ska_zhefu:"折赋",
 			ska_zhefu_backup:"折赋",
 			ska_zhefu_info:"出牌阶段限一次，你可以将仁库中一张牌移动到处理区，并令一名角色选择一项：1. 获得这张牌；2. 交给你一张牌，然后使用这张牌（若不能使用则弃置）。",
-			ymk_jiagou:"架构",
-			ymk_jiagou2:"架构",
-			ymk_jiagou3:"架构",
-			ymk_jiagou_info:"一名角色的准备阶段，你可将一张牌置于牌堆顶，令此角色本回合的手牌上限为此牌点数，然后若此牌点数不大于5，本回合结束阶段，你将手牌补至体力上限。",
-			ymk_jicai:"积材",
-			ymk_jicai2:"积材",
-			ymk_jicai_info:"锁定技，你跳过判定阶段，改为执行一个弃牌阶段；你跳过不以此法执行的弃牌阶段，改为执行一个摸牌阶段。",
 			ska_kezhi:"恪志",
 			ska_kezhi_info:"你使用牌结算后，若此牌被响应，你可以失去1点体力并将一张牌当作此牌使用。每回合限一次，你以此法使用牌后，若此牌造成过伤害，你可以回复1点体力或摸两张牌。",
 			ska_jiyan:"籍验",
@@ -2366,16 +2462,23 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			ska_xiangshi_info:"出牌阶段限一次，你可以翻面。若如此做，你可以打出一张牌，然后弃置一名角色区域内的一张牌。若这两张牌的花色相同，你翻面。",
 			mnm_huaijiu:"怀旧",
 			mnm_huaijiu_info:"准备阶段，你可以获得一名《三国杀：标准》武将的技能，直到你的下一个回合开始。",
-			mnm_huaijiu_append:"<span style=\"font-family: fzktk\">*可选角色：曹操、司马懿、夏侯惇、张辽、许褚、郭嘉、甄姬、刘备、关羽、张飞、诸葛亮、赵云、马超、黄月英、孙权、甘宁、吕蒙、黄盖、周瑜、大乔、陆逊、孙尚香、华佗、吕布、貂蝉、华雄、袁术、公孙瓒、伊籍</span>",
+			mnm_huaijiu_append:"<span style=\"font-family: fzktk\">*可选武将：曹操、司马懿、夏侯惇、张辽、许褚、郭嘉、甄姬、刘备、关羽、张飞、诸葛亮、赵云、马超、黄月英、孙权、甘宁、吕蒙、黄盖、周瑜、大乔、陆逊、孙尚香、华佗、吕布、貂蝉、华雄、袁术、公孙瓒、伊籍</span>",
 			mnm_huaijiu_faq:"*",
-			mnm_huaijiu_faq_info:"可选角色：曹操、司马懿、夏侯惇、张辽、许褚、郭嘉、甄姬、刘备、关羽、张飞、诸葛亮、赵云、马超、黄月英、孙权、甘宁、吕蒙、黄盖、周瑜、大乔、陆逊、孙尚香、华佗、吕布、貂蝉、华雄、袁术、公孙瓒、伊籍",
-			nnk_leishu:"雷书",
-			nnk_leishu2:"雷书",
-			nnk_leishu_effect:"雷书",
-			nnk_leishu_effect3:"雷书",
-			nnk_leishu_effect4:"雷书",
-			nnk_leishu_info:"出牌阶段限一次，你可以将至少一张，至多四张手牌当作雷【杀】使用。若此雷【杀】造成了伤害，且对应实体牌数不小于：一，本回合你使用的下一张牌不可被响应；二，你摸一张牌；三，本回合你可以额外使用一张【杀】，且使用【杀】可以额外指定一个目标；四，本回合你使用的下一张【杀】伤害值基数+2。",
-			//Character Sort
+			mnm_huaijiu_faq_info:"可选武将：曹操、司马懿、夏侯惇、张辽、许褚、郭嘉、甄姬、刘备、关羽、张飞、诸葛亮、赵云、马超、黄月英、孙权、甘宁、吕蒙、黄盖、周瑜、大乔、陆逊、孙尚香、华佗、吕布、貂蝉、华雄、袁术、公孙瓒、伊籍",
+			nnk_yuanlei:"远雷",
+			nnk_yuanlei2:"远雷",
+			nnk_yuanlei_effect:"远雷",
+			nnk_yuanlei_effect3:"远雷",
+			nnk_yuanlei_effect4:"远雷",
+			nnk_yuanlei_info:"出牌阶段限一次，你可以将X张手牌当作无距离限制的雷【杀】使用。若此雷【杀】造成了伤害，且X不小于：一，本回合你使用的下一张牌不可被响应；二，你摸一张牌；三，本回合你可以额外使用一张【杀】，且使用【杀】可以额外指定一个目标；四，本回合你使用的下一张【杀】伤害值基数+2。（X不超过你的体力上限且至少为一）",
+			alz_yingjian:"影见",
+			alz_yingjian2:"影见",
+			alz_yingjian3:"影见·灵",
+			alz_yingjian3_backup:"影见·灵",
+			alz_yingjian_info:"游戏开始时，你获得三个“灵”；转换技，出牌阶段限一次，你可以弃置两张牌，令一名角色①翻面②本轮非锁定技失效。然后若你的“灵”数量小于体力值，你获得一个“灵”；若你拥有“灵”且数量大于体力值，你可以弃一个“灵”，视为你使用一张基本牌。",
+			ymk_kaibai:"开摆",
+			ymk_kaibai_info:"每回合限一次，当你成为一名角色使用牌的目标时，你可以弃置所有手牌并判定，然后你摸X张牌（X为判定结果点数的一半且向上取整）。若此牌对你造成了伤害，你弃置一半手牌（向下取整）。",
+			//Sort
 			sst_special:"SP",
 			sst_mnm:"mario not mary",
 			sst_ymk:"Yumikohimi",
@@ -2389,7 +2492,6 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			ymk_isabelle:"SP Isabelle",
 			ska_bobby:"Bobby",
 			ska_olivia:"Olivia",
-			ymk_577:"577",
 			ska_super_xiaojie:"Super Xiaojie",
 			ska_show_k:"Show-K",
 			ymk_yumikohimi:"SP Yumikohimi",
@@ -2403,7 +2505,9 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			mnm_9_volt_18_volt:"SP 9-Volt & 18-Volt",
 			nnk_robin:"SP Robin",
 			nnk_robin_male:"SP Robin",
-			nnk_robin_female:"SP Robin"
+			nnk_robin_female:"SP Robin",
+			alz_yuri_kozukata:"Yuri Kozukata",
+			ymk_tianyi:"Tianyi"
 		},
 		perfectPair:{
 			ymk_isabelle:["sst_villager"],
@@ -2416,8 +2520,9 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			alz_kyo_kusanagi:["sst_kyo_kusanagi"],
 			mnm_9_volt_18_volt:["sst_9_volt_18_volt","sst_wario"],
 			nnk_robin:["nnk_robin_male","nnk_robin_female","sst_robin","sst_robin_male","sst_robin_female","sst_lucina","sst_chrom"],
-			nnk_robin_male:["nnk_robin","nnk_robin_female","sst_robin","sst_robin_male","sst_robin_female","sst_lucina"],
-			nnk_robin_female:["nnk_robin","nnk_robin_male","sst_robin","sst_robin_male","sst_robin_female","sst_chrom"]
+			nnk_robin_male:["nnk_robin","nnk_robin_female","sst_robin","sst_robin_male","sst_robin_female","sst_lucina","sst_chrom"],
+			nnk_robin_female:["nnk_robin","nnk_robin_male","sst_robin","sst_robin_male","sst_robin_female","sst_lucina","sst_chrom"],
+			ymk_tianyi:["sst_mario_not_mary","sst_yumikohimi","ymk_yumikohimi","sst_kirby","sst_kazuya"]
 		}
 	};
 	return sst_sp;

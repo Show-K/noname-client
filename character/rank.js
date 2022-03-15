@@ -20,7 +20,8 @@ window.noname_character_rank={
 	rarity:{
 		legend:[
 			"ymk_isabelle",
-			"sst_sans"
+			"sst_sans",
+			"sst_massy"
 		],
 		epic:[
 			"sst_dr_mario",
@@ -31,8 +32,6 @@ window.noname_character_rank={
 			"sst_peach",
 			"sst_byleth_female",
 			"sst_byleth_male",
-			"sst_massy",
-			"sst_dark_samus",
 			"sst_mario_not_mary",
 			"sst_haine",
 			"sst_incineroar",
@@ -51,7 +50,6 @@ window.noname_character_rank={
 			"ska_super_xiaojie",
 			"sst_spring_man",
 			"sst_joker",
-			"sst_lucario",
 			"sst_king_dedede",
 			"sst_corrin",
 			"sst_corrin_male",
@@ -62,7 +60,7 @@ window.noname_character_rank={
 			"sst_pikachu",
 			"sst_enderman",
 			"sst_sephiroth",
-			"sst_pokemon_trainer_blue",
+			"sst_pokemon_trainer_leaf",
 			"sst_steve",
 			"sst_fox",
 			"ymk_yumikohimi",
@@ -82,7 +80,12 @@ window.noname_character_rank={
 			"sst_bowser_jr",
 			"nnk_robin",
 			"nnk_robin_male",
-			"nnk_robin_female"
+			"nnk_robin_female",
+			"sst_ryu",
+			"sst_pac_man",
+			"sst_chrom",
+			"sst_lucina",
+			"ymk_tianyi"
 		],
 		rare:[
 			"sst_mario",
@@ -100,16 +103,13 @@ window.noname_character_rank={
 			"sst_simon",
 			"sst_kirby",
 			"sst_pokemon_trainer_red",
-			"sst_chrom",
 			"sst_daisy",
-			"sst_lucina",
 			"ska_bobby",
 			"sst_oc",
 			"sst_dark_link",
 			"sst_windier",
 			"sst_rentianshu",
 			"sst_srf",
-			"sst_ryu",
 			"sst_ike",
 			"sst_toon_link",
 			"sst_wolf",
@@ -142,11 +142,16 @@ window.noname_character_rank={
 			"mnm_9_volt_18_volt",
 			"sst_young_link",
 			"sst_kazuya",
-			"sst_duck_hunt"
-		],
-		junk:[
+			"sst_duck_hunt",
+			"sst_dark_samus",
 			"sst_yoshi",
-			"sst_villager"
-		]
+			"sst_villager",
+			"alz_yuri_kozukata",
+			"sst_lucario",
+			"sst_kraid",
+			"sst_sora",
+			"sst_mewtwo"
+		],
+		junk:[]
 	}
 };

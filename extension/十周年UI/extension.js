@@ -446,7 +446,7 @@ content:function(config, pack){
 					
 					var hpNode = this.node.hp;
 					if (!this.storage.nohp) {
-						if (hpMax > 5) {
+						if (hpMax > 9) {
 							var hpText = (isNaN(hp) ? '×' : (hp == Infinity ? '∞' : hp));
 							var hpMaxText = (isNaN(hpMax) ? '×' : (hpMax == Infinity ? '∞' : hpMax));
 							if (!hpNode.textstyle) {
@@ -4095,12 +4095,12 @@ content:function(config, pack){
 							intro.innerText = '';
 						
 						intro.style.backgroundImage = 'url("' + decadeUIPath + 'assets/image/rarity_' + rarity + '.png")';
-						if ((button.link == 'xushu' || button.link == 'xin_xushu') && button.node && button.node.name && button.node.group){
+						if ((button.link == 'sst_massy') && button.node && button.node.name && button.node.group){
 							if (button.classList.contains('newstyle')) {
-								button.node.name.dataset.nature = 'watermm';
-								button.node.group.dataset.nature = 'water';
+								button.node.name.dataset.nature = 'thundermm';
+								button.node.group.dataset.nature = 'thunder';
 							} else {
-								button.node.group.style.backgroundColor = get.translation('weiColor');
+								button.node.group.style.backgroundColor = get.translation('shenColor');
 							}
 						}
 					},
@@ -4268,7 +4268,9 @@ content:function(config, pack){
 						
 						for (var i in lib.element.button) node[i] = lib.element.button[i];
 						if (position) position.appendChild(node);
-						
+
+						if (type=='character'||type=='player'||type=='characterx') ui.create.rarity(node);
+
 						return node;
 					},
 					
@@ -5201,9 +5203,9 @@ content:function(config, pack){
 			    return result;
 			};
 			
-			game.linexy = function(path){
+			game.linexy = function(path, option){
 				if (!decadeUI.config.playerLineEffect) return gameLinexyFunction.apply(this, arguments);
-				decadeUI.effect.line(path);
+				decadeUI.effect.line(path, option);
 			};
 			
 			ui.click.intro = function(e){
@@ -5426,16 +5428,18 @@ content:function(config, pack){
 				}
 			};
 			
-			// if ((typeof ui.create.menu) == 'function') {
-				// var str = ui.create.menu.toString();
-				// str = str.substring(str.indexOf('{'));
-				// str = str.replace(/game\.documentZoom|1\.3/g, '1');
-				// createMenuFunction = new Function('connectMenu', '_status','lib','game','ui','get','ai', str);
-			// }
+			/*
+			if ((typeof ui.create.menu) == 'function') {
+				var str = ui.create.menu.toString();
+				str = str.substring(str.indexOf('{'));
+				str = str.replace(/game\.documentZoom|1\.3/g, '1');
+				createMenuFunction = new Function('connectMenu', '_status','lib','game','ui','get','ai', str);
+			}
 			
-			// ui.create.menu = function(connectMenu){
-				// return createMenuFunction.call(this, connectMenu, _status, lib, game, ui, get, ai);
-			// };
+			ui.create.menu = function(connectMenu){
+				return createMenuFunction.call(this, connectMenu, _status, lib, game, ui, get, ai);
+			};
+			*/
 			
 			ui.create.arena = function(){
 				ui.updatez();
@@ -5824,6 +5828,8 @@ content:function(config, pack){
 						set:function(value){
 							this.node.campWrap.dataset.camp = value;
 							
+							if (this.name == 'sst_massy') this.node.campWrap.dataset.camp = 'shen';
+
 							if (value){
 								if (decadeUI.config.campIdentityImageMode){
 								    var that = this;
@@ -5924,36 +5930,38 @@ content:function(config, pack){
 			};
 			
 			// 不联机就不用
-			// ui.create.chat = function(){
-				// var chatBox = ui.arena.appendChild(decadeUI.component.chatBox());
-				// for (var i = 0; i < lib.chatHistory.length; i++) {
-					// chatBox.addEntry(lib.chatHistory[i]);
-				// }
+			/*
+			ui.create.chat = function(){
+				var chatBox = ui.arena.appendChild(decadeUI.component.chatBox());
+				for (var i = 0; i < lib.chatHistory.length; i++) {
+					chatBox.addEntry(lib.chatHistory[i]);
+				}
 				
-				// _status.addChatEntry = chatBox.addEntry;
-				// Object.defineProperties(_status, {
-					// addChatEntry: {
-						// configurable: true,
-						// get:function(){
-							// return chatBox.addEntry;
-						// },
-						// set:function(value){
-							// chatBox.overrideEntry = value;
-						// }
-					// },
-				// });
+				_status.addChatEntry = chatBox.addEntry;
+				Object.defineProperties(_status, {
+					addChatEntry: {
+						configurable: true,
+						get:function(){
+							return chatBox.addEntry;
+						},
+						set:function(value){
+							chatBox.overrideEntry = value;
+						}
+					},
+				});
 				
-				// var retVal = base.ui.create.chat.apply(this, arguments);
-				// chatBox.addEntry._origin = chatBox;
-				// return retVal;
-			// };
+				var retVal = base.ui.create.chat.apply(this, arguments);
+				chatBox.addEntry._origin = chatBox;
+				return retVal;
+			};
+			*/
 			
 			lib.init.cssstyles = function(){
 			    var temp = lib.config.glow_phase;
 			    lib.config.glow_phase = '';
 			    initCssstylesFunction.call(this);
 			    lib.config.glow_phase = temp;
-				ui.css.styles.sheet.insertRule('.avatar-name, .avatar-name-default { font-family: "' + (lib.config.name_font || 'fzhtk') + '", "fzhtk" }', 0);
+				ui.css.styles.sheet.insertRule('.avatar-name, .avatar-name-default { font-family: fzhtk }', 0);
 			};
 
 			lib.init.layout = function(layout, nosave){
@@ -9470,7 +9478,7 @@ precontent:function(){
 			node.created = true;
 			node.style.overflow = 'scroll';
 			
-			var list = ['sst_peach', 'sst_bowser', 'sst_master_hand', 'sst_ma'];
+			var list = ['sst_marth', 'sst_bowser', 'sst_master_hand', 'sst_ma'];
 			for (var i = 0; i < 4; i++) {
 				var player = ui.create.div('.seat-player.fakeplayer', node);
 				ui.create.div('.avatar', player).setBackground(list.randomRemove(), 'character');
@@ -9661,7 +9669,7 @@ config:{
     },
 	campIdentityImageMode:{
         name: '势力身份美化',
-        init: false,
+        init: true,
     },
 	playerKillEffect:{
 		name: '玩家击杀特效',
@@ -9772,7 +9780,7 @@ package:{
 		
 		return '<p style="color:rgb(210,210,000); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;">' + log.join('<br>') + '</p>';
 	})(),
-    author:"原作者：短歌 QQ464598631<br>修改者：Show-K",
+    author:"原作者：短歌 QQ464598631<br>修改者（未经允许）：Show-K",
     diskURL:"",
     forumURL:"",
     version:"1.2.0.220114SST",

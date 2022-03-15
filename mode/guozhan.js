@@ -253,17 +253,17 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 		},
 		aozhanRank:{
-			'8':[],
+			'8':['gz_ymk_tianyi'],
 			'7':[],
 			'6':[],
 			'5':[
 				'gz_sst_meta_knight','gz_sst_kyuukou','gz_sst_bowser_jr','gz_ymk_yumikohimi','gz_sst_fox','gz_sst_king_dedede'
 			],
 			'4':[
-				'gz_sst_zero_suit_samus','gz_sst_luigi','gz_sst_dark_samus','gz_sst_greninja','gz_sst_chrom','gz_sst_mr_8','gz_sst_srf','gz_sst_waluigi','gz_ymk_577','gz_sst_ike','gz_sst_miumiu','gz_sst_spring_man','gz_sst_joker','gz_sst_captain_falcon','gz_sst_lucario','gz_sst_steve','gz_sst_pikachu','gz_sst_pokemon_trainer_blue','gz_sst_palutena','gz_sst_rosalina','gz_sst_richter','gz_sst_ma','gz_sst_claude','gz_ska_olivia','gz_sst_kyo_kusanagi','gz_sst_pyra_mythra','gz_sst_donkey_kong'
+				'gz_sst_zero_suit_samus','gz_sst_luigi','gz_sst_dark_samus','gz_sst_greninja','gz_sst_chrom','gz_sst_mr_8','gz_sst_srf','gz_sst_waluigi','gz_ymk_577','gz_sst_ike','gz_sst_miumiu','gz_sst_spring_man','gz_sst_joker','gz_sst_captain_falcon','gz_sst_lucario','gz_sst_steve','gz_sst_pikachu','gz_sst_pokemon_trainer_leaf','gz_sst_palutena','gz_sst_rosalina','gz_sst_richter','gz_sst_ma','gz_sst_claude','gz_ska_olivia','gz_sst_kyo_kusanagi','gz_sst_pyra_mythra','gz_sst_donkey_kong'
 			],
 			'3':[
-				'gz_sst_mario','gz_sst_link','gz_sst_dr_mario','gz_sst_marth','gz_sst_byleth_female','gz_sst_haine','gz_sst_terry','gz_sst_incineroar','gz_sst_oc','gz_sst_ryu','gz_sst_ken','gz_sst_toon_link','gz_sst_wolf','gz_sst_snake','gz_sst_jigglypuff','gz_sst_feiji','gz_sst_sonic','gz_sst_alex','gz_sst_min_min','gz_ska_professor_toad','gz_sst_geno','gz_sst_lucina','gz_sst_master_hand','gz_sst_mii_fighters','gz_sst_zelda','gz_sst_peach','gz_sst_massy','gz_sst_bowser','gz_ska_super_xiaojie','gz_sst_pokemon_trainer_blue','gz_sst_pauline','gz_sst_9_volt_18_volt','gz_ska_show_k','gz_ska_koopa_troopa','gz_sst_kazuya','gz_sst_duck_hunt'
+				'gz_sst_mario','gz_sst_link','gz_sst_dr_mario','gz_sst_marth','gz_sst_byleth_female','gz_sst_haine','gz_sst_terry','gz_sst_incineroar','gz_sst_oc','gz_sst_ryu','gz_sst_ken','gz_sst_toon_link','gz_sst_wolf','gz_sst_snake','gz_sst_jigglypuff','gz_sst_feiji','gz_sst_sonic','gz_sst_alex','gz_sst_min_min','gz_ska_professor_toad','gz_sst_geno','gz_sst_lucina','gz_sst_master_hand','gz_sst_mii_fighters','gz_sst_zelda','gz_sst_peach','gz_sst_massy','gz_sst_bowser','gz_ska_super_xiaojie','gz_sst_pokemon_trainer_leaf','gz_sst_pauline','gz_sst_9_volt_18_volt','gz_ska_show_k','gz_ska_koopa_troopa','gz_sst_kazuya','gz_sst_duck_hunt'
 			],
 			'2':[
 				'gz_sst_wario','gz_sst_byleth_male','gz_sst_mr_game_watch','gz_sst_simon','gz_sst_pokemon_trainer_red','gz_sst_isabelle','gz_sst_dark_link','gz_sst_windier','gz_sst_sheik','gz_sst_rex','gz_sst_cuphead_mugman','gz_sst_krystal','gz_sst_mega_man','gz_sst_hero','gz_sst_falco','gz_sst_enderman','gz_sst_king_k_rool','gz_sst_koopalings','gz_sst_pichu','gz_sst_mario_not_mary','gz_sst_ganondorf','gz_sst_daisy','gz_sst_little_mac','gz_sst_sans','gz_ska_bobby'
@@ -273,15 +273,15 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			],
 		},
 		guozhanRank:{
-			'8':[],
+			'8':['gz_ymk_tianyi'],
 			'7':[
 				'gz_ymk_isabelle','gz_sst_meta_knight','gz_sst_kyuukou','gz_sst_richter','gz_sst_king_dedede','gz_sst_ganondorf','gz_sst_donkey_kong','gz_sst_dr_wily','gz_sst_fox','gz_ymk_yumikohimi'
 			],
 			'6':[
-				'gz_sst_zero_suit_samus','gz_sst_luigi','gz_sst_dark_samus','gz_sst_greninja','gz_sst_isabelle','gz_sst_mr_8','gz_sst_bowser_jr','gz_sst_waluigi','gz_sst_ike','gz_sst_miumiu','gz_sst_spring_man','gz_sst_joker','gz_sst_steve','gz_sst_pikachu','gz_sst_enderman','gz_sst_pokemon_trainer_blue','gz_sst_palutena','gz_sst_rosalina','gz_sst_king_k_rool','gz_sst_master_hand','gz_sst_yumikohimi','gz_sst_claude','gz_ska_olivia','gz_sst_kyo_kusanagi','gz_sst_pyra_mythra'
+				'gz_sst_zero_suit_samus','gz_sst_luigi','gz_sst_dark_samus','gz_sst_greninja','gz_sst_isabelle','gz_sst_mr_8','gz_sst_bowser_jr','gz_sst_waluigi','gz_sst_ike','gz_sst_miumiu','gz_sst_spring_man','gz_sst_joker','gz_sst_steve','gz_sst_pikachu','gz_sst_enderman','gz_sst_pokemon_trainer_leaf','gz_sst_palutena','gz_sst_rosalina','gz_sst_king_k_rool','gz_sst_master_hand','gz_sst_yumikohimi','gz_sst_claude','gz_ska_olivia','gz_sst_kyo_kusanagi','gz_sst_pyra_mythra'
 			],
 			'5':[
-				'gz_sst_mario','gz_sst_link','gz_sst_marth','gz_sst_byleth_female','gz_sst_haine','gz_sst_terry','gz_sst_incineroar','gz_sst_chrom','gz_sst_dark_link','gz_sst_ken','gz_ymk_577','gz_sst_toon_link','gz_sst_snake','gz_sst_lucario','gz_sst_feiji','gz_sst_sonic','gz_sst_min_min','gz_ska_professor_toad','gz_sst_geno','gz_sst_koopalings','gz_sst_ma','gz_sst_zelda','gz_sst_peach','gz_sst_massy','gz_sst_bowser','gz_ska_bobby','gz_ska_super_xiaojie','gz_sst_pokemon_trainer_blue','gz_sst_pauline','gz_sst_9_volt_18_volt','gz_ska_show_k','gz_ska_koopa_troopa','gz_sst_kazuya','gz_sst_duck_hunt'
+				'gz_sst_mario','gz_sst_link','gz_sst_marth','gz_sst_byleth_female','gz_sst_haine','gz_sst_terry','gz_sst_incineroar','gz_sst_chrom','gz_sst_dark_link','gz_sst_ken','gz_ymk_577','gz_sst_toon_link','gz_sst_snake','gz_sst_lucario','gz_sst_feiji','gz_sst_sonic','gz_sst_min_min','gz_ska_professor_toad','gz_sst_geno','gz_sst_koopalings','gz_sst_ma','gz_sst_zelda','gz_sst_peach','gz_sst_massy','gz_sst_bowser','gz_ska_bobby','gz_ska_super_xiaojie','gz_sst_pokemon_trainer_leaf','gz_sst_pauline','gz_sst_9_volt_18_volt','gz_ska_show_k','gz_ska_koopa_troopa','gz_sst_kazuya','gz_sst_duck_hunt'
 			],
 			'4':[
 				'gz_sst_wario','gz_sst_dr_mario','gz_sst_byleth_male','gz_sst_mr_game_watch','gz_sst_simon','gz_sst_pokemon_trainer_red','gz_sst_oc','gz_sst_windier','gz_sst_srf','gz_sst_sheik','gz_sst_wolf','gz_sst_rex','gz_sst_captain_falcon','gz_sst_alex','gz_sst_ridley','gz_sst_lucina','gz_sst_pichu','gz_sst_mii_fighters','gz_sst_mario_not_mary','gz_sst_little_mac','gz_sst_sans'
@@ -299,13 +299,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			mode_guozhan:{
 				sst_64:["gz_sst_mario","gz_sst_donkey_kong","gz_sst_link","gz_sst_yoshi","gz_sst_kirby","gz_sst_luigi","gz_sst_captain_falcon","gz_sst_jigglypuff","gz_sst_fox","gz_sst_pikachu"],
 				sst_melee:["gz_sst_bowser","gz_sst_peach","gz_sst_zelda","gz_sst_sheik","gz_sst_dr_mario","gz_sst_ganondorf","gz_sst_mr_game_watch","gz_sst_marth","gz_sst_young_link","gz_sst_pichu","gz_sst_falco"],
-				sst_brawl:["gz_sst_zero_suit_samus","gz_sst_wario","gz_sst_pokemon_trainer_red","gz_sst_meta_knight","gz_sst_ike","gz_sst_toon_link","gz_sst_wolf","gz_sst_snake","gz_sst_king_dedede","gz_sst_lucario","gz_sst_sonic","gz_sst_pokemon_trainer_blue"],
+				sst_brawl:["gz_sst_zero_suit_samus","gz_sst_wario","gz_sst_pokemon_trainer_red","gz_sst_meta_knight","gz_sst_ike","gz_sst_toon_link","gz_sst_wolf","gz_sst_snake","gz_sst_king_dedede","gz_sst_lucario","gz_sst_sonic","gz_sst_pokemon_trainer_leaf"],
 				sst_4:["gz_sst_villager","gz_sst_rosalina","gz_sst_little_mac","gz_sst_greninja","gz_sst_palutena","gz_sst_lucina","gz_sst_bowser_jr","gz_sst_koopalings","gz_sst_ryu","gz_sst_mega_man","gz_sst_mii_fighters","gz_sst_duck_hunt"],
 				sst_ultimate:["gz_sst_dark_samus","gz_sst_daisy","gz_sst_chrom","gz_sst_ridley","gz_sst_simon","gz_sst_richter","gz_sst_king_k_rool","gz_sst_isabelle","gz_sst_incineroar","gz_sst_ken"],
 				sst_dlc:["gz_sst_terry","gz_sst_byleth_male","gz_sst_byleth_female","gz_sst_joker","gz_sst_steve","gz_sst_alex","gz_sst_hero","gz_sst_min_min","gz_sst_pyra_mythra","gz_sst_kazuya"],
 				sst_spirits:["gz_sst_dark_link","gz_sst_sans","gz_sst_waluigi","gz_sst_master_hand","gz_sst_spring_man","gz_sst_rex","gz_sst_cuphead_mugman","gz_sst_krystal","gz_sst_enderman","gz_sst_geno","gz_sst_kyo_kusanagi","gz_sst_pauline","gz_sst_dr_wily","gz_sst_9_volt_18_volt"],
 				sst_players:["gz_sst_mario_not_mary","gz_sst_yumikohimi","gz_sst_massy","gz_sst_haine","gz_sst_oc","gz_sst_mr_8","gz_sst_kyuukou","gz_sst_windier","gz_sst_rentianshu","gz_sst_srf","gz_sst_miumiu","gz_sst_ma","gz_sst_feiji"],
-				sst_special:["gz_sst_claude","gz_ymk_isabelle","gz_ska_bobby","gz_ska_olivia","gz_ymk_577","gz_ska_super_xiaojie","gz_ska_show_k","gz_ymk_yumikohimi","gz_ska_bowser","gz_ska_professor_toad","gz_ska_koopa_troopa","gz_alz_kyo_kusanagi"]
+				sst_special:["gz_sst_claude","gz_ymk_isabelle","gz_ska_bobby","gz_ska_olivia","gz_ymk_577","gz_ska_super_xiaojie","gz_ska_show_k","gz_ymk_yumikohimi","gz_ska_bowser","gz_ska_professor_toad","gz_ska_koopa_troopa","gz_alz_kyo_kusanagi"],
 			}
 		},
 		characterPack:{
@@ -394,11 +394,11 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				gz_sst_falco:["male","sst_light",4,["sst_juao"],[]],
 				gz_ska_professor_toad:["male","sst_spirit",3,["ska_juegu","ska_kuiwang"],[]],
 				gz_sst_pyra_mythra:["female","sst_light",3,["sst_xuanyi","sst_fuxin"],[]],
-				gz_sst_pokemon_trainer_blue:["female","sst_light",3,["sst_jiliu"],[]],
+				gz_sst_pokemon_trainer_leaf:["female","sst_light",3,["sst_jiliu"],[]],
 				gz_sst_enderman:["male","sst_darkness",2,["sst_lingying","sst_fankui","sst_xiangzhu"],[]],
 				gz_sst_kyo_kusanagi:["male","sst_spirit",4,["sst_congyun","sst_fuzhuo"],[]],
 				gz_sst_geno:["male","sst_spirit",3,["sst_xingjiang","sst_fuyuan"],[]],
-				gz_sst_pokemon_trainer_blue:["female","sst_light",3,["sst_jiliu"],[]],
+				gz_sst_pokemon_trainer_leaf:["female","sst_light",3,["sst_jiliu"],[]],
 				gz_sst_pauline:["female","sst_spirit",3,["sst_shangzheng","sst_yinyuan"],[]],
 				gz_sst_dr_wily:["male","sst_spirit",3,["sst_zaowu","sst_fuqi"],[]],
 				gz_sst_9_volt_18_volt:["male","sst_spirit",4,["sst_tanfen","sst_sutong"],[]],
@@ -435,10 +435,89 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				gz_sst_sans:["male","sst_spirit",3,["sst_shuangguan","sst_langu"],[]],
 				gz_ska_olivia:["female","sst_spirit",3,["gz_ska_shenqi","gz_ska_zhefu"],[]],
 				gz_ska_bobby:["male","sst_spirit",4,["ska_jixing","ska_sheran"],[]],
-				gz_ska_super_xiaojie:["male","sst_reality",4,["ska_kezhi","gz_ska_jiyan"],[]]
+				gz_ska_super_xiaojie:["male","sst_reality",4,["ska_kezhi","gz_ska_jiyan"],[]],
+				gz_ymk_tianyi:["male","ye",4,["gz_ymk_kaibai"],[]]
 			}
 		},
 		skill:{
+			junling4_eff:{
+				mod:{
+					cardEnabled2:function(card){
+						if(get.position(card)=='h') return false
+					},
+				},
+				mark:true,
+				marktext:'令',
+				intro:{
+					content:'不能使用或打出手牌'
+				}
+			},
+			junling5_eff:{
+				trigger:{player:"recoverBefore"},
+				priority:44,
+				forced:true,
+				silent:true,
+				popup:false,
+				content:function(){trigger.cancel()},
+				mark:true,
+				marktext:'令',
+				intro:{
+					content:'不能回复体力'
+				},
+				ai:{
+					effect:{
+						target:function(card,player,target){
+							if(get.tag(card,'recover')) return 'zeroplayertarget';
+						},
+					},
+				}
+			},
+			fengyin_main:{
+				init:function(player,skill){
+					player.addSkillBlocker(skill);
+				},
+				onremove:function(player,skill){
+					player.removeSkillBlocker(skill);
+				},
+				charlotte:true,
+				skillBlocker:function(skill,player){
+					return lib.character[player.name1][3].contains(skill)&&!lib.skill[skill].charlotte&&!get.is.locked(skill,player);
+				},
+				mark:true,
+				marktext:'主',
+				intro:{
+					content:function(storage,player,skill){
+						var list=player.getSkills(null,null,false).filter(function(i){
+							return lib.skill.fengyin_main.skillBlocker(i,player);
+						});
+						if(list.length) return '失效技能：'+get.translation(list);
+						return '无失效技能';
+					}
+				}
+			},
+			fengyin_vice:{
+				init:function(player,skill){
+					player.addSkillBlocker(skill);
+				},
+				onremove:function(player,skill){
+					player.removeSkillBlocker(skill);
+				},
+				charlotte:true,
+				skillBlocker:function(skill,player){
+					return lib.character[player.name2][3].contains(skill)&&!lib.skill[skill].charlotte&&!get.is.locked(skill,player);
+				},
+				mark:true,
+				marktext:'主',
+				intro:{
+					content:function(storage,player,skill){
+						var list=player.getSkills(null,null,false).filter(function(i){
+							return lib.skill.fengyin_vice.skillBlocker(i,player);
+						});
+						if(list.length) return '失效技能：'+get.translation(list);
+						return '无失效技能';
+					}
+				}
+			},
 			"_mingzhisuodingji":{
 				mode:["guozhan"],
 				enable:"phaseUse",
@@ -767,7 +846,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					}).length);
 				},
 				filterCard:function(card){
-					if(_status.event.player.hasSkillTag('lianhengh')) return true;
+					if(_status.event.player.hasSkillTag('lianheng')) return true;
 					return card.hasTag('lianheng');
 				},
 				filterTarget:function(card,player,target){
@@ -2843,6 +2922,46 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						target:3
 					}
 				}
+			},
+			//天翊
+			ymk_kaibai:{
+				usable:1,
+				trigger:{target:"useCardToTarget"},
+				check:function(event,player){
+					var val=0;
+					var cards=player.getCards();
+					for(var i=0;i<cards.length;i++){
+						val+=get.value(cards[i]);
+					}
+					val=val/cards.length;
+					return Math.cbrt(6-val)>0;
+				},
+				content:function(){
+					"step 0"
+					player.discard(player.getCards("h",function(card){
+						return lib.filter.cardDiscardable(card,player);
+					}));
+					"step 1"
+					player.judge(function(card){
+						return get.number(card);
+					}).set("judge2",function(result){
+						return result.number;
+					});
+					"step 2"
+					if(result.number) player.draw(result.number);
+					var evt=trigger.getParent();
+					var next=game.createEvent("ymk_kaibai_clear");
+					event.next.remove(next);
+					evt.after.push(next);
+					next.set("player",player);
+					next.set("card",trigger.card);
+					next.setContent(function(){
+						if(game.cardCausedDamage(card,null,player)&&Math.floor(player.countCards()/2)) player.chooseToDiscard("开摆：弃置"+get.cnNumber(Math.floor(player.countCards()/2))+"张手牌",Math.floor(player.countCards()/2),"h",true);
+					});
+				}
+			},
+			ai:{
+				threaten:4
 			}
 		},
 		game:{
@@ -2919,23 +3038,29 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					});
 					'step 6'
 					if(result.bool){
-						game.broadcastAll(function(player,target){
-							player.say('加入');
-							player.identity='ye';
-							player.setIdentity('ye');
-							player.storage.yexinjia_friend=target;
-						},target,source);
-						target.markSkill('yexinjia_friend');
-						source.removeMark('yexinjia_mark',1);
-						target.drawTo(4);
-						target.recover();
+						target.chat('加入');
+						if(!_status.yexinjia_list) _status.yexinjia_list=['夏','商','周','秦','汉','隋','唐','宋','辽','金','元','明'];
+						source.chooseControl(_status.yexinjia_list).set('prompt','请选择自己所属的野心家势力的标识').set('ai',()=>(_status.yexinjia_list?_status.yexinjia_list.randomGet():0));
 					}
 					else{
 						target.chat('拒绝');
 						game.delay(1.5);
 						if(targets.length) event.goto(5);
+						else event.goto(8);
 					}
 					'step 7'
+					game.broadcastAll(function(player,target,text){
+						player.identity='ye';
+						source.setIdentity(text,'ye');
+						player.setIdentity(text,'ye');
+						player.storage.yexinjia_friend=target;
+					},target,source,result.control);
+					_status.yexinjia_list.remove(result.control);
+					target.markSkill('yexinjia_friend');
+					source.removeMark('yexinjia_mark',1);
+					target.drawTo(4);
+					target.recover();
+					'step 8'
 					if(event.targets2.length) event.goto(3);
 					else delete _status.showYexings;
 				});
@@ -3796,6 +3921,78 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			}
 		},
 		translate:{
+			ye:'野',
+			ye2:'野心家',
+			yexinjia_mark:'野心家',
+			bumingzhi:'不明置',
+			mingzhizhujiang:'明置主将',
+			mingzhifujiang:'明置副将',
+			tongshimingzhi:'同时明置',
+			mode_guozhan_character_config:'国战武将',
+			_zhenfazhaohuan:'阵法召唤',
+			_zhenfazhaohuan_info:'由拥有阵法技的角色发起，满足此阵法技条件的未确定势力角色均可按逆时针顺序依次明置其一张武将牌(响应阵法召唤)，以发挥阵法技的效果。',
+			junling:'军令',
+			junling1:'军令一',
+			junling1_bg:'令',
+			junling1_info:'若被执行，执行者对发起者指定的一名角色造成一点伤害。',
+			junling2:'军令二',
+			junling2_bg:'令',
+			junling2_info:'若被执行，执行者摸一张牌，然后依次交给发起者两张牌。',
+			junling3:'军令三',
+			junling3_bg:'令',
+			junling3_info:'若被执行，执行者失去一点体力。',
+			junling4:'军令四',
+			junling4_bg:'令',
+			junling4_info:'若被执行，直到回合结束，执行者不能使用或打出手牌且非锁定技全部失效。',
+			junling4_eff:'军令四',
+			junling5:'军令五',
+			junling5_bg:'令',
+			junling5_info:'若被执行，执行者将武将牌叠置，且不能回复体力直到回合结束。',
+			junling5_eff:'军令五',
+			junling6:'军令六',
+			junling6_bg:'令',
+			junling6_info:'若被执行，执行者选择一张手牌和一张装备区内牌（若有），然后弃置其余的牌。',
+			_guozhan_marks:'标记',
+			_guozhan_marks_backup:'标记',
+			xianqu_mark:"先驱",
+			zhulianbihe_mark:"珠联璧合",
+			yinyang_mark:"阴阳鱼",
+			_zhulianbihe_mark_tao:"珠联",
+			_yinyang_mark_add:"阴阳鱼",
+			yinyang_add:"阴阳鱼",
+			"fengyin_main":"封印[主将]",
+			"fengyin_main_info":"",
+			"fengyin_vice":"封印[副将]",
+			"fengyin_vice_info":"",
+			"_mingzhisuodingji":"亮将",
+			"_mingzhisuodingji_info":"出牌阶段，你可以明置拥有“锁定技”的武将牌。",
+			_lianheng:'合纵',
+			lianheng_tag:'合',
+			guo_tag:'国',
+			gz_shibing1sst_light:'光兵',
+			gz_shibing2sst_light:'光兵',
+			gz_shibing1sst_darkness:'暗兵',
+			gz_shibing2sst_darkness:'暗兵',
+			gz_shibing1sst_spirit:'魂兵',
+			gz_shibing2sst_spirit:'魂兵',
+			gz_shibing1sst_reality:'现兵',
+			gz_shibing2sst_reality:'现兵',
+			gz_shibing1sst_smash:'斗兵',
+			gz_shibing2sst_smash:'斗兵',
+			gz_shibing1ye:'士兵',
+			gz_shibing2ye:'士兵',
+			guozhan_default:"国战标准",
+			guozhan_zhen:"君临天下·阵",
+			guozhan_shi:"君临天下·势",
+			guozhan_bian:"君临天下·变",
+			guozhan_quan:"君临天下·权",
+			guozhan_jun:"君主武将",
+			guozhan_jin:'文德武备',
+			guozhan_single:'君临天下EX',
+			guozhan_double:'双势力武将',
+			guozhan_yexinjia:'野心家武将',
+			guozhan_zongheng:'纵横捭阖',
+			guozhan_others:"其他",
 			//国战武将
 			//修改技能
 			gz_sst_qiji:"奇迹",
@@ -3890,82 +4087,8 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			gz_ska_jiyan_info:"副将技，此武将牌减少半个阴阳鱼。每轮限一次，你可以视为使用或打出一张【杀】/【闪】/【桃】/【酒】。",
 			sst_paozhi:"抛枝",
 			sst_paozhi_info:"锁定技，你的手牌均可合纵。",
-
-			ye:'野',
-			ye2:'野心家',
-			yexinjia_mark:'野心家',
-
-			bumingzhi:'不明置',
-			mingzhizhujiang:'明置主将',
-			mingzhifujiang:'明置副将',
-			tongshimingzhi:'同时明置',
-			mode_guozhan_character_config:'国战武将',
-			_zhenfazhaohuan:'阵法召唤',
-			_zhenfazhaohuan_info:'由拥有阵法技的角色发起，满足此阵法技条件的未确定势力角色均可按逆时针顺序依次明置其一张武将牌(响应阵法召唤)，以发挥阵法技的效果。',
-
-			junling:'军令',
-			junling1:'军令一',
-			junling1_bg:'令',
-			junling1_info:'若被执行，执行者对发起者指定的一名角色造成一点伤害。',
-			junling2:'军令二',
-			junling2_bg:'令',
-			junling2_info:'若被执行，执行者摸一张牌，然后依次交给发起者两张牌。',
-			junling3:'军令三',
-			junling3_bg:'令',
-			junling3_info:'若被执行，执行者失去一点体力。',
-			junling4:'军令四',
-			junling4_bg:'令',
-			junling4_info:'若被执行，直到回合结束，执行者不能使用或打出手牌且非锁定技全部失效。',
-			junling4_eff:'军令四',
-			junling5:'军令五',
-			junling5_bg:'令',
-			junling5_info:'若被执行，执行者将武将牌叠置，且不能回复体力直到回合结束。',
-			junling5_eff:'军令五',
-			junling6:'军令六',
-			junling6_bg:'令',
-			junling6_info:'若被执行，执行者选择一张手牌和一张装备区内牌（若有），然后弃置其余的牌。',
-			
-			_guozhan_marks:'标记',
-			_guozhan_marks_backup:'标记',
-			xianqu_mark:"先驱",
-			zhulianbihe_mark:"珠联璧合",
-			yinyang_mark:"阴阳鱼",
-			_zhulianbihe_mark_tao:"珠联",
-			_yinyang_mark_add:"阴阳鱼",
-			yinyang_add:"阴阳鱼",
-			
-			"_mingzhisuodingji":"亮将",
-			"_mingzhisuodingji_info":"出牌阶段，你可以明置拥有“锁定技”的武将牌。",
-
-			_lianheng:'合纵',
-			lianheng_tag:'合',
-			guo_tag:'国',
-
-			gz_shibing1sst_light:'光兵',
-			gz_shibing2sst_light:'光兵',
-			gz_shibing1sst_darkness:'暗兵',
-			gz_shibing2sst_darkness:'暗兵',
-			gz_shibing1sst_spirit:'魂兵',
-			gz_shibing2sst_spirit:'魂兵',
-			gz_shibing1sst_reality:'现兵',
-			gz_shibing2sst_reality:'现兵',
-			gz_shibing1sst_smash:'斗兵',
-			gz_shibing2sst_smash:'斗兵',
-			gz_shibing1ye:'士兵',
-			gz_shibing2ye:'士兵',
-
-			guozhan_default:"国战标准",
-			guozhan_zhen:"君临天下·阵",
-			guozhan_shi:"君临天下·势",
-			guozhan_bian:"君临天下·变",
-			guozhan_quan:"君临天下·权",
-			guozhan_jun:"君主武将",
-			guozhan_jin:'文德武备',
-			guozhan_single:'君临天下EX',
-			guozhan_double:'双势力武将',
-			guozhan_yexinjia:'野心家武将',
-			guozhan_zongheng:'纵横捭阖',
-			guozhan_others:"其他",
+			gz_ymk_kaibai:"开摆",
+			gz_ymk_kaibai_info:"每回合限一次，当你成为一名角色使用牌的目标时，你可以弃置所有手牌并判定，然后你摸X张牌（X为你判定牌的点数）。若此牌对你造成了伤害，你弃置一半手牌（向下取整）。"
 		},
 		junList:[],
 		guozhanPile_yingbian:[

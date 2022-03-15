@@ -9,11 +9,11 @@ game.import("character",function(lib,game,ui,get,ai,_status){
                 sst_64:["old_sst_samus","old_sst_donkey_kong"],
                 sst_melee:[],
                 sst_brawl:[],
-                sst_4:[],
-                sst_ultimate:["old_sst_ken"],
+                sst_4:["old_sst_ryu"],
+                sst_ultimate:["old_sst_ken","old_sst_dark_samus","old_sst_richter"],
                 sst_spirits:[],
                 sst_players:[],
-				sst_ymk:["old_ymk_claude"],
+				sst_ymk:["old_ymk_claude","ymk_577"],
 			},
 		},
 		character:{
@@ -52,22 +52,26 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			old_sst_ken:["male","sst_light",4,["old_sst_yanyang","sst_shenglong"],[]],
 			old_ymk_claude:["male","sst_spirit",3,["old_ymk_yunchou","old_ymk_guimou"],[]],
 			old_sst_donkey_kong:["male","sst_light",4,["old_sst_baochui"],[]],
+			old_sst_dark_samus:["female","sst_darkness",3,["sst_yingliu","old_sst_shunxing"],[]],
+			ymk_577:["male","sst_reality",3,["ymk_jiagou","ymk_jicai"],[]],
+			old_sst_richter:["male","sst_darkness",4,["old_sst_shengxi","old_sst_xuelun"],[]],
+			old_sst_ryu:["male","sst_light",4,["old_sst_tandao","sst_bodong"],[]]
 		},
 		characterFilter:{
 		},
 		characterIntro:{
 			/*
-			"<br>"+
-			"系列：（）<br>"+
-			"初登场：（）<br>"+
-			"武将作者：Yumikohimi<br>"+
-			"武将作者：mario not mary<br>"+
-			"武将作者：Show-K<br>"+
-			"------------------------------<br>"+
-			"<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"------------------------------<br>"+
-			"
+			"<br>\
+			系列：（）<br>\
+			初登场：（）<br>\
+			武将作者：Yumikohimi<br>\
+			武将作者：mario not mary<br>\
+			武将作者：Show-K<br>\
+			------------------------------<br>\
+			<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			------------------------------<br>\
+			
 
 			"+
 			"
@@ -101,48 +105,82 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			huaxiong:"董卓旗下名将，自荐抵抗山东地区反对董卓的诸侯联军于汜水关前，他先后斩杀济北相鲍信之弟鲍忠和孙坚部将祖茂、以及袁术部将俞涉和韩馥手下潘凤等人，最后关东联军派出关羽与之一对一决斗而被杀。",
 			xf_yiji:"伊籍，字机伯，生卒年不详，兖州山阳郡（今山东金乡县）人，三国时期蜀汉官员。年少时依附于同乡刘表。刘备落难到荆州时，伊籍时常拜访，托请刘备照顾。建安十三年（208年），刘表病死，伊籍便转投刘备，一起渡江南下。建安十六年（211年），刘备入蜀帮助刘璋，伊籍亦有跟随。随后刘备和刘璋双方决裂。建安十九年（214年），刘备平定益州，任命伊籍为左将军从事中郎，其待遇次于简雍、孙乾等。后升任昭文将军，并与诸葛亮、法正、刘巴、李严共同编制《蜀科》。",
 			//SST
-			old_sst_samus:"0264. 萨姆斯/Samus/サムス<br>"+
-			"系列：Metroid（密特罗德）<br>"+
-			"初登场：Metroid（密特罗德）<br>"+
-			"武将作者：mario not mary<br>"+
-			"------------------------------<br>"+
-			"萨姆斯·亚兰是游戏历史上第一个女主角，以只身一人在外星球的作战闻名。她的能量装甲是高等文明“鸟人族”的成果，给了她强大的火力、防护力和升级的可能性。在大乱斗中，虽然她是道具人，但是她的体术也不差。她的蓄力射击威力惊人。<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"------------------------------<br>"+
-			"“萨姆斯，很不幸的消息……”",
-			old_sst_ken:"0978. 肯/Ken/ケン<br>"+
-			"系列：Street Fighter（街头霸王）<br>"+
-			"初登场：Street Fighter（街头霸王）<br>"+
-			"武将作者：mario not mary<br>"+
-			"------------------------------<br>"+
-			"肯是隆的头号挚友兼劲敌，两人师出同门，与风餐露宿四处苦行的隆不同，肯有着自己的家族与财大气粗的产业，据说现在空手道网课也办的红红火火。他在年轻时因为急躁吃过不少败仗，但现在的他已经有了自己的家庭，即便如此，在顾家的闲暇也一定要挤出时间与挚友对战几局，才是男人的快乐。<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"------------------------------<br>"+
-			"我准备好了，来吧。",
-			old_ymk_claude:"1386. 库罗德/Claude/クロード<br>"+
-			"系列：Fire Emblem（火焰纹章）<br>"+
-			"初登场：Fire Emblem: Three Houses（火焰纹章 风花雪月）<br>"+
-			"武将作者：Yumikohimi<br>"+
-			"------------------------------<br>"+
-			"雷斯塔诸侯同盟盟主之孙、爵位继承人。喜欢策略，喜欢琢磨战术，为了达到目标可以不择手段。不论玩家选择的是贝雷特还是贝雷丝，他都会以“兄弟”称呼他的老师。<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"------------------------------<br>"+
-			"芙朵拉内外都要变革，才能得以见到所愿之景……对吧？",
-			old_sst_donkey_kong:"0134. 森喜刚/Donkey Kong/ドンキーコング<br>"+
-			"系列：Donkey Kong（森喜刚）<br>"+
-			"初登场：Donkey Kong（森喜刚）<br>"+
-			"武将作者：mario not mary<br>"+
-			"------------------------------<br>"+
-			"丛林的王者，也是最狂热的香蕉狂魔。他的冒险总是以某人偷了他的香蕉开始。在大乱斗中，他的力度和投技是众所周知的。虽然体积很大，但是速度也不是特别慢。他的前投掷还能扛着对手走哦！要合理利用这一点！<br>"+
-			"——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>"+
-			"------------------------------<br>"+
-			"砸人很疼的。",
+			old_sst_samus:"0264. 萨姆斯/Samus/サムス<br>\
+			系列：Metroid（密特罗德）<br>\
+			初登场：Metroid（密特罗德）<br>\
+			武将作者：mario not mary<br>\
+			------------------------------<br>\
+			萨姆斯·亚兰是游戏历史上第一个女主角，以只身一人在外星球的作战闻名。她的能量装甲是高等文明“鸟人族”的成果，给了她强大的火力、防护力和升级的可能性。在大乱斗中，虽然她是道具人，但是她的体术也不差。她的蓄力射击威力惊人。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			------------------------------<br>\
+			“萨姆斯，很不幸的消息……”",
+			old_sst_ken:"0978. 肯/Ken/ケン<br>\
+			系列：Street Fighter（街头霸王）<br>\
+			初登场：Street Fighter（街头霸王）<br>\
+			武将作者：mario not mary<br>\
+			------------------------------<br>\
+			肯是隆的头号挚友兼劲敌，两人师出同门，与风餐露宿四处苦行的隆不同，肯有着自己的家族与财大气粗的产业，据说现在空手道网课也办的红红火火。他在年轻时因为急躁吃过不少败仗，但现在的他已经有了自己的家庭，即便如此，在顾家的闲暇也一定要挤出时间与挚友对战几局，才是男人的快乐。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			------------------------------<br>\
+			我准备好了，来吧。",
+			old_ymk_claude:"1386. 库罗德/Claude/クロード<br>\
+			系列：Fire Emblem（火焰纹章）<br>\
+			初登场：Fire Emblem: Three Houses（火焰纹章 风花雪月）<br>\
+			武将作者：Yumikohimi<br>\
+			------------------------------<br>\
+			雷斯塔诸侯同盟盟主之孙、爵位继承人。喜欢策略，喜欢琢磨战术，为了达到目标可以不择手段。不论玩家选择的是贝雷特还是贝雷丝，他都会以“兄弟”称呼他的老师。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			------------------------------<br>\
+			芙朵拉内外都要变革，才能得以见到所愿之景……对吧？",
+			old_sst_donkey_kong:"0134. 森喜刚/Donkey Kong/ドンキーコング<br>\
+			系列：Donkey Kong（森喜刚）<br>\
+			初登场：Donkey Kong（森喜刚）<br>\
+			武将作者：mario not mary<br>\
+			------------------------------<br>\
+			丛林的王者，也是最狂热的香蕉狂魔。他的冒险总是以某人偷了他的香蕉开始。在大乱斗中，他的力度和投技是众所周知的。虽然体积很大，但是速度也不是特别慢。他的前投掷还能扛着对手走哦！要合理利用这一点！<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			------------------------------<br>\
+			砸人很疼的。",
+			old_sst_dark_samus:"0265. 黑暗萨姆斯/Dark Samus/ダークサムス<br>\
+			系列：Metroid（密特罗德）<br>\
+			初登场：（）<br>\
+			武将作者：mario not mary<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			萨姆斯的废弃盔甲、究极密特罗德和有机矿石“啡宗”结合的产物，不但有强大的恢复能力，还能精神控制其他生物和制造自己的分身。它在3ds和WiiU版《任天堂明星大乱斗》中作为辅助模型的时候还能使用啡宗的力量攻击，成为斗士之后各个招式倒是完全和萨姆斯一样了，遗憾。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			“堕入黑暗”",
+			ymk_577:"武将作者：Yumikohimi<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			柚子设计的577，估计又要偏强……意外的还行？",
+			old_sst_richter:"1051. 里希特·贝尔蒙特/Richter Belmont/リヒター・ベルモンド<br>\
+			系列：Castlevania（恶魔城）<br>\
+			初登场：Castlevania: Rondo of Blood（恶魔城X 血之轮回）<br>\
+			武将作者：mario not mary<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			《恶魔城X：血之轮回》的主角，吸血鬼猎人家族的后代，他从德古拉手中救出了自己的恋人，还曾经和德古拉的儿子阿鲁卡多并肩作战。他擅长使用杂技般灵活的体术与敌人周旋，还能解放除鞭子外其他神圣武器的力量，进行更强力的攻击。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			“我有愧于此称……”",
+			old_sst_ryu:"0977. 隆/Ryu/リュウ<br>\
+			系列：Street Fighter（街头霸王）<br>\
+			初登场：Street Fighter（街头霸王）<br>\
+			武将作者：mario not mary<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			隆，武道上永恒的探求者，凭借着从刚拳处学来的波动流暗杀术，他遍历全球挑战强者，在夺得大赛冠军后却淡泊名利不去领奖，因为他的目标只有一个，也是豪鬼留给他的问题：战斗的意义，除了杀戮，还有什么？他也曾为了追求力量迷失自我，将自己沉浸在杀意中，但现在的他已经将阴影从心中驱逐，俨然一代宗师。<br>\
+			——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+			━━━━━━━━━━━━━━━━━<br>\
+			你必须击败我的升龙拳才能得到一线转机。"
 		},
 		characterTitle:{
 			old_sst_samus:"银河战士",
 			old_sst_ken:"红莲格斗王",
 			old_ymk_claude:"连系世界之王",
 			old_sst_donkey_kong:"丛林的王者",
+			old_sst_dark_samus:"暗流涌动",
+			ymk_577:"生电妙手",
+			old_sst_richter:"血之轮回",
+			old_sst_ryu:"求道的武者"
 		},
 		skill:{
 			//LTK
@@ -2498,8 +2536,8 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					},
 					attackFrom:function (from,to,distance){
 						return distance-from.getDamagedHp();
-					},
-				},
+					}
+				}
 			},
 			old_sst_zailu:{
 				trigger:{
@@ -2547,7 +2585,7 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 						player.storage.old_sst_zailu2++;
 					}
 				},
-				group:["old_sst_zailu2","old_sst_zailu3"],
+				group:["old_sst_zailu2","old_sst_zailu3"]
 			},
 			old_sst_zailu2:{
 				trigger:{
@@ -2565,8 +2603,8 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					threaten:function (player,target){
 						if(!player.storage.old_sst_zailu2) return 1;
 						return 1+player.storage.old_sst_zailu2*0.2;
-					},
-				},
+					}
+				}
 			},
 			old_sst_zailu3:{
 				trigger:{
@@ -2605,8 +2643,8 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					threaten:function (player,target){
 						if(!player.storage.old_sst_zailu3) return 1;
 						return 1+player.storage.old_sst_zailu3*0.2;
-					},
-				},
+					}
+				}
 			},
 			//Ken
 			old_sst_yanyang:{
@@ -2638,8 +2676,8 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					trigger.baseDamage+=trigger.cards.length-1;
 				},
 				ai:{
-					damageBonus:true,
-				},
+					damageBonus:true
+				}
 			},
 			//Claude
 			old_ymk_yunchou:{
@@ -2682,7 +2720,7 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 						player.markSkill("old_ymk_yunchou");
 						game.log(player,"将",result.cards,"置于武将牌上");
 					}
-				},
+				}
 				/*
 				ai:{
 					effect:{
@@ -2761,8 +2799,8 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					}
 				},
 				ai:{
-					expose:0.2,
-				},
+					expose:0.2
+				}
 			},
 			old_ymk_guimou:{
 				group:["old_ymk_guimou2","old_ymk_guimou3","old_ymk_guimou4","old_ymk_guimou5"],
@@ -2831,15 +2869,15 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					threaten:2,
 					order:5,
 					result:{
-						player:1,
+						player:1
 					},
 					save:true,
 					respondSha:true,
 					respondTao:true,
 					skillTagFilter:function(player){
 						if(!player.storage.old_ymk_yunchou||!player.storage.old_ymk_yunchou.length) return false;
-					},
-				},
+					}
+				}
 			},
 			old_ymk_guimou2:{
 				trigger:{player:"useCardBefore"},
@@ -2876,7 +2914,7 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					ui.cardPile.insertBefore(event.card,ui.cardPile.firstChild);
 					game.log(player,"将",event.card,"置于牌堆顶");
 					game.updateRoundNumber();
-				},
+				}
 			},
 			old_ymk_guimou3:{
 				trigger:{player:"chooseToRespondBegin"},
@@ -2929,12 +2967,12 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 				ai:{
 					basic:{
 						useful:[6,4],
-						value:[6,4],
+						value:[6,4]
 					},
 					result:{
-						player:1,
-					},
-				},
+						player:1
+					}
+				}
 			},
 			old_ymk_guimou4:{
 				prompt:"将武将牌上的一张牌置于牌堆顶，视为使用一张闪",
@@ -2949,8 +2987,8 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					skillTagFilter:function(player){
 						return player.storage.old_ymk_yunchou&&player.storage.old_ymk_yunchou.length;
 					},
-					respondShan:true,
-				},
+					respondShan:true
+				}
 			},
 			old_ymk_guimou5:{
 				enable:"chooseToUse",
@@ -3009,12 +3047,12 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 							game.log(storage,"被置入了弃牌堆");
 							storage.length=0;
 						}
-					},
+					}
 				},
 				ai:{
-					threaten:2,
+					threaten:2
 				},
-				group:["old_sst_baochui2","old_sst_baochui3"],
+				group:["old_sst_baochui2","old_sst_baochui3"]
 			},
 			old_sst_baochui2:{
 				enable:"chooseToUse",
@@ -3062,8 +3100,8 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					},
 					order:function(){
 						return get.order({name:"sha"})+1;
-					},
-				},
+					}
+				}
 			},
 			old_sst_baochui3:{
 				trigger:{player:"useCard1"},
@@ -3078,9 +3116,576 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 					trigger.baseDamage+=Math.min(3,player.storage.old_sst_baochui_num)-1;
 				},
 				ai:{
-					damageBonus:true,
-				},
+					damageBonus:true
+				}
 			},
+			//Dark Samus
+			old_sst_shunxing:{
+				group:["old_sst_shunxing1","old_sst_shunxing2"],
+				ai:{
+					threaten:2,
+					expose:0.2
+				}
+			},
+			old_sst_shunxing1:{
+				trigger:{player:"phaseDrawBefore"},
+				direct:true,
+				content:function(){
+					"step 0"
+					var check,i,num=0,num2=0,players=game.filterPlayer();
+					for(var i=0;i<players.length;i++){
+						if(player!=players[i]&&players[i].countCards("h")){
+							var att=get.attitude(player,players[i]);
+							if(att<=0){
+								num++;
+							}
+							if(att<0){
+								num2++;
+							}
+						}
+					}
+					check=(num>=2&&num2>0);
+					player.chooseBool(get.prompt("old_sst_shunxing1"),"你可以跳过此摸牌阶段，然后获得一名其他角色区域内的一张牌").set("ai",function(){
+						if(!_status.event.check) return false;
+						if(player.hasCard(function(card){
+							return get.name(card)=="bingliang";
+						},"j")) return false;
+						/*
+						var val=0;
+						var cards=player.getCards("h");
+						for(var i=0;i<cards.length;i++){
+							val+=get.value(cards[i]);
+						}
+						val=val/cards.length;
+						return val>=7;
+						*/
+						return true;
+					}).set("check",check);
+					"step 1"
+					if(result.bool){
+						trigger.cancel();
+						player.logSkill("old_sst_shunxing1");
+						game.log(player,"跳过了此摸牌阶段");
+						player.chooseTarget("瞬形：获得一名其他角色区域内的一张牌",true,function(card,player,target){
+							return target!=player&&target.countGainableCards(player,"hej");
+						}).set("ai",function(target){
+							var player=_status.event.player;
+							var att=get.attitude(player,target);
+							if(att<0){
+								att=-Math.sqrt(-att);
+							}
+							else{
+								att=Math.sqrt(att);
+							}
+							return att*lib.card.shunshou.ai.result.target(player,target);
+						})
+					}
+					else{
+						event.finish();
+					}
+					"step 2"
+					if(result.bool){
+						result.targets.sortBySeat();
+						player.line(result.targets,"green");
+						event.targets=result.targets;
+						if(!event.targets.length) event.finish();
+					}
+					else{
+						event.finish();
+					}
+					"step 3"
+					player.gainMultiple(event.targets,"hej");
+					"step 4"
+					game.delayx();
+				}
+			},
+			old_sst_shunxing2:{
+				trigger:{player:"phaseUseBefore"},
+				direct:true,
+				content:function(){
+					"step 0"
+					var check;
+					if(player.countCards("h")>player.hp+1){
+						check=false;
+					}
+					else if(player.countCards("h",{name:["wuzhong"]})){
+						check=false;
+					}
+					else{
+						check=true;
+					}
+					player.chooseBool(get.prompt("old_sst_shunxing2"),"你可以跳过此出牌阶段，然后重铸任意张红色手牌").set("ai",function(){
+						if(!_status.event.check) return false;
+						if(player.hasCard(function(card){
+							return get.name(card)=="lebu";
+						},"j")) return false;
+						var val=0;
+						var cards=player.getCards("h");
+						for(var i=0;i<cards.length;i++){
+							val+=get.value(cards[i]);
+						}
+						val=val/cards.length;
+						return player.hasCard(function(card){
+							return get.color(card)=="red";
+						},"h")&&val<=4;
+					}).set("check",check);
+					"step 1"
+					if(result.bool){
+						trigger.cancel();
+						player.logSkill("old_sst_shunxing2");
+						game.log(player,"跳过了此出牌阶段");
+						player.chooseCard("h",[1,Infinity],"瞬形：你可以重铸任意张红色手牌",function(card){
+							return get.color(card)=="red";
+						}).set("ai",function(card){
+							return 8-get.value(card);
+						});
+					}
+					else{
+						event.finish();
+					}
+					"step 2"
+					if(result.cards&&result.cards.length) {
+						var cards=result.cards;
+						player.$throw(cards,1000);
+						player.lose(cards,ui.discardPile,"visible").set("type","chongzhu");
+						game.log(player,"将",cards,"置入了弃牌堆");
+						player.draw(cards.length);
+					}
+				}
+			},
+			//577
+			ymk_jiagou:{
+				trigger:{global:"phaseZhunbeiBegin"},
+				filter:function(event,player){
+					return player.countCards("he");
+				},
+				direct:true,
+				content:function(){
+					"step 0"
+					player.chooseCard("he",get.prompt2("ymk_jiagou",trigger.player)).set("ai",function(card){
+						var player=_status.event.player;
+						var target=_status.event.targetx;
+						var judges=target.getCards("j");
+						if(ui.selected.cards&&ui.selected.cards.length){
+							for(var i=0;i<ui.selected.cards.length;i++){
+								if(judges&&judges.length) judges.shift();
+							}
+						}
+						if(judges&&judges.length){
+							var judge=get.judge(judges[0]);
+							return judge(card)*(11-get.value(card));
+						}
+						var att=get.attitude(player,target)*(get.number(card)-target.getHandcardLimit())*Math.max(0,5-get.useful(card));
+						var num=get.number(card)<=5?Math.max(0,player.maxHp-player.countCards("h")):0;
+						return Math.pow(att,1/3)+num;
+					}).set("targetx",trigger.player);
+					"step 1"
+					if(result.cards&&result.cards.length){
+						player.logSkill("ymk_jiagou",trigger.player);
+						var card=result.cards[0];
+						/*
+						event.card=card;
+						player.lose(card,ui.special,"visible");
+						player.$throw(card,1000);
+						game.log(player,"将",card,"置于牌堆顶");
+						*/
+						player.$throw(card,1000);
+						game.log(player,"将",card,"置于牌堆顶");
+						player.lose(card,ui.cardPile,"insert");
+						player.storage.ymk_jiagou=get.number(card);
+						trigger.player.storage.ymk_jiagou=get.number(card);
+						trigger.player.addTempSkill("ymk_jiagou2");
+					}
+				},
+				ai:{
+					expose:0.1
+				},
+				group:["ymk_jiagou3","ymk_jiagou_clear"],
+				subSkill:{
+					clear:{
+						trigger:{global:"phaseAfter"},
+						silent:true,
+						content:function(){
+							delete player.storage.ymk_jiagou;
+						}
+					}
+				}
+			},
+			ymk_jiagou2:{
+				onremove:function(player){
+					delete player.storage.ymk_jiagou;
+				},
+				mod:{
+					maxHandcardBase:function(player,num){
+						return player.storage.ymk_jiagou;
+					}
+				}
+			},
+			ymk_jiagou3:{
+				trigger:{global:"phaseJieshuBegin"},
+				filter:function(event,player){
+					return player.storage.ymk_jiagou&&player.storage.ymk_jiagou<=5;
+				},
+				forced:true,
+				content:function(){
+					player.drawTo(player.maxHp);
+				}
+			},
+			ymk_jicai:{
+				trigger:{player:"phaseJudgeBefore"},
+				forced:true,
+				content:function(){
+					trigger.cancel();
+					player.phaseDiscard();
+				},
+				ai:{
+					effect:{
+						player:function(card,player,target){
+							if(get.type(card)=="delay"){
+								return "zeroplayertarget";
+							}
+						},
+						target:function(card,player,target){
+							if(get.type(card)=="delay"){
+								return "zeroplayertarget";
+							}
+						}
+					}
+				},
+				group:"ymk_jicai2"
+			},
+			ymk_jicai2:{
+				trigger:{player:"phaseDiscardBefore"},
+				filter:function(event,player){
+					return event.getParent().name!="ymk_jicai";
+				},
+				forced:true,
+				content:function(){
+					trigger.cancel();
+					player.phaseDraw();
+				}
+			},
+			//Richter
+			old_sst_shengxi:{
+				preHidden:true,
+				global:"old_sst_shengxi1",
+				onremove:function(player){
+					if(!game.hasPlayer(function(current){
+						return current.hasSkill("old_sst_shengxi");
+					})){
+						var players=game.filterPlayer();
+						var cards=[];
+						for(var i=0;i<players.length;i++){
+							cards=players[i].getCards("h",function(card){
+								return card.hasGaintag("old_sst_shengxi");
+							});
+							players[i].removeGaintag("old_sst_shengxi",cards);
+							players[i].removeGaintag("viewHandcard",cards);
+						}
+					}
+				},
+				ai:{
+					threaten:1.5
+				}
+			},
+			old_sst_shengxi1:{
+				direct:true,
+				trigger:{player:"useCardToPlayer"},
+				filter:function(event,player){
+					var cards=event.target.getCards("h",function(card){
+						return !card.hasGaintag("old_sst_shengxi");
+					});
+					return game.hasPlayer(function(current){
+						return current.hasSkill("old_sst_shengxi")&&(player==current||event.targets.contains(current));
+					})&&cards&&cards.length;
+				},
+				content:function(){
+					"step 0"
+					player.choosePlayerCard(trigger.target,"h",get.prompt2("old_sst_shengxi",trigger.target)).set("filterButton",function(button){
+						return !button.link.hasGaintag("viewHandcard");
+					}).set("targetx",trigger.target).set("ai",function(button){
+						if(get.attitude(_status.event.player,_status.event.targetx)<0){
+							var val=get.buttonValue(button);
+							return val;
+						}
+						else{
+							return 0;
+						}
+					});
+					"step 1"
+					if(result.cards&&result.cards.length){
+						player.logSkill("old_sst_shengxi2",trigger.target);
+						var card=result.cards[0];
+						trigger.target.$give(card,trigger.target,false);
+						trigger.target.addGaintag(card,"viewHandcard");
+						trigger.target.addGaintag(card,"old_sst_shengxi");
+						game.log(player,"明置了",trigger.target,"的",card);
+					}
+				},
+				ai:{
+					expose:0.2,
+					effect:{
+						player:function(card,player,target){
+							if(get.tag(card,"multitarget")) return [1,3];
+							if(card&&typeof card.hasGaintag=="function"&&card.hasGaintag("old_sst_shengxi")) return [1,3];
+						}
+					}
+				},
+				group:"old_sst_shengxi2"
+			},
+			old_sst_shengxi2:{
+				enable:"chooseToUse",
+				prompt:"你可以使用其他角色因〖圣袭〗明置的手牌",
+				hiddenCard:function(player,name){
+					var old_sst_shengxi=[];
+					var players=game.filterPlayer(function(current){
+						return current!=player;
+					});
+					for(var i=0;i<players.length;i++){
+						old_sst_shengxi=old_sst_shengxi.concat(players[i].getCards("h",function(card){
+							return card.hasGaintag("old_sst_shengxi");
+						}));
+					}
+					for(var i=0;i<old_sst_shengxi.length;i++){
+						if(get.name(old_sst_shengxi[i])==name) return true;
+					}
+					return false;
+				},
+				filter:function(event,player){
+					var old_sst_shengxi=[];
+					var players=game.filterPlayer(function(current){
+						return current!=player;
+					});
+					for(var i=0;i<players.length;i++){
+						old_sst_shengxi=old_sst_shengxi.concat(players[i].getCards("h",function(card){
+							return card.hasGaintag("old_sst_shengxi");
+						}));
+					}
+					for(var i=0;i<old_sst_shengxi.length;i++){
+						if(event.filterCard(old_sst_shengxi[i],player,event)) return true;
+					}
+					return false;
+				},
+				chooseButton:{
+					dialog:function(event,player){
+						var old_sst_shengxi=[];
+						var players=game.filterPlayer(function(current){
+							return current!=player;
+						});
+						for(var i=0;i<players.length;i++){
+							old_sst_shengxi=old_sst_shengxi.concat(players[i].getCards("h",function(card){
+								return card.hasGaintag("old_sst_shengxi");
+							}));
+						}
+						return ui.create.dialog("圣袭",old_sst_shengxi,"hidden");
+					},
+					filter:function(button,player){
+						var evt=_status.event.getParent();
+						if(evt&&evt.filterCard){
+							return evt.filterCard(button.link,player,evt);
+						}
+						return true;
+					},
+					check:function(button){
+						if(button.link.name=="du") return 10;
+						var player=_status.event.player;
+						if(player.getUseValue(button.link)>0) return get.order(button.link);
+						return -1;
+					},
+					backup:function(links,player){
+						return {
+							filterCard:function(){return false;},
+							selectCard:-1,
+							viewAs:links[0],
+							onuse:function(result,player){
+								//player.logSkill("old_sst_shengxi");
+								var owner=get.owner(result.card);
+								if(owner){
+									owner.lose(result.card,ui.special);
+									//player.$throw(result.card);
+									owner.line(player,"green");
+									//game.log(player,"使用了",owner,"的",result.card);
+								}
+								game.delay();
+							}
+						}
+					},
+					prompt:function(links,player){
+						return "使用"+get.translation(links);
+					}
+				},
+				ai:{
+					respondSha:true,
+					respondShan:true,
+					respondTao:true,
+					save:true,
+					skillTagFilter:function(player,tag,arg){
+						if(arg!="use") return false;
+						var old_sst_shengxi=[];
+						var players=game.filterPlayer(function(current){
+							return current!=player;
+						});
+						switch(tag){
+							case "respondSha":{
+								for(var i=0;i<players.length;i++){
+									old_sst_shengxi=old_sst_shengxi.concat(players[i].getCards("h",function(card){
+										return card.hasGaintag("old_sst_shengxi")&&get.name(card)=="sha";
+									}));
+								}
+								if(!old_sst_shengxi.length) return false;
+								break;
+							}
+							case "respondShan":{
+								for(var i=0;i<players.length;i++){
+									old_sst_shengxi=old_sst_shengxi.concat(players[i].getCards("h",function(card){
+										return card.hasGaintag("old_sst_shengxi")&&get.name(card)=="shan";
+									}));
+								}
+								if(!old_sst_shengxi.length) return false;
+								break;
+							}
+							case "respondTao":{
+								for(var i=0;i<players.length;i++){
+									old_sst_shengxi=old_sst_shengxi.concat(players[i].getCards("h",function(card){
+										return card.hasGaintag("old_sst_shengxi")&&get.name(card)=="tao";
+									}));
+								}
+								if(!old_sst_shengxi.length) return false;
+								break;
+							}
+							case "save":{
+								for(var i=0;i<players.length;i++){
+									old_sst_shengxi=old_sst_shengxi.concat(players[i].getCards("h",function(card){
+										return card.hasGaintag("old_sst_shengxi")&&get.tag(card,"save");
+									}));
+								}
+								if(!old_sst_shengxi.length) return false;
+								break;
+							}
+						}
+					},
+					order:function(item,player){
+						var event=_status.event;
+						if(event.type!="phase") return 4;
+						if(!player) return -1;
+						var old_sst_shengxi=[];
+						var players=game.filterPlayer(function(current){
+							return current!=player;
+						});
+						for(var i=0;i<players.length;i++){
+							old_sst_shengxi=old_sst_shengxi.concat(players[i].getCards("h",function(card){
+								return card.hasGaintag("old_sst_shengxi");
+							}));
+						}
+						if(!old_sst_shengxi||!old_sst_shengxi.length) return -1;
+						var order=0;
+						for(var i=0;i<old_sst_shengxi.length;i++){
+							if(player.getUseValue(old_sst_shengxi[i])>0){
+								var order2=get.order(old_sst_shengxi[i]);
+								if(order2>order) order=order2;
+							}
+						}
+						return order+1;
+					},
+					result:{
+						player:function(player){
+							if(_status.event.dying) return get.attitude(player,_status.event.dying);
+							return 1;
+						}
+					},
+					useful:-1,
+					value:-1
+				}
+			},
+			old_sst_xuelun:{
+				trigger:{player:"die"},
+				logTarget:"source",
+				forced:true,
+				skillAnimation:true,
+				animationColor:"fire",
+				forceDie:true,
+				filter:function(event,player){
+					return event.source;
+				},
+				content:function(){
+					/*
+					var target=trigger.source;
+					var skills=player.skills.slice(0);
+					for(var i=0;i<skills.length;i++){
+						var info=get.info(skills[i]);
+						if(!info.charlotte&&!info.superCharlotte) target.addSkillLog(skills[i]);
+						//target.addSkillLog(skills[i]);
+					}
+					*/
+					trigger.source.addSkillLog("old_sst_shengxi");
+					trigger.source.addSkillLog("old_sst_xuelun");
+				}
+			},
+			//Ryu
+			old_sst_tandao:{
+				enable:"phaseUse",
+				usable:1,
+				chooseButton:{
+					dialog:function(event,player){
+						return ui.create.dialog("###探道###选择一种颜色，展示手牌并弃置所有此颜色的牌，然后摸X张牌（X为你本回合使用的牌类别数量）");
+					},
+					chooseControl:function(event,player){
+						return ["red","black"];
+					},
+					check:function(){
+						var player=_status.event.player;
+						return player.countCards("he",function(card){
+							return lib.filter.cardDiscardable(card,player)&&get.color(card)=="red";
+						})<player.countCards("he",function(card){
+							return lib.filter.cardDiscardable(card,player)&&get.color(card)=="black";
+						})?"red":"black";
+					},
+					backup:function(result,player){
+						return {
+							delay:false,
+							color:result.control,
+							content:lib.skill.old_sst_tandao.contentx
+						}
+					}
+				},
+				contentx:function(){
+					"step 0"
+					event.color=lib.skill.old_sst_tandao_backup.color;
+					player.popup(event.color);
+					game.log(player,"选择了","#y"+get.translation(event.color));
+					player.showHandcards(get.translation(player.name)+"的手牌（声明了"+get.translation(event.color)+"）");
+					"step 1"
+					if(event.color){
+						var cards=player.getCards("he",function(card){
+							return lib.filter.cardDiscardable(card,player)&&get.color(card)==event.color;
+						});
+						player.discard(cards);
+					}
+					var types=[];
+					var history=player.getHistory("useCard");
+					for(var i=0;i<history.length;i++){
+						if(!types.contains(get.type(history[i].card,"trick"))) types.push(get.type(history[i].card,"trick"));
+					}
+					if(types.length) player.draw(types.length);
+				},
+				ai:{
+					order:1,
+					result:{
+						player:function(player){
+							var types=[];
+							var history=player.getHistory("useCard");
+							for(var i=0;i<history.length;i++){
+								if(!types.contains(get.type(history[i].card,"trick"))) types.push(get.type(history[i].card,"trick"));
+							}
+							return types.length-Math.min(player.countCards("he",function(card){
+								return lib.filter.cardDiscardable(card,player)&&get.color(card)=="red";
+							}),player.countCards("he",function(card){
+								return lib.filter.cardDiscardable(card,player)&&get.color(card)=="black";
+							}));
+						}
+					}
+				}
+			}
 		},
 		dynamicTranslate:{
 		},
@@ -3263,6 +3868,12 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			old_sst_ken:"旧肯",
 			old_ymk_claude:"旧库罗德",
 			old_sst_donkey_kong:"旧森喜刚",
+			old_sst_dark_samus:"旧黑暗萨姆斯",
+			ymk_577:"方块君",
+			old_sst_richter:"旧里希特",
+			old_sst_ryu:"旧隆",
+			//Character ab.
+			old_sst_dark_samus_ab:"黑暗萨姆斯",
 			//Identity mode skill
 			old_sst_juezhan:"绝战",
 			old_sst_juezhan_info:"锁定技，你于出牌阶段可以额外使用X张【杀】，你的攻击距离+X。（X为你已损失的体力值）",
@@ -3286,23 +3897,38 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			old_sst_baochui2:"爆锤",
 			old_sst_baochui3:"爆锤",
 			old_sst_baochui_info:"弃牌阶段，你可以将你弃置的牌置于你的武将牌上。当你需要使用【杀】时，你可以将你武将牌上的所有牌视为伤害为X的【杀】使用。（X为此杀对应的实体牌数量且至多为3）",
-			//Character Sort
-			/*
-			old_sst_64:"64",
-			old_sst_melee:"Melee",
-			old_sst_brawl:"Brawl",
-			old_sst_4:"For WiiU/3DS",
-			old_sst_ultimate:"Ultimate",
-			old_sst_spirits:"命魂",
-			old_sst_players:"玩家",
-			old_sst_ymk:"Yumikohimi",
-			*/
+			old_sst_shunxing:"瞬形",
+			old_sst_shunxing1:"瞬形·摸牌",
+			old_sst_shunxing2:"瞬形·出牌",
+			old_sst_shunxing_info:"你可以跳过你的一个摸牌阶段，然后获得一名其他角色区域内的一张牌；你可以跳过你的一个出牌阶段，然后重铸任意张红色手牌。",
+			ymk_jiagou:"架构",
+			ymk_jiagou2:"架构",
+			ymk_jiagou3:"架构",
+			ymk_jiagou_info:"一名角色的准备阶段，你可将一张牌置于牌堆顶，令此角色本回合的手牌上限为此牌点数，然后若此牌点数不大于5，本回合结束阶段，你将手牌补至体力上限。",
+			ymk_jicai:"积材",
+			ymk_jicai2:"积材",
+			ymk_jicai_info:"锁定技，你跳过判定阶段，改为执行一个弃牌阶段；你跳过不以此法执行的弃牌阶段，改为执行一个摸牌阶段。",
+			old_sst_shengxi:"圣袭",
+			old_sst_shengxi1:"圣袭",
+			old_sst_shengxi2:"圣袭",
+			old_sst_shengxi2_backup:"圣袭",
+			old_sst_shengxi_info:"你使用牌指定目标时，或你成为牌的目标时，使用牌的角色可以明置任意名目标角色一张手牌；一名角色可以使用除其以外角色以此法明置的手牌。",
+			old_sst_xuelun:"血轮",
+			old_sst_xuelun_info:"锁定技，你死亡后，杀死你的角色获得〖圣袭〗〖血轮〗。",
+			old_sst_tandao:"探道",
+			old_sst_tandao_backup:"探道",
+			old_sst_tandao_info:"出牌阶段限一次，你可以选择一种颜色，展示手牌并弃置所有此颜色的牌，然后摸X张牌。（X为你本回合使用的牌类别数量）"
+			//Sort
 		},
 		translateEnglish:{
 			old_sst_samus:"Old Samus",
 			old_sst_ken:"Old Ken",
 			old_ymk_claude:"Old Claude",
-			old_sst_donkey_kong:"Old Donkey Kong"
+			old_sst_donkey_kong:"Old Donkey Kong",
+			old_sst_dark_samus:"Old Dark Samus",
+			ymk_577:"577",
+			old_sst_richter:"Old Richter",
+			old_sst_ryu:"Old Ryu"
 		},
 		perfectPair:{
 			//LTK
@@ -3321,9 +3947,11 @@ game.import("character",function(lib,game,ui,get,ai,_status){
 			zhangliao:["zangba"],
 			ganning:["lingtong","xf_sufei"],
 			//SST
-            old_sst_ken:["sst_ryu"],
-			old_ymk_claude:["sst_byleth_male","sst_byleth_female"],
-			old_sst_donkey_kong:["sst_mario"],
+            old_sst_ken:["sst_ken","sst_ryu","old_sst_ryu"],
+			old_ymk_claude:["sst_claude","sst_byleth_male","sst_byleth_female"],
+			old_sst_donkey_kong:["sst_donkey_kong","sst_mario"],
+			old_sst_richter:["sst_richter","sst_simon"],
+			old_sst_ryu:["sst_ryu","sst_ken"]
 		},
 	};
 	return sst_old;

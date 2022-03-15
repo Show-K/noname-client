@@ -486,7 +486,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						if(player==game.zhu){
 							player.addSkill(game.zhuSkill);
 						}
-						else player.addSkill(['binglin_shaxue','binglin_neihong']);
+						else player.addSkill('binglin_neihong');
 					}
 					game.zhu.hp++;
 					game.zhu.maxHp++;
@@ -1809,10 +1809,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			zhuSkill_xiangyang:'襄阳',
 			zhuSkill_xiangyang_info:'回合结束时，你可获得一个额外的出牌阶段或摸牌阶段。',
 			zhuSkill_jiangling:'江陵',
-			zhuSkill_jiangling_info:'当你使用【杀】或普通锦囊牌选择唯一目标时，你可为此牌增加一个目标（该目标不可响应此牌）。',
+			zhuSkill_jiangling0:'江陵',
+			zhuSkill_jiangling1:'江陵',
+			zhuSkill_jiangling_info:'出牌阶段开始时，你可选择一项：①本阶段内使用【杀】或普通锦囊牌选择唯一目标时可增加一个目标。②本阶段内使用【杀】或普通锦囊牌无次数限制。',
 			zhuSkill_fancheng:'樊城',
-			zhuSkill_fancheng2:'樊城',
-			zhuSkill_fancheng_info:'限定技，出牌阶段，你可摸X张牌获得如下效果直到回合结束：每回合限X次，当你造成伤害时，此伤害+1（X为游戏轮数）。',
+			zhuSkill_fancheng0:'樊城',
+			zhuSkill_fancheng1:'樊城',
+			zhuSkill_fancheng_info:'限定技，出牌阶段，你可选择获得一项效果直到游戏结束：①因执行【杀】的效果而对其他角色造成的伤害+1。②对其他角色造成的渠道不为【杀】的伤害+1。',
 			binglin_shaxue:'歃血',
 			binglin_shaxue_info:'锁定技，每局游戏限三次，当你受到队友造成的伤害时，你防止此伤害。',
 			binglin_neihong:'内讧',
@@ -1952,6 +1955,21 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				},
 			},
 			zhuSkill_jiangling:{
+				trigger:{player:'phaseUseBegin'},
+				direct:true,
+				charlotte:true,
+				content:function(){
+					'step 0'
+					player.chooseControl('加目标','多刀','取消').set('prompt',get.prompt2('zhuSkill_jiangling')).set('ai',()=>(3-game.countPlayer()));
+					'step 1'
+					if(result.index<2){
+						player.logSkill('zhuSkill_jiangling');
+						player.addTempSkill('zhuSkill_jiangling'+result.index,'phaseUseAfter');
+					game.log(player,'选择了','#y'+result.control,'的效果');
+					}
+				},
+			},
+			zhuSkill_jiangling0:{
 				trigger:{player:'useCard2'},
 				direct:true,
 				charlotte:true,
@@ -1994,10 +2012,18 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						player.logSkill('zhuSkill_jiangling',event.targets);
 						if(trigger.targets.contains(event.targets[0])) trigger.targets.removeArray(event.targets);
 						else{
-							trigger.directHit.addArray(event.targets);
+							//trigger.directHit.addArray(event.targets);
 							trigger.targets.addArray(event.targets);
 						}
 					}
+				},
+			},
+			zhuSkill_jiangling1:{
+				charlotte:true,
+				mod:{
+					cardUsable:function(card,player){
+						if(card.name=='sha'||get.type(card)=='trick') return Infinity;
+					},
 				},
 			},
 			zhuSkill_fancheng:{
@@ -2007,24 +2033,47 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				skillAnimation:true,
 				animationColor:'gray',
 				content:function(){
-					player.draw(game.roundNumber);
+					'step 0'
 					player.awakenSkill('zhuSkill_fancheng');
-					player.addTempSkill('zhuSkill_fancheng2');
+					player.chooseControl('杀','其他').set('prompt','选择要强化的伤害').set('ai',()=>get.rand(0,1));
+					'step 1'
+					player.addSkill('zhuSkill_fancheng'+result.index);
+					game.log(player,'本局游戏内',result.index?'#g杀以外':'#y杀','的伤害+1');
+				},
+				ai:{
+					order:100,
+					result:{player:100},
 				},
 			},
-			zhuSkill_fancheng2:{
+			zhuSkill_fancheng0:{
 				trigger:{source:'damageBegin2'},
 				forced:true,
 				charlotte:true,
-				onremove:true,
 				filter:function(event,player){
-					return player.countMark('zhuSkill_fancheng2')<game.roundNumber;
+					return event.player!=player&&event.card&&event.card.name=='sha'&&event.getParent().name=='sha';
 				},
 				logTarget:'player',
 				content:function(){
 					trigger.num++;
-					player.addMark('zhuSkill_fancheng2',1,false);
 				},
+				mark:true,
+				marktext:'殺',
+				intro:{content:'因执行【杀】的效果对其他角色造成的伤害+1'},
+			},
+			zhuSkill_fancheng1:{
+				trigger:{source:'damageBegin2'},
+				forced:true,
+				charlotte:true,
+				filter:function(event,player){
+					return event.player!=player&&(!event.card||event.card.name!='sha');
+				},
+				logTarget:'player',
+				content:function(){
+					trigger.num++;
+				},
+				mark:true,
+				marktext:'谋',
+				intro:{content:'不因【杀】对其他角色造成的伤害+1'},
 			},
 			binglin_shaxue:{
 				init:function(player,skill){
@@ -2955,32 +3004,34 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 		},
 		characterOnline:{
-			wei:[
-				're_caocao','re_guojia','re_simayi','re_xiahoudun','xuzhu','re_zhangliao','re_zhenji','ol_xiahouyuan','dianwei','re_xunyu','zhanghe',
-				'yujin_yujin','re_caozhang','wangyi','guohuai','hanhaoshihuan','chenqun','re_caoxiu','guohuanghou','sunziliufang','xunyou','xinxianying',
-				'sp_caiwenji','caoang','caochun','caohong','sp_caoren','chenlin','sp_jiaxu','litong','sp_pangde','simalang','wanglang',
-				'kuailiangkuaiyue','wangji','sp_simazhao','sp_wangyuanji','yuejin','zangba','xinpi','liuye','simashi','zhuling','duji','caoanmin',
+			sst_light:[
+				'sst_mario','sst_link','sst_yoshi','sst_villager','sst_zelda','sst_dr_mario',
+				'sst_palutena','sst_marth','sst_rosalina','sst_zero_suit_samus','sst_luigi','sst_peach',
+				'sst_byleth_female','sst_byleth_male','sst_samus','sst_terry','sst_kirby','sst_donkey_kong',
+				'sst_pokemon_trainer_red','sst_isabelle','sst_daisy','sst_little_mac','sst_ryu','sst_ken',
+				'sst_ike','sst_toon_link','sst_mega_man','sst_captain_falcon','sst_jigglypuff','sst_pichu',
+				'sst_steve','sst_sonic','sst_hero','sst_fox','sst_alex','sst_min_min','sst_pikachu',
+				'sst_falco','sst_pyra_mythra','sst_pokemon_trainer_leaf','sst_sora','sst_pac_man',
+				//----------------
+				'sst_duck_hunt','sst_ness','sst_chrom','sst_lucina','sst_robin'
 			],
-			shu:[
-				're_guanyu','re_huangyueying','re_liubei','re_machao','re_zhangfei','zhaoyun','re_huangzhong','re_weiyan','re_pangtong','ol_sp_zhugeliang',
-				're_menghuo','re_zhurong','re_fazheng','re_masu','guanxingzhangbao','xin_liaohua','old_madai','re_jianyong','wuyi','zhangsong','zhoucang',
-				'liuchen','xiahoushi','re_zhangyi','liyan','guanyinping','guansuo','mayunlu','mazhong','mizhu','sunqian','xiahouba','zhangxingcai',
-				'wangping','yanyan','chendao','ganfuren','re_maliang','dengzhi','lifeng','zhangyì',
+			sst_darkness:[
+				'sst_wario','sst_ganondorf','sst_bowser','sst_ridley','sst_dark_samus','sst_mr_game_watch',
+				'sst_simon','sst_incineroar','sst_greninja','sst_king_k_rool','sst_richter','sst_meta_knight',
+				'sst_bowser_jr','sst_koopalings','sst_sheik','sst_wolf','sst_young_link','sst_joker',
+				'sst_snake','sst_lucario','sst_king_dedede','sst_enderman','sst_sephiroth','sst_kazuya',
 			],
-			wu:[
-				're_ganning','re_huanggai','re_sunquan','re_sunshangxiang','re_zhouyu','old_zhoutai','re_xiaoqiao','re_taishici','sunjian','re_zhangzhang',
-				're_lingtong','re_wuguotai','xin_xusheng','re_bulianshi','re_chengpu','handang','xin_panzhangmazhong','xin_zhuran','guyong','zhuhuan','cenhun','sundeng','xuezong',
-				'daxiaoqiao','heqi','kanze','sunhao','re_sunluyu','sunshao','zhugejin','zumao','dingfeng','sunliang','zhoufei',
-				'weiwenzhugezhi','xf_sufei','xugong','lingcao','sunru','lvdai','panjun','yanjun','zhoufang',
+			sst_spirit:[
+				'sst_dark_link','sst_sans','sst_waluigi','sst_master_hand','sst_spring_man','sst_rex',
+				'sst_cuphead_mugman','sst_krystal','sst_kyo_kusanagi','sst_pauline','sst_dr_wily','sst_9_volt_18_volt',
+				'sst_kraid',
+				//----------------
+				'sst_geno'
 			],
-			qun:[
-				're_diaochan','re_gongsunzan','re_huatuo','re_huaxiong','re_lvbu','ol_pangde','re_yanwen','jiaxu','gaoshun','xin_liubiao','chengong',
-				're_gongsunyuan','guotufengji','dongbai','fuwan','liuxie','sp_machao','tadun','yanbaihu','yuanshu','zhangbao','yl_luzhi','huangfusong','sp_ganning','huangjinleishi',
-				're_panfeng','guosi','sp_liuqi','mangyachang','gaolan','lvkuanglvxiang','xunchen','sp_zhanghe','re_hansui','re_hejin','zhujun','ol_dingyuan','hanfu','wangrong',
-				'dongcheng','gongsunkang','hucheer','sp_sufei','yj_xuhuang','yj_zhanghe','yj_zhangliao','liuyao','wangcan','sp_taishici','caimao','jiling',
-			],
-			key:[
-				'sp_key_yuri','key_akane','key_akiko','key_ao','key_harukakanata','key_haruko','key_hinata','key_kengo','key_komari','key_kotori','key_kyoko','key_nagisa','key_noda','key_rei','key_rin','key_rumi','key_ryoichi','key_sasami','key_shiorimiyuki','key_shiroha','key_shizuku','key_tomoya','key_tsumugi','key_umi','key_yoshino','key_youta','key_yukine','key_nao','key_misuzu',
+			sst_reality:[
+				'sst_massy','sst_mario_not_mary','sst_yumikohimi','sst_haine','sst_oc','sst_mr_8',
+				'sst_kyuukou','sst_windier','sst_rentianshu','sst_srf','sst_miumiu','sst_ma',
+				'sst_feiji',
 			],
 		},
 		online_cardPile:[
