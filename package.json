@@ -43,7 +43,6 @@
 			"shortcutName": "大乱桌斗",
 			"uninstallDisplayName": "大乱桌斗",
 			"artifactName": "大乱桌斗安装程序v1.40.exe",
-			"deleteAppDataOnUninstall": true,
 			"language": "2052",
 			"unicode": true
 		}
