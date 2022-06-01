@@ -40,8 +40,8 @@ async function checkForUpdate(url) {
 			if(err) alert(err);
 			else {
 				let updateContent = new BrowserWindow({
-					width: 800,
-					height: 600,
+					width: 850,
+					height: 650,
 					title: '大乱桌斗-更新内容',
 					icon: path.join(__dirname, '..' ,'super_smash_tabletop.ico'),
 					autoHideMenuBar: true,
@@ -249,18 +249,19 @@ if (window.indexedDB) {
 	};
     request.onsuccess = function (e) {
         const db = e.target.result;
-		if (!db.objectStoreNames.contains('config')) return;
+        if (!db.objectStoreNames.contains('config')) return;
         const store = db.transaction(['config'], 'readwrite').objectStore('config');
         store.get('extensions').onsuccess = function (e) {
             const extensions = e.target.result;
+            const config = db.transaction(['config'], 'readwrite').objectStore('config');
             if (!Array.isArray(extensions) || extensions.length == 0) {
-                db.transaction(['config'], 'readwrite').objectStore('config').put(['拖拽读取', '在线更新', '应用配置'], 'extensions');
+                config.put(['应用配置', '拖拽读取', '在线更新'], 'extensions');
             }
             if (extensions.includes('\u6982\u5ff5\u6b66\u5c06')) {
-                db.transaction(['config'], 'readwrite').objectStore('config').put(false, "extension_\u6982\u5ff5\u6b66\u5c06_enable");
+                config.put(false, "extension_\u6982\u5ff5\u6b66\u5c06_enable");
             }
             if (extensions.includes('\u5047\u88c5\u65e0\u654c')) {
-                db.transaction(['config'], 'readwrite').objectStore('config').put(false, "extension_\u5047\u88c5\u65e0\u654c_enable");
+                config.put(false, "extension_\u5047\u88c5\u65e0\u654c_enable");
             }
         };
     };
@@ -406,7 +407,7 @@ var Menus = [{
 		label: '版权声明',
 		click: () => {
 			dialog.showMessageBoxSync(thisWindow, {
-				message: '【大乱桌斗】及【无名杀】属于个人开发软件且【完全免费】。如非法倒卖用于牟利将承担法律责任 开发团队将追究到底',
+				message: '【大乱桌斗】（Show-K）及【无名杀】（水乎）属于个人开发软件且【完全免费】。如非法倒卖用于牟利将承担法律责任 开发团队将追究到底',
 				type: 'info',
 				title: '版权声明',
 				icon: path.join(__dirname, '..', 'super_smash_tabletop.ico'),
@@ -416,11 +417,15 @@ var Menus = [{
 }, {
 	label: '反馈',
 	submenu: [{
-		label: '通过QQ联系本应用作者',
+		label: '通过QQ联系本应用作者（诗笺）',
 		click: () => {
 			shell.openExternal('tencent://message/?uin=2954700422');
 		},
-	}],
+	}, {
+        label: '无名杀项目作者： 水乎',
+    }, {
+        label: '无名杀现任更新者： 苏婆玛丽奥',
+    }],
 }];
 
 Menu.setApplicationMenu(Menu.buildFromTemplate(Menus));
