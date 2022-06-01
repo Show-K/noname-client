@@ -179,10 +179,6 @@
 	display: block !important;
 }
 
-.player.connect>div:not(.avatar):not(.name):not(.nameol):not(.hp):not(.room):not(.gaming):not(.identity).primary-avatar {
-	display: block !important;
-}
-
 .player>.camp-wrap div {
 	transition: none;
 }
@@ -201,7 +197,7 @@
 	background: linear-gradient(to bottom, rgb(154, 148, 122), rgb(74, 72, 57));
 }
 
-.player>.camp-wrap[data-camp='sst_darkness']>.camp-back {
+.player>.camp-wrap[data-camp='sst_dark']>.camp-back {
 	background: linear-gradient(to bottom, rgb(45, 103, 153), rgb(19, 45, 78));
 }
 
@@ -211,6 +207,10 @@
 
 .player>.camp-wrap[data-camp='sst_reality']>.camp-back {
 	background: linear-gradient(to bottom, rgb(153, 28, 34), rgb(57, 12, 17));
+}
+
+.player>.camp-wrap[data-camp='sst_reality_shen']>.camp-back {
+	background: linear-gradient(to bottom, rgb(97,87,15), rgb(65,50,9), rgb(67,52,9));
 }
 
 .player>.camp-wrap[data-camp='sst_smash']>.camp-back {
@@ -286,7 +286,7 @@
 	text-shadow: 0 0 5px rgb(170,170,170), 0 0 10px rgb(118,118,118), 0 0 15px rgb(118,118,118);
 }
 
-.player>.camp-wrap[data-camp='sst_darkness']>.camp-name {
+.player>.camp-wrap[data-camp='sst_dark']>.camp-name {
 	text-shadow: 0 0 5px rgb(50, 50, 255), 0 0 10px rgb(120, 120, 255), 0 0 15px rgb(100, 100, 255);
 }
 
@@ -296,6 +296,10 @@
 
 .player>.camp-wrap[data-camp='sst_reality']>.camp-name {
 	text-shadow: 0 0 5px rgb(255,100,100), 0 0 10px rgb(255,50,50), 0 0 15px rgb(255,50,50);
+}
+
+.player>.camp-wrap[data-camp='sst_reality_shen']>.camp-name {
+	text-shadow: 0 0 5px rgb(255, 200, 0), 0 0 10px rgb(255, 200, 0), 0 0 15px rgb(255, 200, 0);
 }
 
 .player>.camp-wrap[data-camp='sst_smash']>.camp-name {
@@ -410,7 +414,7 @@
 	opacity: 1 !important;
 }
 
-.player>.hp-wrap>.hp>div {
+.player>.hp-wrap>.hp>div:not(.shield) {
     position: static;
 	margin-top: 3px;
 	width: 12px;
@@ -440,6 +444,10 @@
 	border-radius: 8px;
 	transition-property: opacity, transform;
 	z-index: 61;
+}
+
+.player.connect>div:not(.avatar):not(.name):not(.nameol):not(.hp):not(.room):not(.gaming):not(.identity).primary-avatar {
+	display: block !important;
 }
 
 .player.fullskin2>.primary-avatar {

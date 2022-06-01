@@ -1427,6 +1427,23 @@ div:not(.handcards)>.card>.info>span,
 	-webkit-animation: cardflip 0.3s ease-out;
 	-webkit-animation-fill-mode: none;
 }
+/*New add*/
+.player .playerchoosetousefinish {
+	animation: game_start 0.5s;
+	-webkit-animation: game_start 0.5s;
+	font-family: 'fzhtk';
+	font-size: 32px;
+	padding-top: 16%;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 4;
+	color: white;
+	text-align: center;
+	text-shadow: black 0 0 4px;
+	pointer-events: none;
+}
+/*New add end*/
 .player .playerjiu {
 	animation: game_start 0.5s;
 	-webkit-animation: game_start 0.5s;
@@ -1983,6 +2000,10 @@ div:not(.handcards)>.card>.info>span,
 	border: 1px solid rgba(39, 79, 7, 1);
 	box-shadow: rgba(0,0,0,0.2) 1px -1px 2px inset, rgba(255,255,255,0.15) -1px 1px 5px inset;
 }
+.button.newstyle>.hp>.shield{
+	background: rgba(63, 119, 173,1);
+	border: 1px solid rgba(31, 82, 131, 1);
+}
 .button.newstyle>.hp>div.text{
 	background: none !important;
 	box-shadow: none !important;
@@ -2389,6 +2410,7 @@ div:not(.handcards)>.card>.info>span,
 #window>.damage {
 	transform: scale(2);
 	font-size: 120px;
+	line-height: 50%;
 }
 .damage.normal-font {
 	font-family: fzhtk;
@@ -2618,31 +2640,35 @@ div:not(.handcards)>.card>.info>span,
 	box-shadow: 0px 1px 1px rgba(0,0,0,0.5);
 	border: 1px solid #fff;
 }
-.hp[data-condition="high"]>div:not(.lost) {
+.button .hp>.shield {
+	background: rgba(63, 119, 173,1);
+	border: 1px solid rgba(63, 119, 173, 1);
+}
+.hp[data-condition="high"]>div:not(.lost):not(.shield) {
 	background: rgba(57, 123, 4,1);
 	border: 1px solid rgba(39, 79, 7, 1);
 }
-.hp[data-condition="mid"]>div:not(.lost) {
+.hp[data-condition="mid"]>div:not(.lost):not(.shield) {
 	background: rgba(166, 140, 6,1);
 	border: 1px solid rgba(79, 64, 7, 1);
 }
-.hp[data-condition="low"]>div:not(.lost) {
+.hp[data-condition="low"]>div:not(.lost):not(.shield) {
 	background: rgba(148, 27, 27,1);
 	border: 1px solid rgba(79, 7, 7, 1);
 }
-.hp.actcount>div:not(.lost) {
+.hp.actcount>div:not(.lost):not(.shield) {
 	background: rgba(63, 119, 173,1);
 	border: 1px solid rgba(31, 82, 131, 1);
 }
-.treasure>.hp>div:not(.lost) {
+.treasure>.hp>div:not(.lost):not(.shield) {
 	background: rgba(63, 119, 173,1) !important;
 	border: 1px solid rgba(31, 82, 131, 1) !important;
 }
-.hp.actcount>div.overflow:not(.lost) {
+.hp.actcount>div.overflow:not(.lost):not(.shield) {
 	background: rgb(154, 154, 154);
 	border: 1px solid rgb(109, 109, 109);
 }
-.hp.actcount.overflow2>div.overflow:not(.lost) {
+.hp.actcount.overflow2>div.overflow:not(.lost):not(.shield) {
 	background: rgb(173, 129, 63);
 	border: 1px solid rgb(131, 109, 31);
 }
@@ -2652,11 +2678,16 @@ div:not(.handcards)>.card>.info>span,
 	filter: grayscale(1);
 	-webkit-filter: grayscale(1);
 }
+
 .hp>.lost {
 	background: rgba(57, 123, 4,1);
 	border: 1px solid rgba(39, 79, 7, 1);
 	filter: grayscale(1);
 	-webkit-filter: grayscale(1);
+}
+.hp>.shield {
+	background: rgba(63, 119, 173,1);
+	border: 1px solid rgba(31, 82, 131, 1);
 }
 .hp.text[data-condition="low"],
 .hp.textstyle[data-condition="low"] {
@@ -2761,7 +2792,7 @@ div:not(.handcards)>.card>.info>span,
 	background-image: radial-gradient(circle at bottom left, rgb(255, 218, 71), rgb(224, 191, 62))
 }
 
-.identitycircle > div > div[data-color='sst_darkness'] {
+.identitycircle > div > div[data-color='sst_dark'] {
 	background-image: radial-gradient(circle at bottom left, rgb(157, 198, 255), rgb(117, 147, 189))
 }
 
@@ -4064,7 +4095,7 @@ span[data-nature='woodmm'] {
 .player .identity[data-color="bZhu"],
 .player .identity[data-color="bZhong"],
 .player .identity[data-color="bNei"],
-.player .identity[data-color="sst_darkness"],
+.player .identity[data-color="sst_dark"],
 .player .identity[data-color="falsezhu"],
 .player .identity[data-color="friend"],
 .water,

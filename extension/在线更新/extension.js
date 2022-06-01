@@ -9,7 +9,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 	}
 
 	/**
-	 * 判断是否能进行更新
+	 * 判断是否能进行更新 
 	 * @returns { string | true }
 	 */
 	function canUpdate() {
@@ -122,7 +122,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 		}
 
         if (typeof game.updateErrors == 'number' && game.updateErrors >= 5) {
-            alert('检测到获取更新失败次数过多，建议您更换大乱桌斗的更新源');
+            alert('检测到获取更新失败次数过多，建议您更换无名杀的更新源');
             game.updateErrors = 0;
         }
 	};
@@ -246,7 +246,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     item.checked = game.getExtensionConfig('在线更新', configName);
                     item.onchange = () => {
                         game.saveConfig(configName, item.checked);
-                        assetConfigFun[configName].onclick(item.checked);
+						assetConfigFun[configName] && assetConfigFun[configName].onclick(item.checked);
 					}
                 };
 
@@ -448,21 +448,23 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 					else console.error(e);
 				}
 				
-				fetch(url)
-					.then(response => {
-						const { ok } = response;
-						if (!ok) {
-							throw response;
-						} else {
-							return response.arrayBuffer();
-						}
-					})
-					.then(arrayBuffer => {
-						// 写入文件
-						//if (!arrayBuffer) return;
-						// 先创建指定文件夹
-						game.ensureDirectory(path, () => {
-			                if (lib.node && lib.node.fs) {
+				if (window.FileTransfer) {
+					let fileTransfer = new FileTransfer();
+					fileTransfer.download(encodeURI(url), encodeURI(lib.assetURL + path + '/' + name), success, error);
+				} else {
+					fetch(url)
+						.then(response => {
+							const { ok } = response;
+							if (!ok) {
+								throw response;
+							} else {
+								return response.arrayBuffer();
+							}
+						})
+						.then(arrayBuffer => {
+							// 写入文件
+							// 先创建指定文件夹
+							game.ensureDirectory(path, () => {
 								const filePath = __dirname + '/' + path + '/' + name;
 								// 如果是个文件夹，就退出
 								if (lib.node.fs.existsSync(filePath)) {
@@ -475,48 +477,23 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 									}
 								}
 								lib.node.fs.writeFile(filePath, Buffer.from(arrayBuffer), null, e => {
-			                        if (e) {
-			                            error(e, 'writeFile');
-			                        } else {
-			                            success();
-			                        }
-			                    });
-			                } else if (typeof window.resolveLocalFileSystemURL == 'function') {
-			                    window.resolveLocalFileSystemURL(lib.assetURL + path, 
-									/** @param { DirectoryEntry } entry */
-									entry => {
-										function write() {
-											entry.getFile(name, { create: true }, fileEntry => {
-												fileEntry.createWriter(fileWriter => {
-													fileWriter.onwriteend = () => {
-														success();
-													};
-													fileWriter.write(arrayBuffer);
-												}, e => {
-													error(e, 'writeFile');
-												});
-											});
-										};
-										// 先判断要下载的是否是个文件夹
-										// 如果是，创建了就直接成功吧
-										entry.getDirectory(name, { create: false }, entry => {
-											console.error(`${path + '/' + name}是个文件夹`);
-											lib.config.brokenFile.remove(path + '/' + name);
-											game.saveConfigValue('brokenFile');
-											error(path + '/' + name, 'isDirectory');
-										}, write);
-			                    });
-			                }
-			            });
-					})
-					.catch(e => {
-						if (e instanceof Response) {
-							const { status, statusText } = e;
-							error(status, statusText);
-						} else {
-							error(e);
-						}
-					});
+									if (e) {
+										error(e, 'writeFile');
+									} else {
+										success();
+									}
+								});
+							});
+						})
+						.catch(e => {
+							if (e instanceof Response) {
+								const { status, statusText } = e;
+								error(status, statusText);
+							} else {
+								error(e);
+							}
+						});
+				}
 			};
 			
 			game.shijianDownloadFile = (current, onsuccess, onerror) => {
@@ -525,7 +502,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				if( (alertStr = canUpdate()) !== true ) {
 					return alert(alertStr);
 				}
-				// 重新下载
+				// 500ms后重新下载
 				let reload = (err, statusText) => {
 					onerror(current, err, statusText);
 					setTimeout(() => {
@@ -551,13 +528,12 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 						switch(e) {
 							case 404 :
 								game.print("文件不存在，不需要重新下载");
-								console.log({current, e, statusText: "文件不存在，不需要重新下载"});
+								console.log(`${current}不存在，不需要重新下载`);
 								lib.config.brokenFile.remove(current);
 								game.saveConfigValue('brokenFile');
 								return onsuccess(current, true);
 							case 429 :
 								game.print("请求太多，稍后重新下载");
-								//console.error({current, e, statusText: "请求太多，稍后重新下载"});
 								onerror(current, e, "请求太多，请稍后重新下载");
 								break;
 							default:
@@ -567,14 +543,23 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 						}
 					} else if (statusText === 'writeFile') {
 						game.print("写入文件失败");
-						//console.error(current, '写入文件失败');
 						onerror(current, e, '写入文件失败');
 					} else if (statusText === 'isDirectory') {
-						console.log({ current, e, statusText: "文件是个文件夹，不需要重新下载" });
+						console.log(`${current}是个文件夹，不需要重新下载`);
+						return onsuccess(current, true);
+					} else if (typeof e.exception == 'string' && e.exception.startsWith('Unable to resolve host')) {
+						console.log('网址解析错误,下载不了');
+						return onsuccess(current, true);
+					} else if (e.http_status === null) {
+						console.log('http码为null');
+						return onsuccess(current, true);
+					} else if (e.http_status == 404 || e.http_status == '404') {
+						console.log('指定网址中没有这个文件: ' + current);
+						lib.config.brokenFile.remove(current);
+						game.saveConfigValue('brokenFile');
 						return onsuccess(current, true);
 					} else {
 						game.print(e);
-						//console.error(current, e);
 						onerror(current, e, statusText);
 					}
 					reload(e, statusText);
@@ -606,9 +591,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 							onsuccess(current, bool);
 							//自调用
 							download();
-						}, (current, e, statusText) => {
-							onerror(current, e, statusText);
-						});
+						}, onerror);
 			
 					} else {
 						onfinish();
@@ -661,9 +644,11 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				const tip = ui.create.div(container, {
 					position: 'relative',
 					paddingTop: '8px',
-					fontSize: '20px'
+					fontSize: '20px',
+					width: '100%'
 				});
 				const file = ui.create.node('span', tip, '', fileName);
+				file.style.width = file.style.maxWidth = '100%';
 				ui.create.node('br', tip);
 				const index = ui.create.node('span', tip, '', value || '0');
 				ui.create.node('span', tip, '', '/');
@@ -675,9 +660,9 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				progress.setAttribute('value', value || '0');
 				progress.setAttribute('max', max);
 
-				//parent.getTitle = () => caption.innerText;
+				parent.getTitle = () => caption.innerText;
 				parent.setTitle = (title) => caption.innerText = title;
-				//parent.getFileName = () => file.innerText;
+				parent.getFileName = () => file.innerText;
 				parent.setFileName = (name) => file.innerText = name;
 				parent.getProgressValue = () => progress.value;
 				parent.setProgressValue = (value) => progress.value = index.innerText = value;
@@ -759,7 +744,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
             show_version: {
                 clear: true,
                 nopointer: true,
-                name: '扩展版本： v1.3SST',
+                name: '扩展版本： v1.32SST',
             },
             update_link_explain: {
                 clear: true,
@@ -1481,14 +1466,29 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				name: '检查图片素材(全部)',
                 onclick: assetConfigFun('assetImageFull')
 			},
+			address: {
+				clear: true,
+				nopointer: true,
+				name: `</br>
+					最新完整包下载地址1：
+					<a target='_self' href='https://hub.fastgit.org/Show-K/noname/archive/refs/heads/super-smash-tabletop.zip'><span style='text-decoration: underline;'>点击下载</span></a></br>
+					最新完整包下载地址2：
+					<a target='_self' href='https://hub.fastgit.xyz/Show-K/noname/archive/refs/heads/super-smash-tabletop.zip'><span style='text-decoration: underline;'>点击下载</span></a>
+				`,
+			}
 		},
 		help: {},
 		package: {
-			intro: "<span style='font-weight: bold;'>※本扩展不与【概念武将】和【假装无敌】扩展兼容</span></br>安装本扩展后会自动覆盖【自动检测更新】的功能，不论扩展是否开启</br>点击按钮即可在线更新，文件下载失败会自动重新下载。目前已经覆盖了游戏自带的更新按钮</br><span style='color:red'>※请不要在更新时关闭游戏或主动断网，否则后果自负</span></br>最新完整包下载地址1：<a target='_self' href='https://hub.fastgit.org/Show-K/noname/archive/refs/heads/super-smash-tabletop.zip'><span style='text-decoration: underline;'>点击下载</span></a></br>最新完整包下载地址2：<a target='_self' href='https://hub.fastgit.xyz/Show-K/noname/archive/refs/heads/super-smash-tabletop.zip'><span style='text-decoration: underline;'>点击下载</span></a>",
-			author: "诗笺",
+			intro: `
+				<span style='font-weight: bold;'>※本扩展不与【概念武将】和【假装无敌】扩展兼容</span></br>
+				安装本扩展后会自动覆盖【自动检测更新】的功能，不论扩展是否开启</br>
+				点击按钮即可在线更新，文件下载失败会自动重新下载。目前已经覆盖了游戏自带的更新按钮</br>
+				<span style='color:red'>※请不要在更新时关闭游戏或主动断网，否则后果自负</span></br>
+			`,
+			author: "原作者：诗笺<br>修改者（未经允许）：Show-K",
 			diskURL: "",
 			forumURL: "",
-			version: "1.3SST",
+			version: "1.32SST",
 		},
 	}
 });

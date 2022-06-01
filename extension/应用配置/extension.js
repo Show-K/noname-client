@@ -46,10 +46,10 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 			//链接：nonameSKill:?extensionName=全能搜索
 			delete lib.extensionMenu.extension_应用配置.delete;
 			
-			//让无名杀控制台内的文字可选中
+			//让大乱桌斗控制台内的文字可选中
 			const fullsize = document.createElement('style');
 			fullsize.innerText = `
-			/* 让无名杀控制台内的文字可选中 */
+			/* 让大乱桌斗控制台内的文字可选中 */
 			.fullsize {
 				user-select: text;
 				-webkit-user-select: text;
@@ -61,9 +61,9 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 			if(lib.config.extension_应用配置_replaceAlert) {
 				window.alert = (message) => {
 					dialog.showMessageBoxSync(remote.getCurrentWindow(), {
-						title: '无名杀',
+						title: '大乱桌斗',
 						message: message !== undefined ? (message + '') : '',
-						icon: path.join(__dirname, 'noname.ico'),
+						icon: path.join(__dirname, 'super_smash_tabletop.ico'),
 						buttons: ['确定'],
 						noLink: true
 					});
@@ -74,9 +74,9 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 			if(lib.config.extension_应用配置_replaceConfirm) {
 				window.confirm = (message) => {
 					const result = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
-						title: '无名杀',
+						title: '大乱桌斗',
 						message: message !== undefined ? (message + '') : '',
-						icon: path.join(__dirname, 'noname.ico'),
+						icon: path.join(__dirname, 'super_smash_tabletop.ico'),
 						buttons: ['确定', '取消'],
 						noLink: true,
 						cancelId: 1,

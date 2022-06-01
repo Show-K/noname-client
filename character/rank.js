@@ -28,7 +28,6 @@ window.noname_character_rank={
 			"sst_palutena",
 			"sst_rosalina",
 			"sst_zero_suit_samus",
-			"sst_luigi",
 			"sst_peach",
 			"sst_byleth_female",
 			"sst_byleth_male",
@@ -56,9 +55,7 @@ window.noname_character_rank={
 			"sst_corrin_female",
 			"ska_bowser",
 			"sst_ma",
-			"sst_min_min",
 			"sst_pikachu",
-			"sst_enderman",
 			"sst_sephiroth",
 			"sst_pokemon_trainer_leaf",
 			"sst_steve",
@@ -85,7 +82,10 @@ window.noname_character_rank={
 			"sst_pac_man",
 			"sst_chrom",
 			"sst_lucina",
-			"ymk_tianyi"
+			"ymk_tianyi",
+			"sst_olimar",
+			"sst_marioraz",
+			"sst_piranha_plant"
 		],
 		rare:[
 			"sst_mario",
@@ -150,7 +150,14 @@ window.noname_character_rank={
 			"sst_lucario",
 			"sst_kraid",
 			"sst_sora",
-			"sst_mewtwo"
+			"sst_mewtwo",
+			"sst_paipai",
+			"xsj_yu_narukami",
+			"sst_luigi",
+			"sst_min_min",
+			"ska_bandana_waddle_dee",
+			"sst_enderman",
+			"ska_magolor"
 		],
 		junk:[]
 	}

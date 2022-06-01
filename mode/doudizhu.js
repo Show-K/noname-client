@@ -216,10 +216,10 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					},game.roundNumber,ui.cardPile.childNodes.length,ui.cardPile.firstChild,game.bonusNum);
 					return;
 				}
-				game.broadcastAll(function(num1,num2,top){
-					if(ui.cardPileNumber) ui.cardPileNumber.innerHTML=num1+'轮 剩余牌: '+num2;
+				game.broadcastAll(function(num1,num2,num3,top){
+					if(ui.cardPileNumber) ui.cardPileNumber.innerHTML=num1+'轮 剩余牌: '+num2+' 弃牌堆: '+num3;
 					_status.pileTop=top;
-				},game.roundNumber,ui.cardPile.childNodes.length,ui.cardPile.firstChild);
+				},game.roundNumber,ui.cardPile.childNodes.length,ui.discardPile.childNodes.length,ui.cardPile.firstChild);
 			},
 			getRoomInfo:function(uiintro){
 				uiintro.add('<div class="text chat">双将模式：'+(lib.configOL.double_character?'开启':'关闭'));
@@ -3011,11 +3011,12 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				'sst_pokemon_trainer_red','sst_isabelle','sst_daisy','sst_little_mac','sst_ryu','sst_ken',
 				'sst_ike','sst_toon_link','sst_mega_man','sst_captain_falcon','sst_jigglypuff','sst_pichu',
 				'sst_steve','sst_sonic','sst_hero','sst_fox','sst_alex','sst_min_min','sst_pikachu',
-				'sst_falco','sst_pyra_mythra','sst_pokemon_trainer_leaf','sst_sora','sst_pac_man',
+				'sst_falco','sst_pyra_mythra','sst_pokemon_trainer_leaf','sst_sora','sst_pac_man',"sst_olimar",
 				//----------------
-				'sst_duck_hunt','sst_ness','sst_chrom','sst_lucina','sst_robin'
+				'sst_duck_hunt',
+				'sst_ness','sst_chrom','sst_lucina','sst_robin'
 			],
-			sst_darkness:[
+			sst_dark:[
 				'sst_wario','sst_ganondorf','sst_bowser','sst_ridley','sst_dark_samus','sst_mr_game_watch',
 				'sst_simon','sst_incineroar','sst_greninja','sst_king_k_rool','sst_richter','sst_meta_knight',
 				'sst_bowser_jr','sst_koopalings','sst_sheik','sst_wolf','sst_young_link','sst_joker',
@@ -3031,7 +3032,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			sst_reality:[
 				'sst_massy','sst_mario_not_mary','sst_yumikohimi','sst_haine','sst_oc','sst_mr_8',
 				'sst_kyuukou','sst_windier','sst_rentianshu','sst_srf','sst_miumiu','sst_ma',
-				'sst_feiji',
+				'sst_feiji',"sst_marioraz",
+				//----------------
+				"sst_paipai"
 			],
 		},
 		online_cardPile:[

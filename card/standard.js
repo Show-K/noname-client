@@ -81,7 +81,9 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				usable:1,
 				updateUsable:'phaseUse',
 				global:'icesha_skill',
-				range:{attack:1},
+				range:function(card,player,target){
+					return player.inRange(target);
+				},
 				selectTarget:1,
 				cardPrompt:function(card){
 					if(card.nature=='stab') return '出牌阶段，对你攻击范围内的一名角色使用。其须使用一张【闪】，且在此之后需弃置一张手牌（没有则不弃）。否则你对其造成1点伤害。';
@@ -122,7 +124,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						event.baseDamage++;
 						game.log(event.card,'的伤害值基数+1');
 					}
-					if(get.cardtag(event.card,'yingbian_gain')){
+					if(get.cardtag(card,'yingbian_gain')){
 						bool=true;
 						var cardx=event.respondTo;
 						if(cardx&&cardx[1]&&cardx[1].cards&&cardx[1].cards.filterInD('od').length) event.player.gain(cardx[1].cards.filterInD('od'),'gain2','log');
@@ -132,7 +134,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						event.directHit.addArray(game.players);
 						game.log(card,'不可被响应');
 					}
-					if(get.cardtag(event.card,'yingbian_draw')){
+					if(get.cardtag(card,'yingbian_draw')){
 						bool=true;
 						event.player.draw();
 					}
@@ -924,7 +926,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				yingbian_tags:['gain','hit','draw','remove','add'],
 				yingbian:function(event){
 					var card=event.card,bool=false;
-					if(get.cardtag(event.card,'yingbian_gain')){
+					if(get.cardtag(card,'yingbian_gain')){
 						bool=true;
 						var cardx=event.respondTo;
 						if(cardx&&cardx[1]&&cardx[1].cards&&cardx[1].cards.filterInD('od').length) event.player.gain(cardx[1].cards.filterInD('od'),'gain2','log');
@@ -934,7 +936,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						event.directHit.addArray(game.players);
 						game.log(card,'不可被响应');
 					}
-					if(get.cardtag(event.card,'yingbian_draw')){
+					if(get.cardtag(card,'yingbian_draw')){
 						bool=true;
 						event.player.draw();
 					}
@@ -1016,7 +1018,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						event.baseDamage++;
 						game.log(event.card,'的伤害值基数+1');
 					}
-					if(get.cardtag(event.card,'yingbian_gain')){
+					if(get.cardtag(card,'yingbian_gain')){
 						bool=true;
 						var cardx=event.respondTo;
 						if(cardx&&cardx[1]&&cardx[1].cards&&cardx[1].cards.filterInD('od').length) event.player.gain(cardx[1].cards.filterInD('od'),'gain2','log');
@@ -1026,7 +1028,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						event.directHit.addArray(game.players);
 						game.log(card,'不可被响应');
 					}
-					if(get.cardtag(event.card,'yingbian_draw')){
+					if(get.cardtag(card,'yingbian_draw')){
 						bool=true;
 						event.player.draw();
 					}
@@ -1145,7 +1147,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						event.baseDamage++;
 						game.log(event.card,'的伤害值基数+1');
 					}
-					if(get.cardtag(event.card,'yingbian_gain')){
+					if(get.cardtag(card,'yingbian_gain')){
 						bool=true;
 						var cardx=event.respondTo;
 						if(cardx&&cardx[1]&&cardx[1].cards&&cardx[1].cards.filterInD('od').length) event.player.gain(cardx[1].cards.filterInD('od'),'gain2','log');
@@ -1155,7 +1157,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						event.directHit.addArray(game.players);
 						game.log(card,'不可被响应');
 					}
-					if(get.cardtag(event.card,'yingbian_draw')){
+					if(get.cardtag(card,'yingbian_draw')){
 						bool=true;
 						event.player.draw();
 					}
@@ -1315,7 +1317,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						event.baseDamage++;
 						game.log(event.card,'的伤害值基数+1');
 					}
-					if(get.cardtag(event.card,'yingbian_gain')){
+					if(get.cardtag(card,'yingbian_gain')){
 						bool=true;
 						var cardx=event.respondTo;
 						if(cardx&&cardx[1]&&cardx[1].cards&&cardx[1].cards.filterInD('od').length) event.player.gain(cardx[1].cards.filterInD('od'),'gain2','log');
@@ -1325,7 +1327,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						event.directHit.addArray(game.players);
 						game.log(card,'不可被响应');
 					}
-					if(get.cardtag(event.card,'yingbian_draw')){
+					if(get.cardtag(card,'yingbian_draw')){
 						bool=true;
 						event.player.draw();
 					}
@@ -1659,7 +1661,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				yingbian_tags:['gain','hit','draw','remove','add'],
 				yingbian:function(event){
 					var card=event.card,bool=false;
-					if(get.cardtag(event.card,'yingbian_gain')){
+					if(get.cardtag(card,'yingbian_gain')){
 						bool=true;
 						var cardx=event.respondTo;
 						if(cardx&&cardx[1]&&cardx[1].cards&&cardx[1].cards.filterInD('od').length) event.player.gain(cardx[1].cards.filterInD('od'),'gain2','log');
@@ -1669,7 +1671,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						event.directHit.addArray(game.players);
 						game.log(card,'不可被响应');
 					}
-					if(get.cardtag(event.card,'yingbian_draw')){
+					if(get.cardtag(card,'yingbian_draw')){
 						bool=true;
 						event.player.draw();
 					}
@@ -1831,31 +1833,30 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				fullskin:true,
 				type:'trick',
 				enable:true,
-				selectTarget:2,
 				singleCard:true,
-				multitarget:true,
 				targetprompt:['被借刀','出杀目标'],
+				complexSelect:true,
 				complexTarget:true,
 				multicheck:function(){
 					return game.hasPlayer(function(current){
 						if(current.getEquip(1)){
 							return game.hasPlayer(function(current2){
-								return lib.filter.filterTarget({name:'sha'},current,current2);
+								return current.inRange(current2)&&current.canUse('sha',current2,false);
 							})
 						}
 					});
 				},
 				filterTarget:function(card,player,target){
-					if(ui.selected.targets.length==0){
-						return (player!=target&&target.getCards('e',{subtype:'equip1'}).length);
-					}
-					else{
-						return lib.filter.filterTarget({name:'sha'},ui.selected.targets[0],target);
-					}
+					return player!=target&&target.getEquip(1)&&game.hasPlayer(function(current){
+						return target!=current&&target.inRange(current)&&target.canUse('sha',current,false);
+					});
+				},
+				filterAddedTarget:function(card,player,target,preTarget){
+					return target!=preTarget&&preTarget.inRange(target)&&preTarget.canUse('sha',target,false);
 				},
 				content:function(){
 					"step 0"
-					if(event.directHit||(!_status.connectMode&&lib.config.skip_shan&&!target.hasSha())){
+					if(event.directHit||!event.addedTarget||(!_status.connectMode&&lib.config.skip_shan&&!target.hasSha())){
 						event.directfalse=true;
 					}
 					else{
@@ -1929,7 +1930,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				yingbian_tags:['gain','hit','draw'],
 				yingbian:function(event){
 					var card=event.card,bool=false;
-					if(get.cardtag(event.card,'yingbian_gain')){
+					if(get.cardtag(card,'yingbian_gain')){
 						bool=true;
 						var cardx=event.respondTo;
 						if(cardx&&cardx[1]&&cardx[1].cards&&cardx[1].cards.filterInD('od').length) event.player.gain(cardx[1].cards.filterInD('od'),'gain2','log');
@@ -1939,7 +1940,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						event.directHit.addArray(game.players);
 						game.log(card,'不可被响应');
 					}
-					if(!bool||get.cardtag(event.card,'yingbian_draw')){
+					if(!bool||get.cardtag(card,'yingbian_draw')){
 						bool=true;
 						event.player.draw();
 					}
@@ -2016,6 +2017,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						value:8,
 					},
 					result:{
+						ignoreStatus:true,
 						target:function(player,target){
 							var num=target.hp-target.countCards('h')-2;
 							if(num>-1) return -0.01;
@@ -2023,7 +2025,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 							if(target.isTurnedOver()) num/=2;
 							var dist=get.distance(player,target,'absolute');
 							if(dist<1) dist=1;
-							return num/Math.sqrt(dist);
+							return num/Math.sqrt(dist)*get.threaten(target,player);
 						}
 					},
 					tag:{

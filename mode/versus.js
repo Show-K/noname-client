@@ -271,18 +271,20 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				game.chooseCharacterEndless();
 			}
 			else if(_status.mode=='siguo'){
-				var list=['sst_light','sst_light','sst_darkness','sst_darkness','sst_spirit','sst_spirit','sst_reality','sst_reality'].randomSort();
+				var list=['sst_light','sst_light','sst_dark','sst_dark','sst_spirit','sst_spirit','sst_reality','sst_reality'].randomSort();
 				for(var i=0;i<game.players.length;i++){
 					game.players[i].side=list[i];
 					game.players[i].identity=list[i];
 					game.players[i].setIdentity(list[i]);
 					game.players[i].node.identity.style.display='none';
 					game.players[i].getId();
+					/*
 					game.players[i].node.action.innerHTML='获即<br>胜将';
 					game.players[i].node.action.style.letterSpacing='0px';
 					game.players[i].node.action.style.lineHeight='22px';
 					game.players[i].node.action.style.top='3px';
 					game.players[i].node.action.style.right='3px';
+					*/
 				}
 				game.chooseCharacterSiguo();
 			}
@@ -602,7 +604,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					ui.arena.classList.add('choose-character');
 					'step 1'
 					var list={
-						sst_light:[],sst_darkness:[],sst_spirit:[],sst_reality:[]
+						sst_light:[],sst_dark:[],sst_spirit:[],sst_reality:[]
 					}
 					event.list=list;
 					for(var i in lib.character){
@@ -798,8 +800,8 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					}
 					game.me.init(result.links[0]);
 					event.list[game.me.side].remove(result.links[0]);
-					var added={sst_light:0,sst_darkness:0,sst_spirit:0,sst_reality:0};
-					var dualside={sst_light:[],sst_darkness:[],sst_spirit:[],sst_reality:[]};
+					var added={sst_light:0,sst_dark:0,sst_spirit:0,sst_reality:0};
+					var dualside={sst_light:[],sst_dark:[],sst_spirit:[],sst_reality:[]};
 					if(get.config('siguo_character')=='increase'){
 						for(var i in lib.characterPack.mode_versus){
 							if(Math.random()<0.5){
@@ -853,7 +855,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					ui.longchuanzhibao=ui.create.system('龙船至宝',null,true);
 					// ui.longchuanzhibao.style.display='none';
 					lib.setPopped(ui.longchuanzhibao,function(){
-						var map={sst_light:0,sst_darkness:0,sst_spirit:0,sst_reality:0};
+						var map={sst_light:0,sst_dark:0,sst_spirit:0,sst_reality:0};
 						for(var i=0;i<game.players.length;i++){
 							var current=game.players[i];
 							map[current.side]+=current.storage.longchuanzhibao;
@@ -1866,7 +1868,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					}
 					var groupSort=function(name){
 						if(lib.character[name][1]=='sst_light') return 0;
-						if(lib.character[name][1]=='sst_darkness') return 1;
+						if(lib.character[name][1]=='sst_dark') return 1;
 						if(lib.character[name][1]=='sst_spirit') return 2;
 						if(lib.character[name][1]=='sst_reality') return 3;
 					}
@@ -3671,25 +3673,25 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 		choiceThree:[
 			"sst_mario","sst_donkey_kong","sst_link","sst_samus","sst_yoshi","sst_kirby","sst_luigi","sst_captain_falcon","sst_jigglypuff","sst_fox","sst_pikachu",
 			"sst_bowser","sst_peach","sst_zelda","sst_sheik","sst_dr_mario","sst_ganondorf","sst_mr_game_watch","sst_marth","sst_young_link","sst_pichu","sst_falco","sst_mewtwo",
-			"sst_zero_suit_samus","sst_wario","sst_pokemon_trainer_red","sst_meta_knight","sst_ike","sst_toon_link","sst_wolf","sst_snake","sst_king_dedede","sst_lucario","sst_sonic","sst_pokemon_trainer_leaf",
+			"sst_zero_suit_samus","sst_wario","sst_pokemon_trainer_red","sst_meta_knight","sst_ike","sst_toon_link","sst_wolf","sst_snake","sst_king_dedede","sst_lucario","sst_sonic","sst_pokemon_trainer_leaf","sst_olimar",
 			"sst_villager","sst_rosalina","sst_little_mac","sst_greninja","sst_palutena","sst_bowser_jr","sst_koopalings","sst_ryu","sst_mega_man","sst_corrin","sst_mii_fighters","sst_pac_man",
 			"sst_dark_samus","sst_daisy","sst_ridley","sst_simon","sst_richter","sst_king_k_rool","sst_isabelle","sst_incineroar","sst_ken",
 			"sst_terry","sst_byleth_male","sst_byleth_female","sst_joker","sst_steve","sst_alex","sst_hero","sst_min_min","sst_pyra_mythra","sst_sephiroth","sst_enderman","sst_kazuya","sst_sora",
 			"sst_dark_link","sst_sans","sst_waluigi","sst_master_hand","sst_spring_man","sst_rex","sst_cuphead_mugman","sst_krystal","sst_kyo_kusanagi","sst_pauline","sst_dr_wily","sst_9_volt_18_volt","sst_kraid",
-			"sst_mario_not_mary","sst_yumikohimi","sst_massy","sst_haine","sst_oc","sst_mr_8","sst_kyuukou","sst_windier","sst_rentianshu","sst_srf","sst_miumiu","sst_ma","sst_feiji",
-			"sst_claude","sst_geno","sst_duck_hunt",
+			"sst_mario_not_mary","sst_yumikohimi","sst_massy","sst_haine","sst_oc","sst_mr_8","sst_kyuukou","sst_windier","sst_rentianshu","sst_srf","sst_miumiu","sst_ma","sst_feiji","sst_marioraz",
+			"sst_claude","sst_geno","sst_duck_hunt","sst_paipai",
 			"sst_ness","sst_chrom","sst_lucina","sst_robin"
 		],
 		choiceFour:[
 			"sst_mario","sst_donkey_kong","sst_link","sst_samus","sst_yoshi","sst_kirby","sst_luigi","sst_captain_falcon","sst_jigglypuff","sst_fox","sst_pikachu",
 			"sst_bowser","sst_peach","sst_zelda","sst_sheik","sst_dr_mario","sst_ganondorf","sst_mr_game_watch","sst_marth","sst_young_link","sst_pichu","sst_falco","sst_mewtwo",
-			"sst_zero_suit_samus","sst_wario","sst_pokemon_trainer_red","sst_meta_knight","sst_ike","sst_toon_link","sst_wolf","sst_snake","sst_king_dedede","sst_lucario","sst_sonic","sst_pokemon_trainer_leaf",
+			"sst_zero_suit_samus","sst_wario","sst_pokemon_trainer_red","sst_meta_knight","sst_ike","sst_toon_link","sst_wolf","sst_snake","sst_king_dedede","sst_lucario","sst_sonic","sst_pokemon_trainer_leaf","sst_olimar",
 			"sst_villager","sst_rosalina","sst_little_mac","sst_greninja","sst_palutena","sst_bowser_jr","sst_koopalings","sst_ryu","sst_mega_man","sst_corrin","sst_mii_fighters","sst_pac_man",
 			"sst_dark_samus","sst_daisy","sst_ridley","sst_simon","sst_richter","sst_king_k_rool","sst_isabelle","sst_incineroar","sst_ken",
 			"sst_terry","sst_byleth_male","sst_byleth_female","sst_joker","sst_steve","sst_alex","sst_hero","sst_min_min","sst_pyra_mythra","sst_sephiroth","sst_enderman","sst_kazuya","sst_sora",
 			"sst_dark_link","sst_sans","sst_waluigi","sst_master_hand","sst_spring_man","sst_rex","sst_cuphead_mugman","sst_krystal","sst_kyo_kusanagi","sst_pauline","sst_dr_wily","sst_9_volt_18_volt","sst_kraid",
-			"sst_mario_not_mary","sst_yumikohimi","sst_massy","sst_haine","sst_oc","sst_mr_8","sst_kyuukou","sst_windier","sst_rentianshu","sst_srf","sst_miumiu","sst_ma","sst_feiji",
-			"sst_claude","sst_geno","sst_duck_hunt",
+			"sst_mario_not_mary","sst_yumikohimi","sst_massy","sst_haine","sst_oc","sst_mr_8","sst_kyuukou","sst_windier","sst_rentianshu","sst_srf","sst_miumiu","sst_ma","sst_feiji","sst_marioraz",
+			"sst_claude","sst_geno","sst_duck_hunt","sst_paipai",
 			"sst_ness","sst_chrom","sst_lucina","sst_robin"
 		],
 		translate:{
@@ -3816,7 +3818,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						trigger:{player:'roundStart'},
 						silent:true,
 						filter:function(){
-							var map={sst_light:0,sst_darkness:0,sst_spirit:0,sst_reality:0};
+							var map={sst_light:0,sst_dark:0,sst_spirit:0,sst_reality:0};
 							for(var i=0;i<game.players.length;i++){
 								var current=game.players[i];
 								map[current.side]+=current.storage.longchuanzhibao;
@@ -4433,7 +4435,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						}
 					}
 
-					var map={sst_light:0,sst_darkness:0,sst_spirit:0,sst_reality:0};
+					var map={sst_light:0,sst_dark:0,sst_spirit:0,sst_reality:0};
 					for(var i=0;i<game.players.length;i++){
 						var current=game.players[i];
 						map[current.side]+=current.storage.longchuanzhibao;
@@ -4876,9 +4878,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 				else{
 					if(_status.mode=='siguo'){
-						var list=['sst_light','sst_darkness','sst_spirit','sst_reality'];
-						var map={sst_light:0,sst_darkness:0,sst_spirit:0,sst_reality:0};
-						var map2={sst_light:0,sst_darkness:0,sst_spirit:0,sst_reality:0};
+						var list=['sst_light','sst_dark','sst_spirit','sst_reality'];
+						var map={sst_light:0,sst_dark:0,sst_spirit:0,sst_reality:0};
+						var map2={sst_light:0,sst_dark:0,sst_spirit:0,sst_reality:0};
 						for(var i=0;i<game.players.length;i++){
 							var current=game.players[i];
 							map[current.side]+=get.condition(current)*get.threaten(current,false,false);

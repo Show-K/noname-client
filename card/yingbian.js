@@ -45,7 +45,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				},
 				yingbian:function(event){
 					var card=event.card,bool=false;
-					if(get.cardtag(event.card,'yingbian_gain')){
+					if(get.cardtag(card,'yingbian_gain')){
 						bool=true;
 						var cardx=event.respondTo;
 						if(cardx&&cardx[1]&&cardx[1].cards&&cardx[1].cards.filterInD('od').length) event.player.gain(cardx[1].cards.filterInD('od'),'gain2','log');
@@ -60,7 +60,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						card.yingbian_all=true;
 						game.log(card,'执行所有选项');
 					}
-					if(get.cardtag(event.card,'yingbian_draw')){
+					if(get.cardtag(card,'yingbian_draw')){
 						bool=true;
 						event.player.draw();
 					}
@@ -232,7 +232,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						event.baseDamage++;
 						game.log(event.card,'的伤害值基数+1');
 					}
-					if(get.cardtag(event.card,'yingbian_gain')){
+					if(get.cardtag(card,'yingbian_gain')){
 						bool=true;
 						var cardx=event.respondTo;
 						if(cardx&&cardx[1]&&cardx[1].cards&&cardx[1].cards.filterInD('od').length) event.player.gain(cardx[1].cards.filterInD('od'),'gain2','log');
@@ -242,7 +242,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						event.directHit.addArray(game.players);
 						game.log(card,'不可被响应');
 					}
-					if(get.cardtag(event.card,'yingbian_draw')){
+					if(get.cardtag(card,'yingbian_draw')){
 						bool=true;
 						event.player.draw();
 					}
@@ -527,9 +527,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					'step 1'
 					if(result.bool){
 						player.logSkill('taigongyinfu_skill');
-						player.lose(result.cards,ui.discardPile,'visible');
-						player.$throw(result.cards,1000);
-						game.log(player,'将',result.cards,'置入了弃牌堆');
+						player.loseToDiscardpile(result.cards).set("skill","_chongzhu");
 						player.draw();
 					}
 				},
