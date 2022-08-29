@@ -155,7 +155,7 @@ async function checkForUpdate(url) {
 	}
 }
 
-localStorage.getItem('autoCheckUpdates') == 'true' && checkForUpdate('https://raw.fastgit.org/Show-K/noname-client/super_smash_tabletop');
+localStorage.getItem('autoCheckUpdates') == 'true' && checkForUpdate('https://raw.fastgit.org/Show-K/noname-client/super-smash-tabletop');
 
 //跳过最开始的下载界面
 if(!localStorage.getItem('noname_inited')){
@@ -171,27 +171,6 @@ if(!localStorage.getItem('noname_inited')){
 	}
 	let has = loop('game/update.js', 'game/config.js', 'game/package.js', 'game/game.js');
 	if(has) localStorage.setItem('noname_inited', 'nodejs');
-}
-
-//创建教程页面
-let win;
-
-function createIframe() {
-	if (win) return;
-	win = new BrowserWindow({
-		width: 800,
-		height: 600,
-		autoHideMenuBar: true,
-		parent: thisWindow,
-		icon: path.join(__dirname, '..', 'super_smash_tabletop.ico'),
-		webPreferences: {
-			plugins: true
-		},
-	});
-	win.loadURL(`file://${__dirname}/../(必看)无名杀全教程10.0.pdf`);
-	win.on('closed', () => {
-		win = null
-	});
 }
 
 // 截图 base64 -> blob
@@ -377,11 +356,6 @@ var Menus = [{
 }, {
 	label: '帮助',
 	submenu: [{
-		label: '无名杀教程',
-		click: () => {
-			createIframe();
-		}
-	}, {
 		label: 'JavaScript教程',
 		click: () => {
 			shell.openExternal('https://developer.mozilla.org/zh-CN/docs/learn/JavaScript');
@@ -392,22 +366,10 @@ var Menus = [{
 			shell.openExternal('https://www.electronjs.org/docs');
 		}
 	}, {
-		label: 'QQ群合集',
-		click: () => {
-			shell.openExternal('https://mp.weixin.qq.com/s?__biz=MzUwOTMwMjExNQ==&mid=100009245&idx=1&sn=5671f6f4003d4fae44da3fc09630a759&chksm=7916e1114e616807e6aa34dec69c34ab1096d9ea332e6fb88b4b48116f41a948d907ff00f96b&mpshare=1&scene=23&srcid=0803MuuzUbphhaDV6y8C2noF&sharer_sharetime=1627992420112&sharer_shareid=0ebf733c5192798632ac5cf18bae205c#rd');
-		}
-	}, {
-		label: 'bug反馈',
-		click: () => {
-			shell.openExternal(
-				'http://tieba.baidu.com/p/6198964821?share=9105&fr=share&see_lz=0&share_from=post&sfc=copy&client_type=2&client_version=12.7.0.1&st=1626539518&unique=144C0C6A06380E116328219CAC1C9174'
-			);
-		}
-	}, {
 		label: '版权声明',
 		click: () => {
 			dialog.showMessageBoxSync(thisWindow, {
-				message: '【大乱桌斗】（Show-K）及【无名杀】（水乎）属于个人开发软件且【完全免费】。如非法倒卖用于牟利将承担法律责任 开发团队将追究到底',
+				message: '【大乱桌斗】/【无名杀】（水乎）属于个人开发软件且【完全免费】。如非法倒卖用于牟利将承担法律责任 开发团队将追究到底',
 				type: 'info',
 				title: '版权声明',
 				icon: path.join(__dirname, '..', 'super_smash_tabletop.ico'),
@@ -417,9 +379,9 @@ var Menus = [{
 }, {
 	label: '反馈',
 	submenu: [{
-		label: '通过QQ联系本应用作者（诗笺）',
+		label: '通过QQ联系本应用作者（Show-K）',
 		click: () => {
-			shell.openExternal('tencent://message/?uin=2954700422');
+			shell.openExternal('tencent://message/?uin=1143158498');
 		},
 	}, {
         label: '无名杀项目作者： 水乎',
@@ -430,9 +392,16 @@ var Menus = [{
 
 Menu.setApplicationMenu(Menu.buildFromTemplate(Menus));
 
+let leaveFullScreen = function(e) {
+	if (e.code == "F11") {
+		thisWindow.setFullScreen(false);
+	}
+};
+
 thisWindow.on('enter-full-screen', () => {
 	if(!thisWindow.isDestroyed()) {
 		Menu.setApplicationMenu(null);
+		window.addEventListener('keydown', leaveFullScreen);
 	} else {
 		app.exit(0);
 	}
@@ -440,8 +409,9 @@ thisWindow.on('enter-full-screen', () => {
 
 thisWindow.on('leave-full-screen', () => {
 	if(!thisWindow.isDestroyed()) {
+		window.removeEventListener('keydown', leaveFullScreen);
 		Menu.setApplicationMenu(Menu.buildFromTemplate(Menus));
-		contents.closeDevTools();
+		// contents.closeDevTools();
 	} else {
 		app.exit(0);
 	}

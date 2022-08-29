@@ -16,12 +16,10 @@
 			}
 		},
 		onDeviceReady: function() {
-			var site_g = 'https://raw.fastgit.org/Show-K/noname/super-smash-tabletop/';
+			var site_g = 'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop/';
 			//github镜像网址
-			var site_c = 'https://show-kadot.coding.net/p/noname/d/noname/git/raw/super-smash-tabletop/';
+			var site_c = 'http://123.56.240.30/Show-K/noname/super-smash-tabletop/';
 			//苏婆config镜像网址
-			var site_xw = 'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop/';
-			//星城玄武镜像网址
 			var site = site_g;
 			var button, changesite, help, version, versionnode;
 			var req = function(url, onload, onerror, target) {
@@ -237,8 +235,8 @@
 			helpnode.id = 'noname_init_help';
 			var helpnodetext = document.createElement('div');
 			helpnodetext.innerHTML =
-				'<div><ol><li>访问<a href="https://hub.fastgit.org/libccy/noname/releases/latest">https://hub.fastgit.org/libccy/noname/releases/latest</a>，下载zip文件' +
-				'<li>解压后将noname-master目录内的所有文件放入对应文件夹：<br>windows/linux：resources/app<br>mac：（右键显示包内容）contents/resources/app<br>android：android/data/com.widget.noname<br>ios：documents（itunes—应用—文件共享）' +
+				'<div><ol><li>访问<a href="https://hub.fastgit.xyz/Show-K/noname/archive/refs/heads/super-smash-tabletop.zip">https://hub.fastgit.xyz/Show-K/noname/archive/refs/heads/super-smash-tabletop.zip</a>，下载zip文件' +
+				'<li>解压后将super-smash-tabletop目录内的所有文件放入对应文件夹：<br>windows/linux：resources/app<br>mac：（右键显示包内容）contents/resources/app<br>android：android/data/win.show_k.super_smash_tabletop<br>ios：documents（itunes—应用—文件共享）' +
 				'<li>完成上述步骤后，<a href="javascript:localStorage.setItem(\'noname_inited\',window.tempSetNoname);window.location.reload()">点击此处</a></div>';
 			helpnode.appendChild(helpnodetext);
 			help.onclick = function() {
@@ -265,9 +263,6 @@
 				if (site == site_c) {
 					site = site_g;
 					this.innerHTML = '下载源: GitHub'
-				} else if(site == site_g){
-					site = site_xw;
-					this.innerHTML = '下载源: 玄武镜像'
 				} else {
 					site = site_c;
 					this.innerHTML = '下载源: Coding'

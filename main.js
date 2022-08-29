@@ -123,14 +123,6 @@ function createWindow() {
 	}
 	if(!win) {
 		win = createWin;
-		//按esc退出全屏模式
-		globalShortcut.register('ESC', () => {
-			if(win.isDestroyed()) {
-				globalShortcut.unregister('ESC');
-			} else {
-				win.setFullScreen(false);
-			}
-		});
 	}
 }
 
@@ -150,6 +142,7 @@ function createMainWindow() {
 			experimentalFeatures: true, //启用Chromium的实验功能
 		}
 	});
+	win.maximize();
 	win.loadURL(`file://${__dirname}/app.html`);
 	if (electronVersion >= 14) {
 		remote.enable(win.webContents);
@@ -360,10 +353,5 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
 		app.quit();
-		// 注销快捷键
-		//globalShortcut.unregister('ESC');
-		
-		// 注销所有快捷键
-		globalShortcut.unregisterAll();
 	}
 });
