@@ -205,7 +205,7 @@ function createEditorWindow() {
 	let win = new BrowserWindow({
 		width: 800,
 		height: 600,
-		title: '无名杀-代码编辑器',
+		title: '大乱桌斗-代码编辑器',
 		icon: path.join(__dirname, 'noname.ico'),
 		autoHideMenuBar: true,
 		webPreferences: {
@@ -234,7 +234,7 @@ function createEditorWindow() {
         let debugWindow = new BrowserWindow({
             width: 800,
             height: 600,
-            title: '无名杀-代码调试',
+            title: '大乱桌斗-代码调试',
             icon: path.join(__dirname, 'noname.ico'),
             show: false,
             webPreferences: {
