@@ -1183,13 +1183,28 @@ interface ExModData {
     globalFrom?(from: Player, to: Player, distance:number): number;
     /**
      * 角色的攻击范围
-     * @param from 
-     * @param to 
-     * @param range 
-     * 
-     * 注：和globalFrom同理，拉近距离，减去；
+	 * 
+	 * 于【v1.9.113.4】更改效果
+	 * 
+	 * @deprecated attackFrom的mod不再影响攻击范围的数值，改为由attackRangeBase和attackRange控制，但attackFrom和attackTo仍然影响“A是否在B攻击范围内”的判断
+	 * 
      */
     attackFrom?(from: Player, to: Player, range:number):number;
+	// 通过Object.values(lib.skill).filter(s => s.mod?.attackRangeBase)查询所有带attackRangeBase的技能
+	/**
+	 * 角色的攻击范围基数
+	 * 
+	 * 【v1.9.113.4】
+	 *
+	 */
+	attackRangeBase?(player: Player, num: number):number;
+	/**
+	 * 修改角色的攻击范围
+	 * 
+	 * 【v1.9.113.4】
+	 *
+	 */
+	attackRange?(player: Player, distance: number):number;
     /**
      * 攻击到角色的范围
      * @param from 
@@ -1318,6 +1333,14 @@ interface ExModData {
     cardname?(card: Card, player: Player): string;
     /** 改变卡牌伤害属性   用于get.nature*/
     cardnature?(card: Card, player: Player): string;
+	/**
+	 * 改变卡牌点数
+	 * 
+	 * 【v1.9.113.5】
+	 * 
+	 * @param number 原来的卡牌点数
+	 */
+	cardnumber?(card: Card, player: Player, number: number): number;
 
     /** 对特定角色使用牌的次数限制（用于优化【对特定角色使用牌无次数限制】的机制）【v1.9.105】 */
     cardUsableTarget?(card: Card, player: Player, target: Target):boolean;

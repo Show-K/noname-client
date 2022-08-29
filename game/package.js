@@ -29,9 +29,11 @@ window.noname_package={
 	},
 	mode:{
 		identity:'身份',
+		th_mougong:'谋攻',
 		guozhan:'国战',
 		versus:'对决',
 		connect:'联机',
+		huanhuazhizhan:'幻化',
 		doudizhu:'斗地主',
 		brawl:'乱斗'
 	},
@@ -51,14 +53,6 @@ window.noname_package={
 			two:'欢乐成双',
 			siguo:'四国争霸',
 			standard:'自由对决'
-		},
-		chess:{
-			combat:'战棋模式',
-			three:'战棋统率',
-			leader:'战棋君主'
-		},
-		single:{
-			normal:'新1v1'
 		}
 	},
 	background:{

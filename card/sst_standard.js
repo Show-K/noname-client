@@ -4,17 +4,18 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 		name:"sst_standard",
 		connect:true,
 		card:{
+			//Exclusive
 			sst_aegises:{
 				fullskin:true,
 				type:"equip",
 				subtype:"equip1",
+				distance:{attackFrom:-2},
 				onEquip:function(){
 					player.markSkill("sst_aegises_skill");
 				},
 				onLose:function(){
 					player.unmarkSkill("sst_aegises_skill");
 				},
-				distance:{attackFrom:-2},
 				ai:{
 					basic:{
 						equipValue:4.5
@@ -22,14 +23,93 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 				},
 				skills:["sst_aegises_skill"]
 			},
+			sst_spear_thrust:{
+				nodelay:true,
+				fullskin:true,
+				type:"basic",
+				enable:true,
+				range:function(card,player,target){
+					return player.inRange(target);
+				},
+				selectTarget:1,
+				filterTarget:function(card,player,target){return player!=target;},
+				content:function(){
+					"step 0"
+					if(typeof event.baseDamage!="number") event.baseDamage=1;
+					if(event.directHit){
+						event._result={bool:false};
+					}
+					else{
+						var str="刺枪：打出一张基本牌";
+						if(target.countCards("sx")){
+							str+="（或取消并改为决定是否将武将牌上一张牌置入弃牌堆）";
+						}
+						else{
+							str+="，否则"+get.translation(player)+"对你造成1点伤害";
+						}
+						var next=target.chooseToRespond(str,function(card){
+							return get.type(card)=="basic";
+						});
+						next.set("ai",function(card){
+							var evt=_status.event.getParent();
+							if(get.damageEffect(evt.target,evt.player,_status.event.player)>=0) return 0;
+							return get.order(card);
+						});
+						next.set("position","hes");
+					}
+					"step 1"
+					if(result.bool==false){
+						if(target.countCards("sx")){
+							target.chooseCardButton("刺枪：将武将牌上一张牌置入弃牌堆，否则"+get.translation(player)+"对你造成1点伤害",target.getCards("sx")).set("ai",function(button){
+								return 11-get.useful(button.link);
+							});
+						}
+						else{
+							target.damage(player);
+							event.finish();
+						}
+					}
+					else{
+						event.finish();
+					}
+					"step 2"
+					if(result.links&&result.links.length){
+						target.loseToDiscardpile(result.links);
+					}
+					else{
+						target.damage(player);
+					}
+				},
+				ai:{
+					basic:{
+						useful:[5,3,1],
+						value:[5,3,1]
+					},
+					order:3.05,
+					result:{
+						target:function(player,target,card){
+							if((target.hasSha()||target.mayHaveShan())&&!player.hasSkillTag("directHit_ai",true,{
+								target:target,
+								card:card
+							},true)) return -1.5/1.2;
+							return -1.5;
+						}
+					},
+					tag:{
+						respond:1,
+						respondSha:1,
+						respondShan:1,
+						respondTao:1,
+						damage:1
+					}
+				}
+			}
 		},
 		skill:{
 			sst_aegises_skill:{
-				init:function(player,skill){
-					if(typeof player.storage[skill]!="boolean") player.storage[skill]=false;
-				},
+				marktext:"☯",
 				intro:{
-					content:function(storage,player){
+					content:function(storage){
 						return storage?"转换技，出牌阶段限一次，你可以与牌堆顶的一张牌拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点雷电伤害。":"转换技，出牌阶段限一次，你可以与一名角色拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点火焰伤害。";
 					}
 				},
@@ -94,12 +174,15 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 			sst_aegises:"天之圣杯",
 			sst_aegises_info:"转换技，出牌阶段限一次，你可以与①一名角色②牌堆顶的一张牌拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点①火焰②雷电伤害。",
 			sst_aegises_append:"<span class=\"text\" style=\"font-family: fzktk\">所以到底算不算大家。</span>",
+			//Exclusive
+			sst_spear_thrust:"刺枪",
+			sst_spear_thrust_info:"出牌阶段，对你攻击范围内的一名角色使用。其须打出一张基本牌或将其武将牌上一张牌置入弃牌堆，否则你对其造成1点伤害。",
+			sst_spear_thrust_append:"<span class=\"text\" style=\"font-family: fzktk\">吾乃波普之星头巾瓦豆鲁迪也！</span>",
 			//Skill
 			sst_aegises_skill:"天之圣杯",
 			sst_aegises_skill_info:"转换技，出牌阶段限一次，你可以与①一名角色②牌堆顶的一张牌拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点①火焰②雷电伤害。"
 		},
-		list:[
-		]
+		list:[]
 	};
 	return sst;
 });

@@ -847,13 +847,14 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				usable:1,
 				prompt:'将至多三张可合纵的牌交给一名与你势力不同的角色，或未确定势力的角色，若你交给与你势力不同的角色，则你摸等量的牌',
 				filter:function(event,player){
-					return (player.getCards('h',function(card){
-						return card.hasTag('lianheng');
-					}).length);
+					if(player.hasSkillTag('lianheng')) return true;
+					return player.hasCard(function(card){
+						return card.hasTag('lianheng')||card.hasGaintag('_lianheng');
+					},'h');
 				},
 				filterCard:function(card){
 					if(_status.event.player.hasSkillTag('lianheng')) return true;
-					return card.hasTag('lianheng');
+					return card.hasTag('lianheng')||card.hasGaintag('_lianheng');
 				},
 				filterTarget:function(card,player,target){
 					if(target==player) return false;
@@ -3188,6 +3189,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				else{
 					num={mark:'标记',draw:'摸牌'}[lib.configOL.initshow_draw];
 				}
+				uiintro.add('<div class="text chat">群雄割据：'+(lib.configOL.qunxionggeju?'开启':'关闭'));
 				uiintro.add('<div class="text chat">首亮奖励：'+num);
 				uiintro.add('<div class="text chat">珠联璧合：'+(lib.configOL.zhulian?'开启':'关闭'));
 				uiintro.add('<div class="text chat">出牌时限：'+lib.configOL.choose_timeout+'秒');
@@ -3274,8 +3276,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			getVideoName:function(){
 				var str=get.translation(game.me.name1)+'/'+get.translation(game.me.name2);
-				var str2=get.cnNumber(parseInt(get.config('player_number')))+'人'+
-					get.translation(lib.config.mode);
+				var str2='';
+				if((_status.connectMode&&lib.configOL.qunxionggeju)||(!_status.connectMode&&get.config('qunxionggeju'))){
+					str2+=get.translation('qunxionggeju');
+				}
+				else{
+					str2+=get.cnNumber(parseInt(get.config('player_number')))+'人'+get.translation(lib.config.mode);
+				}
 				if(game.me.identity=='ye'){
 					str2+=' - 野心家';
 				}
@@ -3512,20 +3519,6 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						}
 						var next=game.me.chooseButton(dialog,true,2).set('onfree',true);
 						next.filterButton=function(button){
-							if(get.config('qunxionggeju')){
-								if(ui.dialog.buttons.length<=10){
-									for(var i=0;i<ui.dialog.buttons.length;i++){
-										if(ui.dialog.buttons[i]!=button){
-											if(lib.element.player.perfectPair.call({
-												name1:button.link,name2:ui.dialog.buttons[i].link
-											})){
-												button.classList.add('glow2');
-											}
-										}
-									}
-								}
-								return true;
-							}
 							if(ui.dialog.buttons.length<=10){
 								for(var i=0;i<ui.dialog.buttons.length;i++){
 									if(ui.dialog.buttons[i]!=button){
@@ -3537,6 +3530,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 									}
 								}
 							}
+							if(get.config('qunxionggeju')) return true;
 							if(lib.character[button.link][4].contains('hiddenSkill')) return false;
 							if(ui.selected.buttons.length==0){
 								if(get.is.double(button.link)) return false;
@@ -3768,6 +3762,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 								}
 							}
 						}
+						if(lib.configOL.qunxionggeju) return true;
 						if(ui.selected.buttons.length==0){
 							if(get.is.double(button.link)) return false;
 							if(lib.character[button.link][1]=='ye') return true;
@@ -3797,7 +3792,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					}).set('processAI',function(){
 						var buttons=_status.event.dialog.buttons;
 						var filterChoice=function(name1,name2){
-							if(get.config('qunxionggeju')) return true;
+							if(lib.configOL.qunxionggeju) return true;
 							if(get.is.double(name1)) return false;
 							var group1=lib.character[name1][1];
 							var group2=lib.character[name2][1];
@@ -3934,6 +3929,8 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			}
 		},
 		translate:{
+			qunxionggeju:'群雄割据',
+
 			ye:'野',
 			ye2:'野心家',
 			yexinjia_mark:'野心家',
@@ -4712,7 +4709,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			player:{
 				getGuozhanGroup:function(num){
-					if(get.config('qunxionggeju')){
+					if((_status.connectMode&&lib.configOL.qunxionggeju)||(!_status.connectMode&&get.config('qunxionggeju'))){
 						if(num==1) return lib.character[this.name2][1];
 						return lib.character[this.name1][1];
 					}
@@ -5029,7 +5026,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						return;
 					}
 					game.addVideo('showCharacter',this,num);
-					if(this.identity=='unknown'||(this.identity!='ye'&&(num==0||num==2)&&lib.character[this.name1][1]=='ye')){
+					if(this.identity=='unknown'||((num==0||num==2)&&lib.character[this.name1][1]=='ye')){
 						this.group=this.getGuozhanGroup(num);
 						this._group=this.group;
 						if((num==0||num==2)&&lib.character[this.name1][1]=='ye'){
@@ -5147,7 +5144,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					game.tryResult();
 				},
 				wontYe:function(group){
-					if(get.config('qunxionggeju')){
+					if((_status.connectMode&&lib.configOL.qunxionggeju)||(!_status.connectMode&&get.config('qunxionggeju'))){
 						if(!group) group=lib.character[this.name1][1];
 						if(_status.yeidentity&&_status.yeidentity.contains(group)) return false;
 						if(get.zhu(this,null,true)) return true;
@@ -5172,7 +5169,6 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					var name2=this.name2;
 					if(name1.indexOf('gz_shibing')==0) return false;
 					if(name2.indexOf('gz_shibing')==0) return false;
-					//if(lib.character[name1][1]!='ye'&&lib.character[name2][1]!='ye'&&lib.character[name1][1]!=lib.character[name2][1]) return false;
 					if(get.is.jun(this.name1)) return true;
 					var list=['re','diy','sp','jsp','shen','jg','xin','old','gz','ol'];
 					for(var i=0;i<list.length;i++){
