@@ -1,13 +1,13 @@
 window.noname_update={
-	version:'1.9.115',
-	update:'1.9.114.4.1',
+	version:'1.9.115.1',
+	update:'1.9.115',
 	changeLog:[
 		'弃置外牌打出双赢 头巾瓦豆鲁迪',
 		'星盾限伤施法骗局 魔法洛亚',
 		'怒气强化火炎直伤 罗伊',
+		'（实验）不来方夕莉、加侬多夫、Sans调整',
 		'代码优化',
-		'bug修复',
-		'其他'
+		'技能调整与bug修复'
 	],
 	files:[
 		'card/sst_standard.js',
@@ -53,6 +53,7 @@ window.noname_update={
 		'extension/十周年UI/player.css',
 		'extension/十周年UI/skill.js',
 		'extension/十周年UI/spine.js',
+		'extension/在线更新/extension.css',
 		'extension/在线更新/extension.js',
 		'extension/在线更新/typings/index.d.ts',
 		'mode/brawl.js',
@@ -60,8 +61,9 @@ window.noname_update={
 		'mode/doudizhu.js',
 		'mode/guozhan.js',
 		'mode/identity.js',
-		'mode/versus.js',
+		'mode/super_smash_tabletop.js',
 		'mode/th_mougong.js',
+		'mode/versus.js',
 		'game/game.js',
 		'game/keyWords.js',
 		//'game/NoSleep.js',
@@ -69,8 +71,8 @@ window.noname_update={
 		'game/package.js',
 		'game/asset.js',
 		'game/source.js',
-		'theme/style/hp/custom.css',
-		'theme/style/hp/emotion.css',
-		'theme/style/hp/image/shield.png',
+		'layout/default/menu.css',
+		'layout/mode/chess.css',
+		'layout/mode/story.css',
 	]
 };
