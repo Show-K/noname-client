@@ -236,7 +236,7 @@
 			var helpnodetext = document.createElement('div');
 			helpnodetext.innerHTML =
 				'<div><ol><li>访问<a href="https://hub.fastgit.xyz/Show-K/noname/archive/refs/heads/super-smash-tabletop.zip">https://hub.fastgit.xyz/Show-K/noname/archive/refs/heads/super-smash-tabletop.zip</a>，下载zip文件' +
-				'<li>解压后将super-smash-tabletop目录内的所有文件放入对应文件夹：<br>windows/linux：resources/app<br>mac：（右键显示包内容）contents/resources/app<br>android：android/data/win.show_k.super_smash_tabletop<br>ios：documents（itunes—应用—文件共享）' +
+				'<li>解压后将super-smash-tabletop目录内的所有文件放入对应文件夹：<br>windows/linux：resources/app<br>mac：（右键显示包内容）contents/resources/app<br>android：android/data/xyz.unitedrhythmizedclub.supersmashtabletop<br>ios：documents（itunes—应用—文件共享）' +
 				'<li>完成上述步骤后，<a href="javascript:localStorage.setItem(\'noname_inited\',window.tempSetNoname);window.location.reload()">点击此处</a></div>';
 			helpnode.appendChild(helpnodetext);
 			help.onclick = function() {

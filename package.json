@@ -14,7 +14,7 @@
 	},
 	"build": {
 		"productName": "大乱桌斗",
-		"appId": "win.show_k.super_smash_tabletop",
+		"appId": "xyz.unitedrhythmizedclub.supersmashtabletop",
 		"directories": {
 			"output": "build"
 		},
