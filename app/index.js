@@ -18,7 +18,7 @@
 		onDeviceReady: function() {
 			var site_g = 'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop/';
 			//github镜像网址
-			var site_c = 'http://123.56.240.30/Show-K/noname/super-smash-tabletop/';
+			var site_c = 'https://unitedrhythmized.club/Show-K/noname/super-smash-tabletop/';
 			//苏婆config镜像网址
 			var site = site_g;
 			var button, changesite, help, version, versionnode;

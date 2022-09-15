@@ -49,12 +49,12 @@
 		configprefix:'noname_0.9_',
 		versionOL:27,
 		updateURLS:{
-			coding:'http://123.56.240.30/Show-K/noname/super-smash-tabletop',
+			coding:'https://unitedrhythmized.club/Show-K/noname/super-smash-tabletop',
 			github:'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop',
 		},
 		updateURL:'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop',
-		mirrorURL:'http://123.56.240.30/Show-K/noname/super-smash-tabletop',
-		hallURL:'123.56.240.30',
+		mirrorURL:'https://unitedrhythmized.club/Show-K/noname/super-smash-tabletop',
+		hallURL:'unitedrhythmized.club',
 		assetURL:'',
 		changeLog:[],
 		updates:[],
@@ -554,8 +554,8 @@
 						init:'coding',
 						unfrequent:true,
 						item:{
-							coding:'Coding（Show-K）',
-							github:'GitHub（Show-K）',
+							coding:'Coding',
+							github:'GitHub',
 						},
 						onclick:function(item){
 							game.saveConfig('update_link',item);
@@ -19125,7 +19125,7 @@
 							if(this.name=='sst_massy') this.node.name.dataset.nature=get.groupnature('shen');
 						}
 						this.sex='male';
-						//this.group='unknown';
+						this.group='unknown';
 						this.storage.nohp=true;
 						skills.add('g_hidden_ai');
 					}
@@ -27979,9 +27979,9 @@
 				type:"equip",
 				subtype:"equip5",
 			},
-			zhengsu_leijin:{},
-			zhengsu_mingzhi:{},
-			zhengsu_bianzhen:{},
+			zhengsu_leijin:{fullskin:true},
+			zhengsu_mingzhi:{fullskin:true},
+			zhengsu_bianzhen:{fullskin:true},
 			disable_judge:{},
 			group_sst_light:{fullskin:true},
 			group_sst_dark:{fullskin:true},
@@ -28527,6 +28527,66 @@
 		},
 		skill:{
 			//New
+			_sst_sex_select:{
+				charlotte:true,
+				superCharlotte:true,
+				trigger:{
+					global:'gameStart',
+					player:['enterGame','showCharacterEnd']
+				},
+				ruleSkill:true,
+				silent:true,
+				firstDo:true,
+				priority:2020,
+				filter:function(event,player){
+					return player.sex=='';
+				},
+				content:function(){
+					'step 0'
+					player.chooseControl('male','female').set('prompt','选择性别').set('ai',function(){return ['male','female'].randomGet()});
+					'step 1'
+					var name=player.name;
+					var differentAvatar=['sst_corrin','sst_robin','nnk_robin'];
+					if(differentAvatar.contains(name)){
+						//player.reinit(name,name+'_'+result.control,false);
+						player.setAvatar(player.name,name+'_'+result.control);
+					}
+					else{
+						player.sex=result.control;
+						game.broadcast(function(player,sex){
+							player.sex=sex;
+						},player,result.control);
+					}
+					game.log(player,'将性别变为了','#y'+get.translation(result.control));
+					var differentGroup={sst_corrin_male:'sst_dark',sst_corrin_female:'sst_light'};
+					if(typeof differentGroup[name+'_'+result.control]=='string'){
+						player.changeGroup(differentGroup[name+'_'+result.control]);
+					}
+					player.update();
+				}
+			},
+			_sst_group_select:{
+				charlotte:true,
+				superCharlotte:true,
+				trigger:{
+					global:'gameStart',
+					player:['enterGame','showCharacterEnd']
+				},
+				ruleSkill:true,
+				silent:true,
+				firstDo:true,
+				priority:2019,
+				filter:function(event,player){
+					return !get.config('no_group')&&player.group=='sst_smash';
+				},
+				content:function(){
+					'step 0'
+					player.chooseControl('sst_light','sst_dark','sst_spirit','sst_reality').set('prompt','选择势力').set('ai',function(){return ['sst_light','sst_dark','sst_spirit','sst_reality'].randomGet()});
+					'step 1'
+					player.changeGroup(result.control);
+					player.update();
+				}
+			},
 			_useAnger_juedou:{
 				ruleSkill:true,
 				charlotte:true,
@@ -31246,8 +31306,8 @@
 			}
 		},
 		connect:function(ip,callback){
-			if(get.config('hall_ip')=='47.99.105.222') game.saveConfig('hall_ip','123.56.240.30','connect');
-			if(lib.config.last_ip=='47.99.105.222') game.saveConfig('last_ip','123.56.240.30');
+			if(get.config('hall_ip')=='47.99.105.222') game.saveConfig('hall_ip','unitedrhythmized.club','connect');
+			if(lib.config.last_ip=='47.99.105.222') game.saveConfig('last_ip','unitedrhythmized.club');
 			if(game.online) return;
 			var withport=false;
 			var index=ip.lastIndexOf(':');
@@ -31261,8 +31321,8 @@
 				ip=ip+':8080';
 			}
 			if(ip=='47.99.105.222:8080'){
-				alert('为保证官方服务器（47.99.105.222）安全，以及尊重现维护者苏婆玛丽奥，《一劳永逸》不允许连接官方服务器！\n如需进入，可用最新的离线/完整包重新覆盖等措施解除《一劳永逸》\n自动跳转至123.56.240.30');
-				ip='123.56.240.30:8080';
+				alert('为保证官方服务器（47.99.105.222）安全，以及尊重现维护者苏婆玛丽奥，《一劳永逸》不允许连接官方服务器！\n如需进入，可用最新的离线/完整包重新覆盖等措施解除《一劳永逸》\n自动跳转至unitedrhythmized.club');
+				ip='unitedrhythmized.club:8080';
 			}
 			_status.connectCallback=callback;
 			try{
@@ -44019,10 +44079,10 @@
 						var li3=document.createElement('li');
 						var trimurl=function(str){
 							if(str==lib.updateURLS.github){
-								return 'GitHub（Show-K）';
+								return 'GitHub';
 							}
 							if(str==lib.updateURLS.coding){
-								return 'Coding（Show-K）'
+								return 'Coding'
 							}
 							var index;
 							index=str.indexOf('://');
@@ -44473,7 +44533,7 @@
 							updatepx.style.display='none';
 							updatepx.style.whiteSpace='nowrap';
 							updatepx.style.marginTop='8px';
-							var buttonx=ui.create.node('button','访问项目主页（Show-K）',function(){
+							var buttonx=ui.create.node('button','访问项目主页',function(){
 								window.open('https://github.com/Show-K/noname');
 							});
 							updatepx.appendChild(buttonx);
