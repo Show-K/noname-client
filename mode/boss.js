@@ -620,57 +620,6 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					},
 				},
 			},
-			"wushuangfangtianji":{
-				type:"equip",
-				modeimage:'boss',
-				subtype:"equip1",
-				distance:{
-					attackFrom:-3,
-				},
-				ai:{
-					basic:{
-						equipValue:2.5,
-					},
-				},
-				skills:["wushuangfangtianji_skill"],
-				fullskin:true,
-			},
-			"shufazijinguan":{
-				type:"equip",
-				subtype:"equip5",
-				modeimage:'boss',
-				ai:{
-					basic:{
-						equipValue:9,
-					},
-				},
-				skills:["shufazijinguan_skill"],
-				fullskin:true,
-			},
-			"hongmianbaihuapao":{
-				type:"equip",
-				subtype:"equip2",
-				modeimage:'boss',
-				ai:{
-					basic:{
-						equipValue:7,
-					},
-				},
-				skills:["hongmianbaihuapao_skill"],
-				fullskin:true,
-			},
-			"linglongshimandai":{
-				type:"equip",
-				subtype:"equip2",
-				modeimage:'boss',
-				ai:{
-					basic:{
-						equipValue:7.5,
-					},
-				},
-				skills:["linglongshimandai_skill"],
-				fullskin:true,
-			},
 			sadouchengbing:{
 				fullskin:true,
 				type:'trick',
@@ -773,60 +722,6 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					}
 				}
 			},
-			guilongzhanyuedao:{
-				type:'equip',
-				fullskin:true,
-				modeimage:'boss',
-				subtype:'equip1',
-				distance:{attackFrom:-2},
-				skills:['guilongzhanyuedao'],
-				nomod:true,
-				nopower:true,
-				unique:true,
-				ai:{
-					equipValue:9
-				}
-			},
-			guofengyupao:{
-				type:'equip',
-				fullskin:true,
-				modeimage:'boss',
-				subtype:'equip2',
-				nomod:true,
-				nopower:true,
-				unique:true,
-				skills:['guofengyupao'],
-				ai:{
-					equipValue:9
-				}
-			},
-			qimenbagua:{
-				type:'equip',
-				fullskin:true,
-				modeimage:'boss',
-				subtype:'equip2',
-				skills:['qimenbagua'],
-				nomod:true,
-				nopower:true,
-				unique:true,
-				ai:{
-					equipValue:9
-				}
-			},
-			chixueqingfeng:{
-				type:'equip',
-				fullskin:true,
-				modeimage:'boss',
-				subtype:'equip1',
-				distance:{attackFrom:-1},
-				skills:['chixueqingfeng'],
-				nomod:true,
-				nopower:true,
-				unique:true,
-				ai:{
-					equipValue:9
-				}
-			},
 			chiyanzhenhunqin:{
 				type:'equip',
 				fullskin:true,
@@ -861,19 +756,6 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				modeimage:'boss',
 				distance:{attackFrom:-3},
 				skills:['xiuluolianyuji'],
-				nomod:true,
-				nopower:true,
-				unique:true,
-				ai:{
-					equipValue:9
-				}
-			},
-			xuwangzhimian:{
-				type:'equip',
-				fullskin:true,
-				subtype:'equip5',
-				modeimage:'boss',
-				skills:['xuwangzhimian'],
 				nomod:true,
 				nopower:true,
 				unique:true,
@@ -1011,6 +893,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				boss_zhuanlunwang:['male','qun',6,['boss_modao','boss_lunhui','boss_wangsheng','boss_zlfanshi'],['shu','hiddenboss','bossallowed']],
     boss_mengpo:['female','qun',3,['boss_shiyou','boss_wanghun','boss_wangshi'],['shu','hiddenboss','bossallowed']],
     boss_dizangwang:['male','qun',8,['boss_bufo','boss_wuliang','boss_dayuan','boss_diting'],['shu','hiddenboss','bossallowed']],
+    //boss_shikieiki:['female','qun',8,['boss_yingzhong'],['qun','hiddenboss','bossallowed']],
 
 				boss_lvbu1:['male','shen',8,['mashu','wushuang','boss_baonu','boss_jingjia','boss_aozhan'],['qun','boss','bossallowed'],'wei'],
 				boss_lvbu2:['male','shen',6,['mashu','wushuang','xiuluo','shenwei','shenji'],['qun','hiddenboss','bossallowed'],'qun'],
@@ -1045,7 +928,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			}
 		},
 		cardPack:{
-			mode_boss:['honghuangzhili','sadouchengbing','yihuajiemu','guilongzhanyuedao','guofengyupao','chiyanzhenhunqin','qimenbagua','xuwangzhimian','juechenjinge','xiuluolianyuji','chixueqingfeng','longfenghemingjian','qicaishenlu','wushuangfangtianji','shufazijinguan','hongmianbaihuapao','linglongshimandai','boss_mengpohuihun','lingsheji','shanrangzhaoshu','jinwuluorigong','xingtianpojunfu','gubuzifeng']
+			mode_boss:['honghuangzhili','sadouchengbing','yihuajiemu','chiyanzhenhunqin','juechenjinge','xiuluolianyuji','longfenghemingjian','qicaishenlu','hongmianbaihuapao','boss_mengpohuihun','lingsheji','shanrangzhaoshu','jinwuluorigong','xingtianpojunfu','gubuzifeng']
 		},
 		init:function(){
 			for(var i in lib.characterPack.mode_boss){
@@ -2042,6 +1925,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 		},
 		skill:{
+			boss_yingzhong:{
+				//Unfinished
+			},
 			niaobaidaowenha_skill:{
 				trigger:{player:'loseMaxHpAfter'},
 				direct:true,
@@ -3552,133 +3438,6 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					},
 				},
 			},
-			"shufazijinguan_skill":{
-				equipSkill:true,
-				trigger:{
-					player:"phaseZhunbeiBegin",
-				},
-				direct:true,
-				content:function(){
-					"step 0"
-					player.chooseTarget(get.prompt('shufazijinguan'),function(card,player,target){
-						return player!=target;
-					}).ai=function(target){
-						return get.damageEffect(target,player,player);
-					}
-					"step 1"
-					if(result.bool){
-						player.line(result.targets,'white');
-						result.targets[0].damage();
-					}
-				},
-			},
-			"linglongshimandai_skill":{
-				equipSkill:true,
-				trigger:{
-					target:"useCardToTargeted",
-				},
-				filter:function(event,player){
-					if(event.targets&&event.targets.length>1||event.player==player) return false;
-					if(player.hasSkillTag('unequip2')) return false;
-					var evt=event.getParent();
-					if(evt.player&&evt.player.hasSkillTag('unequip',false,{
-						name:evt.card?evt.card.name:null,
-						target:player,
-						card:evt.card
-					})) return false;
-					return true;
-				},
-				audio:true,
-				check:function(event,player){
-					return get.effect(player,event.card,event.player,player)<=0;
-				},
-				content:function(){
-					"step 0"
-					player.judge('linglongshimandai',function(card){return (get.suit(card)=='heart')?1.5:-0.5});
-					"step 1"
-					if(result.judge>0){
-						trigger.getParent().excluded.add(player);
-					}
-				},
-				ai:{
-					effect:{
-						target:function(card,player,target,effect){
-							if(player.hasSkillTag('unequip',false,{
-								name:card?card.name:null,
-								target:player,
-								card:card
-							})) return;
-						},
-					},
-				},
-			},
-			"hongmianbaihuapao_skill":{
-				equipSkill:true,
-				trigger:{
-					player:"damageBegin4",
-				},
-				filter:function(event,player){
-					if(event.source&&event.source.hasSkillTag('unequip',false,{
-						name:event.card?event.card.name:null,
-						target:player,
-						card:event.card
-					})) return;
-					if(event.nature) return true;
-				},
-				forced:true,
-				content:function(){
-					trigger.cancel();
-				},
-				ai:{
-					nofire:true,
-					nothunder:true,
-					effect:{
-						target:function(card,player,target,current){
-							if(player.hasSkillTag('unequip',false,{
-								name:card?card.name:null,
-								target:player,
-								card:card
-							})) return;
-							if(get.tag(card,'natureDamage')) return 'zerotarget';
-						},
-					},
-				},
-			},
-			"wushuangfangtianji_skill":{
-				equipSkill:true,
-				trigger:{
-					source:"damageSource",
-				},
-				filter:function(event,player){
-					return event.card&&event.card.name=='sha';
-				},
-				content:function(){
-					'step 0'
-					player.line(trigger.player,'white');
-					if(!trigger.player.countCards('he')){
-						event.goto(1);
-					}else{
-						event.goto(2);
-					}
-					'step 1'
-					player.draw();
-					event.finish();
-					'step 2'
-					player.chooseControl('摸一张牌','弃置其一张牌',function(event,player){ 
-						if(get.attitude(player,trigger.player)>2) return '摸一张牌';
-						return '弃置其一张牌'; 
-					}); 
-					'step 3'
-					if(result.control=='摸一张牌'){ 
-						player.draw();
-						event.finish();
-					} 
-					else{ 
-						player.discardPlayerCard(trigger.player,'he',true); 
-						event.finish();
-					}   
-				},
-			},
 			
 			boss_yaoshou:{
 				mod:{
@@ -4802,19 +4561,6 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					noturn:true,
 				}
 			},
-			xuwangzhimian:{
-				equipSkill:true,
-				trigger:{player:'phaseDrawBegin'},
-				forced:true,
-				content:function(){
-					trigger.num+=2;
-				},
-				mod:{
-					maxHandcard:function(player,num){
-						return num-1;
-					}
-				}
-			},
 			xiuluolianyuji2:{
 				equipSkill:true,
 				vanish:true,
@@ -4867,98 +4613,6 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				forced:true,
 				content:function(){
 					trigger.nature='fire';
-				}
-			},
-			chixueqingfeng:{
-				equipSkill:true,
-				trigger:{player:'useCardToPlayered'},
-				filter:function(event){
-					return event.card.name=='sha';
-				},
-				logTarget:'target',
-				forced:true,
-				content:function(){
-					trigger.target.addTempSkill('chixueqingfeng2','shaAfter');
-				},
-				ai:{
-					unequip:true,
-					skillTagFilter:function(player,tag,arg){
-						if(arg&&arg.name=='sha') return true;
-						return false;
-					}
-				}
-			},
-			chixueqingfeng2:{
-				equipSkill:true,
-				mod:{
-					cardEnabled:function(){
-						return false;
-					},
-					cardUsable:function(){
-						return false;
-					},
-					cardRespondable:function(){
-						return false;
-					},
-					cardSavable:function(){
-						return false;
-					}
-				}
-			},
-			qimenbagua:{
-				equipSkill:true,
-				trigger:{target:'shaBefore'},
-				forced:true,
-				filter:function(event,player){
-					if(player.hasSkillTag('unequip2')) return false;
-					if(event.player.hasSkillTag('unequip',false,{
-						name:event.card?event.card.name:null,
-						target:player,
-						card:event.card
-					})) return false;
-					return true;
-				},
-				content:function(){
-					trigger.cancel();
-				},
-				ai:{
-					effect:{
-						target:function(card,player,target){
-							if(player.hasSkillTag('unequip',false,{
-								name:card?card.name:null,
-								target:player,
-								card:card
-							})) return;
-							if(card.name=='sha') return 'zerotarget';
-						}
-					}
-				}
-			},
-			guilongzhanyuedao:{
-				equipSkill:true,
-				trigger:{player:'useCard'},
-				forced:true,
-				filter:function(event,player){
-					return event.card&&event.card.name=='sha'&&get.color(event.card)=='red';
-				},
-				content:function(){
-					trigger.directHit.addArray(game.players);
-				}
-			},
-			guofengyupao:{
-				equipSkill:true,
-				mod:{
-					targetEnabled:function(card,player,target,now){
-					if(target.hasSkillTag('unequip2')) return false;
-						if(player!=target){
-							if(player.hasSkillTag('unequip',false,{
-								name:card?card.name:null,
-								target:player,
-								card:card
-							})){}
-							else if(get.type(card)=='trick') return false;
-						}
-					}
 				}
 			},
 			longfenghemingjian:{
@@ -9259,22 +8913,12 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			sadouchengbing_info:'出牌阶段对自己使用，若你的势力为“神”，摸X张牌；否则将你手牌补至X；（X为你的体力上限且至多为5）',
 			yihuajiemu:'移花接木',
 			yihuajiemu_info:'出牌阶段对一名有牌的其他角色使用，令其使用一张【杀】，或交给你两张牌',
-			guilongzhanyuedao:'鬼龙斩月刀',
-			guilongzhanyuedao_info:'锁定技，你使用的红色【杀】不能被【闪】响应',
-			guofengyupao:'国风玉袍',
-			guofengyupao_info:'锁定技，你不能成为其他角色使用普通锦囊牌的目标',
 			chiyanzhenhunqin:'赤焰镇魂琴',
 			chiyanzhenhunqin_info:'锁定技，你造成的伤害均视为具有火属性',
-			qimenbagua:'奇门八卦',
-			qimenbagua_info:'锁定技，其他角色使用的【杀】对你无效',
 			juechenjinge:'绝尘金戈',
 			juechenjinge_info:'锁定技，敌方角色计算与己方其他角色距离+1',
 			xiuluolianyuji:'修罗炼狱戟',
 			xiuluolianyuji_info:'你使用【杀】可以额外指定任意名攻击范围内的其他角色为目标；锁定技，你使用【杀】造成的伤害+1，然后令受到伤害的角色回复1点体力',
-			xuwangzhimian:'虚妄之冕',
-			xuwangzhimian_info:'锁定技，摸牌阶段，你额外摸两张牌；你的手牌上限-1',
-			chixueqingfeng:'赤血青锋',
-			chixueqingfeng_info:'锁定技，你使用【杀】结算结束前，目标角色不能使用或打出手牌，且此【杀】无视其防具',
 			longfenghemingjian:'鸾凤和鸣剑',
 			longfenghemingjian_info:'你使用的【雷杀】或【火杀】指定目标后，可令对方选择弃置一张牌或令你摸一张牌',
 			qicaishenlu:'七彩神鹿',
@@ -9595,39 +9239,25 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			"boss_aozhan":"鏖战",
 			"boss_aozhan_info":"锁定技，若你装备区内有：武器牌，你可以多使用一张【杀】；防具牌，防止你受到的超过1点的伤害；坐骑牌，摸牌阶段多摸一张牌；宝物牌，跳过你的判定阶段。",
 			
-			"shufazijinguan_skill":"束发紫金冠",
-			"shufazijinguan_skill_info":"准备阶段，你可以对一名其他角色造成1点伤害。",
-			"linglongshimandai_skill":"玲珑狮蛮带",
-			"linglongshimandai_skill_info":"当其他角色使用牌指定你为唯一目标后，你可以进行一次判定，若判定结果为红桃，则此牌对你无效。",
-			"hongmianbaihuapao_skill":"红棉百花袍",
-			"hongmianbaihuapao_skill_info":"锁定技，防止你受到的属性伤害。",
-			"wushuangfangtianji_skill":"无双方天戟",
-			"wushuangfangtianji_skill_info":"你使用【杀】对目标角色造成伤害后，可以摸一张牌或弃置目标角色一张牌。",
-			"wushuangfangtianji":"无双方天戟",
-			"wushuangfangtianji_info":"你使用【杀】对目标角色造成伤害后，可以摸一张牌或弃置目标角色一张牌。",
-			"shufazijinguan":"束发紫金冠",
-			"shufazijinguan_info":"准备阶段，你可以对一名其他角色造成1点伤害。",
-			"hongmianbaihuapao":"红棉百花袍",
-			"hongmianbaihuapao_info":"锁定技，防止你受到的属性伤害。",
-			"linglongshimandai":"玲珑狮蛮带",
-			"linglongshimandai_info":"当其他角色使用牌指定你为唯一目标后，你可以进行一次判定，若判定结果为红桃，则此牌对你无效。",
-			
-			boss_qinguangwang:'秦广王',
+			boss_qinguangwang_ab:'秦广王',
+			boss_qinguangwang:'秦广王·蒋子文',
 			boss_panguan:'判官',
 			boss_panguan_info:'	锁定技，你不能成为延时类锦囊的目标。',
 			boss_juhun:'拘魂',
 			boss_juhun_info:'锁定技，结束阶段，你令随机一名其他角色的武将牌翻面或横置。',
 			boss_wangxiang:'望乡',
 			boss_wangxiang_info:'锁定技，当你死亡时，你令所有其他角色弃置其装备区内的所有牌。',
-			boss_chujiangwang:'楚江王',
+			boss_chujiangwang_ab:'楚江王',
+			boss_chujiangwang:'楚江王·厉温',
 			boss_bingfeng:'冰封',
 			boss_bingfeng_info:'锁定技，你死亡时，若杀死你的角色武将牌是正面朝上， 你令其翻面。',
-			boss_songdiwang:'宋帝王',
+			boss_songdiwang:'宋帝王·余懃',
 			boss_heisheng:'黑绳',
 			boss_heisheng_info:'锁定技，你死亡时，横置所有场上角色。',
 			boss_shengfu:'绳缚',
 			boss_shengfu_info:'锁定技，你的回合结束时，随机弃置一张场上其他角色的坐骑牌。',
-			boss_wuguanwang:'五官王',
+			boss_wuguanwang_ab:'五官王',
+			boss_wuguanwang:'五官王·吕岱',
 			boss_zhiwang:'治妄',
 			boss_zhiwang_info:'锁定技，当其他角色于摸牌阶段外获得牌时，你随机弃置其一张手牌。',
 			boss_zhiwang_planetarian:'注意事项',
@@ -9636,48 +9266,59 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_gongzheng_info:'锁定技，准备阶段，若你判定区有牌，你随机弃置一张你判定区的牌。',
 			boss_xuechi:'血池',
 			boss_xuechi_info:'锁定技，你的回合结束时，令随机一名其他角色失去2点体力。',
-			boss_yanluowang:'阎罗王',
+			boss_yanluowang_ab:'阎罗王',
+			boss_yanluowang:'阎罗王·包拯',
 			boss_tiemian:'铁面',
 			boss_tiemian_info:'锁定技，你的防具区没有牌时，视为你装备【仁王盾】。',
 			boss_zhadao:'铡刀',
 			boss_zhadao_info:'锁定技，你使用【杀】指定目标后，你令目标角色防具无效。',
 			boss_zhuxin:'诛心',
 			boss_zhuxin_info:'锁定技，你死亡时，你令场上血量最少的一名其他角色受到2点伤害。',
-			boss_bianchengwang:'卞城王',
+			boss_bianchengwang_ab:'卞城王',
+			boss_bianchengwang:'卞城王·毕元宾',
 			boss_leizhou:'雷咒',
 			boss_leizhou_info:'锁定技，准备阶段，你对随机一名其他角色造成1点雷属性伤害',
 			boss_leifu:'雷缚',
 			boss_leifu_info:'锁定技，你的回合结束时，随机横置一名其他角色。',
 			boss_leizhu:'雷诛',
 			boss_leizhu_info:'锁定技，你死亡时，对所有其他角色造成依次造成1点雷属性伤害。',
-			boss_taishanwang:'泰山王',
+			boss_taishanwang_ab:'泰山王',
+			boss_taishanwang:'泰山王·董和',
 			boss_fudu:'服毒',
 			boss_fudu_info:'锁定技，其他角色使用【桃】时，你令随机另一名其他角色失去1点体力。',
 			boss_kujiu:'苦酒',
 			boss_kujiu_info:'锁定技，其他角色准备阶段，你令其失去1点体力，然后该角色视为使用一张【酒】。',
 			boss_renao:'热恼',
 			boss_renao_info:'锁定技，你死亡时，你令随机一名其他角色受到3点火属性伤害。',
-			boss_dushiwang:'都市王',
+			boss_dushiwang_ab:'都市王',
+			boss_dushiwang:'都市王·黄中庸',
 			boss_remen:'热闷',
 			boss_remen_info:'锁定技，若你的装备区内没有防具牌，则【南蛮入侵】、【万箭齐发】和普通【杀】对你无效。',
 			boss_zhifen:'炙焚',
 			boss_zhifen_info:'锁定技，准备阶段，你随机选择一名其他角色，获得其1张手牌（没有则不获得），并对其造成1点火属性伤害。',
 			boss_huoxing:'火刑',
 			boss_huoxing_info:'锁定技，你死亡时，你对所有其他角色造成1点火属性伤害。',
-			boss_pingdengwang:'平等王',
+			boss_pingdengwang_ab:'平等王',
+			boss_pingdengwang:'平等王·陆游',
 			boss_suozu:'锁足',
 			boss_suozu_info:'锁定技，准备阶段，你令所有其他角色横置。',
 			boss_abi:'阿鼻',
 			boss_abi_info:'锁定技，锁定技，你受到伤害时，你对伤害来源造成伤害的角色造成1点随机属性伤害（雷或火随机）。',
 			boss_pingdeng:'平等',
 			boss_pingdeng_info:'锁定技，你死亡时，你对体力最多的一名其他角色造成2点随机属性伤害（属性随机），然后再对一名体力最多的其他角色造成1点随机属性伤害（属性随机）。',
-			boss_zhuanlunwang:'转轮王',
+			boss_zhuanlunwang_ab:'转轮王',
+			boss_zhuanlunwang:'转轮王·薛礼',
 			boss_lunhui:'轮回',
 			boss_lunhui_info:'锁定技，准备阶段，若你的体力小于等于2，则你与场上除你以外体力最高且大于2的角色交换体力值。',
 			boss_wangsheng:'往生',
 			boss_wangsheng_info:'锁定技，你的出牌阶段开始时，视为你随机使用一张【南蛮入侵】或【万箭齐发】。',
 			boss_zlfanshi:'反噬',
 			boss_zlfanshi_info:'锁定技，每个回合你受到第一次伤害后，若再次受到伤害，则对随机一名其他角色造成1点伤害。',
+			boss_shikieiki_ab:'四季映姫',
+			boss_shikieiki:'四季映姬·夜魔仙那度',
+			boss_yingzhong:'映冢',
+			boss_yingzhong_info:'锁定技。你登场后的第一个回合开始时，你随机获得两个“阴间武将”的全部技能。',
+			boss_yingzhong_append:'<span style="font-family:yuanli">四季映姬到阴曹地府<br>——阴(映)到家了！</span>',
 					//孟婆:
 			"boss_mengpo":"孟婆",
 			"boss_shiyou":"拾忧",

@@ -14,17 +14,14 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				content:function(){
 					cards=cards.filterInD();
 					if(cards.length&&target.isAlive()){
-						game.cardsGotoSpecial(cards);
-						game.log(cards,'被移出了游戏');
-						player.$gain2(cards,false);
-						target.markAuto('zhaoshu_skill',cards);
+						target.addToExpansion(cards,'gain2').gaintag.add('zhaoshu_skill');
 						target.addSkill('zhaoshu_skill');
 						game.addGlobalSkill('zhaoshu_global');
 					}
 				},
 				onEquip:function(){
 					if(player.isAlive()){
-						player.lose(card)._triggered=null;
+						player.addToExpansion(card,'giveAuto').gaintag.add('zhaoshu_skill');
 						player.markAuto('zhaoshu_skill',[card]);
 						player.addSkill('zhaoshu_skill');
 						game.addGlobalSkill('zhaoshu_global');
@@ -643,7 +640,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						targets.push(player);
 						if(target.identity!='ye'){
 						game.filterPlayer(function(current){
-							return target!=current&&target.identity==current.identity&&!current.hasSkill('diaohulishan');
+							return target!=current&&target.isFriendOf(current)&&!current.hasSkill('diaohulishan');
 							},targets);
 						}
 					}
@@ -923,14 +920,13 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					return true;
 				},
 				filterTarget:function(card,player,target){
-					if(get.mode()!='guozhan') return player!=target;
+					if(get.mode()!='guozhan') return target.group!=player.group;
 					if(target.identity=='unknown'||player.identity=='unknown') return false;
-					if(player==target) return false;
-					if(player.identity=='ye') return true;
-					return player.identity!=target.identity;
+					return player.isEnemyOf(target);
 				},
 				content:function(){
-					game.asyncDraw([target,player],[1,get.mode()=='guozhan'?3:1]);
+					target.draw(1,'nodelay');
+					player.draw(3);
 				},
 				ai:{
 					basic:{
@@ -1074,9 +1070,9 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				distance:{attackFrom:-1},
 				ai:{
 					equipValue:function(card,player){
-						if(player.identity=='unknown'||player.identity=='ye') return 2.5;
+						if(player.identity=='unknown'||player.identity=='ye') return 2;
 						return 2+game.countPlayer(function(current){
-							return current.identity==player.identity;
+							return current.isFriendOf(player);
 						})/2;
 					},
 					basic:{
@@ -1112,7 +1108,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				enable:'phaseUse',
 				usable:1,
 				filter:function(event,player){
-					var cards=player.getStorage('zhaoshu_cards');
+					var cards=player.getExpansions('zhaoshu_cards');
 					if(cards.length<4) return false;
 					var list=[];
 					for(var i of cards){
@@ -1124,12 +1120,8 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				delay:false,
 				content:function(){
 					'step 0'
-					var cards=player.getStorage('zhaoshu_cards');
-					game.cardsDiscard(cards);
-					player.$throw(cards);
-					game.log(player,'移去了',cards);
-					cards.length=0;
-					player.markSkill('zhaoshu_cards');
+					var cards=player.getExpansions('zhaoshu_cards');
+					player.loseToDiscardpile(cards);
 					game.delayx();
 					'step 1'
 					var list=[
@@ -1156,27 +1148,22 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				intro:{
 					name:'诏书',
 					mark:function(dialog,content,player){
+						var content=player.getExpansions('zhaoshu_skill');
 						dialog.add(content);
 						dialog.addText('<br><li>与你势力相同的角色的出牌阶段限一次，其可以将一张手牌（小势力角色改为至多两张）置于【诏书】上，称为“应”。<br><li>出牌阶段限一次，若你的“应”中包含至少四种花色，则你可以发动“锦囊召唤”，将所有“应”置入弃牌堆，然后随机获得一张未加入游戏的势力锦囊牌。',false);
-						if(player.storage.zhaoshu_cards&&player.storage.zhaoshu_cards.length){
-							dialog.addAuto(player.storage.zhaoshu_cards)
-						}
-					},
-					content:'cards',
-					markcount:function(content,player){
-						return player.getStorage('zhaoshu_cards').length;
-					},
-					onunmark:function(storage,player){
-						var cards=player.getStorage('zhaoshu_skill').concat(player.getStorage('zhaoshu_cards'));
+						var cards=player.getExpansions('zhaoshu_cards');
 						if(cards.length){
-							game.log(cards,'进入了弃牌堆');
-							game.cardsDiscard(cards);
-							player.$throw(cards,1000);
+							dialog.addAuto(cards)
 						}
-						delete player.storage.zhaoshu_skill;
-						delete player.storage.zhaoshu_cards;
-						player.removeSkill('zhaoshu_skill');
 					},
+					content:'expansion',
+					markcount:function(content,player){
+						return player.getExpansions('zhaoshu_cards').length;
+					},
+				},
+				onremove:function(player,skill){
+					var cards=player.getExpansions(skill).concat(player.getExpansions('zhaoshu_cards'));
+					if(cards.length) player.loseToDiscardpile(cards);
 				},
 			},
 			zhaoshu_global:{
@@ -1195,11 +1182,12 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				},
 				position:'h',
 				discard:false,
-				toStorage:true,
+				lose:false,
+				delay:false,
 				check:function(card){
 					var player=_status.event.player,cards=ui.selected.cards.concat(game.findPlayer(function(current){
 						return current.hasSkill('zhaoshu_skill')&&current.isFriendOf(player);
-					}).getStorage('zhaoshu_cards')),suit=get.suit(card,false);
+					}).getExpansions('zhaoshu_cards')),suit=get.suit(card,false);
 					for(var i of cards){
 						if(get.suit(i)==suit) return 0;
 					}
@@ -1220,14 +1208,9 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						return current.hasSkill('zhaoshu_skill')&&current.isFriendOf(player);
 					}))+'的【诏书】上';
 				},
-				prepare:function(cards,player,targets){
-					var target=targets[0]
-					player.$give(cards,target,false);
-					game.log(player,'将',cards,'放在了',target,'的',target.getStorage('zhaoshu_skill'),'上');
-					target.markAuto('zhaoshu_cards',cards);
-					target.markSkill('zhaoshu_skill');
+				content:function(){
+					target.addToExpansion(cards,player,'give').gaintag.add('zhaoshu_cards');
 				},
-				content:function(){},
 				ai:{
 					order:1,
 					result:{
@@ -1272,9 +1255,8 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				equipSkill:true,
 				trigger:{player:'linkBefore'},
 				forced:true,
-				//priority:20,
 				filter:function(event,player){
-					return !player.isMajor()&&!player.isLinked();
+					return player.isNotMajor()&&!player.isLinked();
 				},
 				content:function(){
 					trigger.cancel();
@@ -1509,7 +1491,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					maxHandcard:function(player,num){
 						if(get.mode()=='guozhan'){
 							if(player.hasSkill('huangjintianbingfu')){
-								num+=player.storage.huangjintianbingfu.length;
+								num+=player.getExpansions('huangjintianbingfu').length;
 							}
 							return num+game.countPlayer(function(current){
 								return current.isFriendOf(player);
@@ -1765,11 +1747,9 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			g_wuliu_skill:{
 				equipSkill:true,
 				mod:{
-					attackFrom:function(from,to,distance){
-						return distance-game.countPlayer(function(current){
-							if(current==from) return false;
-							if(current.identity=='unknown'||current.identity=='ye') return false;
-							if(current.identity!=from.identity) return false;
+					attackRange:function(player,distance){
+						return distance+game.countPlayer(function(current){
+							if(current==player||!current.isFriendOf(player)) return false;
 							if(current.hasSkill('wuliu_skill')) return true;
 						});
 					}
@@ -1861,8 +1841,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			huoshaolianying_info_guozhan:'出牌阶段，对你的下家和与其处于同一队列的角色使用，每名角色受到一点火焰伤害',
 			huoshaolianying_info:'对离你最近的一名横置角色使用（若无横置角色则改为对距离你最近的所有角色使用），对目标造成一点火焰伤害',
 			yuanjiao:'远交近攻',
-			yuanjiao_info_guozhan:'对一名不同势力的角色使用，对方摸一张牌，然后你摸3张牌',
-			yuanjiao_info:'对一名其他角色使用，你与其各摸一张牌',
+			yuanjiao_info:'出牌阶段，对一名与你势力不同的角色使用。其摸一张牌，然后你摸三张牌。',
 			yuanjiao_bg:'交',
 			zhibi:'知己知彼',
 			zhibi_info:'出牌阶段对一名其他角色使用，观看其手牌或武将牌',
