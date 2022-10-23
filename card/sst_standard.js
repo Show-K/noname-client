@@ -1,6 +1,9 @@
 "use strict";
-game.import("card",function(lib,game,ui,get,ai,_status){
-	var sst_standard={
+game.import("card",(lib,game,ui,get,ai,_status)=>{
+	/**
+	 * @type {importCardConfig}
+	 */
+	const SST_STANDARD={
 		name:"sst_standard",
 		connect:true,
 		card:{
@@ -10,12 +13,13 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 				type:"equip",
 				subtype:"equip1",
 				distance:{attackFrom:-2},
-				onEquip:function(){
+				onEquip:()=>{
 					player.markSkill("sst_aegises_skill");
 				},
-				onLose:function(){
+				onLose:()=>{
 					player.unmarkSkill("sst_aegises_skill");
 				},
+				equipDelay:false,
 				ai:{
 					basic:{
 						equipValue:4.5
@@ -28,30 +32,26 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 				fullskin:true,
 				type:"basic",
 				enable:true,
-				range:function(card,player,target){
-					return player.inRange(target);
-				},
+				range:(card,player,target)=>player.inRange(target),
 				selectTarget:1,
-				filterTarget:function(card,player,target){return player!=target;},
-				content:function(){
+				filterTarget:lib.filter.notMe,
+				content:()=>{
 					"step 0"
 					if(typeof event.baseDamage!="number") event.baseDamage=1;
 					if(event.directHit){
 						event._result={bool:false};
 					}
 					else{
-						var str="刺枪：打出一张基本牌";
+						let str="刺枪：打出一张基本牌";
 						if(target.countCards("sx")){
 							str+="（或取消并改为决定是否将武将牌上一张牌置入弃牌堆）";
 						}
 						else{
 							str+="，否则"+get.translation(player)+"对你造成1点伤害";
 						}
-						var next=target.chooseToRespond(str,function(card){
-							return get.type(card)=="basic";
-						});
-						next.set("ai",function(card){
-							var evt=_status.event.getParent();
+						const next=target.chooseToRespond(str,card=>get.type(card)=="basic");
+						next.set("ai",card=>{
+							const evt=_status.event.getParent();
 							if(get.damageEffect(evt.target,evt.player,_status.event.player)>=0) return 0;
 							return get.order(card);
 						});
@@ -60,9 +60,7 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 					"step 1"
 					if(result.bool==false){
 						if(target.countCards("sx")){
-							target.chooseCardButton("刺枪：将武将牌上一张牌置入弃牌堆，否则"+get.translation(player)+"对你造成1点伤害",target.getCards("sx")).set("ai",function(button){
-								return 11-get.useful(button.link);
-							});
+							target.chooseCardButton("刺枪：将武将牌上一张牌置入弃牌堆，否则"+get.translation(player)+"对你造成1点伤害",target.getCards("sx")).set("ai",button=>11-get.useful(button.link));
 						}
 						else{
 							target.damage(player);
@@ -87,7 +85,7 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 					},
 					order:3.05,
 					result:{
-						target:function(player,target,card){
+						target:(player,target,card)=>{
 							if((target.hasSha()||target.mayHaveShan())&&!player.hasSkillTag("directHit_ai",true,{
 								target:target,
 								card:card
@@ -108,7 +106,6 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 				type:"equip",
 				subtype:"equip2",
 				fullborder:"simple",
-				fullskin:true,
 				skills:["sst_ink_skill"],
 				selectTarget:[-1,-2],
 				ai:{
@@ -127,8 +124,8 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 					result:{
 						keepAI:true,
 						target:(player,target)=>{
-							var val=0;
-							var card=target.getEquip(2);
+							let val=0;
+							const card=target.getEquip(2);
 							if(card){
 								val=get.value(card,target);
 								if(val<0) return 0;
@@ -143,39 +140,22 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 			sst_aegises_skill:{
 				marktext:"☯",
 				intro:{
-					content:function(storage){
-						return storage?"转换技，出牌阶段限一次，你可以与牌堆顶的一张牌拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点雷电伤害。":"转换技，出牌阶段限一次，你可以与一名角色拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点火焰伤害。";
-					}
+					content:storage=>storage?"转换技，出牌阶段限一次，你可以与牌堆顶的一张牌拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点雷电伤害。":"转换技，出牌阶段限一次，你可以与一名角色拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点火焰伤害。"
 				},
 				equipSkill:true,
 				zhuanhuanji:true,
 				inherit:"sst_xuanyi",
-				filter:function(event,player){
-					if(!player.storage.sst_aegises_skill){
-						return game.hasPlayer(function(current){
-							return player.canCompare(current);
-						});
-					}
-					else{
-						return player.canComparePlayer();
-					}
+				filter:(event,player)=>{
+					if(player.storage.sst_aegises_skill) return player.canComparePlayer();
+					return game.hasPlayer(current=>player.canCompare(current));
 				},
-				filterTarget:function(card,player,target){
-					if(!player.storage.sst_aegises_skill){
-						return player.canCompare(target);
-					}
-					else{
-						return false;
-					}
+				filterTarget:(card,player,target)=>{
+					if(player.storage.sst_aegises_skill) return false;
+					return player.canCompare(target);
 				},
-				selectTarget:function(){
-					var player=_status.event.player;
-					if(!player.storage.sst_aegises_skill){
-						return 1;
-					}
-					else{
-						return 0;
-					}
+				selectTarget:()=>{
+					if(_status.event.player.storage.sst_aegises_skill) return 0;
+					return 1;
 				},
 				delay:false,
 				ai:{
@@ -183,7 +163,7 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 					expose:0.2,
 					damage:true,
 					result:{
-						player:function(player,target){
+						player:(player,target)=>{
 							if(!player.storage.sst_aegises_skill) return -get.attitude(player,target)/2;
 							return 1;
 						}
@@ -218,7 +198,7 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 			//Exclusive
 			sst_spear_thrust:"刺枪",
 			sst_spear_thrust_info:"出牌阶段，对你攻击范围内的一名角色使用。其须打出一张基本牌或将其武将牌上一张牌置入弃牌堆，否则你对其造成1点伤害。",
-			sst_spear_thrust_append:"<span class=\"text\" style=\"font-family: fzktk\">吾乃波普之星头巾瓦豆鲁迪也！</span>",
+			sst_spear_thrust_append:"<span class=\"text\" style=\"font-family: fzktk\">吾乃噗噗噗大陆头巾瓦豆鲁迪也！</span>",
 			//Equip
 			sst_aegises:"天之圣杯",
 			sst_aegises_info:"转换技，出牌阶段限一次，你可以与①一名角色②牌堆顶的一张牌拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点①火焰②雷电伤害。",
@@ -234,5 +214,5 @@ game.import("card",function(lib,game,ui,get,ai,_status){
 		},
 		list:[]
 	};
-	return sst_standard;
+	return SST_STANDARD;
 });

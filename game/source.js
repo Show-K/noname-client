@@ -17,7 +17,8 @@ window.noname_source_list=[
 	'character/sst_standard.js',
 	'character/sst_extra.js',
 	'character/sst_sp.js',
-	'character/sst_old.js',
+	'character/sst_legacy.js',
+	'font/suits.ttf',
 	'game/asset.js',
 	'game/codemirror.js',
 	'game/config.js',
@@ -172,4 +173,6 @@ window.noname_source_list=[
 	'node_modules/ultron/test.js',
 	'node_modules/options/package.json',
 	'node_modules/options/lib/options.js',
+	//Rewrite
+	'extension/十周年UI/image/card/sst_spear_thrust.webp'
 ];

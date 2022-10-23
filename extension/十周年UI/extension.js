@@ -1364,8 +1364,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 								}
 								var range = get.select(event.selectCard);
-								game.check();
 								if ((typeof event.isMine == 'function') && event.isMine()) {
+									game.check();
 									if (event.hsskill && !event.forced && _status.prehidden_skills.contains(event.hsskill)) {
 										ui.click.cancel();
 										return;
@@ -1929,6 +1929,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 												function () {
 													return 0;
 												});
+											if (event.id) next._parent_id = event.id;
+											next.type = 'chooseToUse_button';
 										} else {
 											var next = player.chooseButton(dialog);
 											next.set('ai', info.chooseButton.check ||
@@ -1940,6 +1942,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 													return true;
 												});
 											next.set('selectButton', info.chooseButton.select || 1);
+											if (event.id) next._parent_id = event.id;
+											next.type = 'chooseToUse_button';
 										}
 										event.buttoned = event.result.skill;
 									} else if (info && info.precontent && !game.online && !event.nouse) {
@@ -2000,7 +2004,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								var next = owner.lose(card, ui.special, 'visible').set('type', 'equip').set('getlx', false);
 								next.animate = true;
 								next.blameEvent = event;
-							}
+							} else if (get.position(card) == 'c') event.updatePile = true;
 
 							"step 1"
 							if (event.cancelled) {
@@ -2054,11 +2058,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								if (lib.config.background_audio) {
 									game.playAudio('effect', type);
 								}
-							},
-								get.subtype(card));
+							}, get.subtype(card));
 							player.$equip(card);
 							game.addVideo('equip', player, get.cardInfo(card));
 							game.log(player, '装备了', card);
+							if (event.updatePile) game.updateRoundNumber();
 							"step 5"
 							var info = get.info(card, false);
 							if (info.onEquip && (!info.filterEquip || info.filterEquip(card, player))) {
@@ -2166,7 +2170,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										var id = owner.playerid;
 										if (!map[id]) map[id] = [];
 										map[id].push(i);
-									}
+									} else if (!event.updatePile && get.position(i) == 'c') event.updatePile = true;
 								}
 								for (var i in map) {
 									var owner = (_status.connectMode ? lib.playerOL : game.playerMap)[i];
@@ -2300,6 +2304,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								game.log(player, '获得了', cards);
 							}
 							"step 4"
+							if (event.updatePile) game.updateRoundNumber();
 							event.finish();
 						};
 						EventContent.gameDraw = function () {
@@ -3311,13 +3316,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									var cardnum = card[1] || '';
 									var cardsuit = get.translation(card[0]);
 									if (parseInt(cardnum) == cardnum) cardnum = parseInt(cardnum);
-									if ([1, 11, 12, 13].contains(cardnum)) {
-										cardnum = {
-											'1': 'A',
-											'11': 'J',
-											'12': 'Q',
-											'13': 'K'
-										}[cardnum];
+									if (cardnum > 0 && cardnum < 14) {
+										cardnum = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'][cardnum - 1];
 									}
 									if (!lib.card[card[2]]) lib.card[card[2]] = {};
 									var info = lib.card[card[2]];
@@ -4862,6 +4862,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					game.check = function (event) {
 						var i, j, range;
 						if (event == undefined) event = _status.event;
+						event._checked = true;
 						var custom = event.custom || {};
 						var ok = true,
 							auto = true;
@@ -5626,10 +5627,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						ui.mebg = ui.create.div('#mebg', ui.arena);
 						ui.me = ui.create.div('.hand-wrap', ui.arena);
 						ui.handcards1Container = decadeUI.element.create('hand-cards', ui.me);
-						ui.handcards1Container.onmousewheel = decadeUI.handler.handMousewheel;
-
 						ui.handcards2Container = ui.create.div('#handcards2');
 						ui.arena.classList.remove('nome');
+						if (lib.config.mousewheel && !lib.config.touchscreen) {
+							ui.handcards1Container.onmousewheel = decadeUI.handler.handMousewheel;
+							ui.handcards2Container.onmousewheel = ui.click.mousewheel;
+						}
 
 						var equipSolts = ui.equipSolts = decadeUI.element.create('equips-wrap');
 						equipSolts.back = decadeUI.element.create('equips-back', equipSolts);
@@ -5646,8 +5649,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 						ui.handcards1Container.ontouchstart = ui.click.touchStart;
 						ui.handcards2Container.ontouchstart = ui.click.touchStart;
-						ui.handcards1Container.ontouchmove = ui.click.touchScroll;
-						ui.handcards2Container.ontouchmove = ui.click.touchScroll;
+						ui.handcards1Container.ontouchmove = decadeUI.handler.touchScroll;
+						ui.handcards2Container.ontouchmove = decadeUI.handler.touchScroll;
 						ui.handcards1Container.style.WebkitOverflowScrolling = 'touch';
 						ui.handcards2Container.style.WebkitOverflowScrolling = 'touch';
 
@@ -6277,8 +6280,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						if (cards) {
 							var owner = get.owner(cards[0]);
 							if (owner) {
-								event.relatedLose = owner.lose(cards, 'visible').set('getlx', false);
-							}
+								event.relatedLose = owner.lose(cards, 'visible', ui.special).set('getlx', false);
+							} else if (get.position(cards[0]) == 'c') event.updatePile = true;
 						};
 						"step 1";
 						if (cards[0].destroyed) {
@@ -6355,6 +6358,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 							game.addVideo('addJudge', player, [get.cardInfo(cards[0]), cards[0].viewAs]);
 						}
+						if (event.updatePile) game.updateRoundNumber();
 					};
 
 					lib.element.content.chooseToCompare = function () {
@@ -7099,6 +7103,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						node.innerHTML = str;
 						node.dataset.text = str;
 						node.dataset.nature = nature || 'soil';
+						node.style.animation = 'open-fade-in 0.6s';
 					};
 
 					lib.element.player.$damagepop = function (num, nature, font, nobroadcast) {
@@ -8137,6 +8142,24 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 						if (hand.frameId == void 0) {
 							hand.frameId = requestAnimationFrame(handScroll);
+						}
+					},
+					touchScroll: function (e) {
+						if (_status.mousedragging) return;
+						if (_status.draggingtouchdialog) return;
+						if (!_status.dragged) {
+							if (Math.abs(e.touches[0].clientX / game.documentZoom - this.startX) > 10 ||
+								Math.abs(e.touches[0].clientY / game.documentZoom - this.startY) > 10) {
+								_status.dragged = true;
+							}
+						}
+						if ((this == ui.handcards1Container || this == ui.handcards2Container) && !this.style.overflowX == 'scroll') {
+							e.preventDefault();
+						} else if (lib.device == 'ios' && this.scrollHeight <= this.offsetHeight + 5 && this.scrollWidth <= this.offsetWidth + 5) {
+							e.preventDefault();
+						} else {
+							delete _status._swipeorigin;
+							e.stopPropagation();
 						}
 					},
 				},
@@ -10014,13 +10037,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.12SST（Show-K修复版）',
-					'更新日期：2022-09-05',
-					'- 现在可以设置折叠手牌最小宽度了，且默认值修改为81。',
-					'- 为牌名辅助显示的文字增加了背景颜色，使之更容易阅读。',
-					'- 修复了targetprompt无描边的异常（举例：【借刀杀人】）。',
-					'- 修复了若游戏本体路径包含半角括号，觉醒技/限定技特效等不显示的异常。',
-					'- 将拼点对话框等对话框的z-index调低，使之不会遮挡游戏牌。',
+					'当前版本：1.2.0.220114.15SST（Show-K修复版）',
+					'更新日期：2022-10-22',
+					'- 修复了牌名辅助显示被遮挡的异常。',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
@@ -10040,7 +10059,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "短歌 QQ464598631<br>(Show-K未经允许修改)",
 			diskURL: "",
 			forumURL: "",
-			version: "1.2.0.220114.12SST",
+			version: "1.2.0.220114.15SST",
 		},
 		files: {
 			"character": [],

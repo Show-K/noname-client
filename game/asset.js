@@ -1,6 +1,15 @@
 window.noname_asset_list=[
-	'v1.9.115.1',
-	
+	'v1.9.116',
+	//'audio/background/aozhan_chaoming.mp3',
+	//'audio/background/aozhan_online.mp3',
+	//'audio/background/aozhan_rewrite.mp3',
+	//'audio/background/music_danji.mp3',
+	//'audio/background/music_default.mp3',
+	//'audio/background/music_diaochan.mp3',
+	//'audio/background/music_shezhan.mp3',
+	//'audio/background/music_jifeng.mp3',
+	//'audio/background/music_phliosophy.mp3',
+	//'audio/background/music_jilve.mp3',
 	'audio/card/default.mp3',
 	
 	'audio/card/female/caomu.mp3',
@@ -1206,6 +1215,7 @@ window.noname_asset_list=[
 	'image/character/sst_olimar.png',
 	'image/character/sst_marioraz.png',
 	'image/character/sst_piranha_plant.png',
+	'image/character/sst_bayonetta.png',
 
 	'image/character/sst_claude.png',
 	'image/character/sst_geno.png',
@@ -1220,6 +1230,11 @@ window.noname_asset_list=[
 	'image/character/sst_bandana_waddle_dee.png',
 	'image/character/sst_magolor.png',
 	'image/character/sst_roy.png',
+	'image/character/sst_r_o_b.png',
+	'image/character/sst_inkling.png',
+	'image/character/sst_inkling_male.png',
+	'image/character/sst_inkling_female.png',
+	'image/character/sst_wii_fit_trainer.png',
 
 	'image/character/ymk_isabelle.png',
 	'image/character/ska_bobby.png',
@@ -1243,6 +1258,8 @@ window.noname_asset_list=[
 	'image/character/xsj_yu_narukami.png',
 	'image/character/xsj_dante.png',
 	'image/character/ska_daroach.png',
+	'image/character/nnk_decidueye.png',
+	'image/character/nnk_machamp.png',
 
 	'image/character/caocao.png',
 	'image/character/daqiao.png',
@@ -1315,7 +1332,11 @@ window.noname_asset_list=[
 	'audio/background/music_dharkon.mp3',
 	'audio/background/music_galeem_dharkon.mp3',
 
+	'audio/effect/ignotus.mp3',
+	'audio/effect/sm3dw_overworld.mp3',
 	'audio/effect/sst_big_blue.mp3',
+	'audio/effect/taketori_hishou.mp3',
+	'audio/effect/tori_no_uta.mp3',
 
 	'audio/card/female/lizhengshangyou.mp3',
 	'audio/card/female/tongzhougongji.mp3',
@@ -1325,7 +1346,7 @@ window.noname_asset_list=[
 	'audio/card/male/lizhengshangyou.mp3',
 	'audio/card/male/tongzhougongji.mp3',
 	'audio/card/male/xionghuangjiu.mp3',
-	'audio/card/male/zong.mp3',
+	'audio/card/male/zong.mp3'
 	//New add end
 ];
 window.noname_skin_list={
@@ -1340,4 +1361,5 @@ window.noname_skin_list={
 	sst_young_link:1,
 	sst_zelda:1,
 	ymk_577:1,
+	sst_bayonetta:2
 };

@@ -1,22 +1,13 @@
 window.noname_character_rank={
-	s:[
-	],
-	ap:[
-	],
-	a:[
-	],
-	am:[
-	],
-	bp:[
-	],
-	b:[
-	],
-	bm:[
-	],
-	c:[
-	],
-	d:[
-	],
+	s:[],
+	ap:[],
+	a:[],
+	am:[],
+	bp:[],
+	b:[],
+	bm:[],
+	c:[],
+	d:[],
 	rarity:{
 		legend:[
 			"ymk_isabelle",
@@ -82,7 +73,10 @@ window.noname_character_rank={
 			"sst_piranha_plant",
 			"alz_yuri_kozukata",
 			"sst_ganondorf",
-			"sst_r_o_b"
+			"sst_r_o_b",
+			"sst_bayonetta",
+			"nnk_decidueye",
+			"nnk_machamp"
 		],
 		rare:[
 			"sst_mario",
