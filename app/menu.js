@@ -3,7 +3,8 @@ const { versions } = process;
 const electronVersion = parseFloat(versions.electron);
 let remote;
 if (electronVersion >= 14) {
-	remote =  require('@electron/remote');
+	// @ts-ignore
+	remote = require('@electron/remote');
 } else {
 	remote = require('electron').remote;
 }
@@ -40,8 +41,8 @@ async function checkForUpdate(url) {
 			if(err) alert(err);
 			else {
 				let updateContent = new BrowserWindow({
-					width: 850,
-					height: 650,
+					width: 1280,
+					height: 720,
 					title: '大乱桌斗-更新内容',
 					icon: path.join(__dirname, '..' ,'super_smash_tabletop.ico'),
 					autoHideMenuBar: true,
@@ -161,7 +162,7 @@ localStorage.getItem('autoCheckUpdates') == 'true' && checkForUpdate('https://ra
 if(!localStorage.getItem('noname_inited')){
 	function loop(...args){
 		for (let i = 0; i < args.length; i++) {
-			let filePath = path.join(__dirname, args[i]);
+			let filePath = path.join(__dirname, '..', args[i]);
 			console.log(args[i], fs.existsSync(filePath) );
 			if( !fs.existsSync(filePath) ) return false;
 			let stat = fs.statSync(filePath);
@@ -174,7 +175,7 @@ if(!localStorage.getItem('noname_inited')){
 }
 
 // 截图 base64 -> blob
-function b64toBlob(b64Data, contentType = null, sliceSize = null) {
+function b64toBlob(b64Data, contentType, sliceSize) {
 	contentType = contentType || 'image/png'
 	sliceSize = sliceSize || 512
 	let byteCharacters = atob(b64Data);
@@ -209,7 +210,7 @@ if (window.indexedDB) {
     const request = window.indexedDB.open(configprefix + 'data', 4);
     request.onerror = function (e) { console.error(e); };
 	request.onupgradeneeded = function (e) {
-		const db = e.target.result;
+		const db = /*e.target.result;*/ this.result;
 		if(!db.objectStoreNames.contains('video')){
 			db.createObjectStore('video', { keyPath: 'time' });
 		}
@@ -227,21 +228,42 @@ if (window.indexedDB) {
 		}
 	};
     request.onsuccess = function (e) {
-        const db = e.target.result;
+		const db = /*e.target.result;*/ this.result;
         if (!db.objectStoreNames.contains('config')) return;
         const store = db.transaction(['config'], 'readwrite').objectStore('config');
         store.get('extensions').onsuccess = function (e) {
-            const extensions = e.target.result;
+			/** @type string[] */
+			const extensions = /*e.target.result;*/ this.result;
             const config = db.transaction(['config'], 'readwrite').objectStore('config');
             if (!Array.isArray(extensions) || extensions.length == 0) {
                 config.put(['应用配置', '拖拽读取', '在线更新'], 'extensions');
             }
-            if (extensions.includes('\u6982\u5ff5\u6b66\u5c06')) {
-                config.put(false, "extension_\u6982\u5ff5\u6b66\u5c06_enable");
-            }
-            if (extensions.includes('\u5047\u88c5\u65e0\u654c')) {
-                config.put(false, "extension_\u5047\u88c5\u65e0\u654c_enable");
-            }
+			if (extensions.includes('\u6982\u5ff5\u6b66\u5c06')) {
+				dialog.showMessageBox(thisWindow, {
+					message: '运行\u6982\u5ff5\u6b66\u5c06扩展可能会造成安全性问题，是否关闭此扩展?',
+					type: 'error',
+					title: '应用更新提醒',
+					icon: path.join(__dirname, '..', 'noname.ico'),
+					buttons: ['确定', '取消'],
+					defaultId: 0,
+					cancelId: 1,
+				}).then(({ response }) => {
+					if (response == 0) config.put(false, "extension_\u6982\u5ff5\u6b66\u5c06_enable");
+				});
+			}
+			if (extensions.includes('\u5047\u88c5\u65e0\u654c')) {
+				dialog.showMessageBox(thisWindow, {
+					message: '运行\u5047\u88c5\u65e0\u654c扩展可能会造成安全性问题，是否关闭此扩展?',
+					type: 'error',
+					title: '应用更新提醒',
+					icon: path.join(__dirname, '..', 'noname.ico'),
+					buttons: ['确定', '取消'],
+					defaultId: 0,
+					cancelId: 1,
+				}).then(({ response }) => {
+					if (response == 0) config.put(false, "extension_\u5047\u88c5\u65e0\u654c_enable");
+				});
+			}
         };
     };
 }
@@ -285,6 +307,7 @@ var Menus = [{
 	}, {
 		label: 'emoji选取',
 		click: () => {
+			// @ts-ignore
 			window.showEmojiPanel();
 		},
 	}, {
@@ -390,16 +413,17 @@ var Menus = [{
     }],
 }];
 
+// @ts-ignore
 Menu.setApplicationMenu(Menu.buildFromTemplate(Menus));
 
-let leaveFullScreen = function(e) {
+let leaveFullScreen = function (e) {
 	if (e.code == "F11") {
 		thisWindow.setFullScreen(false);
 	}
 };
 
 thisWindow.on('enter-full-screen', () => {
-	if(!thisWindow.isDestroyed()) {
+	if (!thisWindow.isDestroyed()) {
 		Menu.setApplicationMenu(null);
 		window.addEventListener('keydown', leaveFullScreen);
 	} else {
@@ -408,8 +432,9 @@ thisWindow.on('enter-full-screen', () => {
 });
 
 thisWindow.on('leave-full-screen', () => {
-	if(!thisWindow.isDestroyed()) {
+	if (!thisWindow.isDestroyed()) {
 		window.removeEventListener('keydown', leaveFullScreen);
+		// @ts-ignore
 		Menu.setApplicationMenu(Menu.buildFromTemplate(Menus));
 		// contents.closeDevTools();
 	} else {
@@ -417,6 +442,7 @@ thisWindow.on('leave-full-screen', () => {
 	}
 });
 
+// @ts-ignore
 window.showEmojiPanel = () => {
 	if(!app.isEmojiPanelSupported()) {
 		alert('当前操作系统版本不允许使用本机emoji选取器');

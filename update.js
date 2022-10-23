@@ -18,6 +18,7 @@ window.updateList = [
 
 	//在线更新
 	'extension/在线更新/extension.js',
+	'extension/在线更新/extension.css',
 	'extension/在线更新/typings/index.d.ts',
 
 	// typings
@@ -34,8 +35,10 @@ window.updateList = [
 	"typings/client.d.ts",
 	"typings/content.d.ts",
 	"typings/control.d.ts",
-	"typings/cordova-plugin-file.d.ts",
 	"typings/cordova-plugin-dialogs.d.ts",
+	"typings/cordova-plugin-file.d.ts",
+	"typings/cordova-plugin-file-transfer.d.ts",
+	"typings/cordova-plugin-local-notifications.d.ts",
 	"typings/cordova.d.ts",
 	"typings/create.d.ts",
 	"typings/DateEx.d.ts",

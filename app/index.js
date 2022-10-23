@@ -17,9 +17,10 @@
 		},
 		onDeviceReady: function() {
 			var site_g = 'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop/';
-			//github镜像网址
-			var site_c = 'https://unitedrhythmized.club/Show-K/noname/super-smash-tabletop/';
 			//苏婆config镜像网址
+			var site_c = 'https://ghproxy.com/https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop/';
+			//Show-K URC网址
+			var site_urc = 'https://unitedrhythmized.club/Show-K/noname/super-smash-tabletop/';
 			var site = site_g;
 			var button, changesite, help, version, versionnode;
 			var req = function(url, onload, onerror, target) {
@@ -263,9 +264,12 @@
 				if (site == site_c) {
 					site = site_g;
 					this.innerHTML = '下载源: GitHub'
+				} else if(site == site_g){
+					site = site_urc;
+					this.innerHTML = '下载源: URC'
 				} else {
 					site = site_c;
-					this.innerHTML = '下载源: Coding'
+					this.innerHTML = '下载源: GitHub Proxy'
 				}
 				checkConnection();
 			};

@@ -1,5 +1,5 @@
 const PROTOCOL = 'nonameSkill';
-const { app, BrowserWindow, Menu, ipcMain, session, globalShortcut, crashReporter } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain, session, crashReporter } = require('electron');
 const fs = require('fs');
 const path = require('path');
 const isWindows = process.platform === 'win32';
@@ -106,6 +106,12 @@ app.on('open-url', (event, urlStr) => {
 	createWindow();
 });
 
+app.setAboutPanelOptions({
+	iconPath: 'noname.ico',
+	authors: ['诗笺'],
+	website: 'https://github.com/nonameShijian/noname',
+});
+
 process.env['ELECTRON_DEFAULT_ERROR_MODE'] = 'true';
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 process.noDeprecation = true;
@@ -153,7 +159,7 @@ function createMainWindow() {
 	return win;
 }
 
-function createExtensionWindow() {
+/* function createExtensionWindow() {
 	let win = new BrowserWindow({
 		width: 1280,
 		height: 720,
@@ -174,6 +180,7 @@ function createExtensionWindow() {
 	}
 	return win;
 }
+*/
 
 function createUpdateWindow() {
 	let win = new BrowserWindow({
@@ -197,7 +204,7 @@ function createUpdateWindow() {
 	return win;
 }
 
-global.createEditorWindow = createEditorWindow;
+/* global.createEditorWindow = createEditorWindow;
 global.editorWindow = null;
 global.debugWindow = null;
 
@@ -263,11 +270,12 @@ function createEditorWindow() {
     
 	return win;
 }
+*/
 
 app.whenReady().then(() => {
 	
 	let downloadPath, downloadExtName, extensionWinId, updatePath, updateUrl, updateWinId;
-	const downloadUrl = 'https://kuangthree.coding.net/p/noname-extensionxwjh/d/noname-extensionxwjh/git/raw/master/';
+	// const downloadUrl = 'https://kuangthree.coding.net/p/noname-extensionxwjh/d/noname-extensionxwjh/git/raw/master/';
 	
 	ipcMain.on('download-path', function(event, arg) {
 		[downloadPath, downloadExtName, extensionWinId] = arg;
@@ -279,7 +287,8 @@ app.whenReady().then(() => {
 		event.returnValue = updatePath;
 	});
 	
-	session.defaultSession.on('will-download', (event, item) => {
+	// 注释掉下载扩展的功能
+	/*session.defaultSession.on('will-download', (event, item) => {
 		if(!downloadPath || !downloadExtName || !extensionWinId) return;
 		const fileUrl = decodeURI(item.getURL()).replace(downloadUrl + downloadExtName + '/', '');
 		const savePath = path.join(downloadPath, fileUrl);
@@ -310,6 +319,7 @@ app.whenReady().then(() => {
 			winId.webContents.send('download-done', state);
 		});
 	});
+	*/
 	
 	session.defaultSession.on('will-download', (event, item) => {
 		if(!updatePath || !updateUrl || !updateWinId) return;
