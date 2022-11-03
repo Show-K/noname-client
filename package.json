@@ -9,43 +9,43 @@
         "packageWin64": "electron-packager . 大乱桌斗 --platform=win32 --arch=x64 --out=./ --app-version=1.9.0 --icon=super_smash_tabletop.ico --overwrite --ignore=./node_modules --ignore=.git --electron-version 16.0.4",
         "packageWin32": "electron-packager . 大乱桌斗 --platform=win32 --arch=ia32 --out=./ --app-version=1.9.0 --icon=super_smash_tabletop.ico --overwrite --ignore=node_modules --electron-version 16.0.4",
         "packageLinux": "electron-packager . 大乱桌斗 --platform=linux --arch=x64 --out=./ --app-version=1.9.0 --icon=super_smash_tabletop.ico --overwrite --ignore=node_modules --electron-version 16.0.4",
-		"dist": "electron-builder"
+        "dist": "electron-builder"
     },
-	"build": {
-		"productName": "大乱桌斗",
-		"appId": "xyz.unitedrhythmizedclub.supersmashtabletop",
-		"directories": {
-			"output": "build"
-		},
-		"asar": false,
-		"win": {
-			"icon": "super_smash_tabletop.ico",
-			"target": [
-				{
-					"target": "nsis",
-					"arch": [
-						"x64"
-					]
-				}
-			]
-		},
-		"nsis": {
-			"oneClick": false,
-			"perMachine": false,
-			"allowElevation": true,
-			"allowToChangeInstallationDirectory": true,
-			"installerIcon": "super_smash_tabletop.ico",
-			"uninstallerIcon": "super_smash_tabletop.ico",
-			"installerHeaderIcon": "super_smash_tabletop.ico",
-			"createDesktopShortcut": true,
-			"createStartMenuShortcut": true,
-			"shortcutName": "大乱桌斗",
-			"uninstallDisplayName": "大乱桌斗",
-			"artifactName": "大乱桌斗安装程序v1.43.exe",
-			"language": "2052",
-			"unicode": true
-		}
-	},
+    "build": {
+        "productName": "大乱桌斗",
+        "appId": "xyz.unitedrhythmizedclub.supersmashtabletop",
+        "directories": {
+            "output": "build"
+        },
+        "asar": false,
+        "win": {
+            "icon": "super_smash_tabletop.ico",
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": [
+                        "x64"
+                    ]
+                }
+            ]
+        },
+        "nsis": {
+            "oneClick": false,
+            "perMachine": false,
+            "allowElevation": true,
+            "allowToChangeInstallationDirectory": true,
+            "installerIcon": "super_smash_tabletop.ico",
+            "uninstallerIcon": "super_smash_tabletop.ico",
+            "installerHeaderIcon": "super_smash_tabletop.ico",
+            "createDesktopShortcut": true,
+            "createStartMenuShortcut": true,
+            "shortcutName": "大乱桌斗",
+            "uninstallDisplayName": "大乱桌斗",
+            "artifactName": "大乱桌斗安装程序v1.43.exe",
+            "language": "2052",
+            "unicode": true
+        }
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Show-K/noname-client.git"
@@ -55,14 +55,15 @@
     "author": "Show-K",
     "license": "ISC",
     "devDependencies": {
-		"electron-packager": "^15.3.0",
-		"electron": "^16.0.4",
-		"@types/cordova": "^0.0.34"
+        "@types/cordova": "^0.0.34",
+        "electron": "^16.0.4",
+        "electron-builder": "^23.6.0",
+        "electron-packager": "^15.3.0"
     },
     "dependencies": {
-		"@electron/remote": "^2.0.1",
-		"options": "0.0.6",
-		"ultron": "1.0.2",
-		"ws": "1.0.1"
+        "@electron/remote": "^2.0.1",
+        "options": "0.0.6",
+        "ultron": "1.0.2",
+        "ws": "1.0.1"
     }
 }
