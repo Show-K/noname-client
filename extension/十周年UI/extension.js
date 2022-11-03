@@ -276,7 +276,20 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										continue;
 									}
 
-									var skin = skins[Object.keys(skins)[0]];
+									var skin;
+									if (lib && lib.config && lib.config.qhly_skinset && lib.config.qhly_skinset.djtoggle && lib.config.extensions && lib.config.extensions.contains('千幻聆音') && lib.config['extension_千幻聆音_enable']) {
+										skin = null;
+										var namex = i == 0 ? character : character2;
+										var value = game.qhly_getSkin(namex);
+										if (value) value = value.substring(0, value.lastIndexOf('.'));
+										else value = '经典形象';
+										if (lib.config.qhly_skinset.djtoggle && lib.config.qhly_skinset.djtoggle[namex] && lib.config.qhly_skinset.djtoggle[namex][value]) continue;
+										for (var j of Object.keys(skins)) {
+											if (j == value) skin = skins[value];
+										}
+									} else skin = skins[Object.keys(skins)[0]];
+									if (skin == null) continue;
+
 									if (skin.speed == undefined)
 										skin.speed = 1;
 									this.playDynamic({
@@ -300,12 +313,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										clipSlots: skin.clipSlots,	// 剪掉超出头的部件，仅针对露头动皮，其他勿用
 									}, i == 1);
 
-									this.$dynamicWrap.style.backgroundImage = 'url("' + extensionPath + 'assets/dynamic/' + skin.background + '")';
+									if (i == 0) this.$dynamicWrap.style.backgroundImage = 'url("' + extensionPath + 'assets/dynamic/' + skin.background + '")';
 									if (!increased) {
 										increased = true;
 										decadeUI.CUR_DYNAMIC++;
 									}
 								}
+								this.qhly_replaceDynamic = true;
 							}
 
 							var jie;
@@ -3921,7 +3935,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										if (deputy && dynamic.deputy) {
 											dynamic.stop(dynamic.deputy);
 											dynamic.deputy = null;
-										} else if (dynamic.primary) {
+										} else if (!deputy && dynamic.primary) {
 											dynamic.stop(dynamic.primary);
 											dynamic.primary = null;
 										}
@@ -5498,6 +5512,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									sst_spirit: '魂',
 									sst_reality: '现',
 									sst_smash: '斗',
+									ye: '野',
 								};
 							}
 
@@ -8061,10 +8076,14 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						}, timestamp);
 					},
 					resize: function () {
-						if (decadeUI.isMobile())
+						if (decadeUI.isMobile()) {
 							ui.arena.classList.add('dui-mobile');
-						else
+							ui.window.classList.add('dui-mobile');
+						}
+						else {
 							ui.arena.classList.remove('dui-mobile');
+							ui.window.classList.remove('dui-mobile');
+						}
 
 						var set = decadeUI.dataset;
 						set.animSizeUpdated = false;
@@ -10037,9 +10056,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.15SST（Show-K修复版）',
-					'更新日期：2022-10-22',
-					'- 修复了牌名辅助显示被遮挡的异常。',
+					'当前版本：1.2.0.220114.16SST（Show-K修复版）',
+					'更新日期：2022-11-03',
+					'- 修复了处于隐匿状态的武将的静态武将图片不显示的异常。',
+					'- 修复了手机端牌堆查看等界面花色图案过大的异常。',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
@@ -10059,7 +10079,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "短歌 QQ464598631<br>(Show-K未经允许修改)",
 			diskURL: "",
 			forumURL: "",
-			version: "1.2.0.220114.15SST",
+			version: "1.2.0.220114.16SST",
 		},
 		files: {
 			"character": [],

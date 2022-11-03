@@ -10,7 +10,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_sp:{
 				sst_mnm:["mnm_edelgard"],
 				sst_ymk:["ymk_isabelle","ymk_yumikohimi","ymk_tianyi"],
-				sst_ska:["ska_bobby","ska_olivia","ska_super_xiaojie","ska_show_k","ska_professor_toad","ska_king_olly","ska_koopa_troopa","ska_daroach"],
+				sst_ska:["ska_bobby","ska_olivia","ska_super_xiaojie","ska_show_k","ska_professor_toad","ska_king_olly","ska_koopa_troopa","ska_daroach","ska_rabbid_peach","ska_rabbid_rosalina"],
 				sst_nnk:["nnk_robin","nnk_decidueye","nnk_machamp"],
 				sst_alz:["alz_kyo_kusanagi","alz_yuri_kozukata"],
 				sst_xsj:["xsj_yu_narukami","xsj_dante"],
@@ -40,7 +40,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			xsj_dante:["male","sst_spirit",4,["xsj_wanxie","xsj_moxue"],[]],
 			ska_daroach:["male","sst_spirit",3,["ska_zhidai","ska_siyi"],["hiddenSkill"]],
 			nnk_decidueye:["male","sst_spirit",4,["nnk_fengying","nnk_biantou"],[]],
-			nnk_machamp:["male","sst_spirit",4,["nnk_manwu","nnk_mianyu"],[]]
+			nnk_machamp:["male","sst_spirit",4,["nnk_manwu","nnk_mianyu"],[]],
+			ska_rabbid_peach:["female","sst_spirit",3,["ska_lianmao","ska_huirong"],[]],
+			ska_rabbid_rosalina:["female","sst_spirit",3,["ska_yingyong","ska_zhenmei"],[]]
 		},
 		characterFilter:{
 			mnm_edelgard:mode=>mode=="identity"
@@ -272,7 +274,27 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				一种拥有无穷的力量的宝可梦，用发达的4只手在2秒内可以出拳1000发，四只手发出的格斗招式几乎无法阻挡。与此相对，它们相当不擅长干细活儿。虽然看上去非常雄壮，但其实也有雌性的怪力。<br>\
 				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
 				<hr>\
-				真的暴力。"
+				真的暴力。",
+			ska_rabbid_peach:"武将作者：Show-K<br>\
+				插图作者：《马力欧+疯狂兔子 星耀之愿》<br>\
+				<hr>\
+				0129. 疯兔桃花公主/Rabbid Peach/ラビッツピーチ<br>\
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
+				首次登场：<ruby>马力欧+疯狂兔子：王国之战<rp>（</rp><rt>Mario + Rabbids Kingdom Battle</rt><rp>）</rp></ruby><br>\
+				一只疯兔和桃花公主的假发融合后的产物。她不但和一般的疯兔一样皮，也更加自恋，总是试图吸引人的注意，还喜欢自拍，和真正的桃花公主一点都不一样——她似乎和桃花公主相处也不太融洽。<br>\
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
+				<hr>\
+				任天堂+育碧=?",
+			ska_rabbid_rosalina:"武将作者：Show-K<br>\
+				插图作者：《马力欧+疯狂兔子 星耀之愿》<br>\
+				<hr>\
+				S008. 疯兔罗莎塔/Rabbid Rosalina/ラビッツロゼッタ<br>\
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
+				首次登场：<ruby>马力欧+疯狂兔子 星耀之愿<rp>（</rp><rt>Mario + Rabbids Sparks of Hope</rt><rp>）</rp></ruby><br>\
+				如果你相信自己的祖上有贵族血统，那么表现出皇家风范就是一件再自然不过的事情。疯兔罗莎塔聪明过人，随时准备和自己的队伍一起消灭任何威胁！<br>\
+				——《马力欧+疯狂兔子 星耀之愿》<br>\
+				<hr>\
+				马力欧&路易吉RPG精神续作。另外庆祝一下《超级马力欧银河》15周年。"
 		},
 		characterTitle:{
 			ymk_isabelle:"尽忠职守",
@@ -281,7 +303,6 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			ska_super_xiaojie:"永不言弃",
 			ska_show_k:"中流砥柱",
 			ymk_yumikohimi:"新厨明灶",
-			ska_bowser:"联挚之火",
 			ska_professor_toad:"沙原博时",
 			mnm_edelgard:"炎翼的皇女",
 			alz_kyo_kusanagi:"炎之贵公子",
@@ -296,7 +317,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			xsj_dante:"斯巴达之子",
 			ska_daroach:"宇宙盗贼团前来拜访",
 			nnk_decidueye:"遮天蔽日",
-			nnk_machamp:"百裂拳击"
+			nnk_machamp:"百裂拳击",
+			ska_rabbid_peach:"孤芳他赏",
+			ska_rabbid_rosalina:"博闻强倦"
 		},
 		skill:{
 			//SP Isabelle
@@ -836,6 +859,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					}
 				}
 			},
+			//Show-K
 			ska_jingli:{
 				enable:"phaseUse",
 				usable:1,
@@ -1964,14 +1988,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				filter:event=>event.player.countUsed(null,true)<=1&&!_status.dying.length&&event.targets&&event.targets.length,
 				content:()=>{
 					"step 0"
-					player.chooseCard(get.prompt("ska_zhidai"),"你可以打出一张手牌替换"+get.translation(trigger.card)+"对应的实体牌，若如此做，本回合结束阶段，你对自己使用"+get.translation(trigger.card)+"对应的实体牌","hs",card=>{
-						const player=_status.event.player;
-						const mod2=game.checkMod(card,player,"unchanged","cardEnabled2",player);
-						if(mod2!="unchanged") return mod2;
-						const mod=game.checkMod(card,player,"unchanged","cardRespondable",player);
-						if(mod!="unchanged") return mod;
-						return true;
-					}).set("ai",card=>{
+					const next=player.chooseToRespond();
+					next.set("filterCard",card=>!get.info(card).notarget);
+					next.set("ai",card=>{
 						const player=_status.event.player;
 						const evt=_status.event.getTrigger();
 						let before=0,after=0;
@@ -1983,77 +2002,32 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						after/=evt.targets.length;
 						return after-before;
 					});
+					next.set("noOrdering",true);
+					next.set("position","hes");
+					next.set("logSkill",["ska_zhidai",trigger.player]);
+					next.set("prompt",get.prompt("ska_zhidai",trigger.player))
+					next.set("prompt2","你可以打出一张使用目标为角色的牌替换"+get.translation(trigger.card)+"对应的实体牌");
 					"step 1"
-					if(result.cards&&result.cards.length){
-						const next=player.respond(result.cards,"highlight","ska_zhidai","noOrdering");
-						event.card=next.card;
-						event.cards=next.cards;
-					}
-					else{
-						event.finish();
-					}
-					"step 2"
-					if(card&&cards){
+					if(result.card&&result.cards){
 						const original=trigger.cards.filterInD("o");
 						if(original.length){
-							event.original=original;
 							player.$gain2(original,true);
 							player.gain(original);
 						}
-						trigger.card=card;
-						trigger.cards=cards;
-						if(!Array.isArray(trigger.orderingCards)) trigger.orderingCards=[];
-						trigger.orderingCards.addArray(cards);
-						trigger.throw=false;
-						trigger.noai=true;
-						const evt=event.getParent("phase");
-						if(evt&&evt.name=="phase"&&!evt.ska_zhidai){
-							evt.set("ska_zhidai",true);
-							const next=game.createEvent("ska_zhidai_clear");
-							event.next.remove(next);
-							evt.after.push(next);
-							next.set("player",player);
-							next.setContent(()=>{
-								player.removeGaintag("ska_zhidai",player.getCards());
-							});
+						trigger.card=result.card;
+						trigger.cards=result.cards;
+						if(!Array.isArray(trigger.orderingCards)){
+							trigger.set("orderingCards",result.cards);
 						}
+						else{
+							trigger.orderingCards.addArray(result.cards);
+						}
+						trigger.set("throw",false);
+						trigger.set("noai",true);
 					}
-					else{
-						event.finish();
-					}
-					"step 3"
-					if(Array.isArray(event.original)) player.addGaintag(event.original,"ska_zhidai");
 				},
 				ai:{
 					expose:0.2
-				},
-				group:"ska_zhidai2"
-			},
-			ska_zhidai2:{
-				mod:{
-					aiUseful:(player,card,num)=>{
-						if(get.itemtype(card)=="card"&&card.hasGaintag("ska_zhidai")) return num-1;
-					}
-				},
-				forced:true,
-				trigger:{global:"phaseJieshuBegin"},
-				filter:(event,player)=>player.countCards("h",card=>card.hasGaintag("ska_zhidai")),
-				content:()=>{
-					"step 0"
-					event.cards=player.getCards("h",card=>card.hasGaintag("ska_zhidai"));
-					"step 1"
-					if(cards.length){
-						const card=cards.shift();
-						player.useCard(card,player,false);
-						event.redo();
-					}
-				},
-				ai:{
-					effect:{
-						player:card=>{
-							if(card.cards&&card.cards.filter(card=>get.itemtype(card)=="card"&&card.hasGaintag("ska_zhidai")).length) return [1,1];
-						}
-					}
 				}
 			},
 			ska_siyi:{
@@ -2244,6 +2218,139 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						}
 					}
 				}
+			},
+			//Rabbid Peach
+			ska_lianmao:{
+				locked:true,
+				direct:true,
+				trigger:{player:"useCardToPlayer"},
+				filter:(event,player)=>{
+					if(!["basic","trick"].contains(get.type(event.card))) return false;
+					const evt=event.getParent();
+					if(evt.ska_lianmao) return false;
+					return evt.targets.filter(current=>current!=player&&current.countGainableCards(player,"hej")).length;
+				},
+				content:()=>{
+					"step 0"
+					player.chooseTarget(get.prompt2("ska_lianmao"),(card,player,target)=>target!=player&&_status.event.getTrigger().getParent().targets.contains(target)&&target.countGainableCards(player,"hej"),true).set("ai",target=>{
+						const player=_status.event.player;
+						let att=get.attitude(player,target);
+						if(att<0){
+							att=-Math.sqrt(-att);
+						}
+						else{
+							att=Math.sqrt(att);
+						}
+						return att*lib.card.shunshou.ai.result.target(player,target);
+					});
+					"step 1"
+					if(result.targets&&result.targets.length){
+						trigger.getParent().set("ska_lianmao",true);
+						event.cards=[];
+						event.target=result.targets[0];
+						player.logSkill("ska_lianmao",event.target);
+						player.gainPlayerCard("恋貌：获得"+get.translation(event.target)+"区域内一张牌，然后"+get.translation(event.target)+"获得你区域内一张牌（均正面朝上移动），若这两张牌颜色相同，你摸一张牌",event.target,"hej","visibleMove",true).set("delay",false);
+					}
+					else{
+						event.finish();
+					}
+					"step 2"
+					let str="恋貌：获得"+get.translation(player)+"区域内一张牌（正面朝上移动）";
+					if(result.cards&&result.cards.length){
+						cards.push(...result.cards);
+						str+="，若与"+get.translation(cards)+"颜色相同，"+get.translation(player)+"摸一张牌";
+					}
+					target.gainPlayerCard(str,player,"hej","visibleMove",true).set("delay",false);
+					"step 3"
+					if(result.cards&&result.cards.length){
+						cards.push(...result.cards);
+						if(cards.length>=2){
+							let identical=true;
+							for(let i=0;i<cards.length-1;i++){
+								if(get.color(cards[i])!=get.color(cards[i+1])){
+									identical=false;
+									break;
+								}
+							}
+							if(identical) player.draw("nodelay");
+						}
+					}
+				}
+			},
+			ska_huirong:{
+				locked:false,
+				mod:{
+					selectTarget:(card,player,range)=>{
+						if(card.name=="guaguliaodu"&&range[1]!=-1) range[1]++;
+					}
+				},
+				enable:"phaseUse",
+				usable:1,
+				filterCard:card=>get.color(card)=="red",
+				selectCard:2,
+				position:"hes",
+				viewAs:{name:"guaguliaodu"},
+				viewAsFilter:player=>{
+					if(player.countCards("hes",card=>get.color(card)=="red")<2) return false;
+				},
+				check:card=>5-get.value(card)
+			},
+			//Rabbid Rosalina
+			ska_yingyong:{
+				trigger:{global:"loseAfter"},
+				filter:event=>{
+					if(event.getParent().name!="discard") return false;
+					if(event.hs.length+event.es.length<=0) return false;
+					const history=game.getGlobalHistory("cardMove",evt=>evt.name=="lose"&&evt.getParent().name=="discard"&&evt.hs.length+evt.es.length);
+					return history.length==1;
+				},
+				logTarget:"player",
+				check:(event,player)=>get.attitude(player,event.player)>0,
+				content:()=>{
+					"step 0"
+					player.chooseToGuanxing(7);
+					"step 1"
+					const card=get.cards()[0];
+					if(lib.filter.canBeGained(card,trigger.player,player)){
+						player.give(card,trigger.player,true);
+					}
+					else{
+						ui.cardPile.insertBefore(card.fix(),ui.cardPile.firstChild);
+					}
+					"step 2"
+					_status.currentPhase.chooseToDiscard("颖慵：弃置一张牌","he",true);
+				},
+				ai:{
+					expose:0.2
+				}
+			},
+			ska_zhenmei:{
+				round:4,
+				enable:"phaseUse",
+				position:"he",
+				filterCard:card=>{
+					const suit=get.suit(card);
+					for(const i of ui.selected.cards){
+						if(get.suit(i)==suit) return false;
+					}
+					return true;
+				},
+				selectCard:3,
+				complexCard:true,
+				filterTarget:(card,player,target)=>player.inRange(target),
+				selectTarget:[0,Infinity],
+				content:()=>{
+					target.turnOver();
+				},
+				ai:{
+					order:5,
+					result:{
+						target:(player,target)=>{
+							if(target.hasSkillTag("noturn")) return 0;
+							return target.isTurnedOver()?2:-2;
+						}
+					}
+				}
 			}
 		},
 		dynamicTranslate:{
@@ -2297,11 +2404,14 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			ska_daroach:"怪盗洛切",
 			nnk_decidueye:"狙射树枭",
 			nnk_machamp:"怪力",
+			ska_rabbid_peach:"疯兔桃花公主",
+			ska_rabbid_rosalina:"疯兔罗莎塔",
 			//Character ab.
 			ska_bobby_ab:"炸弹兵",
 			ska_professor_toad_ab:"奇诺比奥",
 			ska_king_olly_ab:"奥利",
 			mnm_9_volt_18_volt_ab:"九伏十八伏",
+			ska_rabbid_peach_ab:"疯兔桃花",
 			//Identity mode skill
 			ymk_zhongmi:"忠秘",
 			ymk_zhongmi_info:"你的回合外，当你获得或不因使用或打出而失去牌时，你可以选择一项：1. 令一名其他角色摸X+1张牌；2. 弃置一名其他角色的X+1张牌。（X为你损失的体力值）",
@@ -2344,8 +2454,6 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			ymk_qiuyi_info:"每回合限一次，当一名角色使用的基本牌或普通锦囊牌（【闪】【无懈可击】除外）结算完毕后，若其体力值或手牌数不小于你，你可以交给其一张牌并令其本回合手牌上限+1，然后你可以视为使用此牌。",
 			ymk_xifang:"析方",
 			ymk_xifang_info:"每回合限一次，一名角色获得你的牌后，你可以观看其手牌，若其满足类别不同或颜色不同，你摸一张牌。",
-			ska_mengjin:"盟进",
-			ska_mengjin_info:"出牌阶段限一次，你可以交给一名其他角色X张牌，然后其交给你Y张牌（X、Y为各自手牌数的一半且向上取整）。你以此法获得的牌无使用距离和次数限制直到回合结束。",
 			ska_juegu:"掘古",
 			ska_juegu_info:"出牌阶段结束时，若你本回合内不因摸牌阶段的额定摸牌而获得的牌数不小于体力值，你可以〖赠予〗一名其他角色一张牌，然后你可以对其造成1点伤害。",
 			ska_kuiwang:"窥往",
@@ -2402,8 +2510,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			xsj_moxue:"魔血",
 			xsj_moxue_info:"当你受到伤害后，你可以将装备区内的一张牌收回手牌，视为使用一张【决斗】。",
 			ska_zhidai:"置代",
-			ska_zhidai2:"置代",
-			ska_zhidai_info:"当一名角色于回合内声明使用第一张牌时，若场上没有处于濒死状态的角色，且此牌有目标，你可以打出一张手牌替换之。本回合结束阶段，你对自己依次使用被替换牌（无视合法性）。",
+			ska_zhidai_info:"当一名角色于回合内声明使用第一张牌时，若场上没有处于濒死状态的角色，且此牌有目标，你可以打出一张使用目标为角色的牌替换之。",
 			ska_siyi:"嘶咿",
 			ska_siyi_effect:"嘶咿",
 			ska_siyi_info:"隐匿技，当你登场后，你可以令一名其他角色的手牌本局游戏对你可见。",
@@ -2417,6 +2524,14 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			nnk_manwu_info:"锁定技，当你使用【杀】造成伤害后，你失去1点体力；你使用【杀】造成的伤害+X。（X为你已损失的体力值）",
 			nnk_mianyu:"免御",
 			nnk_mianyu_info:"锁定技，你的【闪】和【桃】均视为【杀】；你使用以此法视为的【杀】无次数限制且无视防具。",
+			ska_lianmao:"恋貌",
+			ska_lianmao_info:"锁定技，当你使用基本牌或普通锦囊牌指定目标时，你正面朝上获得其中一个不为你的目标区域内一张牌，然后其也对你如此做。若这两张牌颜色相同，你摸一张牌。",
+			ska_huirong:"恢荣",
+			ska_huirong_info:"出牌阶段限一次，你可以将两张红色牌当作【刮骨疗毒】使用；你使用【刮骨疗毒】可以额外选择一名角色。",
+			ska_yingyong:"颖慵",
+			ska_yingyong_info:"当前回合第一次有一名角色因弃置而失去牌后，你可以卜算7并将牌堆顶一张牌交给其，然后当前回合角色弃置一张牌。",
+			ska_zhenmei:"镇寐",
+			ska_zhenmei_info:"每四轮限一次，出牌阶段，你可以弃置三张花色不同的牌，令攻击范围内任意名角色翻面。",
 			//Sort
 			sst_special:"SP",
 			sst_mnm:"mario not mary",
@@ -2450,7 +2565,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			xsj_dante:"Dante",
 			ska_daroach:"Daroach",
 			nnk_decidueye:"Decidueye",
-			nnk_machamp:"Machamp"
+			nnk_machamp:"Machamp",
+			ska_rabbid_peach:"Rabbid Peach",
+			ska_rabbid_rosalina:"Rabbid Rosalina"
 		},
 		perfectPair:{
 			ymk_isabelle:["sst_villager"],
@@ -2467,7 +2584,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			nnk_robin:["sst_robin","sst_lucina","sst_chrom"],
 			ymk_tianyi:["sst_mario_not_mary","sst_yumikohimi","ymk_yumikohimi","sst_kirby","sst_kazuya"],
 			xsj_yu_narukami:["sst_joker"],
-			ska_daroach:["sst_kirby","sst_meta_knight","sst_king_dedede","sst_bandana_waddle_dee","sst_magolor"]
+			ska_daroach:["sst_kirby","sst_meta_knight","sst_king_dedede","sst_bandana_waddle_dee","sst_magolor"],
+			ska_rabbid_peach:["sst_mario","sst_luigi","sst_peach","sst_bowser","sst_yoshi"],
+			ska_rabbid_rosalina:["sst_mario","sst_luigi","sst_peach","sst_bowser","sst_yoshi","ska_rabbid_peach"]
 		}
 	};
 	return SST_SP;
