@@ -25,7 +25,7 @@ const readJSON = (url) => {
 		}).then(resolve);
 	});
 };
-	
+
 async function checkForUpdate(url) {
 	//本地json数据
 	const localJSON = await readJSON('package.json');
@@ -35,16 +35,16 @@ async function checkForUpdate(url) {
 	const serverJSON = await readJSON(url + '/package.json');
 	//服务器安装程序版本
 	const serverInstallerVersion = serverJSON.installerVersion || "";
-	
+
 	const writeTempFile = (str, callback) => {
 		fs.writeFile(`${__dirname}/temp-updateContent.html`, str, err => {
-			if(err) alert(err);
+			if (err) alert(err);
 			else {
 				let updateContent = new BrowserWindow({
 					width: 1280,
 					height: 720,
 					title: '大乱桌斗-更新内容',
-					icon: path.join(__dirname, '..' ,'super_smash_tabletop.ico'),
+					icon: path.join(__dirname, '..', 'super_smash_tabletop.ico'),
 					autoHideMenuBar: true,
 					webPreferences: {
 						nodeIntegration: true,
@@ -57,28 +57,28 @@ async function checkForUpdate(url) {
 				updateContent.on('closed', () => {
 					updateContent = null;
 					fs.unlink(`${__dirname}/temp-updateContent.html`, (err) => {
-					  if (err) throw err;
+						if (err) throw err;
 					});
 				});
 			}
 		});
 	}
-	
-	if(JSON.stringify(serverJSON) == "{}") {
+
+	if (JSON.stringify(serverJSON) == "{}") {
 		//服务器json数据获取失败
-		if(Notification.isSupported()){
+		if (Notification.isSupported()) {
 			return new Notification({
-				title: '检查更新失败', 
+				title: '检查更新失败',
 				body: '服务器json数据获取失败',
 			}).show();
 		} else {
 			return dialog.showErrorBox('服务器json数据获取失败', '');
 		}
 	}
-	
-	if(+localInstallerVersion < +serverInstallerVersion) {
+
+	if (+localInstallerVersion < +serverInstallerVersion) {
 		//本地版本小于服务器安装版本
-		//nonameSkill:?updateURL=https://raw.fastgit.org/nonameShijian/noname/main
+		//nonameSkill:?updateURL=https://raw.fastgit.org/Show-K/noname-client/super-smash-tabletop
 		let fileList = [], updateStr = `
 		<!DOCTYPE html>
 		<html>
@@ -97,9 +97,9 @@ async function checkForUpdate(url) {
 			</style>
 			<body>
 		`;
-		for(let i = 0; i < serverJSON.installerUpdateContent.length; i++) {
-			const {version, updateContent} = serverJSON.installerUpdateContent[i];
-			if(version <= localInstallerVersion) break;
+		for (let i = 0; i < serverJSON.installerUpdateContent.length; i++) {
+			const { version, updateContent } = serverJSON.installerUpdateContent[i];
+			if (version <= localInstallerVersion) break;
 			updateStr += `
 			<span>v${version}更新内容：</span></br>
 			<pre>${updateContent.join('\n\n')}</pre></br>
@@ -110,15 +110,15 @@ async function checkForUpdate(url) {
 			</body>
 		</html>
 		`;
-		
-		if(Notification.isSupported()){
+
+		if (Notification.isSupported()) {
 			//如果支持桌面通知
 			const TITLE = '应用更新提醒';
 			const BODY = '点击查看更新内容';
 			// 实例化不会进行通知
 			const updateNotification = new Notification({
 				// 通知的标题, 将在通知窗口的顶部显示
-				title: TITLE, 
+				title: TITLE,
 				// 通知的正文文本, 将显示在标题或副标题下面
 				body: BODY,
 				// false有声音，true没声音
@@ -141,15 +141,15 @@ async function checkForUpdate(url) {
 				buttons: ['确定', '取消'],
 				defaultId: 0,
 				cancelId: 1,
-			}).then(({response}) => {
-				if(response == 0) writeTempFile(updateStr);
+			}).then(({ response }) => {
+				if (response == 0) writeTempFile(updateStr);
 			});
 		}
-	} else if(+localInstallerVersion == +serverInstallerVersion){
+	} else if (+localInstallerVersion == +serverInstallerVersion) {
 		//版本相同
 		shell.beep();
 		alert('应用已经是最新版');
-	} else if(+localInstallerVersion > +serverInstallerVersion) {
+	} else if (+localInstallerVersion > +serverInstallerVersion) {
 		//本地版本大于服务器版本
 		console.log('本地版本大于服务器版本');
 		alert('本地版本大于服务器版本');
@@ -159,19 +159,19 @@ async function checkForUpdate(url) {
 localStorage.getItem('autoCheckUpdates') == 'true' && checkForUpdate('https://raw.fastgit.org/Show-K/noname-client/super-smash-tabletop');
 
 //跳过最开始的下载界面
-if(!localStorage.getItem('noname_inited')){
-	function loop(...args){
+if (!localStorage.getItem('noname_inited')) {
+	function loop(...args) {
 		for (let i = 0; i < args.length; i++) {
 			let filePath = path.join(__dirname, '..', args[i]);
-			console.log(args[i], fs.existsSync(filePath) );
-			if( !fs.existsSync(filePath) ) return false;
+			console.log(args[i], fs.existsSync(filePath));
+			if (!fs.existsSync(filePath)) return false;
 			let stat = fs.statSync(filePath);
 			if (stat.size == 0) return false;
 		}
 		return true;
 	}
 	let has = loop('game/update.js', 'game/config.js', 'game/package.js', 'game/game.js');
-	if(has) localStorage.setItem('noname_inited', 'nodejs');
+	if (has) localStorage.setItem('noname_inited', 'nodejs');
 }
 
 // 截图 base64 -> blob
@@ -195,55 +195,55 @@ function b64toBlob(b64Data, contentType, sliceSize) {
 }
 
 if (window.indexedDB) {
-    let configprefix = 'noname_0.9_';
-    if (typeof __dirname === 'string' && __dirname.length) {
-        const dirsplit = __dirname.split('/');
-        for (let i = 0; i < dirsplit.length; i++) {
-            if (dirsplit[i]) {
-                const c = dirsplit[i][0];
-                configprefix += /[A-Z]|[a-z]/.test(c) ? c : '_';
-            }
-        }
-        configprefix += '_';
-    }
+	let configprefix = 'noname_0.9_';
+	if (typeof __dirname === 'string' && __dirname.length) {
+		const dirsplit = __dirname.split('/');
+		for (let i = 0; i < dirsplit.length; i++) {
+			if (dirsplit[i]) {
+				const c = dirsplit[i][0];
+				configprefix += /[A-Z]|[a-z]/.test(c) ? c : '_';
+			}
+		}
+		configprefix += '_';
+	}
 
-    const request = window.indexedDB.open(configprefix + 'data', 4);
-    request.onerror = function (e) { console.error(e); };
+	const request = window.indexedDB.open(configprefix + 'data', 4);
+	request.onerror = function (e) { console.error(e); };
 	request.onupgradeneeded = function (e) {
 		const db = /*e.target.result;*/ this.result;
-		if(!db.objectStoreNames.contains('video')){
+		if (!db.objectStoreNames.contains('video')) {
 			db.createObjectStore('video', { keyPath: 'time' });
 		}
-		if(!db.objectStoreNames.contains('image')){
+		if (!db.objectStoreNames.contains('image')) {
 			db.createObjectStore('image');
 		}
-		if(!db.objectStoreNames.contains('audio')){
+		if (!db.objectStoreNames.contains('audio')) {
 			db.createObjectStore('audio');
 		}
-		if(!db.objectStoreNames.contains('config')){
+		if (!db.objectStoreNames.contains('config')) {
 			db.createObjectStore('config');
 		}
-		if(!db.objectStoreNames.contains('data')){
+		if (!db.objectStoreNames.contains('data')) {
 			db.createObjectStore('data');
 		}
 	};
-    request.onsuccess = function (e) {
+	request.onsuccess = function (e) {
 		const db = /*e.target.result;*/ this.result;
-        if (!db.objectStoreNames.contains('config')) return;
-        const store = db.transaction(['config'], 'readwrite').objectStore('config');
-        store.get('extensions').onsuccess = function (e) {
+		if (!db.objectStoreNames.contains('config')) return;
+		const store = db.transaction(['config'], 'readwrite').objectStore('config');
+		store.get('extensions').onsuccess = function (e) {
 			/** @type string[] */
 			const extensions = /*e.target.result;*/ this.result;
-            const config = db.transaction(['config'], 'readwrite').objectStore('config');
-            if (!Array.isArray(extensions) || extensions.length == 0) {
-                config.put(['应用配置', '拖拽读取', '在线更新'], 'extensions');
-            }
+			const config = db.transaction(['config'], 'readwrite').objectStore('config');
+			if (!Array.isArray(extensions) || extensions.length == 0) {
+				config.put(['应用配置', '拖拽读取', '在线更新'], 'extensions');
+			}
 			if (extensions.includes('\u6982\u5ff5\u6b66\u5c06')) {
 				dialog.showMessageBox(thisWindow, {
 					message: '运行\u6982\u5ff5\u6b66\u5c06扩展可能会造成安全性问题，是否关闭此扩展?',
 					type: 'error',
 					title: '应用更新提醒',
-					icon: path.join(__dirname, '..', 'noname.ico'),
+					icon: path.join(__dirname, '..', 'super_smash_tabletop.ico'),
 					buttons: ['确定', '取消'],
 					defaultId: 0,
 					cancelId: 1,
@@ -256,7 +256,7 @@ if (window.indexedDB) {
 					message: '运行\u5047\u88c5\u65e0\u654c扩展可能会造成安全性问题，是否关闭此扩展?',
 					type: 'error',
 					title: '应用更新提醒',
-					icon: path.join(__dirname, '..', 'noname.ico'),
+					icon: path.join(__dirname, '..', 'super_smash_tabletop.ico'),
 					buttons: ['确定', '取消'],
 					defaultId: 0,
 					cancelId: 1,
@@ -264,8 +264,8 @@ if (window.indexedDB) {
 					if (response == 0) config.put(false, "extension_\u5047\u88c5\u65e0\u654c_enable");
 				});
 			}
-        };
-    };
+		};
+	};
 }
 
 var Menus = [{
@@ -279,12 +279,12 @@ var Menus = [{
 				let item = new ClipboardItem({
 					"image/png": b64toBlob(data, 'image/png', 512)
 				});
-				navigator.clipboard.write([item]).then(function() {
+				navigator.clipboard.write([item]).then(function () {
 					console.log('截图保存成功！', new Date().toLocaleString())
-				}, 
-				function(e) {
-					dialog.showErrorBox("截图保存失败", e.message);
-				});
+				},
+					function (e) {
+						dialog.showErrorBox("截图保存失败", e.message);
+					});
 			});
 		}
 	}, {
@@ -320,10 +320,10 @@ var Menus = [{
 				defaultPath: path.join(app.getPath('desktop'), '大乱桌斗.lnk'),
 				properties: ['dontAddToRecent'],
 			});
-			
-			if(!lnkPath) return;
-			
-			let result =  shell.writeShortcutLink(lnkPath, {
+
+			if (!lnkPath) return;
+
+			let result = shell.writeShortcutLink(lnkPath, {
 				target: app.getPath('exe'),
 				description: '大乱桌斗',
 				icon: path.join(__dirname, '..', 'super_smash_tabletop.ico'),
@@ -407,10 +407,10 @@ var Menus = [{
 			shell.openExternal('tencent://message/?uin=1143158498');
 		},
 	}, {
-        label: '无名杀项目作者： 水乎',
-    }, {
-        label: '无名杀现任更新者： 苏婆玛丽奥',
-    }],
+		label: '无名杀项目作者： 水乎',
+	}, {
+		label: '无名杀现任更新者： 苏婆玛丽奥',
+	}],
 }];
 
 // @ts-ignore
@@ -444,7 +444,7 @@ thisWindow.on('leave-full-screen', () => {
 
 // @ts-ignore
 window.showEmojiPanel = () => {
-	if(!app.isEmojiPanelSupported()) {
+	if (!app.isEmojiPanelSupported()) {
 		alert('当前操作系统版本不允许使用本机emoji选取器');
 	} else {
 		app.showEmojiPanel();

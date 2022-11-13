@@ -65,7 +65,7 @@ if (!app.isDefaultProtocolClient(PROTOCOL)) {
 	}
 	// 加一个 `--` 以确保后面的参数不被 Electron 处理
 	args.push('--');
-	
+
 	app.setAsDefaultProtocolClient(PROTOCOL, process.execPath, args);
 	//对应的取消协议:
 	//app.removeAsDefaultProtocolClient(protocol)
@@ -73,7 +73,7 @@ if (!app.isDefaultProtocolClient(PROTOCOL)) {
 
 function handleUrl(arr) {
 	const result = arr.filter(val => val.startsWith('nonameskill:'));
-	if(!result.length) {
+	if (!result.length) {
 		extensionName = null;
 		updateURL = null;
 		return;
@@ -93,11 +93,11 @@ handleUrl(process.argv);
 
 // 其他实例启动时，主实例会通过 second-instance 事件接收其他实例的启动参数 `argv`
 app.on('second-instance', (event, argv) => {
-  // Windows 下通过协议URL启动时，URL会作为参数，所以需要在这个事件里处理
-  if (process.platform === 'win32') {
-	handleUrl(argv);
-	createWindow();
-  }
+	// Windows 下通过协议URL启动时，URL会作为参数，所以需要在这个事件里处理
+	if (process.platform === 'win32') {
+		handleUrl(argv);
+		createWindow();
+	}
 });
 
 // macOS 下通过协议URL启动时，主实例会通过 open-url 事件接收这个 URL
@@ -107,9 +107,9 @@ app.on('open-url', (event, urlStr) => {
 });
 
 app.setAboutPanelOptions({
-	iconPath: 'noname.ico',
-	authors: ['诗笺'],
-	website: 'https://github.com/nonameShijian/noname',
+	iconPath: 'super_smash_tabletop.ico',
+	authors: ['Show-K'],
+	website: 'https://github.com/Show-K/noname-client',
 });
 
 process.env['ELECTRON_DEFAULT_ERROR_MODE'] = 'true';
@@ -118,16 +118,16 @@ process.noDeprecation = true;
 
 function createWindow() {
 	let createWin;
-	if(extensionName) {
-        //暂时屏蔽通过链接下载扩展的功能
+	if (extensionName) {
+		//暂时屏蔽通过链接下载扩展的功能
 		//createWin = createExtensionWindow();
-        createWin = createMainWindow();
-	} else if(updateURL) {
+		createWin = createMainWindow();
+	} else if (updateURL) {
 		createWin = createUpdateWindow();
 	} else {
 		createWin = createMainWindow();
 	}
-	if(!win) {
+	if (!win) {
 		win = createWin;
 	}
 }
@@ -153,9 +153,9 @@ function createMainWindow() {
 	if (electronVersion >= 14) {
 		remote.enable(win.webContents);
 	}
-    /*win.on('closed', () => {
-        BrowserWindow.getAllWindows().forEach(item => item.destroy());
-    });*/
+	/*win.on('closed', () => {
+		BrowserWindow.getAllWindows().forEach(item => item.destroy());
+	});*/
 	return win;
 }
 
@@ -213,7 +213,7 @@ function createEditorWindow() {
 		width: 800,
 		height: 600,
 		title: '大乱桌斗-代码编辑器',
-		icon: path.join(__dirname, 'noname.ico'),
+		icon: path.join(__dirname, 'super_smash_tabletop.ico'),
 		autoHideMenuBar: true,
 		webPreferences: {
 			preload: path.join(__dirname, 'editor', 'preload.js'),
@@ -226,67 +226,67 @@ function createEditorWindow() {
 	win.webContents.openDevTools();
 	win.on('closed', () => {
 		win = null;
-        global.editorWindow = null;
-        if (global.debugWindow != null) {
-            global.debugWindow.destroy();
-            global.debugWindow = null;
-        }
+		global.editorWindow = null;
+		if (global.debugWindow != null) {
+			global.debugWindow.destroy();
+			global.debugWindow = null;
+		}
 	});
 	if (electronVersion >= 14) {
 		require('@electron/remote/main').enable(win.webContents);
 	}
-    global.editorWindow = win;
+	global.editorWindow = win;
 
-    function createDebugWindow() {
-        let debugWindow = new BrowserWindow({
-            width: 800,
-            height: 600,
-            title: '大乱桌斗-代码调试',
-            icon: path.join(__dirname, 'noname.ico'),
-            show: false,
-            webPreferences: {
-                preload: path.join(__dirname, 'editor', 'js', 'debug-preload.js'),
-                nodeIntegration: true,
-                contextIsolation: false,
-                enableRemoteModule: true,
-            }
-        });
-        debugWindow.loadURL(`file://${__dirname}/app.html`);
-        debugWindow.webContents.openDevTools();
-        debugWindow.on('closed', () => {
-            debugWindow = null;
-            global.debugWindow = null;
-            if (global.editorWindow != null) {
-                createDebugWindow();
-            }
-        });
-        if (electronVersion >= 14) {
-            require('@electron/remote/main').enable(debugWindow.webContents);
-        }
-        global.debugWindow = debugWindow;
-    }
+	function createDebugWindow() {
+		let debugWindow = new BrowserWindow({
+			width: 800,
+			height: 600,
+			title: '大乱桌斗-代码调试',
+			icon: path.join(__dirname, 'super_smash_tabletop.ico'),
+			show: false,
+			webPreferences: {
+				preload: path.join(__dirname, 'editor', 'js', 'debug-preload.js'),
+				nodeIntegration: true,
+				contextIsolation: false,
+				enableRemoteModule: true,
+			}
+		});
+		debugWindow.loadURL(`file://${__dirname}/app.html`);
+		debugWindow.webContents.openDevTools();
+		debugWindow.on('closed', () => {
+			debugWindow = null;
+			global.debugWindow = null;
+			if (global.editorWindow != null) {
+				createDebugWindow();
+			}
+		});
+		if (electronVersion >= 14) {
+			require('@electron/remote/main').enable(debugWindow.webContents);
+		}
+		global.debugWindow = debugWindow;
+	}
 
-    createDebugWindow();
+	createDebugWindow();
     
 	return win;
 }
 */
 
 app.whenReady().then(() => {
-	
+
 	let downloadPath, downloadExtName, extensionWinId, updatePath, updateUrl, updateWinId;
 	// const downloadUrl = 'https://kuangthree.coding.net/p/noname-extensionxwjh/d/noname-extensionxwjh/git/raw/master/';
-	
-	ipcMain.on('download-path', function(event, arg) {
+
+	ipcMain.on('download-path', function (event, arg) {
 		[downloadPath, downloadExtName, extensionWinId] = arg;
 		event.returnValue = downloadPath;
 	});
-	
-	ipcMain.on('update-path', function(event, arg) {
+
+	ipcMain.on('update-path', function (event, arg) {
 		[updatePath, updateUrl, updateWinId] = arg;
 		event.returnValue = updatePath;
 	});
-	
+
 	// 注释掉下载扩展的功能
 	/*session.defaultSession.on('will-download', (event, item) => {
 		if(!downloadPath || !downloadExtName || !extensionWinId) return;
@@ -320,16 +320,16 @@ app.whenReady().then(() => {
 		});
 	});
 	*/
-	
+
 	session.defaultSession.on('will-download', (event, item) => {
-		if(!updatePath || !updateUrl || !updateWinId) return;
+		if (!updatePath || !updateUrl || !updateWinId) return;
 		const fileUrl = decodeURI(item.getURL()).replace(updateUrl + '/', '');
 		const savePath = path.join(updatePath, fileUrl);
 		item.setSavePath(savePath);
 		const winId = BrowserWindow.fromId(updateWinId);
-		
+
 		item.on('updated', (event, state) => {
-			if(winId.isDestroyed()) {
+			if (winId.isDestroyed()) {
 				//窗口被关闭
 				updatePath = updateUrl = updateWinId = null;
 				item.cancel();
@@ -345,13 +345,13 @@ app.whenReady().then(() => {
 				}
 			}
 		});
-		
+
 		item.once('done', (event, state) => {
-			if(winId.isDestroyed()) return;
+			if (winId.isDestroyed()) return;
 			winId.webContents.send('update-done', state);
 		});
 	});
-	
+
 	createWindow();
 	app.on('activate', () => {
 		if (BrowserWindow.getAllWindows().length === 0) {

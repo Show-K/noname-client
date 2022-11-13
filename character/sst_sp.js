@@ -1127,7 +1127,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						game.log(player,"将",nhs,"置于牌堆顶");
 					}
 				},
-				check:card=>5-get.value(card),
+				check:card=>7-get.value(card),
 				content:()=>{
 					const evt=event.getParent(2);
 					evt.set("ska_kuiwang",true);
@@ -1383,6 +1383,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				preHidden:true,
 				trigger:{global:"damageSource"},
 				init:player=>player.storage.renku=true,
+				filter:event=>event.source,
 				check:()=>_status.renku.length<6,
 				content:()=>{
 					"step 0"
@@ -2221,60 +2222,25 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			},
 			//Rabbid Peach
 			ska_lianmao:{
-				locked:true,
-				direct:true,
+				forced:true,
 				trigger:{player:"useCardToPlayer"},
-				filter:(event,player)=>{
-					if(!["basic","trick"].contains(get.type(event.card))) return false;
-					const evt=event.getParent();
-					if(evt.ska_lianmao) return false;
-					return evt.targets.filter(current=>current!=player&&current.countGainableCards(player,"hej")).length;
-				},
+				filter:(event,player)=>player.inRange(event.target)&&event.target.countGainableCards(player,"hej"),
+				logTarget:"target",
 				content:()=>{
 					"step 0"
-					player.chooseTarget(get.prompt2("ska_lianmao"),(card,player,target)=>target!=player&&_status.event.getTrigger().getParent().targets.contains(target)&&target.countGainableCards(player,"hej"),true).set("ai",target=>{
-						const player=_status.event.player;
-						let att=get.attitude(player,target);
-						if(att<0){
-							att=-Math.sqrt(-att);
-						}
-						else{
-							att=Math.sqrt(att);
-						}
-						return att*lib.card.shunshou.ai.result.target(player,target);
-					});
+					event.cards=[];
+					event.target=trigger.target;
+					player.gainPlayerCard("恋貌：正面朝上获得"+get.translation(event.target)+"区域内一张牌，然后"+get.translation(event.target)+"正面朝上获得你区域内一张牌，若这两张牌颜色相同，你摸一张牌",event.target,"hej","visibleMove",true).set("delay",false);
 					"step 1"
-					if(result.targets&&result.targets.length){
-						trigger.getParent().set("ska_lianmao",true);
-						event.cards=[];
-						event.target=result.targets[0];
-						player.logSkill("ska_lianmao",event.target);
-						player.gainPlayerCard("恋貌：获得"+get.translation(event.target)+"区域内一张牌，然后"+get.translation(event.target)+"获得你区域内一张牌（均正面朝上移动），若这两张牌颜色相同，你摸一张牌",event.target,"hej","visibleMove",true).set("delay",false);
-					}
-					else{
-						event.finish();
-					}
-					"step 2"
-					let str="恋貌：获得"+get.translation(player)+"区域内一张牌（正面朝上移动）";
+					let str="恋貌：正面朝上获得"+get.translation(player)+"区域内一张牌";
 					if(result.cards&&result.cards.length){
 						cards.push(...result.cards);
-						str+="，若与"+get.translation(cards)+"颜色相同，"+get.translation(player)+"摸一张牌";
+						if(cards.length==1) str+="，若与"+get.translation(cards)+"颜色相同，"+get.translation(player)+"摸一张牌";
 					}
 					target.gainPlayerCard(str,player,"hej","visibleMove",true).set("delay",false);
-					"step 3"
-					if(result.cards&&result.cards.length){
-						cards.push(...result.cards);
-						if(cards.length>=2){
-							let identical=true;
-							for(let i=0;i<cards.length-1;i++){
-								if(get.color(cards[i])!=get.color(cards[i+1])){
-									identical=false;
-									break;
-								}
-							}
-							if(identical) player.draw("nodelay");
-						}
-					}
+					"step 2"
+					if(result.cards&&result.cards.length) cards.push(...result.cards);
+					if(cards.length==2&&get.color(cards[0])==get.color(cards[1])) player.draw("nodelay");
 				}
 			},
 			ska_huirong:{
@@ -2299,6 +2265,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			ska_yingyong:{
 				trigger:{global:"loseAfter"},
 				filter:event=>{
+					if(!event.player.isIn()) return false;
 					if(event.getParent().name!="discard") return false;
 					if(event.hs.length+event.es.length<=0) return false;
 					const history=game.getGlobalHistory("cardMove",evt=>evt.name=="lose"&&evt.getParent().name=="discard"&&evt.hs.length+evt.es.length);
@@ -2372,14 +2339,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				return "转换技，出牌阶段限一次，你可以将三张牌置于仁库中，令一名角色<span class=\"bluetext\">①翻面</span>②本轮非锁定技失效。";
 			}
 		},
-		/*
-		characterReplace:{
-			//sst_mario:["sst_mario","sst_dr_mario","ska_mario"],
-			//sst_bowser:["sst_bowser","ska_bowser"],
-			sst_yumikohimi:["sst_yumikohimi","ymk_yumikohimi"],
-			sst_isabelle:["sst_isabelle","ymk_isabelle"]
-		},
-		*/
+		characterReplace:{},
 		translate:{
 			//Character
 			ymk_isabelle:"SP西施惠",
@@ -2484,7 +2444,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			ska_xiangshi_info:"出牌阶段限一次，你可以翻面。若如此做，你可以打出一张牌，然后弃置一名角色区域内的一张牌。若这两张牌的花色相同，你翻面。",
 			mnm_huaijiu:"怀旧",
 			mnm_huaijiu_info:"准备阶段，你可以获得一名《三国杀 标准版》武将的技能，直到你的下一个回合开始。",
-			mnm_huaijiu_append:"<span style=\"font-family: fzktk\">*可选武将：曹操、司马懿、夏侯惇、张辽、许褚、郭嘉、甄姬、刘备、关羽、张飞、诸葛亮、赵云、马超、黄月英、孙权、甘宁、吕蒙、黄盖、周瑜、大乔、陆逊、孙尚香、华佗、吕布、貂蝉、华雄、袁术、公孙瓒、伊籍</span>",
+			mnm_huaijiu_append:"<span style=\"font-family: LXGWWenKai\">*可选武将：曹操、司马懿、夏侯惇、张辽、许褚、郭嘉、甄姬、刘备、关羽、张飞、诸葛亮、赵云、马超、黄月英、孙权、甘宁、吕蒙、黄盖、周瑜、大乔、陆逊、孙尚香、华佗、吕布、貂蝉、华雄、袁术、公孙瓒、伊籍</span>",
 			mnm_huaijiu_faq:"*",
 			mnm_huaijiu_faq_info:"可选武将：曹操、司马懿、夏侯惇、张辽、许褚、郭嘉、甄姬、刘备、关羽、张飞、诸葛亮、赵云、马超、黄月英、孙权、甘宁、吕蒙、黄盖、周瑜、大乔、陆逊、孙尚香、华佗、吕布、貂蝉、华雄、袁术、公孙瓒、伊籍",
 			nnk_yuanlei:"远雷",
@@ -2525,7 +2485,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			nnk_mianyu:"免御",
 			nnk_mianyu_info:"锁定技，你的【闪】和【桃】均视为【杀】；你使用以此法视为的【杀】无次数限制且无视防具。",
 			ska_lianmao:"恋貌",
-			ska_lianmao_info:"锁定技，当你使用基本牌或普通锦囊牌指定目标时，你正面朝上获得其中一个不为你的目标区域内一张牌，然后其也对你如此做。若这两张牌颜色相同，你摸一张牌。",
+			ska_lianmao_info:"锁定技，当你使用牌指定攻击范围内的角色为目标时，你正面朝上获得其区域内一张牌，然后其也对你如此做。若这两张牌颜色相同，你摸一张牌。",
 			ska_huirong:"恢荣",
 			ska_huirong_info:"出牌阶段限一次，你可以将两张红色牌当作【刮骨疗毒】使用；你使用【刮骨疗毒】可以额外选择一名角色。",
 			ska_yingyong:"颖慵",

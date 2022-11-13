@@ -1,11 +1,11 @@
 'use strict';
-(function() {
+(function () {
 	if (localStorage.getItem('noname_inited')) return;
 	var app = {
-		initialize: function() {
+		initialize: function () {
 			this.bindEvents();
 		},
-		bindEvents: function() {
+		bindEvents: function () {
 			if (window.require && window.__dirname) {
 				this.onDeviceReady();
 			} else {
@@ -15,7 +15,7 @@
 				document.addEventListener('deviceready', this.onDeviceReady, false);
 			}
 		},
-		onDeviceReady: function() {
+		onDeviceReady: function () {
 			var site_g = 'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop/';
 			//苏婆config镜像网址
 			var site_c = 'https://ghproxy.com/https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop/';
@@ -23,10 +23,10 @@
 			var site_urc = 'https://unitedrhythmized.club/Show-K/noname/super-smash-tabletop/';
 			var site = site_g;
 			var button, changesite, help, version, versionnode;
-			var req = function(url, onload, onerror, target) {
+			var req = function (url, onload, onerror, target) {
 				var sScriptURL = url;
 				var oReq = new XMLHttpRequest();
-				if (onload) oReq.addEventListener("load", function() {
+				if (onload) oReq.addEventListener("load", function () {
 					try {
 						eval(this.responseText);
 						if (target && !window[target]) {
@@ -46,16 +46,16 @@
 				oReq.send();
 			}
 
-			var checkConnection = function() {
+			var checkConnection = function () {
 				button.innerHTML = '正在连接';
 				button.classList.add('disabled');
 				versionnode.innerHTML = '';
-				req(site + 'game/update.js', function() {
+				req(site + 'game/update.js', function () {
 					button.classList.remove('disabled');
-					button.innerHTML = '下载大乱桌斗';
+					button.innerHTML = '下载游戏';
 					version = window.noname_update.version;
 					versionnode.innerHTML = 'v' + version;
-				}, function() {
+				}, function () {
 					button.classList.add('disabled');
 					button.innerHTML = '连接失败';
 				}, 'noname_update');
@@ -69,11 +69,11 @@
 				dir = cordova.file.documentsDirectory;
 			}
 
-			var update = function() {
+			var update = function () {
 				button.innerHTML = '正在连接';
 				button.classList.add('disabled');
 				versionnode.innerHTML = '';
-				req(site + 'game/source.js', function() {
+				req(site + 'game/source.js', function () {
 					button.remove();
 					changesite.remove();
 					help.remove();
@@ -98,7 +98,7 @@
 					var n1 = 0;
 					var n2 = updates.length;
 					progress.innerHTML = n1 + '/' + n2;
-					var finish = function() {
+					var finish = function () {
 						prompt.innerHTML = '游戏文件下载完毕';
 						progress.innerHTML = n1 + '/' + n2;
 						if (window.FileTransfer) {
@@ -106,13 +106,13 @@
 						} else {
 							localStorage.setItem('noname_inited', 'nodejs');
 						}
-						setTimeout(function() {
+						setTimeout(function () {
 							window.location.reload();
 						}, 1000);
 					}
 					var downloadFile;
 					if (window.FileTransfer) {
-						downloadFile = function(url, folder, onsuccess, onerror) {
+						downloadFile = function (url, folder, onsuccess, onerror) {
 							var fileTransfer = new FileTransfer();
 							url = site + url;
 							folder = dir + folder;
@@ -122,11 +122,11 @@
 					} else {
 						var fs = require('fs');
 						var http = require('https');
-						downloadFile = function(url, folder, onsuccess, onerror) {
+						downloadFile = function (url, folder, onsuccess, onerror) {
 							url = site + url;
 							var dir = folder.split('/');
 							var str = '';
-							var download = function() {
+							var download = function () {
 								try {
 									var file = fs.createWriteStream(__dirname + '/' + folder);
 								} catch (e) {
@@ -136,18 +136,18 @@
 								opts.headers = {
 									'User-Agent': 'AppleWebkit'
 								};
-								var request = http.get(opts, function(response) {
+								var request = http.get(opts, function (response) {
 									var stream = response.pipe(file);
 									stream.on('finish', onsuccess);
 									stream.on('error', onerror);
 								});
 							}
-							var access = function() {
+							var access = function () {
 								if (dir.length <= 1) {
 									download();
 								} else {
 									str += '/' + dir.shift();
-									fs.access(__dirname + str, function(e) {
+									fs.access(__dirname + str, function (e) {
 										if (e) {
 											try {
 												fs.mkdir(__dirname + str, access);
@@ -163,15 +163,15 @@
 							access();
 						};
 					}
-					var multiDownload = function(list, onsuccess, onerror, onfinish) {
+					var multiDownload = function (list, onsuccess, onerror, onfinish) {
 						list = list.slice(0);
-						var download = function() {
+						var download = function () {
 							if (list.length) {
 								var current = list.shift();
-								downloadFile(current, current, function() {
+								downloadFile(current, current, function () {
 									if (onsuccess) onsuccess();
 									download();
-								}, function() {
+								}, function () {
 									if (onerror) onerror();
 									download();
 								});
@@ -181,13 +181,13 @@
 						}
 						download();
 					};
-					multiDownload(updates, function() {
+					multiDownload(updates, function () {
 						n1++;
 						progress.innerHTML = n1 + '/' + n2;
-					}, null, function() {
+					}, null, function () {
 						setTimeout(finish, 500);
 					});
-				}, function() {
+				}, function () {
 					button.classList.add('disabled');
 					button.innerHTML = '连接失败';
 				}, 'noname_source_list');
@@ -201,11 +201,11 @@
 			button = document.createElement('div');
 			button.id = 'button';
 
-			var touchstart = function(e) {
+			var touchstart = function (e) {
 				if (this.classList.contains('disabled')) return;
 				this.style.transform = 'scale(0.98)';
 			};
-			var touchend = function() {
+			var touchend = function () {
 				this.style.transform = '';
 			};
 			button.ontouchstart = touchstart;
@@ -213,12 +213,12 @@
 			button.onmousedown = touchstart;
 			button.onmouseup = touchend;
 			button.onmouseleave = touchend;
-			button.onclick = function() {
+			button.onclick = function () {
 				if (button.classList.contains('disabled')) return;
 				update();
 			};
 			document.body.appendChild(button);
-			document.ontouchmove = function(e) {
+			document.ontouchmove = function (e) {
 				e.preventDefault();
 			};
 
@@ -240,14 +240,14 @@
 				'<li>解压后将super-smash-tabletop目录内的所有文件放入对应文件夹：<br>windows/linux：resources/app<br>mac：（右键显示包内容）contents/resources/app<br>android：android/data/xyz.unitedrhythmizedclub.supersmashtabletop<br>ios：documents（itunes—应用—文件共享）' +
 				'<li>完成上述步骤后，<a href="javascript:localStorage.setItem(\'noname_inited\',window.tempSetNoname);window.location.reload()">点击此处</a></div>';
 			helpnode.appendChild(helpnodetext);
-			help.onclick = function() {
+			help.onclick = function () {
 				document.body.appendChild(helpnode);
 			}
 
 			var back = document.createElement('div');
 			back.id = 'back';
 			back.innerHTML = '返回';
-			back.onclick = function() {
+			back.onclick = function () {
 				helpnode.remove();
 			};
 			helpnode.appendChild(back);
@@ -260,11 +260,11 @@
 			} else {
 				window.tempSetNoname = 'nodejs';
 			}
-			changesite.onclick = function() {
+			changesite.onclick = function () {
 				if (site == site_c) {
 					site = site_g;
 					this.innerHTML = '下载源: GitHub'
-				} else if(site == site_g){
+				} else if (site == site_g) {
 					site = site_urc;
 					this.innerHTML = '下载源: URC'
 				} else {

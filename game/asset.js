@@ -1,5 +1,5 @@
 window.noname_asset_list=[
-	'v1.9.116',
+	'v1.9.116.3',
 	//'audio/background/aozhan_chaoming.mp3',
 	//'audio/background/aozhan_online.mp3',
 	//'audio/background/aozhan_rewrite.mp3',
@@ -277,8 +277,19 @@ window.noname_asset_list=[
 	'audio/voice/female/22.mp3',
 	
 	//New add
-	'font/fzhtk.ttf',
-	'font/fzktk.ttf',
+	'font/LXGWWenKai-Bold.woff2',
+	'font/LXGWWenKai-Light.woff2',
+	'font/LXGWWenKai-Regular.woff2',
+	'font/sarasa-ui-sc-bold.woff2',
+	'font/sarasa-ui-sc-bolditalic.woff2',
+	'font/sarasa-ui-sc-extralight.woff2',
+	'font/sarasa-ui-sc-extralightitalic.woff2',
+	'font/sarasa-ui-sc-italic.woff2',
+	'font/sarasa-ui-sc-light.woff2',
+	'font/sarasa-ui-sc-lightitalic.woff2',
+	'font/sarasa-ui-sc-regular.woff2',
+	'font/sarasa-ui-sc-semibold.woff2',
+	'font/sarasa-ui-sc-semibolditalic.woff2',
 	'image/background/standard_bg.png',
 	'image/background/battlefield_bg.png',
 	'image/background/final_destination_bg.png',

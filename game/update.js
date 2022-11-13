@@ -1,6 +1,6 @@
 window.noname_update={
-	version:'1.9.116.1',
-	update:'1.9.116',
+	version:'1.9.116.3',
+	update:'1.9.116.2',
 	changeLog:[
 		'亚空使者 机器人',
 		'喷射战士 鱿鱼',
@@ -9,9 +9,11 @@ window.noname_update={
 		'（实验）宇宙盗贼 怪盗洛切',
 		'（实验）遮天蔽日 狙射树枭',
 		'（实验）百裂拳击 怪力',
+		'（实验）孤芳他赏 疯兔桃花公主',
+		'（实验）博闻强倦 疯兔罗莎塔',
 		'Snake、希克调整',
 		'代码优化',
-		'技能调整与bug修复'
+		'其他技能调整和bug修复'
 	],
 	files:[
 		'card/extra.js',
@@ -75,14 +77,10 @@ window.noname_update={
 		'extension/在线更新/extension.css',
 		'extension/在线更新/extension.js',
 		'extension/在线更新/typings/index.d.ts',
+		'font/suits.woff2',
 		'mode/huanhuazhizhan.js',
 		'mode/super_smash_tabletop.js',
-		'mode/th_mougong.js',
+		'mode/th_mougong.js'
 		//Rewrite
-		'extension/十周年UI/image/card/sst_spear_thrust.webp',
-		'image/character/nnk_decidueye.png',
-		'image/character/nnk_machamp.png',
-		'image/character/ska_rabbid_peach.png',
-		'image/character/ska_rabbid_rosalina.png'
 	]
 };

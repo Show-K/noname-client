@@ -22,7 +22,6 @@ window.noname_package={
 		huanlekapai:'欢乐卡牌'
 	},
 	play:{
-		boss:'诸神降临',
 		cardpile:'牌堆补充',
 		wuxing:'五行生克',
 		coin:'富甲天下'
@@ -73,8 +72,8 @@ window.noname_package={
 		music_galeem_dharkon:'光暗'
 	},
 	font:{
-		fzhtk:"黑体",
-		fzktk:'楷体'
+		sarasa:"黑体",
+		LXGWWenKai:'楷体'
 	},
 	theme:{
 		woodden:'木纹',

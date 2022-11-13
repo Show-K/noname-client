@@ -52,7 +52,12 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_inkling_male:["male","sst_light",3,["sst_xumo","sst_pentu"],["unseen","hiddenSkill"]],
 			sst_wii_fit_trainer:["","sst_light",4,["sst_zuoxi"],[]]
 		},
-		characterFilter:{},
+		characterFilter:{
+			sst_claude:()=>{
+				if(_status.connectMode) return lib.config.connect_cards.contains("yingbian");
+				return lib.config.cards.contains("yingbian");
+			}
+		},
 		characterIntro:{
 			/*
 			"武将作者：Yumikohimi<br>\
@@ -1946,6 +1951,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			},
 			sst_yebao_effect:{
 				charlotte:true,
+				locked:true,
 				mark:true,
 				init:player=>{
 					if(!Array.isArray(player.storage.sst_yebao_effect)) player.storage.sst_yebao_effect=[];
@@ -1964,14 +1970,14 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				},
 				onremove:true,
 				trigger:{global:"phaseEnd"},
-				forced:true,
+				direct:true,
 				content:()=>{
 					for(let i=0;Array.isArray(player.storage.sst_yebao_effect)&&i<player.storage.sst_yebao_effect.length;i++){
 						player.storage.sst_yebao_effect[i]--;
 						if(player.storage.sst_yebao_effect[i]<=0) player.storage.sst_yebao_effect.splice(i--,1);
 						player.markSkill("sst_yebao_effect");
 						if(!player.storage.sst_yebao_effect.length) player.removeSkill("sst_yebao_effect");
-						player.chooseToDiscard("业报：弃置一张牌","he",true);
+						player.chooseToDiscard("业报：弃置一张牌","he",true).set("logSkill","sst_yebao_effect");
 					}
 				}
 			},
@@ -2013,7 +2019,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					maixie:true,
 					maixie_hp:true,
 					maiHp:true,
-					threaten:0.5
+					threaten:0.25
 				},
 				group:"sst_juexin_fail",
 				subSkill:{
@@ -2349,26 +2355,26 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				filter:()=>_status.currentPhase.isIn(),
 				logTarget:()=>_status.currentPhase,
 				content:()=>{
-					lib.skill.sst_anzong.logTarget().addSkill("sst_anzong_effect");
+					lib.skill.sst_anzong.logTarget().addSkill(event.name+"_effect");
 					game.delayx();
 				}
 			},
 			sst_anzong_effect:{
 				charlotte:true,
-				init:player=>{
-					player.storage.sst_anzong_effect=player.dieAfter2;
+				init:(player,skill)=>{
+					player.storage[skill]=player.dieAfter2;
 					game.broadcastAll((player,dieAfter2)=>player.dieAfter2=dieAfter2,player,source=>{
 						if(source) source.draw(3);
 					});
 				},
 				mark:true,
 				intro:{
-					content:"杀死你执行的奖惩为：<span style=\"font-family: fzktk\">杀死你的角色摸三张牌</span>",
+					content:"杀死你执行的奖惩为：<span style=\"font-family: LXGWWenKai\">杀死你的角色摸三张牌</span>",
 					markcount:()=>3
 				},
-				onremove:player=>{
-					game.broadcastAll((player,dieAfter2)=>player.dieAfter2=dieAfter2,player,player.storage.sst_anzong_effect);
-					delete player.storage.sst_anzong_effect;
+				onremove:(player,skill)=>{
+					game.broadcastAll((player,dieAfter2)=>player.dieAfter2=dieAfter2,player,player.storage[skill]);
+					delete player.storage[skill];
 				}
 			},
 			//Inkling
@@ -2580,6 +2586,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					失败：以此法展示三次手牌后，此技能改为非使命技，“场上等量的牌”改为“场上等量的红色牌”。";
 			}
 		},
+		characterReplace:{},
 		translate: {
 			//Civil War mode reference
 			_guozhan_marks:"标记",
@@ -2704,7 +2711,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_shouyin_info:"你使用牌结算后，可以令一名其他角色选择是否使用一张类别相同的牌，若其以此法使用了牌且两张牌目标唯一且相同，你摸一张牌。",
 			sst_anzong:"暗踪",
 			sst_anzong_effect:"暗踪",
-			sst_anzong_info:"隐匿技，锁定技，当你登场时，将杀死当前回合角色执行的奖惩改为：<span style=\"font-family: fzktk\">杀死其的角色摸三张牌</span>。",
+			sst_anzong_info:"隐匿技，锁定技，当你登场时，将杀死当前回合角色执行的奖惩改为：<span style=\"font-family: LXGWWenKai\">杀死其的角色摸三张牌</span>。",
 			sst_xumo:"蓄墨",
 			sst_xumo_info:"隐匿技，锁定技，当你登场时，摸三张牌。",
 			sst_pentu:"喷涂",
