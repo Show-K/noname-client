@@ -134,7 +134,7 @@ window.config={
 	connect_characters:[],
 	connect_cards:[],
 	plays:[],
-	extensions:['应用配置','拖拽读取','在线更新','十周年UI','导入助手'],
+	extensions:['应用配置','在线更新','十周年UI','导入助手'],
 	banned:[],
 	bannedcards:[],
 	forbidlist:[],
