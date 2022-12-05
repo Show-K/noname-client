@@ -78,7 +78,7 @@ async function checkForUpdate(url) {
 
 	if (+localInstallerVersion < +serverInstallerVersion) {
 		//本地版本小于服务器安装版本
-		//nonameSkill:?updateURL=https://raw.fastgit.org/Show-K/noname-client/super-smash-tabletop
+		//nonameSkill:?updateURL=https://ghproxy.com/https://raw.githubusercontent.com/Show-K/noname-client/super-smash-tabletop
 		let fileList = [], updateStr = `
 		<!DOCTYPE html>
 		<html>
@@ -156,7 +156,7 @@ async function checkForUpdate(url) {
 	}
 }
 
-localStorage.getItem('autoCheckUpdates') == 'true' && checkForUpdate('https://raw.fastgit.org/Show-K/noname-client/super-smash-tabletop');
+localStorage.getItem('autoCheckUpdates') == 'true' && checkForUpdate('https://ghproxy.com/https://raw.githubusercontent.com/Show-K/noname-client/super-smash-tabletop');
 
 //跳过最开始的下载界面
 if (!localStorage.getItem('noname_inited')) {
@@ -290,7 +290,7 @@ var Menus = [{
 	}, {
 		label: '检查应用更新',
 		click: () => {
-			checkForUpdate('https://raw.fastgit.org/Show-K/noname-client/super_smash_tabletop');
+			checkForUpdate('https://ghproxy.com/https://raw.githubusercontent.com/Show-K/noname-client/super_smash_tabletop');
 		},
 	}, {
 		label: '自动检查更新',
