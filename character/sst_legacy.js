@@ -6,19 +6,6 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 	const SST_LEGACY={
 		name:"sst_legacy",
 		connect:true,
-		characterSort:{
-			sst_legacy:{
-				sst_64:["deprecated_sst_samus","deprecated_sst_donkey_kong"],
-				sst_melee:[],
-				sst_brawl:[],
-				sst_4:["deprecated_sst_ryu"],
-				sst_ultimate:["deprecated_sst_ken","deprecated_sst_dark_samus","deprecated_sst_richter"],
-				sst_spirits:["deprecated_sst_geno"],
-				sst_players:[],
-				sst_ska:["deprecated_ska_professor_toad"],
-				sst_ymk:["deprecated_ymk_claude","ymk_577"],
-			},
-		},
 		character:{
 			//LTK
 			re_lidian:["male","sst_smash",3,["xunxun","wangxi"],["unseen"]],
@@ -66,6 +53,19 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			deprecated_ska_professor_toad:["male","sst_spirit",3,["deprecated_ska_juegu","deprecated_ska_kuiwang"],[]]
 		},
 		characterFilter:{
+		},
+		characterSort:{
+			sst_legacy:{
+				sst_64:["deprecated_sst_samus","deprecated_sst_donkey_kong"],
+				sst_melee:[],
+				sst_brawl:[],
+				sst_4:["deprecated_sst_ryu"],
+				sst_ultimate:["deprecated_sst_ken","deprecated_sst_dark_samus","deprecated_sst_richter"],
+				sst_spirits:["deprecated_sst_geno"],
+				sst_players:[],
+				sst_ska:["deprecated_ska_professor_toad"],
+				sst_ymk:["deprecated_ymk_claude","ymk_577"],
+			},
 		},
 		characterIntro:{
 			//LTK
@@ -224,7 +224,98 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			deprecated_ska_professor_toad:"沙原博时",
 			ska_bowser:"联挚之火"
 		},
+		perfectPair:{
+			//LTK
+			xiahoudun:["xiahouyuan"],
+			zhenji:["caopi"],
+			caocao:["xuzhu","dianwei","bianfuren"],
+			huangzhong:["weiyan"],
+			zhugeliang:["jiangwei","jiangfei","huangyueying"],
+			liubei:["guanyu","zhangfei","ganfuren"],
+			zhaoyun:["liushan"],
+			daqiao:["xiaoqiao"],
+			zhouyu:["huanggai","xiaoqiao","zhouyi"],
+			sunquan:["zhoutai"],
+			lvbu:["diaochan"],
+			machao:["madai","mayunlu"],
+			zhangliao:["zangba"],
+			ganning:["lingtong","xf_sufei"],
+			//SST
+			deprecated_sst_ken:["sst_ken","sst_ryu","deprecated_sst_ryu"],
+			deprecated_ymk_claude:["sst_claude","sst_byleth_male","sst_byleth_female"],
+			deprecated_sst_donkey_kong:["sst_donkey_kong","sst_mario"],
+			deprecated_sst_richter:["sst_richter","sst_simon"],
+			deprecated_sst_ryu:["sst_ryu","sst_ken"],
+			deprecated_sst_geno:["sst_geno","sst_mario","sst_bowser","sst_peach"],
+			deprecated_ska_professor_toad:["ska_professor_toad","sst_mario","ska_olivia"]
+		},
 		skill:{
+			//System
+			_sst_sex_select:{
+				charlotte:true,
+				superCharlotte:true,
+				trigger:{
+					global:"gameStart",
+					player:["enterGame","showCharacterEnd"]
+				},
+				ruleSkill:true,
+				silent:true,
+				firstDo:true,
+				priority:2020,
+				filter:(event,player)=>player.sex=="",
+				content:()=>{
+					"step 0"
+					player.chooseControl("male","female").set("prompt","选择性别").set("ai",()=>["male","female"].randomGet());
+					"step 1"
+					player.sex=result.control;
+					game.broadcast((player,sex)=>player.sex=sex,player,result.control);
+					const name=player.name;
+					const differentAvatar=[
+						"sst_corrin",
+						"sst_robin",
+						"nnk_robin",
+						"sst_inkling"
+					];
+					const nameAfter=`${name}_${result.control}`;
+					if(differentAvatar.contains(name)) player.setAvatar(name,nameAfter);
+					game.log(player,"将性别变为了",`#y${get.translation(result.control)}`);
+					const differentGroup={
+						sst_corrin_male:"sst_dark",
+						sst_corrin_female:"sst_light"
+					};
+					const group=differentGroup[nameAfter];
+					if(typeof group=="string") player.changeGroup(group);
+					player.update();
+				}
+			},
+			_sst_group_select:{
+				charlotte:true,
+				superCharlotte:true,
+				trigger:{
+					global:'gameStart',
+					player:['enterGame','showCharacterEnd']
+				},
+				ruleSkill:true,
+				silent:true,
+				firstDo:true,
+				priority:2019,
+				filter:(event,player)=>!get.config('no_group')&&player.group=='sst_smash',
+				content:()=>{
+					'step 0'
+					player.chooseControl('sst_light','sst_dark','sst_spirit','sst_reality').set('prompt','选择势力').set('ai',()=>{
+						if(game.zhu&&game.zhu!=_status.event.player&&get.attitude(_status.event.player,game.zhu)>0&&_status.event.controls.contains(game.zhu.group)) return game.zhu.group;
+						return _status.event.controls.randomGet();
+					});
+					'step 1'
+					player.changeGroup(result.control);
+					player.update();
+				}
+			},
+			braces:{
+				intro:{
+					content:'#'
+				}
+			},
 			//LTK
 			xunxun:{
 				audio:2,
@@ -4724,31 +4815,6 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			deprecated_sst_ryu:"Deprecated Ryu",
 			deprecated_sst_geno:"Deprecated ♡♪!?",
 			deprecated_ska_professor_toad:"Deprecated Professor Toad"
-		},
-		perfectPair:{
-			//LTK
-			xiahoudun:["xiahouyuan"],
-			zhenji:["caopi"],
-			caocao:["xuzhu","dianwei","bianfuren"],
-			huangzhong:["weiyan"],
-			zhugeliang:["jiangwei","jiangfei","huangyueying"],
-			liubei:["guanyu","zhangfei","ganfuren"],
-			zhaoyun:["liushan"],
-			daqiao:["xiaoqiao"],
-			zhouyu:["huanggai","xiaoqiao","zhouyi"],
-			sunquan:["zhoutai"],
-			lvbu:["diaochan"],
-			machao:["madai","mayunlu"],
-			zhangliao:["zangba"],
-			ganning:["lingtong","xf_sufei"],
-			//SST
-			deprecated_sst_ken:["sst_ken","sst_ryu","deprecated_sst_ryu"],
-			deprecated_ymk_claude:["sst_claude","sst_byleth_male","sst_byleth_female"],
-			deprecated_sst_donkey_kong:["sst_donkey_kong","sst_mario"],
-			deprecated_sst_richter:["sst_richter","sst_simon"],
-			deprecated_sst_ryu:["sst_ryu","sst_ken"],
-			deprecated_sst_geno:["sst_geno","sst_mario","sst_bowser","sst_peach"],
-			deprecated_ska_professor_toad:["ska_professor_toad","sst_mario","ska_olivia"]
 		}
 	};
 	return SST_LEGACY;

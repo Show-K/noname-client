@@ -13,7 +13,6 @@
 	};
 	var _status={
 		//SST addition
-		mougong_buff:['sha','shan','juedou','huogong','tao'],
 		discardPile:[],
 		//SST addition end
 		paused:false,
@@ -51,11 +50,11 @@
 		configprefix:'noname_0.9_',
 		versionOL:27,
 		updateURLS:{
-			coding:'https://unitedrhythmized.club/Show-K/noname/super-smash-tabletop',
-			github:'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop',
+			coding:'https://unitedrhythmized.club/Show-K/noname',
+			github:'https://ghproxy.com/https://raw.githubusercontent.com/Show-K/noname',
 		},
-		updateURL:'https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop',
-		mirrorURL:'https://unitedrhythmized.club/Show-K/noname/super-smash-tabletop',
+		updateURL:'https://ghproxy.com/https://raw.githubusercontent.com/Show-K/noname',
+		mirrorURL:'https://unitedrhythmized.club/Show-K/noname',
 		hallURL:'unitedrhythmized.club',
 		assetURL:'',
 		changeLog:[],
@@ -556,8 +555,8 @@
 						init:'coding',
 						unfrequent:true,
 						item:{
-							coding:'Github Proxy',
-							github:'GitHub',
+							coding:'URC',
+							github:'GitHub Proxy',
 						},
 						onclick:function(item){
 							game.saveConfig('update_link',item);
@@ -566,7 +565,7 @@
 					},
 					extension_source:{
 						name:'获取扩展地址',
-						init:'Coding',
+						init:'GitHub',
 						unfrequent:true,
 						item:{},
 						intro:function(){
@@ -1479,7 +1478,7 @@
 								}
 								case 'new':node.setBackgroundImage('theme/style/card/image/new.png');break;
 								case 'ol':node.setBackgroundImage('theme/style/card/image/ol.png');break;
-								case 'wood':node.setBackgroundImage('theme/woodden/wood.jpg');node.style.backgroundSize='initial';break;
+								case 'wood':node.setBackgroundImage('theme/woodden/wood3.png');node.style.backgroundSize='initial';break;
 								case 'music':node.setBackgroundImage('theme/music/wood3.png');break;
 								case 'simple':node.setBackgroundImage('theme/simple/card.png');break;
 							}
@@ -1610,7 +1609,7 @@
 								case 'official':node.className='button character';node.setBackgroundImage('theme/style/cardback/image/official.png');break;
 								case 'liusha':node.className='button character';node.setBackgroundImage('theme/style/cardback/image/liusha.png');break;
 								case 'ol':node.className='button character';node.setBackgroundImage('theme/style/cardback/image/ol.png');break;
-								case 'wood':node.className='button card fullskin';node.setBackgroundImage('theme/woodden/wood.jpg');node.style.backgroundSize='initial';break;
+								case 'wood':node.className='button card fullskin';node.setBackgroundImage('theme/woodden/wood3.png');node.style.backgroundSize='initial';break;
 								case 'music':node.className='button card fullskin';node.setBackgroundImage('theme/music/wood3.png');break;
 							}
 							if(link=='custom'){
@@ -1924,7 +1923,7 @@
 									node.className='button character dashedmenubutton';
 									break;
 								}
-								case 'wood':node.setBackgroundImage('theme/woodden/wood.jpg');break;
+								case 'wood':node.setBackgroundImage('theme/woodden/wood3.png');break;
 								case 'music':node.style.backgroundImage='linear-gradient(#4b4b4b, #464646)';break;
 								case 'simple':node.style.backgroundImage='linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4))';break;
 							}
@@ -1967,7 +1966,7 @@
 							else if(layout!='default'){
 								var str='';
 								switch(layout){
-									case 'wood':str='url("'+lib.assetURL+'theme/woodden/wood.jpg")';break;
+									case 'wood':str='url("'+lib.assetURL+'theme/woodden/wood3.png")';break;
 									case 'music':str='linear-gradient(#4b4b4b, #464646)';break;
 									case 'simple':str='linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4))';break;
 								}
@@ -2357,7 +2356,7 @@
 									node.classList.add('dashedmenubutton');
 									break;
 								}
-								case 'wood':node.setBackgroundImage('theme/woodden/wood.jpg');break;
+								case 'wood':node.setBackgroundImage('theme/woodden/wood3.png');break;
 								case 'music':node.style.backgroundImage='linear-gradient(#4b4b4b, #464646)';break;
 								case 'simple':node.style.backgroundImage='linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4))';break;
 							}
@@ -2399,7 +2398,7 @@
 							else if(layout!='default'){
 								var str='';
 								switch(layout){
-									case 'wood':str='url("'+lib.assetURL+'theme/woodden/wood.jpg")';break;
+									case 'wood':str='url("'+lib.assetURL+'theme/woodden/wood3.png")';break;
 									case 'music':str='linear-gradient(#4b4b4b, #464646);color:white;text-shadow:black 0 0 2px';break;
 									case 'simple':str='linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));color:white;text-shadow:black 0 0 2px';break;
 								}
@@ -4346,6 +4345,13 @@
 						frequent:true,
 						restart:true,
 					},
+					connect_unbalanced_mode:{
+						name:'阴间模式',
+						init:false,
+						frequent:true,
+						restart:true,
+						intro:'开启后游戏中将模仿三国杀客户端特有的游戏外机制等'
+					},
 					connect_zhong_card:{
 						name:'明忠卡牌替换',
 						init:true,
@@ -4539,6 +4545,13 @@
 						},
 						frequent:true,
 						restart:true,
+					},
+					unbalanced_mode:{
+						name:'阴间模式',
+						init:false,
+						restart:true,
+						frequent:true,
+						intro:'开启后游戏中将模仿三国杀客户端特有的游戏外机制等'
 					},
 					double_nei:{
 						name:'双内奸',
@@ -5358,13 +5371,6 @@
 						restart:true,
 						intro:'<li>势备：默认模式，使用线下《君临天下·势备篇》的牌堆进行游戏。<br><li>应变：使用OL的应变国战牌堆进行游戏。<br><li>怀旧：使用传统国战的牌堆进行游戏。',
 					},
-					connect_qunxionggeju:{
-						name:'群雄割据',
-						init:false,
-						frequent:true,
-						restart:true,
-						intro:'开放不同势力组合，以优先亮出的武将牌作为自己的势力，双势力武将则使用列表的第一个势力',
-					},
 					connect_player_number:{
 						name:'游戏人数',
 						init:'8',
@@ -5380,6 +5386,13 @@
 						},
 						frequent:true,
 						restart:true,
+					},
+					connect_qunxionggeju:{
+						name:'群雄割据',
+						init:false,
+						frequent:true,
+						restart:true,
+						intro:'开放不同势力组合，以优先亮出的武将牌作为自己的势力，双势力武将则使用列表的第一个势力',
 					},
 					connect_initshow_draw:{
 						name:'首亮奖励',
@@ -5456,13 +5469,6 @@
 						restart:true,
 						intro:'<li>势备：默认模式，使用线下《君临天下·势备篇》的牌堆进行游戏。<br><li>应变：使用OL的应变国战牌堆进行游戏。<br><li>怀旧：使用传统国战的牌堆进行游戏。<br><li>自由：使用玩家的自定义牌堆进行游戏。',
 					},
-					qunxionggeju:{
-						name:'群雄割据',
-						init:false,
-						frequent:true,
-						restart:true,
-						intro:'开放不同势力组合，以优先亮出的武将牌作为自己的势力，双势力武将则使用列表的第一个势力',
-					},
 					player_number:{
 						name:'游戏人数',
 						init:'8',
@@ -5479,6 +5485,13 @@
 						},
 						frequent:true,
 						restart:true,
+					},
+					qunxionggeju:{
+						name:'群雄割据',
+						init:false,
+						frequent:true,
+						restart:true,
+						intro:'开放不同势力组合，以优先亮出的武将牌作为自己的势力，双势力武将则使用列表的第一个势力',
 					},
 					initshow_draw:{
 						name:'首亮奖励',
@@ -6270,6 +6283,12 @@
 						frequent:true,
 						intro:'在用户填写的IP地址没有直接指定使用WS/WSS协议的情况下，默认使用WSS协议，而非WS协议来连接到联机服务器。<br>请不要轻易勾选此项！',
 					},
+					ten_players:{
+						name:'十人房间',
+						input:false,
+						frequent:true,
+						intro:'你的房间游戏人数由最多八人提升至最多十人。<br>若开启此项，其他人必须也支持十人房间才能进入你的房间，否则会报错！<br>若关闭此项，你不能进入其他人创建的十人房间，否则会报错！'
+					},
 				}
 			},
 			huanhuazhizhan:{
@@ -6390,6 +6409,13 @@
 						restart:true,
 						frequent:true,
 					},
+					connect_unbalanced_mode:{
+						name:'阴间模式',
+						init:false,
+						frequent:true,
+						restart:true,
+						intro:'开启后游戏中将模仿三国杀客户端特有的游戏外机制等'
+					},
 					connect_double_character:{
 						name:'双将模式',
 						init:false,
@@ -6456,6 +6482,13 @@
 						},
 						restart:true,
 						frequent:true,
+					},
+					unbalanced_mode:{
+						name:'阴间模式',
+						init:false,
+						restart:true,
+						frequent:true,
+						intro:'开启后游戏中将模仿三国杀客户端特有的游戏外机制等'
 					},
 					double_character:{
 						name:'双将模式',
@@ -7955,7 +7988,7 @@
 					if(lib.config.player_style&&lib.config.player_style!='default'&&lib.config.player_style!='custom'){
 						var str='';
 						switch(lib.config.player_style){
-							case 'wood':str='url("'+lib.assetURL+'theme/woodden/wood.jpg")';break;
+							case 'wood':str='url("'+lib.assetURL+'theme/woodden/wood3.png")';break;
 							case 'music':str='linear-gradient(#4b4b4b, #464646)';break;
 							case 'simple':str='linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4))';break;
 						}
@@ -7974,7 +8007,7 @@
 					if(lib.config.control_style&&lib.config.control_style!='default'&&lib.config.control_style!='custom'){
 						var str='';
 						switch(lib.config.control_style){
-							case 'wood':str='url("'+lib.assetURL+'theme/woodden/wood.jpg")';break;
+							case 'wood':str='url("'+lib.assetURL+'theme/woodden/wood3.png")';break;
 							case 'music':str='linear-gradient(#4b4b4b, #464646);color:white;text-shadow:black 0 0 2px';break;
 							case 'simple':str='linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));color:white;text-shadow:black 0 0 2px';break;
 						}
@@ -10335,6 +10368,12 @@
 		},
 		translate:{
 			//SST addition
+			db_atk:'进攻对策',
+			db_atk1:'全军出击',
+			db_atk2:'分兵围城',
+			db_def:'防御对策',
+			db_def1:'奇袭粮道',
+			db_def2:'开城诱敌',
 			attack:'攻击',
 			shield:'防御',
 			grab:'投掷',
@@ -10569,9 +10608,7 @@
 					event.card2=card;
 					'step 4'
 					if(event.lose_list.length){
-						game.loseAsync({
-							lose_list:event.lose_list,
-						}).setContent('chooseToCompareLose');
+						event.lose_list.forEach(i=>i[0].lose(i[1],ui.ordering));
 					}
 					if(event.card2) game.cardsGotoOrdering(event.card2);
 					'step 5'
@@ -10581,8 +10618,14 @@
 					player.$compare(event.card1,player,event.card2);
 					game.log(player,'的拼点牌为',event.card1);
 					game.log('#b牌堆顶','的拼点牌为',event.card2);
-					event.num1=event.card1.number;
-					event.num2=event.card2.number;
+					const getNum=card=>{
+						for(const i of event.lose_list){
+							if(i[1]==card) return get.number(card,i[0]);
+						}
+						return get.number(card,false);
+					};
+					event.num1=getNum(event.card1);
+					event.num2=getNum(event.card2);
 					event.trigger('compare');
 					game.delay(0,1500);
 					'step 6'
@@ -11178,7 +11221,6 @@
 						},event.chooseTime);
 					}
 					if(event.isMine()){
-						ui.arena.classList.add('choose-to-move');
 						delete ui.selected.guanxing_button;
 						var list=event.list,filterMove=event.filterMove,filterOk=event.filterOk;
 						_status.imchoosing=true;
@@ -11207,7 +11249,10 @@
 						event.dialog.classList.add('scroll1');
 						event.dialog.classList.add('scroll2');
 						event.dialog.classList.add('fullwidth');
-						event.dialog.classList.add('fullheight');
+						if(list.length>1){
+							ui.arena.classList.add('choose-to-move');
+							event.dialog.classList.add('fullheight');
+						}
 						
 						event.moved=[];
 						var buttonss=[];
@@ -13598,6 +13643,73 @@
 					}
 					if(event.dialog&&event.dialog.close) event.dialog.close();
 				},
+				discardMultiple:function(){
+					'step 0'
+					event.type='discard';
+					if(!event.position) event.position=ui.discardPile;
+					var cards=[];
+					event.cards=cards;
+					for(var i=0;i<event.lose_list.length;i++){
+						var next=event.lose_list[i][0].lose(event.lose_list[i][1],event.position);
+						game.log(event.lose_list[i][0],'弃置了',event.lose_list[i][1]);
+						next.type=='discard';
+						cards.addArray(event.lose_list[i][1]);
+						next.getlx=false;
+					}
+					var evt=event;
+					if(evt.animate!=false){
+						evt.discardid=lib.status.videoId++;
+						game.broadcastAll(function(list,id){
+							for(var i of list){
+								i[0].$throw(i[1],null,'nobroadcast');
+							}
+							var cardnodes=[];
+							cardnodes._discardtime=get.time();
+							for(var ix of list){
+								var card=ix[1];
+								for(var i=0;i<cards.length;i++){
+									if(cards[i].clone){
+										cardnodes.push(cards[i].clone);
+									}
+								}
+							}
+							ui.todiscard[id]=cardnodes;
+						},event.lose_list,evt.discardid);
+						if(lib.config.sync_speed&&cards[0]&&cards[0].clone){
+							if(evt.delay!=false){
+								var waitingForTransition=get.time();
+								evt.waitingForTransition=waitingForTransition;
+								cards[0].clone.listenTransition(function(){
+									if(_status.waitingForTransition==waitingForTransition&&_status.paused){
+										game.resume();
+									}
+									delete evt.waitingForTransition;
+								});
+							}
+							else if(evt.getParent().discardTransition){
+								delete evt.getParent().discardTransition;
+								var waitingForTransition=get.time();
+								evt.getParent().waitingForTransition=waitingForTransition;
+								cards[0].clone.listenTransition(function(){
+									if(_status.waitingForTransition==waitingForTransition&&_status.paused){
+										game.resume();
+									}
+									delete evt.getParent().waitingForTransition;
+								});
+							}
+						}
+					}
+					'step 1'
+					if(event.delay!=false){
+						if(event.waitingForTransition){
+							_status.waitingForTransition=event.waitingForTransition;
+							game.pause();
+						}
+						else{
+							game.delayx();
+						}
+					}
+				},
 				chooseToCompareLose:function(){
 					for(var i=0;i<event.lose_list.length;i++){
 						var next=event.lose_list[i][0].lose(event.lose_list[i][1],ui.ordering);
@@ -15233,7 +15345,7 @@
 					else{
 						game.log(player,'展示了',cards);
 					}
-					game.delayx(typeof event.delay=='number'?event.delay:2);
+					game.delayx(event.delay_time||2.5);
 					game.addVideo('showCards',player,[event.str,get.cardsInfo(cards)]);
 					"step 1"
 					game.broadcast('closeDialog',event.dialogid);
@@ -16674,7 +16786,7 @@
 				lose:function(){
 					"step 0"
 					var evt=event.getParent();
-					if((evt.name!='discard'&&event.type!='discard')&&(evt.name!='loseToDiscardpile'&&event.type!='loseToDiscardpile')){
+					if((evt.name!='discard'||event.type!='discard')&&(evt.name!='loseToDiscardpile'||event.type!='loseToDiscardpile')){
 						event.delay=false;
 						return;
 					}
@@ -17735,32 +17847,7 @@
 					return true;
 				},
 				chooseToComparePileTop:function(check){
-					const next=game.createEvent('chooseToCompare');
-					next.set('player',this);
-					if(check){
-						next.set('ai',check);
-					}
-					else{
-						next.set('ai',card=>{
-							if(typeof card=='string'&&lib.skill[card]){
-								const ais=lib.skill[card].check||(()=>0);
-								return ais();
-							}
-							const player=get.owner(card);
-							const getn=card=>{
-								if(player.hasSkill('tianbian')&&get.suit(card)=='heart') return 13;
-								return get.number(card);
-							};
-							const event=_status.event.getParent();
-							let addi=(get.value(card)>=8&&get.type(card)!='equip')?-10:0;
-							if(card.name=='du') addi+=5;
-							return getn(card)-get.value(card)/2+addi;
-						});
-					}
-					next.setContent('chooseToComparePileTop');
-					next.forceDie=true;
-					next._args=Array.from(arguments);
-					return next;
+					return this.chooseToCompare(null,check).setContent('chooseToComparePileTop');
 				},
 				initBraces:function(num,forced){
 					if(this.bracesInited()&&!forced) return;
@@ -18656,6 +18743,7 @@
 				initOL:function(name,character){
 					this.node.avatar.setBackground(character,'character');
 					this.node.avatar.show();
+					name=`${[' - 离线',' - 托管'].contains(name.slice(-5))?'×':''}${name}`;
 					this.node.name.innerHTML=get.verticalStr(name);
 					this.nickname=name;
 					this.avatar=character;
@@ -18713,8 +18801,8 @@
 						this.hp=Math.min(this.maxHp,info[3]);
 						if(this.hp<this.maxHp||config.gameStarted) str+=('人数：'+this.hp+'/'+this.maxHp);
 						else str+=('人数：<span class="firetext">'+this.hp+'/'+this.maxHp+'</span>');
-						
-						str+=('　('+info[0].slice(0,12)+' 的房间)');
+						const nickname=info[0].slice(0,12);
+						str+=`　(${[' - 离线',' - 托管'].contains(nickname.slice(-5))?'×':''}${nickname} 的房间)`;
 						if(config.mode!='guozhan'&&(config.mode!='doudizhu'||config.doudizhu_mode!='online')){
 							str+='【';
 							for(var i=0;i<config.cardPack.length;i++){
@@ -20333,13 +20421,17 @@
 							var player=_status.event.player;
 							var event=_status.event.getParent();
 							var getn=function(card){
-								if(player.hasSkill('tianbian')&&get.suit(card)=='heart') return 13*(event.small?-1:1);
-								return get.number(card)*(event.small?-1:1);
+								if(player.hasSkill('tianbian')&&get.suit(card)=='heart') return 13*(Boolean(event.small)?-1:1);
+								return get.number(card)*(Boolean(event.small)?-1:1);
 							}
-							if(source&&source!=player&&get.attitude(player,source)>1){
-								return -getn(card)-get.value(card)/2+addi;
+							if(source&&source!=player){
+								if((get.attitude(player,source)>1)==Boolean(event.small)) return -getn(card)-get.value(card)/2+addi;
+								return getn(card)-get.value(card)/2+addi;
 							}
-							return getn(card)-get.value(card)/2+addi;
+							else{
+								if(Boolean(event.small)) return -getn(card)-get.value(card)/2+addi;
+								return getn(card)-get.value(card)/2+addi;
+							}
 						}
 						next.setContent('chooseToCompareMultiple');
 					}
@@ -20353,21 +20445,21 @@
 							}
 							var player=get.owner(card);
 							var getn=function(card){
-								if(player.hasSkill('tianbian')&&get.suit(card)=='heart') return 13*(event.small?-1:1);
-								return get.number(card)*(event.small?-1:1);
+								if(player.hasSkill('tianbian')&&get.suit(card)=='heart') return 13;
+								return get.number(card);
 							}
 							var event=_status.event.getParent();
 							var to=(player==event.player?event.target:event.player);
 							var addi=(get.value(card)>=8&&get.type(card)!='equip')?-6:0;
 							if(card.name=='du') addi-=5;
 							if(player==event.player){
-								if(get.attitude(player,to)>0&&event.small){
+								if(Boolean(event.small)){
 									return -getn(card)-get.value(card)/2+addi;
 								}
 								return getn(card)-get.value(card)/2+addi;
 							}
 							else{
-								if(get.attitude(player,to)>0){
+								if((get.attitude(player,to)<=0)==Boolean(event.small)){
 									return -getn(card)-get.value(card)/2+addi;
 								}
 								return getn(card)-get.value(card)/2+addi;
@@ -21608,7 +21700,7 @@
 								map.cards2.addArray(evt.cards2);
 							}
 						});
-						if(map.cards.length>0||map.ss.length>0||map.xs.length>0) return map;
+						return map;
 					};
 					next.gaintag=[];
 					return next;
@@ -21675,7 +21767,7 @@
 								map.cards2.addArray(evt.cards2);
 							}
 						});
-						if(map.cards.length>0||map.ss.length>0||map.xs.length>0) return map;
+						return map;
 					};
 					next.gaintag=[];
 					return next;
@@ -21734,6 +21826,16 @@
 					next.setContent('lose');
 					next.getl=function(player){
 						if(this.getlx!==false&&this.player==player) return this;
+						return {
+							player:player,
+							hs:[],
+							es:[],
+							js:[],
+							ss:[],
+							xs:[],
+							cards:[],
+							cards2:[],
+						};
 					};
 					return next;
 				},
@@ -22124,16 +22226,24 @@
 								map.cards2.addArray(evt.cards2);
 							}
 						});
-						if(map.cards.length>0||map.ss.length>0||map.xs.length>0) return map;
+						return map;
 					};
 					return next;
 				},
 				addJudge:function(card,cards){
 					var next=game.createEvent('addJudge');
-					next.card=card;
-					next.cards=cards;
-					if(next.cards==undefined) next.cards=[card];
-					if(get.itemtype(next.cards)=='card') next.cards=[next.cards];
+					if(get.itemtype(card)=='card'){
+						next.card=card;
+						next.cards=[card];
+					}
+					else{
+						next.cards=cards;
+						if(get.itemtype(next.cards)=='card') next.cards=[next.cards];
+						if(typeof card=='string'){
+							card={name:card};
+						}
+						next.card=get.autoViewAs(card,next.cards)
+					}
 					next.player=this;
 					next.setContent('addJudge');
 					next.getl=function(player){
@@ -22159,7 +22269,7 @@
 								map.cards2.addArray(evt.cards2);
 							}
 						});
-						if(map.cards.length>0||map.ss.length>0||map.xs.length>0) return map;
+						return map;
 					};
 					return next;
 				},
@@ -23286,7 +23396,37 @@
 							this.disabledSkills[skills]=[];
 							var info=get.info(skills);
 							if(info.ondisable&&info.onremove){
-								info.onremove(this);
+								if(typeof info.onremove=='function'){
+									info.onremove(this,skill);
+								}
+								else if(typeof info.onremove=='string'){
+									if(info.onremove=='storage'){
+										delete this.storage[skill];
+									}
+									else{
+										var cards=this.storage[skill];
+										if(get.itemtype(cards)=='card'){
+											cards=[cards];
+										}
+										if(get.itemtype(cards)=='cards'){
+											if(this.onremove=='discard'){
+												this.$throw(cards);
+											}
+											if(this.onremove=='discard'||this.onremove=='lose'){
+												game.cardsDiscard(cards);
+												delete this.storage[skill];
+											}
+										}
+									}
+								}
+								else if(Array.isArray(info.onremove)){
+									for(var i=0;i<info.onremove.length;i++){
+										delete this.storage[info.onremove[i]];
+									}
+								}
+								else if(info.onremove===true){
+									delete this.storage[skill];
+								}
 							}
 						}
 						this.disabledSkills[skills].add(skill);
@@ -26499,6 +26639,18 @@
 						this.trigger(this.name+'Cancelled');
 						if(this.player&&lib.phaseName.contains(this.name)) this.player.getHistory('skipped').add(this.name)}
 				},
+				neutralize:function(){
+					this.untrigger.call(this,arguments);
+					this.finish();
+					this._neutralized=true;
+					this.trigger('eventNeutralized');
+				},
+				unneutralize:function(){
+					this.untrigger.call(this,arguments);
+					delete this._neutralized;
+					delete this.finished;
+					if(this.type=='card'&&this.card&&this.name=='sha') this.directHit=true;
+				},
 				goto:function(step){
 					this.step=step-1;
 				},
@@ -27403,6 +27555,22 @@
 				type:'pss',
 				fullskin:true,
 			},
+			db_atk1:{
+				type:'db_atk',
+				fullimage:true,
+			},
+			db_atk2:{
+				type:'db_atk',
+				fullimage:true,
+			},
+			db_def1:{
+				type:'db_def',
+				fullimage:true,
+			},
+			db_def2:{
+				type:'db_def',
+				fullimage:true,
+			},
 			feichu_equip1:{
 				type:"equip",
 				subtype:"equip1",
@@ -27972,153 +28140,6 @@
 			}
 		},
 		skill:{
-			//SST addition
-			_sst_sex_select:{
-				charlotte:true,
-				superCharlotte:true,
-				trigger:{
-					global:'gameStart',
-					player:['enterGame','showCharacterEnd']
-				},
-				ruleSkill:true,
-				silent:true,
-				firstDo:true,
-				priority:2020,
-				filter:(event,player)=>player.sex=='',
-				content:()=>{
-					'step 0'
-					player.chooseControl('male','female').set('prompt','选择性别').set('ai',()=>['male','female'].randomGet());
-					'step 1'
-					player.sex=result.control;
-					game.broadcast((player,sex)=>player.sex=sex,player,result.control);
-					const name=player.name;
-					const differentAvatar=['sst_corrin','sst_robin','nnk_robin','sst_inkling'];
-					if(differentAvatar.contains(name)) player.setAvatar(name,name+'_'+result.control);
-					game.log(player,'将性别变为了','#y'+get.translation(result.control));
-					const differentGroup={sst_corrin_male:'sst_dark',sst_corrin_female:'sst_light'};
-					if(typeof differentGroup[name+'_'+result.control]=='string') player.changeGroup(differentGroup[name+'_'+result.control]);
-					player.update();
-				}
-			},
-			_sst_group_select:{
-				charlotte:true,
-				superCharlotte:true,
-				trigger:{
-					global:'gameStart',
-					player:['enterGame','showCharacterEnd']
-				},
-				ruleSkill:true,
-				silent:true,
-				firstDo:true,
-				priority:2019,
-				filter:(event,player)=>!get.config('no_group')&&player.group=='sst_smash',
-				content:()=>{
-					'step 0'
-					player.chooseControl('sst_light','sst_dark','sst_spirit','sst_reality').set('prompt','选择势力').set('ai',()=>{
-						if(game.zhu&&game.zhu!=_status.event.player&&get.attitude(_status.event.player,game.zhu)>0&&_status.event.controls.contains(game.zhu.group)) return game.zhu.group;
-						return _status.event.controls.randomGet();
-					});
-					'step 1'
-					player.changeGroup(result.control);
-					player.update();
-				}
-			},
-			_useAnger_juedou:{
-				ruleSkill:true,
-				charlotte:true,
-				forced:true,
-				popup:false,
-				trigger:{source:'damageBegin1'},
-				filter:(event,player)=>{
-					const evt=event.getParent(2);
-					if(!evt||evt.name!='useCard') return false;
-					if(typeof evt.th_anger!='object') return false;
-					if(typeof evt.th_anger[player.playerid]!='number') return false;
-					return evt.th_anger[player.playerid]!=0;
-				},
-				content:()=>trigger.num+=trigger.getParent(2).th_anger[player.playerid]
-			},
-			braces:{
-				intro:{
-					content:'#'
-				}
-			},
-			choose_to_use_skip:{
-				charlotte:true,
-				superCharlotte:true,
-				ruleSkill:true,
-				init:function(player){
-					game.addVideo('chooseToUseSkipNode',player,true);
-					game.broadcastAll(function(player){
-						if(!player.node.chooseToUseFinish){
-							player.node.chooseToUseFinish=ui.create.div('.playerchoosetousefinish','跳过<br>出牌',player.node.avatar);
-							player.node.chooseToUseFinish2=ui.create.div('.playerchoosetousefinish','跳过<br>出牌',player.node.avatar2);
-						}
-					},player);
-				},
-				onremove:function(player){
-					game.addVideo('chooseToUseSkipNode',player,false);
-					game.broadcastAll(function(player){
-						if(player.node.chooseToUseFinish){
-							player.node.chooseToUseFinish.delete();
-							player.node.chooseToUseFinish2.delete();
-							delete player.node.chooseToUseFinish;
-							delete player.node.chooseToUseFinish2;
-						}
-					},player);
-				}
-			},
-			choose_to_use_finish:{
-				charlotte:true,
-				superCharlotte:true,
-				ruleSkill:true,
-				init:function(player){
-					game.addVideo('chooseToUseFinishNode',player,true);
-					game.broadcastAll(function(player){
-						if(!player.node.chooseToUseFinish){
-							player.node.chooseToUseFinish=ui.create.div('.playerchoosetousefinish','结束<br>出牌',player.node.avatar);
-							player.node.chooseToUseFinish2=ui.create.div('.playerchoosetousefinish','结束<br>出牌',player.node.avatar2);
-						}
-					},player);
-				},
-				onremove:function(player){
-					game.addVideo('chooseToUseFinishNode',player,false);
-					game.broadcastAll(function(player){
-						if(player.node.chooseToUseFinish){
-							player.node.chooseToUseFinish.delete();
-							player.node.chooseToUseFinish2.delete();
-							delete player.node.chooseToUseFinish;
-							delete player.node.chooseToUseFinish2;
-						}
-					},player);
-				}
-			},
-			choose_to_use_finish_first:{
-				charlotte:true,
-				superCharlotte:true,
-				ruleSkill:true,
-				init:function(player){
-					game.addVideo('chooseToUseFinishFirstNode',player,true);
-					game.broadcastAll(function(player){
-						if(!player.node.chooseToUseFinish){
-							player.node.chooseToUseFinish=ui.create.div('.playerchoosetousefinish','首先<br>结束',player.node.avatar);
-							player.node.chooseToUseFinish2=ui.create.div('.playerchoosetousefinish','首先<br>结束',player.node.avatar2);
-						}
-					},player);
-				},
-				onremove:function(player){
-					game.addVideo('chooseToUseFinishFirstNode',player,false);
-					game.broadcastAll(function(player){
-						if(player.node.chooseToUseFinish){
-							player.node.chooseToUseFinish.delete();
-							player.node.chooseToUseFinish2.delete();
-							delete player.node.chooseToUseFinish;
-							delete player.node.chooseToUseFinish2;
-						}
-					},player);
-				}
-			},
-			//SST addition End
 			zhengsu:{
 				trigger:{player:'phaseDiscardEnd'},
 				forced:true,
@@ -28766,7 +28787,7 @@
 				}
 			},
 			_discard:{
-				trigger:{global:['discardAfter','loseToDiscardpileAfter']},
+				trigger:{global:['discardAfter','loseToDiscardpileAfter','loseAsyncAfter']},
 				forced:true,
 				popup:false,
 				priority:-100,
@@ -29007,7 +29028,84 @@
 					player.link();
 					if(trigger.getParent().notLink()) trigger.getParent().lianhuanable=true;
 				}
+			},
+			//SST addition
+			choose_to_use_skip:{
+				charlotte:true,
+				superCharlotte:true,
+				ruleSkill:true,
+				init:function(player){
+					game.addVideo('chooseToUseSkipNode',player,true);
+					game.broadcastAll(function(player){
+						if(!player.node.chooseToUseFinish){
+							player.node.chooseToUseFinish=ui.create.div('.playerchoosetousefinish','跳过<br>出牌',player.node.avatar);
+							player.node.chooseToUseFinish2=ui.create.div('.playerchoosetousefinish','跳过<br>出牌',player.node.avatar2);
+						}
+					},player);
+				},
+				onremove:function(player){
+					game.addVideo('chooseToUseSkipNode',player,false);
+					game.broadcastAll(function(player){
+						if(player.node.chooseToUseFinish){
+							player.node.chooseToUseFinish.delete();
+							player.node.chooseToUseFinish2.delete();
+							delete player.node.chooseToUseFinish;
+							delete player.node.chooseToUseFinish2;
+						}
+					},player);
+				}
+			},
+			choose_to_use_finish:{
+				charlotte:true,
+				superCharlotte:true,
+				ruleSkill:true,
+				init:function(player){
+					game.addVideo('chooseToUseFinishNode',player,true);
+					game.broadcastAll(function(player){
+						if(!player.node.chooseToUseFinish){
+							player.node.chooseToUseFinish=ui.create.div('.playerchoosetousefinish','结束<br>出牌',player.node.avatar);
+							player.node.chooseToUseFinish2=ui.create.div('.playerchoosetousefinish','结束<br>出牌',player.node.avatar2);
+						}
+					},player);
+				},
+				onremove:function(player){
+					game.addVideo('chooseToUseFinishNode',player,false);
+					game.broadcastAll(function(player){
+						if(player.node.chooseToUseFinish){
+							player.node.chooseToUseFinish.delete();
+							player.node.chooseToUseFinish2.delete();
+							delete player.node.chooseToUseFinish;
+							delete player.node.chooseToUseFinish2;
+						}
+					},player);
+				}
+			},
+			choose_to_use_finish_first:{
+				charlotte:true,
+				superCharlotte:true,
+				ruleSkill:true,
+				init:function(player){
+					game.addVideo('chooseToUseFinishFirstNode',player,true);
+					game.broadcastAll(function(player){
+						if(!player.node.chooseToUseFinish){
+							player.node.chooseToUseFinish=ui.create.div('.playerchoosetousefinish','首先<br>结束',player.node.avatar);
+							player.node.chooseToUseFinish2=ui.create.div('.playerchoosetousefinish','首先<br>结束',player.node.avatar2);
+						}
+					},player);
+				},
+				onremove:function(player){
+					game.addVideo('chooseToUseFinishFirstNode',player,false);
+					game.broadcastAll(function(player){
+						if(player.node.chooseToUseFinish){
+							player.node.chooseToUseFinish.delete();
+							player.node.chooseToUseFinish2.delete();
+							delete player.node.chooseToUseFinish;
+							delete player.node.chooseToUseFinish2;
+						}
+					},player);
+				}
 			}
+			//SST addition end
 		},
 		character:{},
 		perfectPair:{},
@@ -30230,7 +30328,7 @@
 						map.cards2.addArray(evt.cards2);
 					}
 				});
-				if(map.cards.length>0||map.ss.length>0||map.xs.length>0) return map;
+				return map;
 			};
 			if(arg&&get.is.object(arg)){
 				for(var i in arg) next[i]=arg[i];
@@ -30727,8 +30825,6 @@
 			}
 		},
 		connect:function(ip,callback){
-			if(get.config('hall_ip')=='47.99.105.222') game.saveConfig('hall_ip','unitedrhythmized.club','connect');
-			if(lib.config.last_ip=='47.99.105.222') game.saveConfig('last_ip','unitedrhythmized.club');
 			if(game.online) return;
 			var withport=false;
 			var index=ip.lastIndexOf(':');
@@ -30742,7 +30838,6 @@
 				ip=ip+':8080';
 			}
 			if(ip=='47.99.105.222:8080'){
-				alert('为保证官方服务器（47.99.105.222）安全，以及尊重现维护者苏婆玛丽奥，《一劳永逸》不允许连接官方服务器！\n如需进入，可用最新的离线/完整包重新覆盖等措施解除《一劳永逸》\n自动跳转至unitedrhythmized.club');
 				ip='unitedrhythmized.club:8080';
 			}
 			_status.connectCallback=callback;
@@ -33640,10 +33735,10 @@
 			var extname=(_status.extension||info.extension);
 			var imgsrc;
 			if(_status.evaluatingExtension){
-				imgsrc='db:extension-'+extname+':'+name+'.jpg';
+				imgsrc='db:extension-'+extname+':'+name+'.png';
 			}
 			else{
-				imgsrc='ext:'+extname+'/'+name+'.jpg';
+				imgsrc='ext:'+extname+'/'+name+'.png';
 			}
 			var character=[info.sex,info.group,info.hp,info.skills||[],[imgsrc]];
 			if(info.tags){
@@ -33670,10 +33765,10 @@
 						}
 						var imgsrc;
 						if(_status.evaluatingExtension){
-							imgsrc='db:extension-'+extname+':'+j+'.jpg';
+							imgsrc='db:extension-'+extname+':'+j+'.png';
 						}
 						else{
-							imgsrc='ext:'+extname+'/'+j+'.jpg';
+							imgsrc='ext:'+extname+'/'+j+'.png';
 						}
 						pack[i][j][4].push(imgsrc);
 						if(pack[i][j][4].contains('boss')||
@@ -33716,10 +33811,10 @@
 			}
 			else if(info.fullimage){
 				if(_status.evaluatingExtension){
-					info.image='db:extension-'+extname+':'+name+'.jpg';
+					info.image='db:extension-'+extname+':'+name+'.png';
 				}
 				else{
-					info.image='ext:'+extname+'/'+name+'.jpg';
+					info.image='ext:'+extname+'/'+name+'.png';
 				}
 			}
 			lib.card[name]=info;
@@ -33773,10 +33868,10 @@
 						}
 						else if(pack[i][j].fullimage){
 							if(_status.evaluatingExtension){
-								pack[i][j].image='db:extension-'+extname+':'+j+'.jpg';
+								pack[i][j].image='db:extension-'+extname+':'+j+'.png';
 							}
 							else{
-								pack[i][j].image='ext:'+extname+'/'+j+'.jpg';
+								pack[i][j].image='ext:'+extname+'/'+j+'.png';
 							}
 						}
 						lib.cardPack[packname].push(j);
@@ -33808,10 +33903,10 @@
 			var imgsrc;
 			var extname=_status.extension||info2.extension;
 			if(_status.evaluatingExtension){
-				imgsrc='extension-'+extname+':'+name+'.jpg';
+				imgsrc='extension-'+extname+':'+name+'.png';
 			}
 			else{
-				imgsrc='ext:'+extname+'/'+name+'.jpg';
+				imgsrc='ext:'+extname+'/'+name+'.png';
 			}
 			lib.mode[name]={
 				name:info2.translate,
@@ -41408,7 +41503,7 @@
 									}
 								}
 								if(!fakeme.image){
-									if(!page.content.image[name+'.jpg']){
+									if(!page.content.image[name+'.png']){
 										editnode.classList.add('disabled');
 										return;
 									}
@@ -41496,7 +41591,7 @@
 									};
 									page.content.image={};
 									for(var i in page.content.pack.character){
-										var file=i+'.jpg';
+										var file=i+'.png';
 										var loadImage=function(file,data){
 											var img = new Image();
 											img.crossOrigin = 'Anonymous';
@@ -41772,8 +41867,8 @@
 											alert('武将名与现有武将重复，请更改\n提示：武将名格式为id+|+中文名，其中id必须惟一');
 											return;
 										}
-										page.content.image[name+'.jpg']=page.content.image[currentButton.link+'.jpg'];
-										delete page.content.image[currentButton.link+'.jpg'];
+										page.content.image[name+'.png']=page.content.image[currentButton.link+'.png'];
+										delete page.content.image[currentButton.link+'.png'];
 										delete page.content.pack.character[currentButton.link];
 										delete page.content.pack.translate[currentButton.link];
 										currentButton.link=name;
@@ -41786,10 +41881,10 @@
 									}
 								}
 								if(fakeme.image){
-									page.content.image[name+'.jpg']=fakeme.image;
+									page.content.image[name+'.png']=fakeme.image;
 								}
 								else{
-									if(!page.content.image[name+'.jpg']){
+									if(!page.content.image[name+'.png']){
 										alert('请选择武将头像');
 										return;
 									}
@@ -41975,14 +42070,6 @@
 									for(var i in page.content.pack.card){
 										var file;
 										var fullskin=page.content.pack.card[i].fullskin?true:false;
-										/*
-										if(fullskin){
-											file=i+'.png';
-										}
-										else{
-											file=i+'.jpg';
-										}
-										*/
 										file=i+'.png';
 										var loadImage=function(file,data){
 											var img = new Image();
@@ -42105,20 +42192,12 @@
 								var fileToLoad=input.files[0];
 								if(fileToLoad){
 									var fileReader = new FileReader();
-									var fullimage=(fileToLoad.name.indexOf('.jpg')!=-1);
 									fileReader.onload = function(fileLoadedEvent)
 									{
 										var data = fileLoadedEvent.target.result;
-										if(fullimage){
-											fakeme.imagenode.style.backgroundImage='';
-											fakeme.style.backgroundImage='url('+data+')';
-											fakeme.classList.remove('fullskin');
-										}
-										else{
-											fakeme.style.backgroundImage='';
-											fakeme.imagenode.style.backgroundImage='url('+data+')';
-											fakeme.classList.add('fullskin');
-										}
+										fakeme.style.backgroundImage='';
+										fakeme.imagenode.style.backgroundImage='url('+data+')';
+										fakeme.classList.add('fullskin');
 										fakeme.image64=data;
 										fakeme.classList.add('inited');
 										var fileReader = new FileReader();
@@ -42322,13 +42401,7 @@
 											alert('卡牌名与现有卡牌重复，请更改\n提示：卡牌名格式为id+|+中文名，其中id必须惟一');
 											return;
 										}
-										var extname;
-										if(currentButton.classList.contains('fullskin')){
-											extname='.png';
-										}
-										else{
-											extname='.jpg';
-										}
+										var extname='.png';
 										page.content.image[name+extname]=page.content.image[currentButton.link+extname];
 										delete page.content.image[currentButton.link+extname];
 										delete page.content.pack.card[currentButton.link];
@@ -42344,14 +42417,7 @@
 									}
 								}
 								if(fakeme.image){
-									if(fakeme.classList.contains('fullskin')){
-										page.content.image[name+'.png']=fakeme.image;
-										delete page.content.image[name+'.jpg'];
-									}
-									else{
-										page.content.image[name+'.jpg']=fakeme.image;
-										delete page.content.image[name+'.png'];
-									}
+									page.content.image[name+'.png']=fakeme.image;
 								}
 								else if(!fakeme.classList.contains('inited')){
 									alert('请选择一个卡牌背景');
@@ -43508,10 +43574,10 @@
 						var li3=document.createElement('li');
 						var trimurl=function(str){
 							if(str==lib.updateURLS.github){
-								return 'GitHub';
+								return 'GitHub Proxy';
 							}
 							if(str==lib.updateURLS.coding){
-								return 'Coding'
+								return 'URC';
 							}
 							var index;
 							index=str.indexOf('://');
@@ -47196,7 +47262,9 @@
 			},
 			connectPlayers:function(ip){
 				game.connectPlayers=[];
-				for(var i=0;i<10;i++){
+				let max=8;
+				if(get.config('ten_players','connect')) max=10;
+				for(var i=0;i<max;i++){
 					var player=ui.create.player(ui.window);
 					player.dataset.position=i;
 					player.classList.add('connect');
@@ -47283,7 +47351,7 @@
 				// 	var bg2=ui.create.div(bg);
 				// 	ui.create.div(bg);
 				// 	var rect=players[i].getBoundingClientRect();
-				// 	bg2.style.backgroundImage='url("image/background/huangtian_bg.jpg")';
+				// 	bg2.style.backgroundImage='url("image/background/huangtian_bg.png")';
 				// 	bg2.style.width=ui.window.offsetWidth+'px';
 				// 	bg2.style.height=ui.window.offsetHeight+'px';
 				// 	bg2.style.transform='translate('+(-rect.left)+'px,'+(-rect.top)+'px)';
@@ -47808,14 +47876,16 @@
 						for(var i=0;i<button.info.length;i++){
 							var node=ui.create.div('.menubutton.videonode.pointerdiv',uiintro.content);
 							ui.create.div('.menubutton.videoavatar',node).setBackground(button.info[i][1]||'sst_mario','character');
+							const nickname=button.info[i][0]||'无名玩家';
+							const nicknameTest=`${[' - 离线',' - 托管'].contains(nickname.slice(-5))?'×':''}${nickname}`;
 							if(button.info[i][4]==game.wsid){
-								ui.create.div('.name','<span class="thundertext thunderauto">'+(button.info[i][0]||'无名玩家'),node);node.isme=true;
+								ui.create.div('.name',`<span class="thundertext thunderauto">${nicknameTest}`,node);node.isme=true;
 							}
 							else if(button.info[i][2]){
-								ui.create.div('.name',(button.info[i][0]||'无名玩家'),node);
+								ui.create.div('.name',nicknameTest,node);
 							}
 							else{
-								ui.create.div('.name','<span style="opacity:0.6">'+(button.info[i][0]||'无名玩家'),node);
+								ui.create.div('.name',`<span style="opacity:0.6">${nicknameTest}`,node);
 							}
 							//show ID
 							//ui.create.div('.videostatus',node,button.info[i][5]);
@@ -51656,9 +51726,7 @@
 			}
 			return num;
 		},
-		connectNickname:function(){
-			return typeof lib.config.connect_nickname=='string'?(lib.config.connect_nickname.slice(0,12)):'无名玩家';
-		},
+		connectNickname:()=>`※${(typeof lib.config.connect_nickname=='string'?(lib.config.connect_nickname.slice(0,12)):'无名玩家')}`,
 		zhinangs:function(filter){
 			var list=(_status.connectMode?lib.configOL:lib.config).zhinang_tricks;
 			if(!list||!list.filter||!list.length) return get.inpile('trick','trick').randomGets(3);
@@ -52059,8 +52127,8 @@
 						isCard:true,
 						cardid:card.cardid,
 						wunature:card.wunature,
-						storage:card.storage,
-						cards:card.cards,
+						storage:get.copy(card.storage),
+						cards:get.copy(card.cards),
 					};
 					if(get.itemtype(cards)=='cards'&&!card.cards) next.cards=cards.slice(0);
 					else if(get.itemtype(card)=='card') next.cards=[card];
@@ -52248,7 +52316,7 @@
 				url+='/';
 			}
 			if(master!='nodev'){
-				return url;
+				return url+'master/';
 			}
 			else{
 				return url+'v'+lib.version+'/';
@@ -54512,7 +54580,9 @@
 				if(!simple||get.is.phoneLayout()){
 					var es=node.getCards('e');
 					for(var i=0;i<es.length;i++){
-						uiintro.add('<div><div class="skill">'+es[i].outerHTML+'</div><div>'+lib.translate[es[i].name+'_info']+'</div></div>');
+						var cardinfo=lib.card[es[i].name];
+						if(cardinfo&&cardinfo.cardPrompt) uiintro.add('<div><div class="skill">'+es[i].outerHTML+'</div><div>'+cardinfo.cardPrompt(es[i])+'</div></div>');
+						else uiintro.add('<div><div class="skill">'+es[i].outerHTML+'</div><div>'+lib.translate[es[i].name+'_info']+'</div></div>');
 						uiintro.content.lastChild.querySelector('.skill>.card').style.transform='';
 					}
 					var js=node.getCards('j');
@@ -54690,7 +54760,7 @@
 								});
 								button._link=i;
 								if(i){
-									button.setBackgroundImage('image/skin/'+nameskin+'/'+i+'.jpg');
+									button.setBackgroundImage('image/skin/'+nameskin+'/'+i+'.png');
 								}
 								else{
 									if(gzbool&&lib.character[nameskin2][4].contains('gzskin')&&lib.config.mode_config.guozhan.guozhanSkin) button.setBackground(nameskin2,'character','noskin');
@@ -54727,7 +54797,7 @@
 								nameskin=nameskin.slice(3);
 								gzbool=true;
 							}
-							img.src=lib.assetURL+'image/skin/'+nameskin+'/'+num+'.jpg';
+							img.src=lib.assetURL+'image/skin/'+nameskin+'/'+num+'.png';
 						}
 						if(lib.config.change_skin){
 							if(!node.isUnseen(0)){
@@ -55210,7 +55280,7 @@
 								});
 								button._link=i;
 								if(i){
-									button.setBackgroundImage('image/skin/'+nameskin+'/'+i+'.jpg');
+									button.setBackgroundImage('image/skin/'+nameskin+'/'+i+'.png');
 								}
 								else{
 									if(gzbool&&lib.character[nameskin2][4].contains('gzskin')&&lib.config.mode_config.guozhan.guozhanSkin) button.setBackground(nameskin2,'character','noskin');
@@ -55229,7 +55299,7 @@
 								num--;
 								createButtons(num);
 							}
-							img.src=lib.assetURL+'image/skin/'+nameskin+'/'+num+'.jpg';
+							img.src=lib.assetURL+'image/skin/'+nameskin+'/'+num+'.png';
 						}
 						if(lib.config.change_skin){
 							loadImage();
